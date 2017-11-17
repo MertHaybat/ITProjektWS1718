@@ -1,6 +1,9 @@
 package de.hdm.ITProjekt17.client;
 
 import de.hdm.ITProjekt17.shared.FieldVerifier;
+import de.hdm.ITProjekt17.shared.GreetingService;
+import de.hdm.ITProjekt17.shared.GreetingServiceAsync;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

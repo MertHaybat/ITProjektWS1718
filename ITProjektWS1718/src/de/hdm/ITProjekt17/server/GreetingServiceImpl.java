@@ -1,7 +1,8 @@
 package de.hdm.ITProjekt17.server;
 
-import de.hdm.ITProjekt17.client.GreetingService;
 import de.hdm.ITProjekt17.shared.FieldVerifier;
+import de.hdm.ITProjekt17.shared.GreetingService;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**

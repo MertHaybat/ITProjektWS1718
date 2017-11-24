@@ -1,8 +1,12 @@
 package de.hdm.ITProjekt17.server.db;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 
+import com.google.gwt.user.client.Window;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
@@ -40,10 +44,8 @@ public class ProfilMapper {
 		Connection con = DBConnection.connection();
 		
 		try{
-		Statement stmt = con.createStatement();
-		
-		ResultSet rs = stmt.executeQuery("SELECT id, nachname, racher, FROM profil "
-				+ "WHERE id=" + id);
+		Statement stmt = con.createStatement();		
+		ResultSet rs = stmt.executeQuery("SELECT * FROM `profil` WHERE `id` = " + id);
 		
 		if (rs.next()){
 			Profil p = new Profil();
@@ -57,7 +59,7 @@ public class ProfilMapper {
 			e2.printStackTrace();
 			return null;
 		}
-		
+
 		return null;
 	}
 	

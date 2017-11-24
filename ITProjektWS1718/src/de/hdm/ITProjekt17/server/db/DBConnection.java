@@ -8,7 +8,7 @@ public class DBConnection{
 
 	private static Connection con = null;
 	private static String googleUrl = "jdbc:google:mysql://itprojektneu:europe-west1:itprojektneu/itprojekt2?user=root&password=1234";
-	private static String localUrl = "jdbc:mysql://localhost:3306/it projekt?user=root&password=";
+	private static String localUrl = "jdbc:mysql://localhost:3306/itprojekttest?user=root&password=";
      
     public static Connection connection(){
 
@@ -20,12 +20,13 @@ public class DBConnection{
                 (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
                 	// Load the class that provides the new
                     // "jdbc:google:mysql://" prefix.
-                    Class.forName("com.mysql.jdbc.GoogleDriver");
+                	Class.forName("com.mysql.jdbc.GoogleDriver");
                     url = googleUrl;
                 } else {
+
 //                     Local MySQL instance to use during development.
-                    Class.forName("com.mysql.jdbc.GoogleDriver");
-                    url = googleUrl;
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    url = localUrl;
                     
                 }
                 /*
@@ -36,7 +37,7 @@ public class DBConnection{
                  * Diese Verbindung wird dann in der statischen Variable con
                  * abgespeichert und fortan verwendet.
                  */
-                con = (Connection) DriverManager.getConnection(googleUrl);
+//                con = (Connection) DriverManager.getConnection(googleUrl);
             } catch (Exception e) {
                 con = null;
                 e.printStackTrace();

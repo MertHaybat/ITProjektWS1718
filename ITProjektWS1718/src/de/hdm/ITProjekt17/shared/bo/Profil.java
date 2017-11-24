@@ -15,7 +15,13 @@ public class Profil extends BusinessObject {
 	 * Auslesen der Variable nachname
 	 * @return
 	 */
-	
+	public Profil(){
+		
+	}
+	public Profil(String nachname, boolean raucher){
+		this.nachname = nachname;
+		this.raucher= raucher;
+	}
 	public String getNachname() {
 		return nachname;
 	}

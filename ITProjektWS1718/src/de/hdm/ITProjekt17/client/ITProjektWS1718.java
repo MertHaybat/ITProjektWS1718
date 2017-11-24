@@ -1,6 +1,7 @@
 package de.hdm.ITProjekt17.client;
 
 import com.google.gwt.core.client.*;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -34,13 +35,16 @@ public class ITProjektWS1718 implements EntryPoint{
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
+				
 			}
 
 			@Override
 			public void onSuccess(Profil result) {
+				Window.alert("war richtig");
 				tb1.setValue(result.getNachname());
+				Window.alert(result.getNachname());
 				
-			}
+				}
 			
 		});
 		navPanel.add(ft1);

@@ -11,6 +11,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class PartnerboerseAdministrationImpl extends RemoteServiceServlet 
 implements PartnerboerseAdministration {
 
+	
 	private ProfilMapper profilMapper = null;
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
@@ -26,5 +27,6 @@ implements PartnerboerseAdministration {
 	public Profil getProfilById(int id) throws IllegalArgumentException {
 		return this.profilMapper.findByKey(id);
 	}
+	
 
 }

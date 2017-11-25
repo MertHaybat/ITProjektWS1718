@@ -1,6 +1,6 @@
 package de.hdm.ITProjekt17.shared.bo;
 
-import sun.util.calendar.BaseCalendar.Date;
+import java.util.Date;
 
 /**
  * Realisieren eines exemplarischen Suchprofils der Partnerbörse 

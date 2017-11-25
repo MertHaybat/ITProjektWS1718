@@ -24,6 +24,7 @@ public class Suchprofil extends BusinessObject {
 	
 	//----------------Variablen-der-Klasse-Suchprofil------------------------------
 	
+	
 	/**
 	 * Variable minAlter gibt mindest Alter des zusuchenden Teilnehmers an.
 	 */
@@ -124,10 +125,6 @@ public class Suchprofil extends BusinessObject {
 
 	//-------------------------------------------------------------------
 	//------------Get-Methoden-------------------------------------------
-	
-	
-	
-	
 	
 	/**
 	 * Abfragen des mindest Alters eines Teilnehmers.

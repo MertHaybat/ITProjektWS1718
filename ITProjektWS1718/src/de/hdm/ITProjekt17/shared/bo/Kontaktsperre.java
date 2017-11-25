@@ -1,6 +1,7 @@
 package de.hdm.ITProjekt17.shared.bo;
 
 /**
+ * Realisierung einer exemplarischen Kontaktsperre von Profilen
  * Mit diseer Klasse werden exemplarische Kontaktsperren vergeben.
  * Es ist möglich Teilnehmer, welche ungewünscht sind zu sperren.
  * @author dezzyanthony

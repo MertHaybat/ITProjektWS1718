@@ -2,7 +2,7 @@ package de.hdm.ITProjekt17.shared.bo;
 
 
 /**
- * Darstellung einer exemplarischen Merkliste zum auflisten alle Teilnehmer der Partnerbörse,
+ * Realisierung einer exemplarischen Merkliste zum auflisten alle Teilnehmer der Partnerbörse,
  * welche der Teilnehmern später kontaktieren möchte.
  * 
  * @author dezzyanthony

@@ -13,19 +13,9 @@ public class Auswahleigenschaft extends Eigenschaft {
 
 	
 	//--------Variablen-der-Klasse-Auswahleigenschaft----------------
-	
-	private int auswahleigenschaftId = 0;
-	
+		
 
 	private String Auswahleigenschaft;
-
-	public int getAuswahleigenschaftId() {
-		return auswahleigenschaftId;
-	}
-
-	public void setAuswahleigenschaftId(int auswahleigenschaftId) {
-		this.auswahleigenschaftId = auswahleigenschaftId;
-	}
 
 	public String getAuswahleigenschaft() {
 		return Auswahleigenschaft;

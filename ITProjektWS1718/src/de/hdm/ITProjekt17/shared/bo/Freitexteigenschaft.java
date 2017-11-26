@@ -12,8 +12,6 @@ public class Freitexteigenschaft extends Eigenschaft{
 	
 	private String Freitexteigenschaft;
 
-	private int freitexteigenschaftId = 0;
-
 	public String getFreitexteigenschaft() {
 		return Freitexteigenschaft;
 	}
@@ -22,15 +20,6 @@ public class Freitexteigenschaft extends Eigenschaft{
 		Freitexteigenschaft = freitexteigenschaft;
 	}
 
-	public int getFreitexteigenschaftId() {
-		return freitexteigenschaftId;
-	}
-
-	public void setFreitexteigenschaftId(int freitexteigenschaftId) {
-		this.freitexteigenschaftId = freitexteigenschaftId;
-	}
-
-
-	}
+}
 
 

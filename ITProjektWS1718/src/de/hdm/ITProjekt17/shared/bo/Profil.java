@@ -97,7 +97,7 @@ public class Profil extends BusinessObject {
 	 * Auslesen der Variable Haarfarbe.
 	 * @return
 	 */
-	public String gethaarfarbe(){
+	public String getHaarfarbe(){
 		return this.haarfarbe;
 	}
 	

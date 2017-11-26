@@ -2,7 +2,7 @@ package de.hdm.ITProjekt17.shared.bo;
 
 
 /**
- * Realisierung einer exemplarischen Merkliste zum auflisten alle Teilnehmer der Partnerbörse,
+ * Realisierung einer exemplarischen Merkliste zum auflisten von Teilnehmer der Partnerbörse,
  * welche der Teilnehmern später kontaktieren möchte.
  * 
  * @author dezzyanthony
@@ -15,26 +15,18 @@ public class Merkzettel extends BusinessObject{
 	
 	
 	/**
-	 * Varaible des zumerkenden Profils
-	 */
-	private int merkzettelId = 0;
-	
-	/**
-	 * Variable von Profil, welche vermerk verhängt
+	 * Variable Profil-Id als Fremdschlüssel aus Klasse Profil
 	 */
 	private int profilId = 0;
 	
 	
 	//------------------------Get-Methoden-------------------------
 	
+	
 	/**
-	 * 
+	 * Abfragen der Profil-Id. 
 	 * @return
 	 */
-	public int getMerkzettelId(){
-		return merkzettelId;
-	}
-	
 	public int getProfilId(){
 		return profilId;
 	}
@@ -43,16 +35,7 @@ public class Merkzettel extends BusinessObject{
 	
 	
 	/**
-	 * Gibt es pro Profil nur eine MerkzettelID???
-	 * @param merkId
-	 */
-	public void setMerkzettelId(int merkId){
-		merkzettelId = merkId;
-	}
-	
-	/**
-	 * Wird hier die ProfilID neu vergeben oder vergeben für das Profil, welches die Merkung durchführt??
-	 * Wenn es eine MerkzettelId pro Profil gibt wird die ProfilId der Klasse Profil hier übertragen oder neu angelegt?
+	 * Setzen der Profi-ID 
 	 * @param profilId
 	 */
 	public void setProfilId(int profilId){

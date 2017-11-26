@@ -15,7 +15,11 @@ public class Kontaktsperre extends BusinessObject {
 
 	
 	//--------Variablen-der-Klasse-Kontaktsperre----------------
-
+	
+	/**
+	 * ID, welche vergeben wird wenn ein Teilnehmer gesperrt wurde
+	 */
+	private int kontaktsperreId = 0;
 	
 	/**
 	 * ID des Profils, welches gesperrt werden soll.
@@ -25,6 +29,13 @@ public class Kontaktsperre extends BusinessObject {
 	
 	//-------------------Get-Methoden----------------------------
 	
+	/**
+	 * Auslesen des Profils, welches gesperrt wurden.
+	 * @return
+	 */
+	public int getKontaktsperreId(){
+		return kontaktsperreId;
+	}
 	
 	/**
 	 * Auslesen des Profils, welches einen Kontakt gesperrt hat.
@@ -37,6 +48,13 @@ public class Kontaktsperre extends BusinessObject {
 	
 	//-------------------Set-Methoden----------------------------
 	
+	/**
+	 * Setzen einer ID für das zu sperrende Profil
+	 * @param kontaktsperreId
+	 */
+	public void setKontaktsperreId(int kontaktsperreId){
+		this.kontaktsperreId = kontaktsperreId;
+	}
 	
 	/**
 	 * Setzen einer ID des Profils, welches die Sperrung durchführt
@@ -45,6 +63,8 @@ public class Kontaktsperre extends BusinessObject {
 	public void setProfilId(int profilId){
 		this.profilId = profilId;
 	}
+	
+	//Wirklich nötig eine neue ProfilID zusetzen um ein Sperrendes Profil zu verwalten
 	
 
 }

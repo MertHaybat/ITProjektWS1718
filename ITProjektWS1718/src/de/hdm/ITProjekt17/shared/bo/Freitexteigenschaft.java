@@ -2,40 +2,22 @@ package de.hdm.ITProjekt17.shared.bo;
 
 
 /**
- * Realisierung einer exemplarischen Freitext Eigenschaft.
- * Sie erlaubt es Texte in Form von String-Literale zu schreiben.
- * @author dezzyanthony
+ * Realisierung einer exemplarischen Auswahleigenschaft von Profilen
+ * Mit diseer Klasse werden exemplarische Auswahleigenschaften vergeben.
  *
  */
 
 public class Freitexteigenschaft extends Eigenschaft{
 	
-	//-----------Variablen-der-Klasse-FreiTexteigenschaft-----------
+	private static final long serialVersionUID = 1L; 
 	
-	/**
-	 * Freie Information des Teilnehmers
-	 */
-	private String freiTexteigenschaft = "";
-	
-	
-	//------------------Get-Methoden-----------------------------
-	
-	/**
-	 * Abfragen der freiTexteigenschaft
-	 * @return
-	 */
-	public String freiTexteigenschaft(){
-		return freiTexteigenschaft;
+	private String freitexteigenschaft;
+
+	public String getFreitexteigenschaft() {
+		return freitexteigenschaft;
 	}
-	
-	
-	//------------------Set-Methoden----------------------------
-	
-	/**
-	 * Setzen der Frei Text Eigenschaft
-	 * @param freiText
-	 */
-	public void setFreiTexteigenschaft(String freiText){
-		freiTexteigenschaft = freiText;
+
+	public void setFreitexteigenschaft(String freitexteigenschaft) {
+		freitexteigenschaft = freitexteigenschaft;
 	}
 }

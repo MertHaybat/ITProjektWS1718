@@ -33,12 +33,12 @@ public class Profil extends BusinessObject {
 	/**
 	 * Vraible Religion im Profil; Gibt die Religion der Person an.
 	 */
-	private Auswahleigenschaft religion;
+	private String religion;
 	
 	/**
 	 * Variable Haarfarbe im Profil; Gibt die Haaarfarbe der Person an.
 	 */
-	private Auswahleigenschaft haarfarbe;
+	private String haarfarbe;
 	
 	/**
 	 * Variable Nachname im Profil; Gibt den Nachnamen der Person an.
@@ -47,7 +47,7 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Raucher im Profil; Gibt an, ob die Person raucht oder nicht.
 	 */
-	private Auswahleigenschaft raucher;
+	private boolean raucher;
 	/**
 	 * Auslesen der Variable nachname
 	 * @return
@@ -58,10 +58,6 @@ public class Profil extends BusinessObject {
 		
 	}
 
-	public Profil(String nachname, Auswahleigenschaft raucher){
-		this.nachname = nachname;
-		this.raucher= raucher;
-	}
 	
 	//--------------Get-Methoden--------------------
 	
@@ -70,7 +66,7 @@ public class Profil extends BusinessObject {
 	 * @return
 	 */
 	public String getVorname(){
-		return vorname;
+		return this.vorname;
 	}
 	
 	/**
@@ -78,7 +74,7 @@ public class Profil extends BusinessObject {
 	 * @return
 	 */
 	public String getNachname(){
-		return nachname;
+		return this.nachname;
 	}
 	
 	/**
@@ -86,7 +82,7 @@ public class Profil extends BusinessObject {
 	 * @return
 	 */
 	public Date getGeburtsdatum(){
-		return geburtsdatum;
+		return this.geburtsdatum;
 	}
 	
 	/**
@@ -94,30 +90,30 @@ public class Profil extends BusinessObject {
 	 * @return
 	 */
 	public int getKoerpergroesse(){
-		return koerpergroesse;
+		return this.koerpergroesse;
 	}
 	
 	/**
 	 * Auslesen der Variable Haarfarbe.
 	 * @return
 	 */
-	public Auswahleigenschaft gethaarfarbe(){
-		return haarfarbe;
+	public String gethaarfarbe(){
+		return this.haarfarbe;
 	}
 	
 	/**
 	 * Auslesen der Variable Religion.
 	 * @return
 	 */
-	public Auswahleigenschaft getReligion(){
-		return religion;
+	public String getReligion(){
+		return this.religion;
 	}
 	/**
 	 * Auslesen der Variable Raucher.
 	 * @return
 	 */
-	public Auswahleigenschaft getRaucher() {
-		return raucher;
+	public boolean getRaucher() {
+		return this.raucher;
 	}
 	
 	
@@ -151,7 +147,7 @@ public class Profil extends BusinessObject {
 	 * Setzen der Variable Haarfarbe.
 	 * @param haarfarbe
 	 */
-	public void setHaarfarbe(Auswahleigenschaft haarfarbe){
+	public void setHaarfarbe(String haarfarbe){
 		this.haarfarbe = haarfarbe;
 	}
 	
@@ -167,14 +163,14 @@ public class Profil extends BusinessObject {
 	 * Setzen der Variable Religion.
 	 * @param religion
 	 */
-	public void setReligion(Auswahleigenschaft religion){
+	public void setReligion(String religion){
 		this.religion = religion;
 	}
 	/**
 	 * Setzen der Variable Raucher
 	 * @param raucher
 	 */
-	public void setRaucher(Auswahleigenschaft raucher) {
+	public void setRaucher(boolean raucher) {
 		this.raucher = raucher;
 	}
 	

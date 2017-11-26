@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
-
-import com.google.gwt.user.client.Window;
-
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class ProfilMapper {
@@ -21,7 +17,7 @@ public class ProfilMapper {
 	private static ProfilMapper profilMapper = null;
 	
 	/**
-	 * Geschützter Konstruktor - verhindet die Möglichkeit, mit "new" 
+	 * Geschï¿½tzter Konstruktor - verhindet die Mï¿½glichkeit, mit "new" 
 	 * neue Instanzen dieser Klasse zu erzeugen.
 	 */
 	protected ProfilMapper(){	

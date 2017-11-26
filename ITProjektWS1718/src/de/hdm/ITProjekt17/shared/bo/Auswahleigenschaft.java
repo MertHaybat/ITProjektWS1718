@@ -16,7 +16,7 @@ public class Auswahleigenschaft extends Eigenschaft {
 	/**
 	 * Variable auswahlEigenschaft ist eine Auswahl, welche der Teilnehmer auswählt
 	 */
-	private Auswahleigenschaft auswahlEigenschaft;
+	private String auswahlEigenschaft;
 	
 	
 	
@@ -26,7 +26,7 @@ public class Auswahleigenschaft extends Eigenschaft {
 	 * Abfragen der Auswahleigenschaft
 	 * @return
 	 */
-	public Auswahleigenschaft getAuswahleigenschaft(){
+	public String getAuswahleigenschaft(){
 		return auswahlEigenschaft;
 	}
 	
@@ -38,9 +38,7 @@ public class Auswahleigenschaft extends Eigenschaft {
 	 * Setzen einer Auswahleigneschaft
 	 * @param auswahlEigenschaft
 	 */
-	public void setAuswahleigenschaft(Auswahleigenschaft auswahlEigenschaft){
+	public void setAuswahleigenschaft(String auswahlEigenschaft){
 		this.auswahlEigenschaft = auswahlEigenschaft;
 	}
-	
-
 }

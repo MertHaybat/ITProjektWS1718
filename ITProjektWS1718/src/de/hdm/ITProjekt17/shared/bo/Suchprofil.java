@@ -47,17 +47,17 @@ public class Suchprofil extends BusinessObject {
 	/**
 	 * Variable religion gibt die Religion des zusuchenden Teilnehmers an.
 	 */
-	private Auswahleigenschaft religion;
+	private String religion;
 	
 	/**
 	 * Variable haarfarbe gibt die Haarfarbe des zusuchenden Teilnehmers an.
 	 */
-	private Auswahleigenschaft haarfarbe;
+	private String haarfarbe;
 	
 	/**
 	 * Variable raucher gibt an ob der zusuchende Teilnehmer raucher ist oder nicht.
 	 */
-	private Auswahleigenschaft raucher; 
+	private Boolean raucher; 
 	
 	
 	
@@ -101,7 +101,7 @@ public class Suchprofil extends BusinessObject {
 	 * Setzen der Religion eines Teilnehmers.
 	 * @param reli
 	 */
-	public void setReligion(Auswahleigenschaft reli){
+	public void setReligion(String reli){
 		religion = reli;
 	}
 	
@@ -109,7 +109,7 @@ public class Suchprofil extends BusinessObject {
 	 * Setzen der Haarfarbe des zusuchenden Teilnehmers.
 	 * @param haarfarbe
 	 */
-	public void setHaarfarbe(Auswahleigenschaft haarfarbe){
+	public void setHaarfarbe(String haarfarbe){
 		this.haarfarbe = haarfarbe;
 	}
 	
@@ -117,7 +117,7 @@ public class Suchprofil extends BusinessObject {
 	 * Setzen ob zusuchender Teilenhmer Raucht
 	 * @param raucher
 	 */
-	public void setRaucher(Auswahleigenschaft raucher){
+	public void setRaucher(Boolean raucher){
 		this.raucher = raucher;
 	}
 	
@@ -167,7 +167,7 @@ public class Suchprofil extends BusinessObject {
 	 * Abfragen der Religion eines Teilnehmers.
 	 * @return
 	 */
-	public Auswahleigenschaft getReligion(){
+	public String getReligion(){
 		return religion;
 	}
 	
@@ -175,7 +175,7 @@ public class Suchprofil extends BusinessObject {
 	 * Abfragen der Haarfarbe eines Teilnehmers.
 	 * @return
 	 */
-	public Auswahleigenschaft getHaarfarbe(){
+	public String getHaarfarbe(){
 		return haarfarbe;
 	}
 	
@@ -183,7 +183,7 @@ public class Suchprofil extends BusinessObject {
 	 * Abfragen ob zu suchendes Profil Raucher ist oder nicht.
 	 * @return
 	 */
-	public Auswahleigenschaft getRaucher(){
+	public Boolean getRaucher(){
 		return raucher;
 	}
 	

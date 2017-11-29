@@ -18,7 +18,7 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Vorname im Profil; Gibt den Vornamen der Person an.
 	 */
-	private String vorname = "";
+	private String vorname;
 	
 	/**
 	 * Variable Geburtsdatum im Profil; Gibt das Geburtsdatum der Person an.

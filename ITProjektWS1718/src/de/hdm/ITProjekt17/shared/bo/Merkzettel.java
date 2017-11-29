@@ -11,53 +11,37 @@ package de.hdm.ITProjekt17.shared.bo;
 
 public class Merkzettel extends BusinessObject{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//---------------Variablen-der-Klasse-Merkzettel---------------
 	
 	
 	/**
-	 * Varaible des zumerkenden Profils
-	 */
-	private int merkzettelId = 0;
-	
-	/**
 	 * Variable von Profil, welche vermerk verhängt
 	 */
-	private int profilId = 0;
+	private int profilId_merkender;
+	private int profilId_gemerkter;
 	
 	
 	//------------------------Get-Methoden-------------------------
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getMerkzettelId(){
-		return merkzettelId;
+	
+	public int getProfilId_merkender() {
+		return profilId_merkender;
 	}
-	
-	public int getProfilId(){
-		return profilId;
+
+	public void setProfilId_merkender(int profilId_merkender) {
+		this.profilId_merkender = profilId_merkender;
 	}
-	
-	//------------------------Set-Methoden-------------------------
-	
-	
-	/**
-	 * Gibt es pro Profil nur eine MerkzettelID???
-	 * @param merkId
-	 */
-	public void setMerkzettelId(int merkId){
-		merkzettelId = merkId;
+
+	public int getProfilId_gemerkter() {
+		return profilId_gemerkter;
 	}
-	
-	/**
-	 * Wird hier die ProfilID neu vergeben oder vergeben für das Profil, welches die Merkung durchführt??
-	 * Wenn es eine MerkzettelId pro Profil gibt wird die ProfilId der Klasse Profil hier übertragen oder neu angelegt?
-	 * @param profilId
-	 */
-	public void setProfilId(int profilId){
-		this.profilId = profilId;
+
+	public void setProfilId_gemerkter(int profilId_gemerkter) {
+		this.profilId_gemerkter = profilId_gemerkter;
 	}
-	
 
 }

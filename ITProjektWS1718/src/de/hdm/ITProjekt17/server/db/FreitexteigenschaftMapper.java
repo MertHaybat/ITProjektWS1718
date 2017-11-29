@@ -47,7 +47,7 @@ public class FreitexteigenschaftMapper {
 			if (rs.next()){
 				Freitexteigenschaft p = new Freitexteigenschaft();
 				p.setId(rs.getInt("id"));
-				p.setFreitexteigenschaft(rs.getString("freitexteigenschaft"));
+				p.setWert(rs.getString("wert"));
 				
 				return p;
 			}

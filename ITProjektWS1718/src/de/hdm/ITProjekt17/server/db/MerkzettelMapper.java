@@ -47,8 +47,8 @@ public class MerkzettelMapper {
 			if (rs.next()){
 				Merkzettel p = new Merkzettel();
 				p.setId(rs.getInt("id"));
-				p.setProfilId(rs.getInt("profilId"));
-				
+				p.setProfilId_gemerkter(rs.getInt("profilid_gemerkter"));
+				p.setProfilId_merkender(rs.getInt("profilid_merkender"));
 				return p;
 			}
 		}

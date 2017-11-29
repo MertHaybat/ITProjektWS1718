@@ -18,14 +18,14 @@ public class Info extends BusinessObject{
 	//-------------------Variablen-der-Info-Klasse--------------------
 	
 	/**
-	 * Variable profilId ist dei Id des Profil's
+	 * Variable profilId ist dei Id des Profil's (Fremdschlüssel!!!)
 	 */
-	private int profilId = 0;
+	private int profilId;
 	
 	/**
 	 * Variable text enthÃ¤lt informationen des Profils
 	 */
-	private String text = "";
+	private String text;
 	
 	
 	

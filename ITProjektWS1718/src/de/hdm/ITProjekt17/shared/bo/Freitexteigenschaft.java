@@ -11,13 +11,23 @@ public class Freitexteigenschaft extends Eigenschaft{
 	
 	private static final long serialVersionUID = 1L; 
 	
-	private String freitexteigenschaft;
+	private String wert;
+	
+	private int eigenschaftid;
 
-	public String getFreitexteigenschaft() {
-		return freitexteigenschaft;
+	public int getEigenschaftid() {
+		return eigenschaftid;
 	}
 
-	public void setFreitexteigenschaft(String freitexteigenschaft) {
-		freitexteigenschaft = freitexteigenschaft;
+	public void setEigenschaftid(int eigenschaftid) {
+		this.eigenschaftid = eigenschaftid;
+	}
+
+	public String getWert() {
+		return this.wert;
+	}
+
+	public void setWert(String wert) {
+		this.wert = wert;
 	}
 }

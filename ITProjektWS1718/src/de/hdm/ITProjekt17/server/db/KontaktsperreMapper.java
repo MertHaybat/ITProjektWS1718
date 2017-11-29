@@ -46,7 +46,8 @@ package de.hdm.ITProjekt17.server.db;
 				if (rs.next()){
 					Kontaktsperre p = new Kontaktsperre();
 					p.setId(rs.getInt("id"));
-					p.setProfilId(rs.getInt("profilId"));
+					p.setProfilId_gesperrter(rs.getInt("profilid_gesperrter"));
+					p.setProfilId_sperrender(rs.getInt("profilid_sperrender"));
 					
 					return p;
 				}

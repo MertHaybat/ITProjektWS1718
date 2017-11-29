@@ -24,6 +24,10 @@ public class Suchprofil extends BusinessObject {
 	
 	//----------------Variablen-der-Klasse-Suchprofil------------------------------
 	
+	/*
+	 * Variable profilId ist der Fremdschlüssel von Profil kommend, um das Suchprofil einordnen zu können
+	 */
+	private int profilId;
 	
 	/**
 	 * Variable minAlter gibt mindest Alter des zusuchenden Teilnehmers an.
@@ -60,11 +64,17 @@ public class Suchprofil extends BusinessObject {
 	 */
 	private Boolean raucher; 
 	
-	
-	
-	
 	//------------------------------------------------------------------
 	//----------------------Set-Methoden--------------------------------
+	
+	/**
+	 * Setzen des Fremdschlüssels
+	 * @param profilId
+	 */
+	public void setProfilId(int profilId) {
+		this.profilId = profilId;
+	}
+	
 	
 	/**
 	 * Setzen des mindest Alters eines zusuchenden Teilnehmers.
@@ -125,6 +135,14 @@ public class Suchprofil extends BusinessObject {
 
 	//-------------------------------------------------------------------
 	//------------Get-Methoden-------------------------------------------
+	
+	/**
+	 * Abfragen des Fremdschlüssels ProfilID
+	 * @return profilId
+	 */
+	public int getProfilId() {
+		return profilId;
+	}
 	
 	/**
 	 * Abfragen des mindest Alters eines Teilnehmers.

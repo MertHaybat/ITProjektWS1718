@@ -47,7 +47,7 @@ public class AuswahleigenschaftMapper {
 			if (rs.next()){
 				Auswahleigenschaft p = new Auswahleigenschaft();
 				p.setId(rs.getInt("id"));
-				p.setAuswahleigenschaft(rs.getString("auswahleigenschaft"));
+				p.setWert(rs.getString("wert"));
 				
 				return p;
 			}

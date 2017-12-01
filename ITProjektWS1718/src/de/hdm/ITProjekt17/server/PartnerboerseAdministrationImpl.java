@@ -1,7 +1,6 @@
 package de.hdm.ITProjekt17.server;
 
 import de.hdm.ITProjekt17.server.db.*;
-import de.hdm.ITProjekt17.shared.FieldVerifier;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministration;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 

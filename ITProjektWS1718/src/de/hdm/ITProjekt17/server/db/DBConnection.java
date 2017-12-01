@@ -7,8 +7,8 @@ import com.google.appengine.api.utils.SystemProperty;
 public class DBConnection{
 
 	private static Connection con = null;
-	private static String googleUrl = "jdbc:google:mysql://itprojektneu:europe-west1:itprojektneu/itprojekt2?user=root&password=1234";
-	private static String localUrl = "jdbc:mysql://localhost:3306/itprojekttest?user=root&password=";
+	//private static String googleUrl = "jdbc:google:mysql://itprojektneu:europe-west1:itprojektneu/itprojekt2?user=root&password=1234";
+	private static String localUrl = "jdbc:mysql://localhost:3306/itprojektws1718?user=root&password=";
      
     public static Connection connection(){
 
@@ -21,11 +21,12 @@ public class DBConnection{
                 	// Load the class that provides the new
                     // "jdbc:google:mysql://" prefix.
                 	Class.forName("com.mysql.jdbc.GoogleDriver");
-                    url = googleUrl;
+                   // url = googleUrl;
+
                 } else {
 
 //                     Local MySQL instance to use during development.
-                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+                    Class.forName("com.mysql.jdbc.Driver");
                     url = localUrl;
                     
                 }
@@ -37,7 +38,8 @@ public class DBConnection{
                  * Diese Verbindung wird dann in der statischen Variable con
                  * abgespeichert und fortan verwendet.
                  */
-//                con = (Connection) DriverManager.getConnection(googleUrl);
+                con = DriverManager.getConnection(url);
+              //  con = (Connection) DriverManager.getConnection(googleUrl);
             } catch (Exception e) {
                 con = null;
                 e.printStackTrace();

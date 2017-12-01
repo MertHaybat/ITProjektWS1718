@@ -1,11 +1,8 @@
 package de.hdm.ITProjekt17.server.db;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import com.ibm.icu.text.SimpleDateFormat;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
@@ -26,8 +23,8 @@ public class ProfilMapper {
 	 * Gesch�tzter Konstruktor - verhindet die M�glichkeit, mit "new" 
 	 * neue Instanzen dieser Klasse zu erzeugen.
 	 */
-	protected ProfilMapper(){	
-	}
+//	protected ProfilMapper(){	
+//	}
 	
 	/**
 	 * Kann aufgerufen werden durch ProfilMapper.profilMapper. Sie stellt die
@@ -97,8 +94,8 @@ public class ProfilMapper {
 		
 		try{
 		Statement stmt = con.createStatement();		
-		ResultSet rs = stmt.executeQuery("SELECT * FROM `profil` WHERE `id` = " + id);
-		
+		ResultSet rs = stmt.executeQuery("SELECT * FROM profil " + "WHERE id=" + id);
+			
 		if (rs.next()){
 			Profil p = new Profil();
 			p.setId(rs.getInt("id"));

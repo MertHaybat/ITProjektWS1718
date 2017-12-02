@@ -7,6 +7,10 @@ public class Eigenschaft extends BusinessObject {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public Eigenschaft(){
+		
+	}
+	
 	private int profilid;
 
 	public int getProfilid() {

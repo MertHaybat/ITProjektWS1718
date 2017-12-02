@@ -55,8 +55,12 @@ public class Auswahleigenschaft extends Eigenschaft {
 		this.wert = wert;
 	}
 
-	public void setEigenschaftid(int eigenschaftid) {
+	
+
+
+	public void setEigenschaft(Eigenschaft e) {
 		this.eigenschaftid = eigenschaftid;
+		
 	}
 	
 }

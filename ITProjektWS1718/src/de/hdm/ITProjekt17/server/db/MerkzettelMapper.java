@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
+import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class MerkzettelMapper {
 
@@ -47,8 +49,8 @@ public class MerkzettelMapper {
 			if (rs.next()){
 				Merkzettel p = new Merkzettel();
 				p.setId(rs.getInt("id"));
-				p.setProfilId_gemerkter(rs.getInt("profilid_gemerkter"));
-				p.setProfilId_merkender(rs.getInt("profilid_merkender"));
+				p.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+				p.setProfilId_merkender(rs.getInt("profilId_merkender"));
 				return p;
 			}
 		}
@@ -60,4 +62,115 @@ public class MerkzettelMapper {
 			return null;
 		}
 		
-	}
+		public Merkzettel insertInfo(Merkzettel merk) {
+			
+			Connection con = DBConnection.connection();
+
+			try {
+				Statement stmt = con.createStatement();
+
+				/*
+				 * Zunächst schauen wir nach, welches der momentan höchste
+				 * Primärschlüsselwert ist.
+				 */
+				ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
+				+ "FROM merkzettel ");
+
+				// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+				if (rs.next()) {
+					/*
+					 * merk erhält den bisher maximalen, nun um 1 inkrementierten
+					 * Primärschlüssel.
+					 */
+					merk.setId(rs.getInt("maxid") + 1);
+
+					stmt = con.createStatement();
+
+					// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+					stmt.executeUpdate("INSERT INTO merkzettel (id, profilId_merkender, profilId_gemerkter)"
+							+ "VALUES " + merk.getId() + "','" + merk.getProfilId_merkender() + "','" + merk.getProfilId_gemerkter() + "')");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return merk;
+		}
+		/**
+		 * Löschen des Objekt Merkzettel in der Datenbank
+		 * @param merk
+		 */
+		public void deleteInfo(Merkzettel merk) {
+		    Connection con = DBConnection.connection();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      stmt.executeUpdate("DELETE FROM merkzettel " + "WHERE id=" + merk.getId());
+
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+		  }
+		
+		/**
+		 * Erneutes schreiben in die Datenbank um das Profil Objekt zu aktualisieren
+		 * @param p
+		 * @return
+		 */
+		 public Merkzettel updateInfo(Merkzettel merk) {
+			    Connection con = DBConnection.connection();
+
+			    try {
+			      Statement stmt = con.createStatement();
+
+			      stmt.executeUpdate("UPDATE merkzettel " + "SET profilId_merkender=\"" + merk.getProfilId_merkender()
+			          + "profilId_gemerkter=\" " + merk.getProfilId_gemerkter() + "\"" + "WHERE id=" + merk.getId());
+
+			    }
+			    catch (SQLException e2) {
+			      e2.printStackTrace();
+			    }
+
+			    // Um Analogie zu insert(Merkzettel merk) zu wahren, geben wir merk zurück
+			    return merk;
+			  }
+		
+		 public Vector<Merkzettel> getAllMerkzettel() {
+			 
+			    Connection con = DBConnection.connection();
+			    
+			    Vector<Merkzettel> result = new Vector<Merkzettel>();
+			
+			    try {
+			        Statement stmt = con.createStatement();
+
+			        ResultSet rs = stmt.executeQuery("SELECT id, profilId_merkender, profilId_gemerkter "
+			            + "FROM merkzettel "  
+			            + "' ORDER BY id");
+
+			        // Für jeden Eintrag im Suchergebnis wird nun ein Customer-Objekt
+			        // erstellt.
+			        while (rs.next()) {
+			          Merkzettel merk = new Merkzettel();
+			          merk.setId(rs.getInt("id"));
+			          Profil pro = new Profil();
+			          pro.setId(rs.getInt("id"));
+			          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
+			          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+			         
+			          // Hinzufügen des neuen Objekts zum Ergebnisvektor
+			          result.addElement(merk);
+			        }
+			      }
+			      catch (SQLException e) {
+			        e.printStackTrace();
+			      }
+
+			      // Ergebnisvektor zurückgeben
+			      return result;
+			    }
+
+		 }
+	

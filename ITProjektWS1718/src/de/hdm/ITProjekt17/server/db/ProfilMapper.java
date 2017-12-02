@@ -1,9 +1,10 @@
 package de.hdm.ITProjekt17.server.db;
 
-import java.sql.Connection;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.Vector;
 
+import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class ProfilMapper {
@@ -88,6 +89,54 @@ public class ProfilMapper {
 		return pro;
 		
 	}
+	/**
+	 * Löschen des Objekt Profil in der Datenbank
+	 * @param p
+	 */
+	public void deleteProfil(Profil pro) {
+	    Connection con = DBConnection.connection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+
+	      stmt.executeUpdate("DELETE FROM profil " + "WHERE id=" + pro.getId());
+
+	    }
+	    catch (SQLException e2) {
+	      e2.printStackTrace();
+	    }
+	  }
+	
+	/**
+	 * Erneutes schreiben in die Datenbank um das Profil Objekt zu aktualisieren
+	 * @param p
+	 * @return
+	 */
+	 public Profil updateProfil(Profil pro) {
+		    Connection con = DBConnection.connection();
+
+		    try {
+		      Statement stmt = con.createStatement();
+
+		      stmt.executeUpdate("UPDATE profil " 
+		    		  			+ "SET vorname=\""+ pro.getVorname() + "\", " 
+		    		  			+ "nachname=\"" + pro.getNachname() + "\", "
+		    		  			+ "geburtsdatum=\"" + pro.getGeburtsdatum() + "\", "
+		    		  			+ "koerpergroesse=\"" + pro.getKoerpergroesse() + "\", "
+		    		  			+ "religion=\"" + pro.getReligion() + "\", "
+		    		  			+ "haarfarbe=\"" + pro.getHaarfarbe() + "\", "
+		    		  			+ "raucher=\"" + pro.getRaucher() + "\", "
+		            		    + "WHERE id=" + pro.getId());
+	                         
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+
+		    // Um Analogie zu insert(Profil pro) zu wahren, geben wir pro zurück
+		    return pro;
+		  }
+	
 
 	public Profil findByKey(int id){
 		Connection con = DBConnection.connection();
@@ -97,11 +146,17 @@ public class ProfilMapper {
 		ResultSet rs = stmt.executeQuery("SELECT * FROM profil " + "WHERE id=" + id);
 			
 		if (rs.next()){
-			Profil p = new Profil();
-			p.setId(rs.getInt("id"));
-			p.setNachname(rs.getString("nachname"));
-			p.setRaucher(rs.getBoolean("raucher"));
-			return p;
+			Profil pro = new Profil();
+			pro.setId(rs.getInt("id"));
+			pro.setVorname(rs.getString("vorname"));
+			pro.setNachname(rs.getString("nachname"));
+			pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
+			pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
+			pro.setReligion(rs.getString("religion"));
+			pro.setHaarfarbe(rs.getString("haarfarbe"));
+			pro.setRaucher(rs.getBoolean("raucher"));
+			
+			return pro;
 		}
 	}
 		catch (SQLException e2){
@@ -111,5 +166,41 @@ public class ProfilMapper {
 
 		return null;
 	}
-	
+	 public Vector<Profil> getAll() {
+		 
+		    Connection con = DBConnection.connection();
+		    
+		    Vector<Profil> result = new Vector<Profil>();
+		
+		    try {
+		        Statement stmt = con.createStatement();
+
+		        ResultSet rs = stmt.executeQuery("SELECT id, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher "
+		            + "FROM profil "  
+		            + "' ORDER BY id");
+
+		        // Für jeden Eintrag im Suchergebnis wird nun ein Customer-Objekt
+		        // erstellt.
+		        while (rs.next()) {
+		          Profil pro = new Profil();
+		          pro.setId(rs.getInt("id"));
+		          pro.setVorname(rs.getString("vorname"));
+		          pro.setNachname(rs.getString("nachname"));
+		          pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
+		          pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
+		          pro.setReligion(rs.getString("religion"));
+		          pro.setHaarfarbe(rs.getString("haarfarbe"));
+		          pro.setRaucher(rs.getBoolean("raucher"));
+		          
+		          // Hinzufügen des neuen Objekts zum Ergebnisvektor
+		          result.addElement(pro);
+		        }
+		      }
+		      catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+
+		      // Ergebnisvektor zurückgeben
+		      return result;
+	 }
 }

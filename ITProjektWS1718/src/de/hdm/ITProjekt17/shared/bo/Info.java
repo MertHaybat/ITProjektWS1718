@@ -66,6 +66,11 @@ public class Info extends BusinessObject{
 	public void setText(String text){
 		this.text = text;
 	}
+
+	public void setProfil(Profil p) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

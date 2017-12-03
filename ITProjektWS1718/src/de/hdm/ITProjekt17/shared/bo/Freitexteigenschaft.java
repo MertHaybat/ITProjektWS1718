@@ -30,4 +30,9 @@ public class Freitexteigenschaft extends Eigenschaft{
 	public void setWert(String wert) {
 		this.wert = wert;
 	}
+
+	public void setEigenschaft(Eigenschaft e) {
+		this.eigenschaftid = eigenschaftid;
+		
+	}
 }

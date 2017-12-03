@@ -61,32 +61,46 @@ public class MerkzettelMapper {
 
 			return null;
 		}
-		
+		/**
+		 * Insert Methode ist für die EInfügeoperation in die Datenbank zuständig
+		 * @param merk
+		 * @return
+		 */
 		public Merkzettel insertInfo(Merkzettel merk) {
 			
+			/**
+			 * Aufbau der DB Connection
+			 */
 			Connection con = DBConnection.connection();
-
+			/**
+			 * Try und Catch gehören zum Exception Handling 
+			 * Try = Versuch erst dies 
+			 * Catch = Wenn Try nicht geht versuch es so ..
+			 */
 			try {
 				Statement stmt = con.createStatement();
-
-				/*
-				 * Zunächst schauen wir nach, welches der momentan höchste
-				 * Primärschlüsselwert ist.
+				/**
+				 * Was ist der momentan höchste Primärschlüssel
 				 */
 				ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
 				+ "FROM merkzettel ");
 
-				// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+				/**
+				 *  Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
+				 */
 				if (rs.next()) {
-					/*
-					 * merk erhält den bisher maximalen, nun um 1 inkrementierten
-					 * Primärschlüssel.
+					/**
+					 * Varaible merk erhält den höchsten Primärschlüssel inkrementiert um 1
 					 */
 					merk.setId(rs.getInt("maxid") + 1);
-
+					/**
+					 * Ein Statement wird erzeugt
+					 */
 					stmt = con.createStatement();
 
-					// Jetzt erst erfolgt die tatsächliche Einfügeoperation
+					/**
+					 * Hier erfolgt die Einfügeoperation
+					 */
 					stmt.executeUpdate("INSERT INTO merkzettel (id, profilId_merkender, profilId_gemerkter)"
 							+ "VALUES " + merk.getId() + "','" + merk.getProfilId_merkender() + "','" + merk.getProfilId_gemerkter() + "')");
 				}
@@ -97,15 +111,25 @@ public class MerkzettelMapper {
 			return merk;
 		}
 		/**
-		 * Löschen des Objekt Merkzettel in der Datenbank
+		 * Löschen des Objektes Merkzettel in der Datenbank
 		 * @param merk
 		 */
 		public void deleteInfo(Merkzettel merk) {
+			
+			/**
+			 * Aufbau der DB Connection
+			 */
 		    Connection con = DBConnection.connection();
-
+		    /**
+			 * Try und Catch gehören zum Exception Handling 
+			 * Try = Versuch erst dies 
+			 * Catch = Wenn Try nicht geht versuch es so ..
+			 */
 		    try {
 		      Statement stmt = con.createStatement();
-
+		      /**
+		       * Hier erfolgt die Löschoperation
+		       */
 		      stmt.executeUpdate("DELETE FROM merkzettel " + "WHERE id=" + merk.getId());
 
 		    }
@@ -116,15 +140,25 @@ public class MerkzettelMapper {
 		
 		/**
 		 * Erneutes schreiben in die Datenbank um das Profil Objekt zu aktualisieren
-		 * @param p
-		 * @return
+		 * @param merk
+		 * @return merk
 		 */
 		 public Merkzettel updateInfo(Merkzettel merk) {
+			 	/**
+				 * Aufbau der DB Connection
+				 */
 			    Connection con = DBConnection.connection();
-
+			    /**
+				 * Try und Catch gehören zum Exception Handling 
+				 * Try = Versuch erst dies 
+				 * Catch = Wenn Try nicht geht versuch es so ..
+				 */
 			    try {
 			      Statement stmt = con.createStatement();
-
+			      
+			      /**
+			       * Eigentliche Updateoperation 
+			       */
 			      stmt.executeUpdate("UPDATE merkzettel " + "SET profilId_merkender=\"" + merk.getProfilId_merkender()
 			          + "profilId_gemerkter=\" " + merk.getProfilId_gemerkter() + "\"" + "WHERE id=" + merk.getId());
 
@@ -133,25 +167,38 @@ public class MerkzettelMapper {
 			      e2.printStackTrace();
 			    }
 
-			    // Um Analogie zu insert(Merkzettel merk) zu wahren, geben wir merk zurück
+			    /**
+			     * Um Analogie zu insert(Merkzettel merk) zu wahren, geben wir merk zurück
+			     */
 			    return merk;
 			  }
 		
 		 public Vector<Merkzettel> getAllMerkzettel() {
-			 
+			 	/**
+				 * Aufbau der DB Connection
+				 */
 			    Connection con = DBConnection.connection();
-			    
+			    /**
+			     * Erzeugung eines Merkzettel Vektors zur Speicherung von Merkzettel Variblen
+			     */
 			    Vector<Merkzettel> result = new Vector<Merkzettel>();
-			
+			    /**
+				 * Try und Catch gehören zum Exception Handling 
+				 * Try = Versuch erst dies 
+				 * Catch = Wenn Try nicht geht versuch es so ..
+				 */
 			    try {
 			        Statement stmt = con.createStatement();
-
+			        /**
+			         * Statement ausfüllen und an die DB senden
+			         */
 			        ResultSet rs = stmt.executeQuery("SELECT id, profilId_merkender, profilId_gemerkter "
 			            + "FROM merkzettel "  
 			            + "' ORDER BY id");
 
-			        // Für jeden Eintrag im Suchergebnis wird nun ein Customer-Objekt
-			        // erstellt.
+			        /**
+			         *  Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt
+			         */
 			        while (rs.next()) {
 			          Merkzettel merk = new Merkzettel();
 			          merk.setId(rs.getInt("id"));
@@ -160,7 +207,9 @@ public class MerkzettelMapper {
 			          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
 			          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
 			         
-			          // Hinzufügen des neuen Objekts zum Ergebnisvektor
+			          /**
+			           * Hinzufügen des neuen Objekts zum Ergebnisvektor
+			           */
 			          result.addElement(merk);
 			        }
 			      }
@@ -168,8 +217,10 @@ public class MerkzettelMapper {
 			        e.printStackTrace();
 			      }
 
-			      // Ergebnisvektor zurückgeben
-			      return result;
+			      /**
+			       *  Ergebnisvektor zurückgeben
+			       */
+			    return result;
 			    }
 
 		 }

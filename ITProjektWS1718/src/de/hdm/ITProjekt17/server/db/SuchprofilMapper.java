@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
+import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 
 public class SuchprofilMapper {
@@ -66,4 +68,178 @@ public class SuchprofilMapper {
 		return null;
 	}
 	
+		public Suchprofil insertSuchprofil(Suchprofil such){
+		/**
+		 * DB COnnection wird aufgebaut
+		 */
+		Connection con = DBConnection.connection();
+		/**
+		 * Try und Catch gehören zum Exception Handling 
+		 * Try = Versuch erst dies 
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
+		try {
+		      Statement stmt = con.createStatement();
+		      	/**
+				 * Was ist der momentan höchste Primärschlüssel
+				 */
+		      ResultSet rs = stmt.executeQuery("SELECT MAX(ID) AS maxid "
+		              + "FROM suchprofil ");
+		     	
+		      if(rs.next()){
+		    	  
+		    	  	/**
+					 * Varaible merk erhält den höchsten Primärschlüssel inkrementiert um 1
+					 */
+		    	  	such.setId(rs.getInt("maxid") + 1);
+		    	  	/**
+		    	  	 * Leeres-Statement wird angelegt 
+		    	  	 */
+		    	  	stmt = con.createStatement();
+		    	  	/**
+		    	  	 * Ausfüllen des Statements und an die DB senden
+		    	  	 */
+		    		stmt.executeUpdate("INSERT INTO suchprofil (id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher)" 
+		    				+"VALUES (" +
+	                        such.getId() + "," + "'" +
+	                        such.getMinAlter() +"'" + "," +
+	                        such.getMaxAlter() +"'" + "," +
+	                        such.getGeburtsdatum() +"," + 
+	                        such.getKoerpergroesse() + "," + 
+	                        such.getReligion() + "," + "'" +
+	                        such.getHaarfarbe() +"'" + ","+
+	                        such.getRaucher() +
+	                         ")");
+		    	  
+		      }
+		}
+		catch(SQLException e2){
+			e2.printStackTrace();
+		}
+		return such;
+		}
+		
+		/**
+		 * Löschen des Suchprofil-Objektes in der Datenbank
+		 * @param such
+		 */
+		public void deleteSuchprofil(Suchprofil such) {
+			/**
+			 * Aufbau der Db Connection
+			 */
+		    Connection con = DBConnection.connection();
+		    /**
+			 * Try und Catch gehören zum Exception Handling 
+			 * Try = Versuch erst dies 
+			 * Catch = Wenn Try nicht geht versuch es so ..
+			 */
+		    try {
+		    	
+		      Statement stmt = con.createStatement();
+		      /**
+		       * Durchführung der Löschung / Ausfüllen des Statements und senden an die DB
+		       */
+		      stmt.executeUpdate("DELETE FROM suchprofil " + "WHERE id=" + such.getId());
+
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+		  }
+		
+		/**
+		 * Erneutes schreiben in die Datenbank um das Suchprofil-Objekt zu aktualisieren
+		 * @param such
+		 * @return
+		 */
+		 public Suchprofil updateSuchprofil(Suchprofil such) {
+			 /**
+			  * Aufbau der Db Connection
+			  */
+			    Connection con = DBConnection.connection();
+			    /**
+				 * Try und Catch gehören zum Exception Handling 
+				 * Try = Versuch erst dies 
+				 * Catch = Wenn Try nicht geht versuch es so ..
+				 */
+			    try {
+			      Statement stmt = con.createStatement();
+			      /**
+			       * Updaten der Informationen des Suchprofils 
+			       */
+			      stmt.executeUpdate("UPDATE profil " 
+			    		  			+ "SET vorname=\""+ such.getMinAlter() + "\", " 
+			    		  			+ "nachname=\"" + such.getMaxAlter() + "\", "
+			    		  			+ "geburtsdatum=\"" + such.getGeburtsdatum() + "\", "
+			    		  			+ "koerpergroesse=\"" + such.getKoerpergroesse() + "\", "
+			    		  			+ "religion=\"" + such.getReligion() + "\", "
+			    		  			+ "haarfarbe=\"" + such.getHaarfarbe() + "\", "
+			    		  			+ "raucher=\"" + such.getRaucher() + "\", "
+			            		    + "WHERE id=" + such.getId());
+		                         
+			    }
+			    catch (SQLException e2) {
+			      e2.printStackTrace();
+			    }
+
+			    /**
+			     * Um Analogie zu insertSuchprofil(Suchprofil such) zu wahren, geben wir such zurück
+			     */
+			    return such;
+			  }
+		 
+		 /**
+		  * Rückgabe der Suchprofil-Vektor Objekte
+		  * @return result
+		  */
+		 public Vector<Suchprofil> getAll() {
+			 /**
+			  * Aufbau Db Connection
+			  */
+			    Connection con = DBConnection.connection();
+			    
+			    /**
+			     * Verktor-Objekt wird erzeugt
+			     */
+			    Vector<Suchprofil> result = new Vector<Suchprofil>();
+			    /**
+				 * Try und Catch gehören zum Exception Handling 
+				 * Try = Versuch erst dies 
+				 * Catch = Wenn Try nicht geht versuch es so ..
+				 */
+			    try {
+			        Statement stmt = con.createStatement();
+
+			        /**
+			         * Auswahl der Daten von SUchprofil in der Datenbank und Rückgabe erfolgt geordnet nach der Id.
+			         */
+			        ResultSet rs = stmt.executeQuery("SELECT id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher "
+			            + "FROM suchprofil "  
+			            + "' ORDER BY id");
+
+			        /**
+			         * Für jeden Eintrag im Suchergebnis wird nun ein Suchprofil-Objekt erstellt.
+			         */
+			        while (rs.next()) {
+			          Suchprofil suchp = new Suchprofil();
+			          suchp.setId(rs.getInt("id"));
+			          suchp.setMinAlter(rs.getInt("minalter"));
+			          suchp.setMaxAlter(rs.getInt("maxalter"));
+			          suchp.setGeburtsdatum(rs.getDate("geburtsdatum"));
+			          suchp.setKoerpergroesse(rs.getInt("koerpergroesse"));
+			          suchp.setReligion(rs.getString("religion"));
+			          suchp.setHaarfarbe(rs.getString("haarfarbe"));
+			          suchp.setRaucher(rs.getBoolean("raucher"));
+			          
+			          /**
+			           * Hinzufügen des neuen Objekts zum Ergebnisvektor
+			           */
+			          result.addElement(suchp);
+			        }
+			      }
+			      catch (SQLException e) {
+			        e.printStackTrace();
+			      }
+			      return result;
+		 }
 }

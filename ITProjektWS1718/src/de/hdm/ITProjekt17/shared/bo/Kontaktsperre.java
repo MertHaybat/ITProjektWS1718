@@ -18,24 +18,31 @@ public class Kontaktsperre extends BusinessObject {
 	
 	
 	/**
-	 * ID des Profils, welches gesperrt werden soll.
+	 * ID des Profils, welches gesperrt und von wem es gesperrt werden soll.
 	 */
 	private int profilId_sperrender = 0;
 	private int profilId_gesperrter = 0;
 	
+	
+	//--------------Get-Methoden-----------------------------
+	
 	public int getProfilId_sperrender() {
 		return profilId_sperrender;
 	}
-	public void setProfilId_sperrender(int profilId_sperrender) {
-		this.profilId_sperrender = profilId_sperrender;
-	}
+	
 	public int getProfilId_gesperrter() {
 		return profilId_gesperrter;
 	}
+	
+	//----------------Set-Methoden---------------------------
+	
 	public void setProfilId_gesperrter(int profilId_gesperrter) {
 		this.profilId_gesperrter = profilId_gesperrter;
 	}
 	
+	public void setProfilId_sperrender(int profilId_sperrender) {
+		this.profilId_sperrender = profilId_sperrender;
+	}
 
 
 }

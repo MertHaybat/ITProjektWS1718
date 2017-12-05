@@ -18,7 +18,7 @@ public class Info extends BusinessObject{
 	//-------------------Variablen-der-Info-Klasse--------------------
 	
 	/**
-	 * Variable profilId ist dei Id des Profil's (Fremdschlüssel!!!)
+	 * Variable profilId ist dei Id des Profil's (Fremdschlï¿½ssel!!!)
 	 */
 	private int profilId;
 	
@@ -26,6 +26,10 @@ public class Info extends BusinessObject{
 	 * Variable text enthÃ¤lt informationen des Profils
 	 */
 	private String text;
+	/**
+	 * Variable eigenschaftid ist die ID von Eigenschaft als FS
+	 */
+	private int eigenschaftid;
 	
 	
 	
@@ -45,6 +49,13 @@ public class Info extends BusinessObject{
 	 */
 	public String getText(){
 		return text;
+	}
+	/**
+	 * Auslesen der Eigenschaft id
+	 * @return
+	 */
+	public int getEigenschaftid(){
+		return eigenschaftid;
 	}
 	
 	
@@ -66,11 +77,11 @@ public class Info extends BusinessObject{
 	public void setText(String text){
 		this.text = text;
 	}
-
-	public void setProfil(Profil p) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * Setzen einer Eigenschaft id
+	 * @param eigenschaftid
+	 */
+	public void setEigenschaftid(int eigenschaftid){
+		this.eigenschaftid = eigenschaftid;
 	}
-	
-	
 }

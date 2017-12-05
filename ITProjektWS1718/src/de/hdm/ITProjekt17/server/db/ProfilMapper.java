@@ -218,6 +218,10 @@ public class ProfilMapper {
 
 		return null;
 	}
+	/**
+	 * Mit der Methode GetAll werden alle Profil in einem Ergebnis-Vektor namens Profil gespeichert und zurückgegeben
+	 * @return
+	 */
 	 public Vector<Profil> getAll() {
 		 
 		 	/**

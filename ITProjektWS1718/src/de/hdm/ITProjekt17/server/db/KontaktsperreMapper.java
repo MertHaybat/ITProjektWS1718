@@ -65,8 +65,8 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 				if (rs.next()){
 					Kontaktsperre p = new Kontaktsperre();
 					p.setId(rs.getInt("id"));
-					p.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
 					p.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
+					p.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
 					
 					return p;
 				}
@@ -119,7 +119,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 						/**
 						 * Jetzt erst erfolgt die tatsächliche Einfügeoperation
 						 */
-						stmt.executeUpdate("INSERT INTO merkzettel (id, profilId_sperrender, profilId_gesperrter)"
+						stmt.executeUpdate("INSERT INTO kontaktsperre (id, profilId_sperrender, profilId_gesperrter)"
 								+ "VALUES " + sperre.getId() + "','" + sperre.getProfilId_sperrender() + "','" + sperre.getProfilId_gesperrter() + "')");
 					}
 
@@ -128,27 +128,29 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 				}
 				return sperre;
 			}
-				/**
-				 * Löschen des Objekt Merkzettel in der Datenbank
-				 * @param merk
-				 */
-				public void deleteKontaktsperre(Kontaktsperre sperre) {
-					/**
-					 * Db Connection wird aufgebaut
-					 */
-				    Connection con = DBConnection.connection();
-				    /**
-					 * Try und Catch gehören zum Exception Handling 
-					 * Try = Versuch erst dies 
-					 * Catch = Wenn Try nicht geht versuch es so ..
-					 */
-				    try {
-				      Statement stmt = con.createStatement();
-				      
-				      /**
-				       * Durchführung der Löschoperation
-				       */
-				      stmt.executeUpdate("DELETE FROM kontaktsperre " + "WHERE id=" + sperre.getId());
+		/**
+		 * Löschen des Objekt Merkzettel in der Datenbank
+		 * @param merk
+		 */
+		public void deleteKontaktsperre(Kontaktsperre sperre) {
+		/**
+		 * Db Connection wird aufgebaut
+		 */
+			Connection con = DBConnection.connection();
+			/**
+			 * Try und Catch gehören zum Exception Handling 
+			 * Try = Versuch erst dies 
+			 * Catch = Wenn Try nicht geht versuch es so ..
+			 */
+			 try {
+				 /**
+				  * Erstellen eines leeren Statements
+				  */
+			 Statement stmt = con.createStatement();
+			 /**
+			  * Durchführung der Löschoperation
+			  */
+			 stmt.executeUpdate("DELETE FROM kontaktsperre " + "WHERE id=" + sperre.getId());
 
 				    }
 				    catch (SQLException e2) {
@@ -161,23 +163,23 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 				 * @param sperre
 				 * @return sperre
 				 */
-				 public Kontaktsperre updateKontaktsperre(Kontaktsperre sperre) {
-					 /**
-					  * Db Connection wird aufgebaut
-					  */
-					    Connection con = DBConnection.connection();
-					    /**
-						 * Try und Catch gehören zum Exception Handling 
-						 * Try = Versuch erst dies 
-						 * Catch = Wenn Try nicht geht versuch es so ..
-						 */
-					    try {
-					      Statement stmt = con.createStatement();
+		public Kontaktsperre updateKontaktsperre(Kontaktsperre sperre) {
+		 /**
+		  * Db Connection wird aufgebaut
+		  */
+		 Connection con = DBConnection.connection();
+		 /**
+		  * Try und Catch gehören zum Exception Handling 
+		  * Try = Versuch erst dies 
+		  * Catch = Wenn Try nicht geht versuch es so ..
+		  */
+			try {
+			Statement stmt = con.createStatement();
 					      
-					      /**
-					       * Durchüfhung der Updateoperation
-					       */
-					      stmt.executeUpdate("UPDATE kontaktpserre " + "SET profilId_sperrender=\"" + sperre.getProfilId_sperrender()
+			 /**
+			  * Durchüfhung der Updateoperation
+			  */
+			stmt.executeUpdate("UPDATE kontaktsperre " + "SET profilId_sperrender=\"" + sperre.getProfilId_sperrender()
 					          + "profilId_gesperrter=\" " + sperre.getProfilId_gesperrter() + "\"" + "WHERE id=" + sperre.getId());
 
 					    }
@@ -190,47 +192,45 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 					     */
 					    return sperre;
 					  }
-				 public Vector<Kontaktsperre> getAllKontaktsperre() {
-					 	/**
-					 	 * Aufbau der DB Connection
-					 	 */
-					    Connection con = DBConnection.connection();
+		public Vector<Kontaktsperre> getAllKontaktsperre() {
+			/**
+			 * Aufbau der DB Connection
+			 */
+			 Connection con = DBConnection.connection();
+			 	/**
+			 	 * Kontaktsperre-Vektor Objekt wird erstellt
+			 	 */
+				 Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
+				 /**
+				  * Try und Catch gehören zum Exception Handling 
+				  * Try = Versuch erst dies 
+				  * Catch = Wenn Try nicht geht versuch es so ..
+				  */
+				 try {
+					 Statement stmt = con.createStatement();
+
+					 ResultSet rs = stmt.executeQuery("SELECT id, profilId_sperrender, profilId_gesperrter "
+					  + "FROM kontaktsperre "  
+					  + "' ORDER BY id");
+
 					    /**
-					     * Kontaktsperre-Vektor Objekt wird erstellt
+					     * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
 					     */
-					    Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
-					    /**
-						 * Try und Catch gehören zum Exception Handling 
-						 * Try = Versuch erst dies 
-						 * Catch = Wenn Try nicht geht versuch es so ..
-						 */
-					    try {
-					        Statement stmt = con.createStatement();
-
-					        ResultSet rs = stmt.executeQuery("SELECT id, profilId_sperrender, profilId_gesperrter "
-					            + "FROM merkzettel "  
-					            + "' ORDER BY id");
-
-					        /**
-					         * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
-					         */
-					        while (rs.next()) {
-					          Kontaktsperre kSperre = new Kontaktsperre();
-					          kSperre.setId(rs.getInt("id"));
-					          Profil pro = new Profil();
-					          pro.setId(rs.getInt("id"));
-					          kSperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-					          kSperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+					    while (rs.next()) {
+					    Kontaktsperre kSperre = new Kontaktsperre();
+					    kSperre.setId(rs.getInt("id"));
+					    kSperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
+					    kSperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
 					         
-					          /**
-					           * Hinzufügen des neuen Objekts zum Ergebnisvektor
-					           */
-					          result.addElement(kSperre);
-					        }
-					      }
-					      catch (SQLException e) {
-					        e.printStackTrace();
-					      }
-					      return result;
+					     /**
+					      * Hinzufügen des neuen Objekts zum Ergebnisvektor
+					      */
+					     result.addElement(kSperre);
+					    }
+					 }
+					  catch (SQLException e) {
+					   e.printStackTrace();
 				 }
+			return result;
+			}
 		}

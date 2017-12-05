@@ -39,14 +39,35 @@ public class SuchprofilMapper {
 		
 		return suchprofilMapper;
 	}
+	/**
+	 * Durch die Methode findByKey kann ein Suchprofil anhand seines Primärschlüssels zurückgegeben werden
+	 * @param id
+	 * @return
+	 */
 	public Suchprofil findByKey(int id){
+		/**
+		 * Aufbau einer Db Connection
+		 */
 		Connection con = DBConnection.connection();
-		
+		/**
+		 * Try und Catch gehören zum Exception Handling 
+		 * Try = Versuch erst dies 
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
 		try{
+			/**
+			 * Erstellen eines leeren Statements
+			 */
 		Statement stmt = con.createStatement();		
+		/**
+		 * Auswahl alles (*) aus der Tabelle Suchprofil und das Ergebnis wird in der Variablen result gespeichert
+		 */
 		ResultSet rs = stmt.executeQuery("SELECT * FROM `suchprofil` WHERE `id` = " + id);
 		
 		if (rs.next()){
+			/**
+			 * Erstellen eines Suchprofil-Objektes und setzten der Werte 
+			 */
 			Suchprofil p = new Suchprofil();
 			p.setId(rs.getInt("id"));
 			p.setMinAlter(rs.getInt("minAlter"));
@@ -57,6 +78,9 @@ public class SuchprofilMapper {
 			p.setHaarfarbe(rs.getString("haarfarbe"));
 			p.setRaucher(rs.getBoolean("raucher"));
 			
+			/**
+			 * Rückgabe des Suchprofils p 
+			 */
 			return p;
 		}
 	}

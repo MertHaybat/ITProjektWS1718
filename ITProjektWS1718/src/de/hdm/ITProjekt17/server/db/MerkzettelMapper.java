@@ -39,14 +39,35 @@ public class MerkzettelMapper {
 			
 			return merkzettelMapper;
 		}
+		/**
+		 * Mit der Methode findByKey kann ein Merkzettel via ID abgerufen werden
+		 * @param id
+		 * @return
+		 */
 		public Merkzettel findByKey(int id){
+			/**
+			 * Aufbau einer DB Connection
+			 */
 			Connection con = DBConnection.connection();
-			
+			/**
+			 * Try und Catch gehören zum Exception Handling 
+			 * Try = Versuch erst dies 
+			 * Catch = Wenn Try nicht geht versuch es so ..
+			 */
 			try{
+				/**
+				 * Erstellen eines leeren Statements
+				 */
 			Statement stmt = con.createStatement();		
+			/**
+			 * Abfragen alles (*) aus der Tabelle Merkzettel
+			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `merkzettel` WHERE `id` = " + id);
 			
 			if (rs.next()){
+				/**
+				 * Erstellen eines Merkzettel-Objektes um Id, id des gesperrten und sperrenden darin zuspeichern und zurückzugeben
+				 */
 				Merkzettel p = new Merkzettel();
 				p.setId(rs.getInt("id"));
 				p.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
@@ -172,7 +193,10 @@ public class MerkzettelMapper {
 			     */
 			    return merk;
 			  }
-		
+		/**
+		 * Mit der Methode getAllMerkzettel werden Merkzettel in einem Ergebnis Vektor namens Merkzettel gespeichert und zurückgegeben
+		 * @return
+		 */
 		 public Vector<Merkzettel> getAllMerkzettel() {
 			 	/**
 				 * Aufbau der DB Connection
@@ -202,8 +226,6 @@ public class MerkzettelMapper {
 			        while (rs.next()) {
 			          Merkzettel merk = new Merkzettel();
 			          merk.setId(rs.getInt("id"));
-			          Profil pro = new Profil();
-			          pro.setId(rs.getInt("id"));
 			          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
 			          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
 			         

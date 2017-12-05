@@ -41,25 +41,41 @@ public class InfoMapper {
 
 		return infoMapper;
 	}
-
-	public ArrayList<Info> insertInfo(ArrayList<Info> in) throws Exception {// c
-		// fuer
-		// character
+	/**
+	 * 
+	 * @param in
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<Info> insertInfo(ArrayList<Info> in) throws Exception {
+		/**
+		 * Aufbau einer DB Connection
+		 */
 		Connection con = DBConnection.connection();
-
+		/**
+		 * Try und Catch gehören zum Exception Handling 
+		 * Try = Versuch erst dies 
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
 		try {
+			/**
+			 * Erstellen eines Leeren Statements
+			 */
 			Statement stmt = con.createStatement();
+			
 			for (Info c : in) {
 
 				ResultSet rs = stmt.executeQuery("SELECT MAX(`id`) AS maxid FROM info");
 
 				if (rs.next()) {
-					/*
+					/**
 					 * c erhält den bisher maximalen, nun um 1 inkrementierten
 					 * Primärschlüssel.
 					 */
 					c.setId(rs.getInt("maxid") + 1);
-
+					/**
+					 * Eigentliche Einfügeoperation
+					 */
 					stmt.executeUpdate("INSERT INTO `info` (`id`, `text`, `profilid`) VALUES (" + c.getId() + "', '"+c.getText()+"','"+c.getProfilId()+");");
 
 				}
@@ -70,7 +86,12 @@ public class InfoMapper {
 		}
 		return in;
 	}
-
+	/**
+	 * Mit der Updatefunktion wird das Updaten von Daten in der Tabelle Info durchgeführt
+	 * @param in
+	 * @return in
+	 * @throws Exception
+	 */
 	public Info updateInfo(Info in) throws Exception {
 		Connection con = DBConnection.connection();
 
@@ -89,7 +110,11 @@ public class InfoMapper {
 
 		return in;
 	}
-
+	/**
+	 * Mit der delete Funktion wird das Löschen von Info Datensätzen ermöglicht
+	 * @param in
+	 * @throws Exception
+	 */
 	public void deleteInfo(Info in) throws Exception {
 		Connection con = DBConnection.connection();
 
@@ -101,7 +126,11 @@ public class InfoMapper {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Durch die findByKey Operation kann eine Info nach der Id gesucht und zurückgegeben werden
+ * @param id
+ * @return
+ */
 	public Info findByKey(int id) {
 		Connection con = DBConnection.connection();
 
@@ -123,44 +152,45 @@ public class InfoMapper {
 
 		return null;
 	}
-	
+	/**
+	 * Durch die GetAll Methode werden alle Informationen, welche in der Tabelle Info gespeichert sind ausgelesen und zurückgegeben.
+	 * @return
+	 * @throws Exception
+	 */
 	public ArrayList<Info> getAll() throws Exception {
-
+		/**
+		 * Aufbau einer DB Connection
+		 */
 		Connection con = DBConnection.connection();
-
+		/**
+		 * Erstellen einer ArrayList Info
+		 */
 		ArrayList<Info> result = new ArrayList<Info>();
+		
 		try {
+			/**
+			 * Erstellen eines leeren Statements
+			 */
 			Statement stmt = con.createStatement();
-
-			/*
-			 * Zunächst schauen wir nach, welches der momentan höchste
-			 * Primärschlüsselwert ist.
+			
+			/**
+			 * Abfrage alles (*) aus Tabelle info, welches in rs gespeichert wird
 			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `info`");
-
-			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-
+			
+			/**
+			 * Die while-Schleife erzeugt beim durchlauf ein Info Objekt in dieses wird die (Id, text, eigenschaftid und profilid) gesetzt
+			 * und in das Info Objekt als Ergebnis abgespeichert
+			 */
 			while (rs.next()) {
-				Info c = new Info();// default Konstruktor in
-													// Eigenscgaft.java
-													// einf�gen damit es kein
-													// Fehler anzeigt
+				Info c = new Info();
 				c.setId(rs.getInt("id"));
 				c.setText(rs.getString("text"));
-				Profil p = new Profil();
-				p.setId(rs.getInt("profilid"));
-				c.setProfil(p);
-				// a.setId(rs.getInt("") + 1);
+				c.setEigenschaftid(rs.getInt("eigenschaftid"));
+				c.setProfilId(rs.getInt("profilid"));
+				
 				result.add(c);
 			}
-
-			stmt = con.createStatement();
-
-			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-			// stmt.executeUpdate("");
-			// return result;
-			// }
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

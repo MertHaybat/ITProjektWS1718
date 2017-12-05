@@ -41,27 +41,42 @@ public class EigenschaftMapper {
 
 		return eigenschaftMapper;
 	}
-
-	public ArrayList<Eigenschaft> insertEigenschaft(ArrayList<Eigenschaft> eig) throws Exception {// c
-																									// fuer
-																									// character
+	
+	/**
+	 * Mit der insert Methode können EIgenschaften hinzugefügt werden 
+	 * @param eig
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<Eigenschaft> insertEigenschaft(ArrayList<Eigenschaft> eig) throws Exception {
+		/**
+		 * Aufbau einer DB Connection
+		 */
 		Connection con = DBConnection.connection();
-
+		/**
+		 * Try und Catch gehören zum Exception Handling 
+		 * Try = Versuch erst dies 
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
 		try {
+			/**
+			 * Erstellen eines leeren Statements
+			 */
 			Statement stmt = con.createStatement();
 			for (Eigenschaft c : eig) {
 
 				ResultSet rs = stmt.executeQuery("SELECT MAX(`id`) AS maxid FROM eigenschaft");
 
 				if (rs.next()) {
-					/*
+					/**
 					 * c erhält den bisher maximalen, nun um 1 inkrementierten
 					 * Primärschlüssel.
 					 */
 					c.setId(rs.getInt("maxid") + 1);
-
-					stmt.executeUpdate("INSERT INTO `eigenschaft` (`id`, `profilid`) VALUES (" + c.getId() + "', '"
-							+ c.getProfilid() + "',);");
+					/**
+					 * Einfügeoperation in die Eigenschafts Tabelle
+					 */
+					stmt.executeUpdate("INSERT INTO `eigenschaft` (`id`) VALUES (" + c.getId());
 
 				}
 
@@ -69,17 +84,36 @@ public class EigenschaftMapper {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		/**
+		 * Rückgabe vom Wert eig
+		 */
 		return eig;
 	}
-
+	/**
+	 * Mit dieser Methode können Tabellen geupdated werden
+	 * @param eig
+	 * @return
+	 * @throws Exception
+	 */
 	public Eigenschaft updateEigenschaft(Eigenschaft eig) throws Exception {
+		/**
+		 * Aufbau einer Db Connection
+		 */
 		Connection con = DBConnection.connection();
-
+		/**
+		 * Try und Catch gehören zum Exception Handling 
+		 * Try = Versuch erst dies 
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
 		try {
+			/**
+			 * Erstellen eines leeren Statements
+			 */
 			Statement stmt = con.createStatement();
-
-			stmt.executeUpdate("UPDATE `eigenschaft` SET `id` = '" + eig.getId() + "', `profilid` = '"
-					+ eig.getProfilid() + "' WHERE `eigenschaft`.`id` = " + eig.getId());
+			/**
+			 * Updateoperation in die eigsnchafts Tabelle wird durchgeführt
+			 */
+			stmt.executeUpdate("UPDATE `eigenschaft` SET `id` = '" + eig.getId() + "' WHERE `eigenschaft`.`id` = " + eig.getId());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -87,24 +121,59 @@ public class EigenschaftMapper {
 
 		return eig;
 	}
-
+	/**
+	 * DIe Delete Methode gewährleistet die Löschung von Eigenschaften 
+	 * @param eig
+	 * @throws Exception
+	 */
 	public void deleteEigenschaft(Eigenschaft eig) throws Exception {
+		/**
+		 * Aufbau einer DB Connection
+		 */
 		Connection con = DBConnection.connection();
-
+		/**
+		 * Try und Catch gehören zum Exception Handling 
+		 * Try = Versuch erst dies 
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
 		try {
+			/**
+			 * Erstellen eines leeren Statements 
+			 */
 			Statement stmt = con.createStatement();
 
+				/**
+				 * Durchführung der Löschoperation
+				 */
 			stmt.executeUpdate("DELETE FROM `eigenschaft` WHERE `id` = " + eig.getId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+   /**
+	* Die Methode findByKey ermöglicht es eine Eigenschaft via Schlüssel zu finden
+	* @param id
+	* @return
+	*/
 	public Eigenschaft findByKey(int id) {
+		/**
+		 * Aufbau einer DB Connection
+		 */
 		Connection con = DBConnection.connection();
-
+		/**
+		 * Try und Catch gehören zum Exception Handling 
+		 * Try = Versuch erst dies 
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
 		try {
+			/**
+			 * Erstellen eines leeren Statements
+			 */
 			Statement stmt = con.createStatement();
+			/**
+			 * Auswahl alles (*) aus der Eigenschaftstabelle 
+			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft` WHERE `id` = " + id);
 
 			if (rs.next()) {
@@ -121,42 +190,49 @@ public class EigenschaftMapper {
 		return null;
 	}
 
+	/**
+	 * Durch die GetAll Methode können alle Eigenschaften angezeigt werden
+	 * @return
+	 * @throws Exception
+	 */
 	public ArrayList<Eigenschaft> getAll() throws Exception {
-
+		/**
+		 * Aufbau einer DB Connection
+		 */
 		Connection con = DBConnection.connection();
-
+		/**
+		 * Erstellen eines Eigenschaft-Vektor-Objekts
+		 */
 		ArrayList<Eigenschaft> result = new ArrayList<Eigenschaft>();
+		/**
+		 * Try und Catch gehören zum Exception Handling 
+		 * Try = Versuch erst dies 
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
 		try {
+			/**
+			 * Erstellen eines leeren Statements
+			 */
 			Statement stmt = con.createStatement();
-
-			/*
-			 * Zunächst schauen wir nach, welches der momentan höchste
-			 * Primärschlüsselwert ist.
+			
+			/**
+			 * Auswahl alles (*) aus der Eigenschaftstabelle
 			 */
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft`");
 
-			// Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-
 			while (rs.next()) {
-				Eigenschaft c = new Eigenschaft();// default Konstruktor in
-													// Eigenscgaft.java
-													// einf�gen damit es kein
-													// Fehler anzeigt
+				/**
+				 * Erstellen eines EIgenschafts-Objekts
+				 */
+				Eigenschaft c = new Eigenschaft();
+				/**
+				 * Es wird eine ID gesetzt welche zum Ergebnis Vektor ArrayList hinzugefügt wird
+				 */
 				c.setId(rs.getInt("id"));
-				Profil p = new Profil();
-				p.setId(rs.getInt("profilid"));
-				c.setProfil(p);
-				// a.setId(rs.getInt("") + 1);
+			
+				
 				result.add(c);
 			}
-
-			stmt = con.createStatement();
-
-			// Jetzt erst erfolgt die tatsächliche Einfügeoperation
-			// stmt.executeUpdate("");
-			// return result;
-			// }
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

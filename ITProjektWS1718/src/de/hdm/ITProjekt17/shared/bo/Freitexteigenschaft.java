@@ -11,28 +11,36 @@ public class Freitexteigenschaft extends Eigenschaft{
 	
 	private static final long serialVersionUID = 1L; 
 	
-	private String wert;
 	
+	
+	/**
+	 * Variablen wert, welche den Wert später speichert der als freitext geschreiben wird
+	 */
+	private String wert;
+	/**
+	 * Variable eigenschaftid ist als Fredmschlüssel in dieser Klasse gespeichert
+	 */
 	private int eigenschaftid;
 
+	
+	
+	//---------------Get-Methoden---------------------------
+	
 	public int getEigenschaftid() {
 		return eigenschaftid;
 	}
-
-	public void setEigenschaftid(int eigenschaftid) {
-		this.eigenschaftid = eigenschaftid;
-	}
-
+	
 	public String getWert() {
 		return this.wert;
 	}
 
-	public void setWert(String wert) {
-		this.wert = wert;
+	//---------------Set-Methoden-----------------------------
+	
+	public void setEigenschaftid(int eigenschaftid) {
+		this.eigenschaftid = eigenschaftid;
 	}
 
-	public void setEigenschaft(Eigenschaft e) {
-		this.eigenschaftid = eigenschaftid;
-		
+	public void setWert(String wert) {
+		this.wert = wert;
 	}
 }

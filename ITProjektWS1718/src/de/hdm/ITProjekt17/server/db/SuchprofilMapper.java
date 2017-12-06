@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import de.hdm.ITProjekt17.shared.bo.Profil;
+
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 
 public class SuchprofilMapper {

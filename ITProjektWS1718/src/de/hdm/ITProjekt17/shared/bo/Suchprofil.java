@@ -25,7 +25,7 @@ public class Suchprofil extends BusinessObject {
 	//----------------Variablen-der-Klasse-Suchprofil------------------------------
 	
 	/*
-	 * Variable profilId ist der Fremdschlüssel von Profil kommend, um das Suchprofil einordnen zu können
+	 * Variable profilId ist der Fremdschlï¿½ssel von Profil kommend, um das Suchprofil einordnen zu kï¿½nnen
 	 */
 	private int profilId;
 	
@@ -68,7 +68,7 @@ public class Suchprofil extends BusinessObject {
 	//----------------------Set-Methoden--------------------------------
 	
 	/**
-	 * Setzen des Fremdschlüssels
+	 * Setzen des Fremdschlï¿½ssels
 	 * @param profilId
 	 */
 	public void setProfilId(int profilId) {
@@ -128,7 +128,7 @@ public class Suchprofil extends BusinessObject {
 	 * Setzen ob zusuchender Teilenhmer Raucht
 	 * @param raucher
 	 */
-	public void setRaucher(Boolean raucher){
+	public void setRaucher(boolean raucher){
 		this.raucher = raucher;
 	}
 	
@@ -137,7 +137,7 @@ public class Suchprofil extends BusinessObject {
 	//------------Get-Methoden-------------------------------------------
 	
 	/**
-	 * Abfragen des Fremdschlüssels ProfilID
+	 * Abfragen des Fremdschlï¿½ssels ProfilID
 	 * @return profilId
 	 */
 	public int getProfilId() {

@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
+import sun.java2d.cmm.Profile;
 
 public class ProfilMapper {
 
@@ -42,11 +43,11 @@ public class ProfilMapper {
 	}
 	
     /**
-     * Einfuegen eines <code>Account</code>-Objekts in die Datenbank. Dabei wird
+     * Einfuegen eines <code>Profil</code>-Objekts in die Datenbank. Dabei wird
      * auch der Primaerschluessel des uebergebenen Objekts geprueft und ggf.
      * berichtigt.
      *
-     * @param a das zu speichernde Objekt
+     * @param pro das zu speichernde Objekt
      * @return das bereits uebergebene Objekt, jedoch mit ggf. korrigierter
      * <code>id</code>.
      * 
@@ -68,34 +69,32 @@ public class ProfilMapper {
 		      	/**
 				 * Was ist der momentan höchste Primärschlüssel
 				 */
-		      ResultSet rs = stmt.executeQuery("SELECT MAX(ID) AS maxid "
+		      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
 		              + "FROM profil ");
 		     	
 		      if(rs.next()){
 		    	  	/**
 					 * Varaible merk erhält den höchsten Primärschlüssel inkrementiert um 1
 					 */
-		    	  	pro.setId(rs.getInt("maxid") + 1);
+		    	  	pro.setId(rs.getInt("maxid") + 1);	    	  	
 		    	  	/**
-					 * Ein Statement wird erzeugt
-					 */
-		    	  	stmt = con.createStatement();
-		    	  	
-		    	  	/**
-		    	  	 * Durchführen der Updateoperation
+		    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 		    	  	 */
-		    		stmt.executeUpdate("INSERT INTO profil (id, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher)" 
-		    				+"VALUES (" +
-	                        pro.getId() + "," + "'" +
-	                        pro.getVorname() +"'" + "," +
-	                        pro.getNachname() +"'" + "," +
-	                        pro.getGeburtsdatum() +"," + 
-	                        pro.getKoerpergroesse() + "," + 
-	                        pro.getReligion() + "," + "'" +
-	                        pro.getHaarfarbe() +"'" + ","+
-	                        pro.getRaucher() +
-	                         ")");
-		    	  
+		    	  		PreparedStatement stmt1 = con.prepareStatement(
+		    	  				"INSERT INTO profil(id, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher) "
+		    	  				+ "VALUES (?,?,?,?,?,?,?,?) ",
+		    	  				Statement.RETURN_GENERATED_KEYS);
+		    	  				stmt1.setInt(1, pro.getId());
+		    	  				stmt1.setString(2, pro.getVorname());
+		    	  				stmt1.setString(3, pro.getNachname());
+		    	  				stmt1.setDate(4, (Date) pro.getGeburtsdatum());
+		    	  				stmt1.setInt(5, pro.getKoerpergroesse());
+		    	  				stmt1.setString(6, pro.getReligion());
+		    	  				stmt1.setString(7, pro.getHaarfarbe());
+		    	  				stmt1.setBoolean(8, pro.getRaucher());
+		    	  				
+		    	  				
+		    	  				stmt1.executeUpdate();
 		      }
 		}
 		catch(SQLException e2){
@@ -104,6 +103,8 @@ public class ProfilMapper {
 		return pro;
 		
 	}
+	
+	
 	/**
 	 * Löschen des Objekt Profil in der Datenbank
 	 * @param pro
@@ -119,13 +120,14 @@ public class ProfilMapper {
 		 * Catch = Wenn Try nicht geht versuch es so ..
 		 */
 	    try {
-	      Statement stmt = con.createStatement();
+	    	/**
+		      * Durchführung der Löschoperation
+		      */
+	     PreparedStatement stmt = con.prepareStatement("DELETE FROM profil " + "WHERE id= ? ");
+	     stmt.setInt(1, pro.getId());
+	     stmt.executeUpdate();
 
-	      /**
-	       * Durchführung der Löschoperation
-	       */
-	      stmt.executeUpdate("DELETE FROM profil " + "WHERE id=" + pro.getId());
-
+	  
 	    }
 	    catch (SQLException e2) {
 	      e2.printStackTrace();
@@ -138,7 +140,8 @@ public class ProfilMapper {
 	 * @return pro
 	 */
 	 public Profil updateProfil(Profil pro) {
-		 	/**
+		 	String sql = "UPDATE profil SET  vorname=?, nachname=?, geburtsdatum=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=? WHERE id=?";
+		 /**
 		 	 * Aufbau der Db Connection
 		 	 */
 		    Connection con = DBConnection.connection();
@@ -148,31 +151,100 @@ public class ProfilMapper {
 			 * Catch = Wenn Try nicht geht versuch es so ..
 			 */
 		    try {
-		      Statement stmt = con.createStatement();
+		    
+		    	PreparedStatement stmt = con.prepareStatement(sql);
+		    	
+		    	
+		    	stmt.setString(1, pro.getVorname());
+		    	stmt.setString(2, pro.getNachname());
+		    	stmt.setDate(3, (Date) pro.getGeburtsdatum());
+		    	stmt.setInt(4, pro.getKoerpergroesse());
+		    	stmt.setString(5, pro.getReligion());
+		    	stmt.setString(6, pro.getHaarfarbe());
+		    	stmt.setBoolean(7, pro.getRaucher());
 
-		      /**
-		       * Durchführung der Updateoperation
-		       */
-		      stmt.executeUpdate("UPDATE profil " 
-		    		  			+ "SET vorname=\""+ pro.getVorname() + "\", " 
-		    		  			+ "nachname=\"" + pro.getNachname() + "\", "
-		    		  			+ "geburtsdatum=\"" + pro.getGeburtsdatum() + "\", "
-		    		  			+ "koerpergroesse=\"" + pro.getKoerpergroesse() + "\", "
-		    		  			+ "religion=\"" + pro.getReligion() + "\", "
-		    		  			+ "haarfarbe=\"" + pro.getHaarfarbe() + "\", "
-		    		  			+ "raucher=\"" + pro.getRaucher() + "\", "
-		            		    + "WHERE id=" + pro.getId());
-	                         
+		    	stmt.setInt(8, pro.getId());
+		    	stmt.executeUpdate();
+		    	
+		    	System.out.println("Updated");
+		   
 		    }
 		    catch (SQLException e2) {
 		      e2.printStackTrace();
 		    }
 
 		    /**
-		     *  Um Analogie zu insert(Profil pro) zu wahren, geben wir pro zurück
+		     *  Das Profil wird zurückgegeben
 		     */
 		    return pro;
 		  }
+	 
+	 	/**
+		 * Mit der Methode GetAll werden alle Profil in einem Ergebnis-Vektor namens Profil gespeichert und zurückgegeben
+		 * @return
+		 */
+		 public Vector<Profil> getAllProfil() {
+			 
+			 	/**
+			 	 * Aufbau der DB Connection
+			 	 */
+			    Connection con = DBConnection.connection();
+			  
+			    Vector<Profil> result = new Vector<Profil>();
+			    try {
+			    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM profil ");
+			    	
+			      
+			    	ResultSet rs = stmt.executeQuery();
+			        
+			        /**
+			         * Für jeden Eintrag im Suchergebnis wird nun ein Profil-Objekt erstellt.
+			         */
+			        while (rs.next()) {
+			          Profil pro = new Profil();
+			          pro.setId(rs.getInt("id"));
+			          pro.setVorname(rs.getString("vorname"));
+			          pro.setNachname(rs.getString("nachname"));
+			          pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
+			          pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
+			          pro.setReligion(rs.getString("religion"));
+			          pro.setHaarfarbe(rs.getString("haarfarbe"));
+			          pro.setRaucher(rs.getBoolean("raucher"));
+			          
+			          /**
+			           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+			           */
+			          result.addElement(pro);
+			        }
+			      }
+			      catch (SQLException e) {
+			        e.printStackTrace();
+			      }
+
+			      /**
+			       *  Ergebnisvektor zurückgeben
+			       */
+			      return result;
+		 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 //Nochmals anschauen....
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	/**
 	 * Es wird nur ein Profil-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
 	 * ist und nur einmal existiert.
@@ -189,26 +261,27 @@ public class ProfilMapper {
 		 * Try = Versuch erst dies 
 		 * Catch = Wenn Try nicht geht versuch es so ..
 		 */
-		try{
-		Statement stmt = con.createStatement();		
-		
+
+		try{	
+		PreparedStatement stmt = con.prepareStatement("SELCECT * FROM profil WHERE id=?");
 		/**
 		 * Statement ausfüllen und an die DB senden
 		 */
-		ResultSet rs = stmt.executeQuery("SELECT * FROM profil " + "WHERE id=" + id);
+		ResultSet rs = stmt.executeQuery();
 			
 		if (rs.next()){
 			Profil pro = new Profil();
-			pro.setId(rs.getInt("id"));
-			pro.setVorname(rs.getString("vorname"));
-			pro.setNachname(rs.getString("nachname"));
-			pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
-			pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
-			pro.setReligion(rs.getString("religion"));
-			pro.setHaarfarbe(rs.getString("haarfarbe"));
-			pro.setRaucher(rs.getBoolean("raucher"));
-			
-			return pro;
+	          pro.setId(rs.getInt("id"));
+	          pro.setVorname(rs.getString("vorname"));
+	          pro.setNachname(rs.getString("nachname"));
+	          pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
+	          pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
+	          pro.setReligion(rs.getString("religion"));
+	          pro.setHaarfarbe(rs.getString("haarfarbe"));
+	          pro.setRaucher(rs.getBoolean("raucher"));
+	          
+	          return pro;
+
 		}
 	}
 		catch (SQLException e2){
@@ -218,59 +291,4 @@ public class ProfilMapper {
 
 		return null;
 	}
-	/**
-	 * Mit der Methode GetAll werden alle Profil in einem Ergebnis-Vektor namens Profil gespeichert und zurückgegeben
-	 * @return
-	 */
-	 public Vector<Profil> getAll() {
-		 
-		 	/**
-		 	 * Aufbau der DB Connection
-		 	 */
-		    Connection con = DBConnection.connection();
-		    
-		    /**
-		     * Erstellen des Ergebnis Verktors Profil
-		     */
-		    Vector<Profil> result = new Vector<Profil>();
-		
-		    try {
-		        Statement stmt = con.createStatement();
-		        
-		        /**
-		         *Statement wird ausgefüllt und an die DB gesendet
-		         */
-		        ResultSet rs = stmt.executeQuery("SELECT id, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher "
-		            + "FROM profil "  
-		            + "' ORDER BY id");
-
-		        /**
-		         * Für jeden Eintrag im Suchergebnis wird nun ein Profil-Objekt erstellt.
-		         */
-		        while (rs.next()) {
-		          Profil pro = new Profil();
-		          pro.setId(rs.getInt("id"));
-		          pro.setVorname(rs.getString("vorname"));
-		          pro.setNachname(rs.getString("nachname"));
-		          pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
-		          pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
-		          pro.setReligion(rs.getString("religion"));
-		          pro.setHaarfarbe(rs.getString("haarfarbe"));
-		          pro.setRaucher(rs.getBoolean("raucher"));
-		          
-		          /**
-		           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
-		           */
-		          result.addElement(pro);
-		        }
-		      }
-		      catch (SQLException e) {
-		        e.printStackTrace();
-		      }
-
-		      /**
-		       *  Ergebnisvektor zurückgeben
-		       */
-		      return result;
-	 }
 }

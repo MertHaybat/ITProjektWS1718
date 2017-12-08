@@ -1,7 +1,8 @@
 package de.hdm.ITProjekt17.server.db;
 
 	import java.sql.Connection;
-	import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 	import java.sql.SQLException;
 	import java.sql.Statement;
 import java.util.Vector;
@@ -39,54 +40,11 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 				
 				return kontaktsperreMapper;
 			}
-			/**
-			 * Es wird nur ein Merkezttel-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
-			 * ist und nur einmal existiert.
-			 * @param id
-			 * @return p
-			 */
-			public Kontaktsperre findByKey(int id){
-				/**
-				 * Db Connection wird aufgebaut
-				 */
-				Connection con = DBConnection.connection();
-				/**
-				 * Try und Catch gehören zum Exception Handling 
-				 * Try = Versuch erst dies 
-				 * Catch = Wenn Try nicht geht versuch es so ..
-				 */
-				try{
-				Statement stmt = con.createStatement();		
-				/**
-				 * Statement wird ausgefüllt und an die DB gesendet
-				 */
-				ResultSet rs = stmt.executeQuery("SELECT * FROM `kontaktsperre` WHERE `id` = " + id);
-				
-				if (rs.next()){
-					Kontaktsperre p = new Kontaktsperre();
-					p.setId(rs.getInt("id"));
-					p.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-					p.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
-					
-					return p;
-				}
-			}
-				catch (SQLException e2){
-					e2.printStackTrace();
-					return null;
-				}
-
-				return null;
-			}
 			
-			/**
-			 * Insert Methode ist für die Einfügeoperation in die Datenbank zuständig
-			 * @param sperre
-			 * @return sperre
-			 */
-			public Kontaktsperre insertKontaktsperre(Kontaktsperre sperre) {
+			
+		 public Kontaktsperre insertKontaktsperre(Kontaktsperre sperre){
 				/**
-				 * Aufbau Db Connection
+				 * Aufbau der DB Connection
 				 */
 				Connection con = DBConnection.connection();
 				/**
@@ -95,142 +53,203 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 				 * Catch = Wenn Try nicht geht versuch es so ..
 				 */
 				try {
-					Statement stmt = con.createStatement();
-
-					/**
-					 * Zunächst schauen wir nach, welches der momentan höchste
-					 * Primärschlüsselwert ist.
-					 */
-					ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
-					+ "FROM kontaktsperre ");
-
-					/**
-					 * Wenn wir etwas zurückerhalten, kann dies nur einzeilig sein
-					 */
-					if (rs.next()) {
-						/**
-						 * merk erhält den bisher maximalen, nun um 1 inkrementierten
-						 * Primärschlüssel.
+				      Statement stmt = con.createStatement();
+				      	/**
+						 * Was ist der momentan höchste Primärschlüssel
 						 */
-						sperre.setId(rs.getInt("maxid") + 1);
-
-						stmt = con.createStatement();
-
-						/**
-						 * Jetzt erst erfolgt die tatsächliche Einfügeoperation
-						 */
-						stmt.executeUpdate("INSERT INTO kontaktsperre (id, profilId_sperrender, profilId_gesperrter)"
-								+ "VALUES " + sperre.getId() + "','" + sperre.getProfilId_sperrender() + "','" + sperre.getProfilId_gesperrter() + "')");
-					}
-
-				} catch (SQLException e) {
-					e.printStackTrace();
+				      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
+				              + "FROM kontaktsperre ");
+				     	
+				      if(rs.next()){
+				    	  	/**
+							 * Varaible merk erhält den höchsten Primärschlüssel inkrementiert um 1
+							 */
+				    	  	sperre.setId(rs.getInt("maxid") + 1);	    	  	
+				    	  	/**
+				    	  	 * Durchführen der Einfüge Operation via Prepared Statement
+				    	  	 */
+				    	  		PreparedStatement stmt1 = con.prepareStatement(
+				    	  				"INSERT INTO kontaktsperre (id, profilId_sperrender, profilId_gesperrter) "
+				    	  				+ "VALUES (?,?,?) ",
+				    	  				Statement.RETURN_GENERATED_KEYS);
+				    	  				stmt1.setInt(1, sperre.getId());
+				    	  				stmt1.setInt(2, sperre.getProfilId_sperrender());
+				    	  				stmt1.setInt(3, sperre.getProfilId_gesperrter());
+				    	  				
+				    	  				
+				    	  				
+				    	  				stmt1.executeUpdate();
+				      }
+				}
+				catch(SQLException e2){
+					e2.printStackTrace();
 				}
 				return sperre;
+				
 			}
-		/**
-		 * Löschen des Objekt Merkzettel in der Datenbank
-		 * @param merk
-		 */
-		public void deleteKontaktsperre(Kontaktsperre sperre) {
-		/**
-		 * Db Connection wird aufgebaut
-		 */
-			Connection con = DBConnection.connection();
 			/**
-			 * Try und Catch gehören zum Exception Handling 
-			 * Try = Versuch erst dies 
-			 * Catch = Wenn Try nicht geht versuch es so ..
+			 * Löschen des Objekt Kontaktsperre in der Datenbank
+			 * @param pro
 			 */
-			 try {
-				 /**
-				  * Erstellen eines leeren Statements
-				  */
-			 Statement stmt = con.createStatement();
-			 /**
-			  * Durchführung der Löschoperation
-			  */
-			 stmt.executeUpdate("DELETE FROM kontaktsperre " + "WHERE id=" + sperre.getId());
+			public void deleteKontaktsperre (Kontaktsperre sperre) {
+				/**
+				 * Aufbau der DB Connection
+				 */
+			    Connection con = DBConnection.connection();
+			    /**
+				 * Try und Catch gehören zum Exception Handling 
+				 * Try = Versuch erst dies 
+				 * Catch = Wenn Try nicht geht versuch es so ..
+				 */
+			    try {
+			    	/**
+				      * Durchführung der Löschoperation
+				      */
+			     PreparedStatement stmt = con.prepareStatement("DELETE FROM kontaktsperre " + "WHERE id= ? ");
+			     stmt.setInt(1, sperre.getId());
+			     stmt.executeUpdate();
 
+			  
+			    }
+			    catch (SQLException e2) {
+			      e2.printStackTrace();
+			    }
+			  }
+			
+			/**
+			 * Erneutes schreiben in die Datenbank um das Kontaktsperre Objekt zu aktualisieren
+			 * @param pro
+			 * @return pro
+			 */
+			 public Kontaktsperre updateKontaktsperre(Kontaktsperre sperre){
+				 	String sql = "UPDATE kontaktsperre SET  profilId_sperrender=?, profilId_gesperrter=? WHERE id=?";
+				 /**
+				 	 * Aufbau der Db Connection
+				 	 */
+				    Connection con = DBConnection.connection();
+				    /**
+					 * Try und Catch gehören zum Exception Handling 
+					 * Try = Versuch erst dies 
+					 * Catch = Wenn Try nicht geht versuch es so ..
+					 */
+				    try {
+				    
+				    	PreparedStatement stmt = con.prepareStatement(sql);
+				    	
+				    	
+				    	stmt.setInt(1, sperre.getProfilId_sperrender());
+				    	stmt.setInt(2, sperre.getProfilId_gesperrter());
+
+				    	stmt.setInt(8, sperre.getId());
+				    	stmt.executeUpdate();
+				    	
+				    	System.out.println("Updated");
+				   
 				    }
 				    catch (SQLException e2) {
 				      e2.printStackTrace();
 				    }
+
+				    /**
+				     *  Das Profil wird zurückgegeben
+				     */
+				    return sperre;
 				  }
-				
-				/**
-				 * Erneutes schreiben in die Datenbank um das Profil Objekt zu aktualisieren
-				 * @param sperre
-				 * @return sperre
-				 */
-		public Kontaktsperre updateKontaktsperre(Kontaktsperre sperre) {
-		 /**
-		  * Db Connection wird aufgebaut
-		  */
-		 Connection con = DBConnection.connection();
-		 /**
-		  * Try und Catch gehören zum Exception Handling 
-		  * Try = Versuch erst dies 
-		  * Catch = Wenn Try nicht geht versuch es so ..
-		  */
-			try {
-			Statement stmt = con.createStatement();
-					      
+			 
+			 public Vector<Kontaktsperre> getAllKontaktsperre() {
+					/**
+					 * Aufbau der DB Connection
+					 */
+					 Connection con = DBConnection.connection();
+					 	/**
+					 	 * Kontaktsperre-Vektor Objekt wird erstellt
+					 	 */
+						 Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
+						 /**
+						  * Try und Catch gehören zum Exception Handling 
+						  * Try = Versuch erst dies 
+						  * Catch = Wenn Try nicht geht versuch es so ..
+						  */
+						 try {
+							 Statement stmt = con.createStatement();
+
+							 ResultSet rs = stmt.executeQuery("SELECT id, profilId_sperrender, profilId_gesperrter "
+							  + "FROM kontaktsperre "  
+							  + "' ORDER BY id");
+
+							    /**
+							     * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
+							     */
+							    while (rs.next()) {
+							    Kontaktsperre kSperre = new Kontaktsperre();
+							    kSperre.setId(rs.getInt("id"));
+							    kSperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
+							    kSperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+							         
+							     /**
+							      * Hinzufügen des neuen Objekts zum Ergebnisvektor
+							      */
+							     result.addElement(kSperre);
+							    }
+							 }
+							  catch (SQLException e) {
+							   e.printStackTrace();
+						 }
+					return result;
+					} 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 //Nochmals anschaun ob dies so passt....
+			 
+			 
+			 
+			 
+			 
 			 /**
-			  * Durchüfhung der Updateoperation
-			  */
-			stmt.executeUpdate("UPDATE kontaktsperre " + "SET profilId_sperrender=\"" + sperre.getProfilId_sperrender()
-					          + "profilId_gesperrter=\" " + sperre.getProfilId_gesperrter() + "\"" + "WHERE id=" + sperre.getId());
+				 * Es wird nur ein Kontaktsperre-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+				 * ist und nur einmal existiert.
+				 * @param id
+				 * @return p
+				 */
+				public Kontaktsperre findByKey(int id){
+					/**
+					 * Db Connection wird aufgebaut
+					 */
+					Connection con = DBConnection.connection();
+					/**
+					 * Try und Catch gehören zum Exception Handling 
+					 * Try = Versuch erst dies 
+					 * Catch = Wenn Try nicht geht versuch es so ..
+					 */
+					try{
+					Statement stmt = con.createStatement();		
+					/**
+					 * Statement wird ausgefüllt und an die DB gesendet
+					 */
+					ResultSet rs = stmt.executeQuery("SELECT * FROM kontaktsperre WHERE id = " + id);
+					
+					if (rs.next()){
+						Kontaktsperre p = new Kontaktsperre();
+						p.setId(rs.getInt("id"));
+						p.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
+						p.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+						
+						return p;
+					}
+				}
+					catch (SQLException e2){
+						e2.printStackTrace();
+						return null;
+					}
 
-					    }
-					    catch (SQLException e2) {
-					      e2.printStackTrace();
-					    }
-
-					    /**
-					     * Um Analogie zu insertKontaktsperre(Kontaktsperre sperre) zu wahren, geben wir merk zurück
-					     */
-					    return sperre;
-					  }
-		public Vector<Kontaktsperre> getAllKontaktsperre() {
-			/**
-			 * Aufbau der DB Connection
-			 */
-			 Connection con = DBConnection.connection();
-			 	/**
-			 	 * Kontaktsperre-Vektor Objekt wird erstellt
-			 	 */
-				 Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
-				 /**
-				  * Try und Catch gehören zum Exception Handling 
-				  * Try = Versuch erst dies 
-				  * Catch = Wenn Try nicht geht versuch es so ..
-				  */
-				 try {
-					 Statement stmt = con.createStatement();
-
-					 ResultSet rs = stmt.executeQuery("SELECT id, profilId_sperrender, profilId_gesperrter "
-					  + "FROM kontaktsperre "  
-					  + "' ORDER BY id");
-
-					    /**
-					     * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
-					     */
-					    while (rs.next()) {
-					    Kontaktsperre kSperre = new Kontaktsperre();
-					    kSperre.setId(rs.getInt("id"));
-					    kSperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-					    kSperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
-					         
-					     /**
-					      * Hinzufügen des neuen Objekts zum Ergebnisvektor
-					      */
-					     result.addElement(kSperre);
-					    }
-					 }
-					  catch (SQLException e) {
-					   e.printStackTrace();
-				 }
-			return result;
-			}
-		}
+					return null;
+				}
+	}

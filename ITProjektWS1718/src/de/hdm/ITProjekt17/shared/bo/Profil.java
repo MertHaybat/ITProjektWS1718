@@ -18,7 +18,7 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Vorname im Profil; Gibt den Vornamen der Person an.
 	 */
-	private String vorname;
+	private String vorname ="";
 	
 	/**
 	 * Variable Geburtsdatum im Profil; Gibt das Geburtsdatum der Person an.
@@ -28,26 +28,26 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Körpergrösse im Profil; Gibt die Grösse der Person an.
 	 */
-	private int koerpergroesse;
+	private int koerpergroesse = 0;
 	
 	/**
 	 * Vraible Religion im Profil; Gibt die Religion der Person an.
 	 */
-	private String religion;
+	private String religion = "";
 	
 	/**
 	 * Variable Haarfarbe im Profil; Gibt die Haaarfarbe der Person an.
 	 */
-	private String haarfarbe;
+	private String haarfarbe = "";
 	
 	/**
 	 * Variable Nachname im Profil; Gibt den Nachnamen der Person an.
 	 */
-	private String nachname;
+	private String nachname = "";
 	/**
 	 * Variable Raucher im Profil; Gibt an, ob die Person raucht oder nicht.
 	 */
-	private boolean raucher;
+	private boolean raucher = false;
 	/**
 	 * Auslesen der Variable nachname
 	 * @return

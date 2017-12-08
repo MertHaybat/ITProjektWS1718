@@ -1,12 +1,14 @@
 package de.hdm.ITProjekt17.server.db;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-
+import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 
 public class SuchprofilMapper {
@@ -39,147 +41,66 @@ public class SuchprofilMapper {
 		
 		return suchprofilMapper;
 	}
-	/**
-	 * Durch die Methode findByKey kann ein Suchprofil anhand seines Primärschlüssels zurückgegeben werden
-	 * @param id
-	 * @return
-	 */
-	public Suchprofil findByKey(int id){
-		/**
-		 * Aufbau einer Db Connection
-		 */
-		Connection con = DBConnection.connection();
-		/**
-		 * Try und Catch gehören zum Exception Handling 
-		 * Try = Versuch erst dies 
-		 * Catch = Wenn Try nicht geht versuch es so ..
-		 */
-		try{
-			/**
-			 * Erstellen eines leeren Statements
-			 */
-		Statement stmt = con.createStatement();		
-		/**
-		 * Auswahl alles (*) aus der Tabelle Suchprofil und das Ergebnis wird in der Variablen result gespeichert
-		 */
-		ResultSet rs = stmt.executeQuery("SELECT * FROM `suchprofil` WHERE `id` = " + id);
-		
-		if (rs.next()){
-			/**
-			 * Erstellen eines Suchprofil-Objektes und setzten der Werte 
-			 */
-			Suchprofil p = new Suchprofil();
-			p.setId(rs.getInt("id"));
-			p.setMinAlter(rs.getInt("minAlter"));
-			p.setMaxAlter(rs.getInt("maxAlter"));
-			p.setGeburtsdatum(rs.getDate("geburtsdatum"));
-			p.setKoerpergroesse(rs.getInt("koerpergroesse"));
-			p.setReligion(rs.getString("religion"));
-			p.setHaarfarbe(rs.getString("haarfarbe"));
-			p.setRaucher(rs.getBoolean("raucher"));
-			
-			/**
-			 * Rückgabe des Suchprofils p 
-			 */
-			return p;
-		}
-	}
-		catch (SQLException e2){
-			e2.printStackTrace();
-			return null;
-		}
-
-		return null;
-	}
 	
-		public Suchprofil insertSuchprofil(Suchprofil such){
-		/**
-		 * DB COnnection wird aufgebaut
-		 */
-		Connection con = DBConnection.connection();
-		/**
-		 * Try und Catch gehören zum Exception Handling 
-		 * Try = Versuch erst dies 
-		 * Catch = Wenn Try nicht geht versuch es so ..
-		 */
-		try {
-		      Statement stmt = con.createStatement();
-		      	/**
-				 * Was ist der momentan höchste Primärschlüssel
+		 
+		 
+		 public Suchprofil insertSuchprofil(Suchprofil such){
+				/**
+				 * Aufbau der DB Connection
 				 */
-		      ResultSet rs = stmt.executeQuery("SELECT MAX(ID) AS maxid "
-		              + "FROM suchprofil ");
-		     	
-		      if(rs.next()){
-		    	  
-		    	  	/**
-					 * Varaible merk erhält den höchsten Primärschlüssel inkrementiert um 1
-					 */
-		    	  	such.setId(rs.getInt("maxid") + 1);
-		    	  	/**
-		    	  	 * Leeres-Statement wird angelegt 
-		    	  	 */
-		    	  	stmt = con.createStatement();
-		    	  	/**
-		    	  	 * Ausfüllen des Statements und an die DB senden
-		    	  	 */
-		    		stmt.executeUpdate("INSERT INTO suchprofil (id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher)" 
-		    				+"VALUES (" +
-	                        such.getId() + "," + "'" +
-	                        such.getMinAlter() +"'" + "," +
-	                        such.getMaxAlter() +"'" + "," +
-	                        such.getGeburtsdatum() +"," + 
-	                        such.getKoerpergroesse() + "," + 
-	                        such.getReligion() + "," + "'" +
-	                        such.getHaarfarbe() +"'" + ","+
-	                        such.getRaucher() +
-	                         ")");
-		    	  
-		      }
-		}
-		catch(SQLException e2){
-			e2.printStackTrace();
-		}
-		return such;
-		}
-		
-		/**
-		 * Löschen des Suchprofil-Objektes in der Datenbank
-		 * @param such
-		 */
-		public void deleteSuchprofil(Suchprofil such) {
+				Connection con = DBConnection.connection();
+				/**
+				 * Try und Catch gehören zum Exception Handling 
+				 * Try = Versuch erst dies 
+				 * Catch = Wenn Try nicht geht versuch es so ..
+				 */
+				try {
+				      Statement stmt = con.createStatement();
+				      	/**
+						 * Was ist der momentan höchste Primärschlüssel
+						 */
+				      ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid "
+				              + "FROM suchprofil ");
+				     	
+				      if(rs.next()){
+				    	  	/**
+							 * Varaible merk erhält den höchsten Primärschlüssel inkrementiert um 1
+							 */
+				    	  	such.setId(rs.getInt("maxid") + 1);	    	  	
+				    	  	/**
+				    	  	 * Durchführen der Einfüge Operation via Prepared Statement
+				    	  	 */
+				    	  		PreparedStatement stmt1 = con.prepareStatement(
+				    	  				"INSERT INTO suchprofil (id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher) "
+				    	  				+ "VALUES (?,?,?,?,?,?,?,?) ",
+				    	  				Statement.RETURN_GENERATED_KEYS);
+				    	  				stmt1.setInt(1, such.getId());
+				    	  				stmt1.setInt(2, such.getMinAlter());
+				    	  				stmt1.setInt(3, such.getMaxAlter());
+				    	  				stmt1.setDate(4, (Date) such.getGeburtsdatum());
+				    	  				stmt1.setInt(5, such.getKoerpergroesse());
+				    	  				stmt1.setString(6, such.getReligion());
+				    	  				stmt1.setString(7, such.getHaarfarbe());
+				    	  				stmt1.setBoolean(8, such.getRaucher());
+				    	  				
+				    	  				
+				    	  				stmt1.executeUpdate();
+				      }
+				}
+				catch(SQLException e2){
+					e2.printStackTrace();
+				}
+				return such;
+				
+			}
 			/**
-			 * Aufbau der Db Connection
+			 * Löschen des Objekt Suchprofil in der Datenbank
+			 * @param pro
 			 */
-		    Connection con = DBConnection.connection();
-		    /**
-			 * Try und Catch gehören zum Exception Handling 
-			 * Try = Versuch erst dies 
-			 * Catch = Wenn Try nicht geht versuch es so ..
-			 */
-		    try {
-		    	
-		      Statement stmt = con.createStatement();
-		      /**
-		       * Durchführung der Löschung / Ausfüllen des Statements und senden an die DB
-		       */
-		      stmt.executeUpdate("DELETE FROM suchprofil " + "WHERE id=" + such.getId());
-
-		    }
-		    catch (SQLException e2) {
-		      e2.printStackTrace();
-		    }
-		  }
-		
-		/**
-		 * Erneutes schreiben in die Datenbank um das Suchprofil-Objekt zu aktualisieren
-		 * @param such
-		 * @return
-		 */
-		 public Suchprofil updateSuchprofil(Suchprofil such) {
-			 /**
-			  * Aufbau der Db Connection
-			  */
+			public void deleteProfil(Suchprofil such) {
+				/**
+				 * Aufbau der DB Connection
+				 */
 			    Connection con = DBConnection.connection();
 			    /**
 				 * Try und Catch gehören zum Exception Handling 
@@ -187,83 +108,183 @@ public class SuchprofilMapper {
 				 * Catch = Wenn Try nicht geht versuch es so ..
 				 */
 			    try {
-			      Statement stmt = con.createStatement();
-			      /**
-			       * Updaten der Informationen des Suchprofils 
-			       */
-			      stmt.executeUpdate("UPDATE profil " 
-			    		  			+ "SET vorname=\""+ such.getMinAlter() + "\", " 
-			    		  			+ "nachname=\"" + such.getMaxAlter() + "\", "
-			    		  			+ "geburtsdatum=\"" + such.getGeburtsdatum() + "\", "
-			    		  			+ "koerpergroesse=\"" + such.getKoerpergroesse() + "\", "
-			    		  			+ "religion=\"" + such.getReligion() + "\", "
-			    		  			+ "haarfarbe=\"" + such.getHaarfarbe() + "\", "
-			    		  			+ "raucher=\"" + such.getRaucher() + "\", "
-			            		    + "WHERE id=" + such.getId());
-		                         
+			    	/**
+				      * Durchführung der Löschoperation
+				      */
+			     PreparedStatement stmt = con.prepareStatement("DELETE FROM profil " + "WHERE id= ? ");
+			     stmt.setInt(1, such.getId());
+			     stmt.executeUpdate();
+
+			  
 			    }
 			    catch (SQLException e2) {
 			      e2.printStackTrace();
 			    }
-
-			    /**
-			     * Um Analogie zu insertSuchprofil(Suchprofil such) zu wahren, geben wir such zurück
-			     */
-			    return such;
 			  }
-		 
-		 /**
-		  * Rückgabe der Suchprofil-Vektor Objekte
-		  * @return result
-		  */
-		 public Vector<Suchprofil> getAll() {
-			 /**
-			  * Aufbau Db Connection
-			  */
-			    Connection con = DBConnection.connection();
-			    
-			    /**
-			     * Verktor-Objekt wird erzeugt
-			     */
-			    Vector<Suchprofil> result = new Vector<Suchprofil>();
-			    /**
-				 * Try und Catch gehören zum Exception Handling 
-				 * Try = Versuch erst dies 
-				 * Catch = Wenn Try nicht geht versuch es so ..
+			
+			
+			/**
+			 * Erneutes schreiben in die Datenbank um das Profil Objekt zu aktualisieren
+			 * @param pro
+			 * @return pro
+			 */
+			 public Suchprofil updateProfil(Suchprofil such) {
+				 	String sql = "UPDATE profil SET  minalter=?, maxalter=?, geburtsdatum=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=? WHERE id=?";
+				 /**
+				 	 * Aufbau der Db Connection
+				 	 */
+				    Connection con = DBConnection.connection();
+				    /**
+					 * Try und Catch gehören zum Exception Handling 
+					 * Try = Versuch erst dies 
+					 * Catch = Wenn Try nicht geht versuch es so ..
+					 */
+				    try {
+				    
+				    	PreparedStatement stmt = con.prepareStatement(sql);
+				    	
+				    	
+				    	stmt.setInt(1, such.getMinAlter());
+				    	stmt.setInt(2, such.getMaxAlter());
+				    	stmt.setDate(3, (Date) such.getGeburtsdatum());
+				    	stmt.setInt(4, such.getKoerpergroesse());
+				    	stmt.setString(5, such.getReligion());
+				    	stmt.setString(6, such.getHaarfarbe());
+				    	stmt.setBoolean(7, such.getRaucher());
+
+				    	stmt.setInt(8, such.getId());
+				    	stmt.executeUpdate();
+				    	
+				    	System.out.println("Updated");
+				   
+				    }
+				    catch (SQLException e2) {
+				      e2.printStackTrace();
+				    }
+
+				    /**
+				     *  Das Profil wird zurückgegeben
+				     */
+				    return such;
+				  }
+			 
+			 	/**
+				 * Mit der Methode GetAll werden alle Suchprofil in einem Ergebnis-Vektor namens Profil gespeichert und zurückgegeben
+				 * @return
 				 */
-			    try {
-			        Statement stmt = con.createStatement();
+				 public Vector<Suchprofil> getAllProfil() {
+					 
+					 	/**
+					 	 * Aufbau der DB Connection
+					 	 */
+					    Connection con = DBConnection.connection();
+					  
+					    Vector<Suchprofil> result = new Vector<Suchprofil>();
+					    try {
+					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM suchprofil ");
+					    	
+					      
+					    	ResultSet rs = stmt.executeQuery();
+					        
+					        /**
+					         * Für jeden Eintrag im Suchergebnis wird nun ein Profil-Objekt erstellt.
+					         */
+					        while (rs.next()) {
+					          Suchprofil suchp = new Suchprofil();
+					          suchp.setId(rs.getInt("id"));
+					          suchp.setMinAlter(rs.getInt("minalter"));
+					          suchp.setMaxAlter(rs.getInt("maxalter"));
+					          suchp.setGeburtsdatum(rs.getDate("geburtsdatum"));
+					          suchp.setKoerpergroesse(rs.getInt("koerpergroesse"));
+					          suchp.setReligion(rs.getString("religion"));
+					          suchp.setHaarfarbe(rs.getString("haarfarbe"));
+					          suchp.setRaucher(rs.getBoolean("raucher"));
+					          
+					          /**
+					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+					           */
+					          result.addElement(suchp);
+					        }
+					      }
+					      catch (SQLException e) {
+					        e.printStackTrace();
+					      }
 
-			        /**
-			         * Auswahl der Daten von SUchprofil in der Datenbank und Rückgabe erfolgt geordnet nach der Id.
-			         */
-			        ResultSet rs = stmt.executeQuery("SELECT id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher "
-			            + "FROM suchprofil "  
-			            + "' ORDER BY id");
+					      /**
+					       *  Ergebnisvektor zurückgeben
+					       */
+					      return result;
+				 }
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 // Nochmals anschaun......
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 /**
+				 * Durch die Methode findByKey kann ein Suchprofil anhand seines Primärschlüssels zurückgegeben werden
+				 * @param id
+				 * @return
+				 */
+				public Suchprofil findByKey(int id){
+					/**
+					 * Aufbau einer Db Connection
+					 */
+					Connection con = DBConnection.connection();
+					/**
+					 * Try und Catch gehören zum Exception Handling 
+					 * Try = Versuch erst dies 
+					 * Catch = Wenn Try nicht geht versuch es so ..
+					 */
+					try{
+						/**
+						 * Erstellen eines leeren Statements
+						 */
+					Statement stmt = con.createStatement();		
+					/**
+					 * Auswahl alles (*) aus der Tabelle Suchprofil und das Ergebnis wird in der Variablen result gespeichert
+					 */
+					ResultSet rs = stmt.executeQuery("SELECT * FROM `suchprofil` WHERE `id` = " + id);
+					
+					if (rs.next()){
+						/**
+						 * Erstellen eines Suchprofil-Objektes und setzten der Werte 
+						 */
+						Suchprofil p = new Suchprofil();
+						p.setId(rs.getInt("id"));
+						p.setMinAlter(rs.getInt("minAlter"));
+						p.setMaxAlter(rs.getInt("maxAlter"));
+						p.setGeburtsdatum(rs.getDate("geburtsdatum"));
+						p.setKoerpergroesse(rs.getInt("koerpergroesse"));
+						p.setReligion(rs.getString("religion"));
+						p.setHaarfarbe(rs.getString("haarfarbe"));
+						p.setRaucher(rs.getBoolean("raucher"));
+						
+						/**
+						 * Rückgabe des Suchprofils p 
+						 */
+						return p;
+					}
+				}
+					catch (SQLException e2){
+						e2.printStackTrace();
+						return null;
+					}
 
-			        /**
-			         * Für jeden Eintrag im Suchergebnis wird nun ein Suchprofil-Objekt erstellt.
-			         */
-			        while (rs.next()) {
-			          Suchprofil suchp = new Suchprofil();
-			          suchp.setId(rs.getInt("id"));
-			          suchp.setMinAlter(rs.getInt("minalter"));
-			          suchp.setMaxAlter(rs.getInt("maxalter"));
-			          suchp.setGeburtsdatum(rs.getDate("geburtsdatum"));
-			          suchp.setKoerpergroesse(rs.getInt("koerpergroesse"));
-			          suchp.setReligion(rs.getString("religion"));
-			          suchp.setHaarfarbe(rs.getString("haarfarbe"));
-			          suchp.setRaucher(rs.getBoolean("raucher"));
-			          
-			          /**
-			           * Hinzufügen des neuen Objekts zum Ergebnisvektor
-			           */
-			          result.addElement(suchp);
-			        }
-			      }
-			      catch (SQLException e) {
-			        e.printStackTrace();
-			      }
-			      return result;
-		 }
+					return null;
+				}	 
 }

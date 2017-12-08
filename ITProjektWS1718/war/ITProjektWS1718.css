@@ -3,6 +3,15 @@
 
 /** Example rules used by the template application (remove for your app) */
 
+#Details {
+    margin-left: 10px;
+}
+
+#strukturtable{
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 #Topbar {
 	height: 40px;
     margin-top: 20px;
@@ -36,6 +45,10 @@ h1 {
 }
 
 /** Most GWT widgets already have a style name defined */
+.topbarbutton {
+	width:19px;
+	height:20px;
+}
 .gwt-DialogBox {
   width: 400px;
 }

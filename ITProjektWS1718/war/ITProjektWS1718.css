@@ -2,12 +2,32 @@
 
 
 /** Example rules used by the template application (remove for your app) */
+
+#Topbar {
+	height: 40px;
+    margin-top: 20px;
+    background-color: #13117b;
+}
+
+#Foot {
+	background-color: #13117b;
+    height: 80px;
+}
+#Header {
+	background-color: #13117b;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 105px;
+    border-radius: 26px;
+    margin-top: -30px;
+}
+
 h1 {
-  font-size: 2em;
-  font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
+  color: white;
+    text-align: center;
+    font-family: serif;
+    font-size: 30px;
+    margin: 40px 0px 70px;
 }
 
 .sendButton {
@@ -32,3 +52,4 @@ h1 {
 #closeButton {
   margin: 15px 6px 6px;
 }
+

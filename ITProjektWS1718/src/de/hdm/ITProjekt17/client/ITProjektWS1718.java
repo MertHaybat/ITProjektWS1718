@@ -14,6 +14,10 @@ public class ITProjektWS1718 implements EntryPoint{
 
 	@Override
 	public void onModuleLoad() {
+		Menubar mb = new Menubar();
+		RootPanel.get("Navigator").add(mb);
+		Topbar tp = new Topbar();
+		RootPanel.get("Topbar").add(tp);
 		BeispielSeite b = new BeispielSeite();
 		RootPanel.get("Details").add(b);
 		

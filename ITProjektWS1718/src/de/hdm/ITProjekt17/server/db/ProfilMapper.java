@@ -3,10 +3,8 @@ package de.hdm.ITProjekt17.server.db;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
-
-import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
-import sun.java2d.cmm.Profile;
+
 
 public class ProfilMapper {
 

@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
-import de.hdm.ITProjekt17.shared.bo.Merkzettel;
-import de.hdm.ITProjekt17.shared.bo.Profil;
 
 	public class KontaktsperreMapper {
 			/**

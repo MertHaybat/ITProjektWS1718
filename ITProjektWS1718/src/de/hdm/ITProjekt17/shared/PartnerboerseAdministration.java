@@ -7,7 +7,7 @@ import de.hdm.ITProjekt17.shared.bo.*;
 
 @RemoteServiceRelativePath("partnerboerseadministration")
 public interface PartnerboerseAdministration extends RemoteService {
-	
+	//testcommit
 	public void init() throws IllegalArgumentException;
 	
 	/**

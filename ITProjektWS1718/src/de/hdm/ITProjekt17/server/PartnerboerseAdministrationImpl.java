@@ -20,6 +20,7 @@ implements PartnerboerseAdministration {
 
 	
 	private ProfilMapper profilMapper = null;
+	private KontaktsperreMapper kontaktsperreMapper = null;
 	
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
@@ -29,6 +30,7 @@ implements PartnerboerseAdministration {
 	public void init() throws IllegalArgumentException{
 		
 		this.profilMapper = ProfilMapper.profilMapper();
+		this.kontaktsperreMapper = KontaktsperreMapper.kontaktsperreMapper();
 	}
 	
 	@Override
@@ -109,9 +111,16 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Kontaktsperre insertKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{
+			kontaktsperreMapper.insertKontaktsperre(k);
+		}	catch(Exception e) {
+			
+		}
 		return null;
 	}
 

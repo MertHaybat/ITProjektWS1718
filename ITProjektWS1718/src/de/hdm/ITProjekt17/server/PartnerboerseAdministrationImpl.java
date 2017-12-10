@@ -29,7 +29,7 @@ implements PartnerboerseAdministration {
 		return this.profilMapper.findByKey(id);
 
 	}
-
+//test
 
 	
 

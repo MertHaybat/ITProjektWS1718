@@ -12,5 +12,6 @@ public interface PartnerboerseAdministrationAsync {
 
 	void getProfilById(int id, AsyncCallback<Profil> callback);
 
+	//test
 	
 }

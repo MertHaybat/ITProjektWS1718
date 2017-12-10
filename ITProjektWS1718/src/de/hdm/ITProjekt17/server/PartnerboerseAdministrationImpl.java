@@ -4,6 +4,7 @@ import de.hdm.ITProjekt17.server.db.*;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministration;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
@@ -12,6 +13,7 @@ implements PartnerboerseAdministration {
 
 	
 	private ProfilMapper profilMapper = null;
+	
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
 		
@@ -25,7 +27,10 @@ implements PartnerboerseAdministration {
 	@Override
 	public Profil getProfilById(int id) throws IllegalArgumentException {
 		return this.profilMapper.findByKey(id);
+
 	}
+
+
 	
 
 }

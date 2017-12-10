@@ -19,5 +19,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public Profil getProfilById(int id) throws IllegalArgumentException;
+
+
 	
 }

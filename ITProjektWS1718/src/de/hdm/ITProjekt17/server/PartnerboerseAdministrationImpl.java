@@ -18,7 +18,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class PartnerboerseAdministrationImpl extends RemoteServiceServlet 
 implements PartnerboerseAdministration {
 
-	
+	private AuswahleigenschaftMapper auswahleigenschaftMapper = null;
+	private EigenschaftMapper eigenschaftMapper = null;
+	private FreitexteigenschaftMapper freitexteigenschaftMapper = null;
+	private InfoMapper infoMapper = null;
 	private ProfilMapper profilMapper = null;
 	private KontaktsperreMapper kontaktsperreMapper = null;
 	
@@ -29,6 +32,10 @@ implements PartnerboerseAdministration {
 	
 	public void init() throws IllegalArgumentException{
 		
+		this.auswahleigenschaftMapper = AuswahleigenschaftMapper.auswahleigenschaftMapper();
+		this.eigenschaftMapper = EigenschaftMapper.eigenschaftMapper();
+		this.freitexteigenschaftMapper = FreitexteigenschaftMapper.freitexteigenschaftMapper();
+		this.infoMapper = InfoMapper.infoMapper();
 		this.profilMapper = ProfilMapper.profilMapper();
 		this.kontaktsperreMapper = KontaktsperreMapper.kontaktsperreMapper();
 	}

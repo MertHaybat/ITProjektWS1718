@@ -11,6 +11,16 @@
     <servlet-class>de.hdm.ITProjekt17.server.PartnerboerseAdministrationImpl</servlet-class>
   </servlet>
   
+  <servlet>
+  	<servlet-name>loginService</servlet-name>
+  	<servlet-class>de.hdm.ITProjekt17.server.LoginServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>loginService</servlet-name>
+  	<url-pattern>/itprojektws1718/login</url-pattern>
+  </servlet-mapping>
+    
   <servlet-mapping>
     <servlet-name>PartnerboerseServlet</servlet-name>
     <url-pattern>/itprojektws1718/partnerboerseadministration</url-pattern>

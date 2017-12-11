@@ -23,7 +23,7 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Geburtsdatum im Profil; Gibt das Geburtsdatum der Person an.
 	 */
-	private Date geburtsdatum;
+	private Date geburtsdatum = null;
 	
 	/**
 	 * Variable Körpergrösse im Profil; Gibt die Grösse der Person an.
@@ -179,10 +179,17 @@ public class Profil extends BusinessObject {
 	
 	
 	/*
-	 * Erzeugung einer textuellen Darstellung des jeweiligen Profils
+	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
 	 */
 	public String toString(){
-		return super.toString() + "Profil-ID: #" + this.getId()
-		+ "Name: #" + this.nachname + "Raucher: #" + this.getRaucher();
+		return super.toString() + 
+					"Profil-ID: #" + this.getId() +
+					" Vorname: #" + this.getVorname() + 
+					" Nachname: #" + this.getNachname() + 
+					" Geburtsdatum: #" + this.getGeburtsdatum() + 
+					" Haarfarbe: #" + this.getHaarfarbe() + 
+					" Körpergröße: #" + this.getKoerpergroesse() + 
+					" Religion: #" + this.getReligion() + 
+					" Raucher: #" + this.getRaucher();
 	}
 }

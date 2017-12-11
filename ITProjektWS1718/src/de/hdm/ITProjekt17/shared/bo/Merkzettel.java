@@ -21,8 +21,8 @@ public class Merkzettel extends BusinessObject{
 	/**
 	 * Variable von Profil, welche vermerk verhängt
 	 */
-	private int profilId_merkender;
-	private int profilId_gemerkter;
+	private int profilId_merkender= 0;
+	private int profilId_gemerkter = 0;
 	
 	//---------------Get-Methoden--------------------------
 	
@@ -44,4 +44,16 @@ public class Merkzettel extends BusinessObject{
 		this.profilId_gemerkter = profilId_gemerkter;
 	}
 
+	
+	/*
+	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
+	 */
+	public String toString(){
+		return super.toString() + 
+					"Merkzettel-ID: #" + this.getId() +
+					" Profil-Id-merkender: #" + this.getProfilId_merkender() + 
+					" Profil-Id-gemerkter: #" + this.getProfilId_gemerkter(); 
+					
+	}
+	
 }

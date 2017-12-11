@@ -44,5 +44,15 @@ public class Kontaktsperre extends BusinessObject {
 		this.profilId_sperrender = profilId_sperrender;
 	}
 
+	/*
+	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
+	 */
+	public String toString(){
+		return super.toString() + 
+					"Kontaktsperre-ID: #" + this.getId() +
+					" Profil-Id-gesperrter: #" + this.getProfilId_gesperrter() + 
+					" Profil-Id-sperrender: #" + this.getProfilId_sperrender();
+					
+	}
 
 }

@@ -47,4 +47,17 @@ public class Suchprofil_Info extends BusinessObject {
 	public void setInfoId(int infoid){
 		this.infoid = infoid;
 	}
+	
+	/*
+	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
+	 */
+	public String toString(){
+		return super.toString() + 
+					"Suchprofil_Info-ID: #" + this.getId() +
+					" Suchprofil-Id: #" + this.getSuchprofilId() + 
+					" Info-Id: #" + this.getInfoId();
+					
+					
+					
+	}
 }

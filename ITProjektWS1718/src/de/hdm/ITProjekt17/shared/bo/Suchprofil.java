@@ -27,42 +27,42 @@ public class Suchprofil extends BusinessObject {
 	/*
 	 * Variable profilId ist der Fremdschl�ssel von Profil kommend, um das Suchprofil einordnen zu k�nnen
 	 */
-	private int profilId;
+	private int profilId = 0;
 	
 	/**
 	 * Variable minAlter gibt mindest Alter des zusuchenden Teilnehmers an.
 	 */
-	private int minAlter;
+	private int minAlter = 0;
 	
 	/**
 	 * Variable maxAlter gibt maximales Alter des zusuchenden Teilnehmers an.
 	 */
-	private int maxAlter;
+	private int maxAlter = 0;
 	
 	/**
 	 * Variable geburtsdatum gibt das Geburtsdatum des zusuchenden Teilnehmers.
 	 */
-	private Date geburtsdatum;
+	private Date geburtsdatum  ;
 	
 	/**
 	 * Variable koerpergroesse gibt die Körpergrösse des zusuchenden Teilneherms an.
 	 */
-	private int koerpergroesse;
+	private int koerpergroesse = 0;
 	
 	/**
 	 * Variable religion gibt die Religion des zusuchenden Teilnehmers an.
 	 */
-	private String religion;
+	private String religion = "";
 	
 	/**
 	 * Variable haarfarbe gibt die Haarfarbe des zusuchenden Teilnehmers an.
 	 */
-	private String haarfarbe;
+	private String haarfarbe = "";
 	
 	/**
 	 * Variable raucher gibt an ob der zusuchende Teilnehmer raucher ist oder nicht.
 	 */
-	private Boolean raucher; 
+	private Boolean raucher = false; 
 	
 	//------------------------------------------------------------------
 	//----------------------Set-Methoden--------------------------------
@@ -202,6 +202,18 @@ public class Suchprofil extends BusinessObject {
 		return raucher;
 	}
 	
-	
-	
+	/*
+	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
+	 */
+	public String toString(){
+		return super.toString() + 
+					"Profil-ID: #" + this.getId() +
+					" Min Alter: #" + this.getMinAlter() + 
+					" Max Alter: #" + this.getMaxAlter() + 
+					" Geburtsdatum: #" + this.getGeburtsdatum() + 
+					" Haarfarbe: #" + this.getHaarfarbe() + 
+					" Körpergröße: #" + this.getKoerpergroesse() + 
+					" Religion: #" + this.getReligion() + 
+					" Raucher: #" + this.getRaucher();
+	}
 }

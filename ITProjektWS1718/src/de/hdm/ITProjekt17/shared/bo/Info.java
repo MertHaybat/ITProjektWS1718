@@ -20,16 +20,16 @@ public class Info extends BusinessObject{
 	/**
 	 * Variable profilId ist dei Id des Profil's (Fremdschl�ssel!!!)
 	 */
-	private int profilId;
+	private int profilId = 0;
 	
 	/**
 	 * Variable text enthält informationen des Profils
 	 */
-	private String text;
+	private String text ="";
 	/**
 	 * Variable eigenschaftid ist die ID von Eigenschaft als FS
 	 */
-	private int eigenschaftid;
+	private int eigenschaftid = 0;
 	
 	
 	
@@ -84,4 +84,19 @@ public class Info extends BusinessObject{
 	public void setEigenschaftid(int eigenschaftid){
 		this.eigenschaftid = eigenschaftid;
 	}
+	
+	/*
+	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
+	 */
+	public String toString(){
+		return super.toString() + 
+					"Info-ID: #" + this.getId() +
+					" Profil-Id: #" + this.getProfilId() + 
+					" Text: #" + this.getText() +
+					" Eigenschaft-Id: #" + this.getEigenschaftid();
+				
+					
+	}
+	
+	
 }

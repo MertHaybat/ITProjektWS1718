@@ -1,5 +1,6 @@
 package de.hdm.ITProjekt17.shared;
 
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
@@ -17,6 +18,7 @@ public interface PartnerboerseAdministrationAsync {
 	void init(AsyncCallback<Void> callback);
 
 	void getProfilById(int id, AsyncCallback<Profil> callback);
+
 
 	void insertAuswahleigenschaft(Auswahleigenschaft aus, AsyncCallback<Auswahleigenschaft> callback);
 

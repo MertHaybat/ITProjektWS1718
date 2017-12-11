@@ -11,14 +11,20 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
 public class PartnerboerseAdministrationImpl extends RemoteServiceServlet 
 implements PartnerboerseAdministration {
 
-	
+	private AuswahleigenschaftMapper auswahleigenschaftMapper = null;
+	private EigenschaftMapper eigenschaftMapper = null;
+	private FreitexteigenschaftMapper freitexteigenschaftMapper = null;
+	private InfoMapper infoMapper = null;
 	private ProfilMapper profilMapper = null;
+	private KontaktsperreMapper kontaktsperreMapper = null;
+	
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
 		
@@ -26,12 +32,18 @@ implements PartnerboerseAdministration {
 	
 	public void init() throws IllegalArgumentException{
 		
+		this.auswahleigenschaftMapper = AuswahleigenschaftMapper.auswahleigenschaftMapper();
+		this.eigenschaftMapper = EigenschaftMapper.eigenschaftMapper();
+		this.freitexteigenschaftMapper = FreitexteigenschaftMapper.freitexteigenschaftMapper();
+		this.infoMapper = InfoMapper.infoMapper();
 		this.profilMapper = ProfilMapper.profilMapper();
+		this.kontaktsperreMapper = KontaktsperreMapper.kontaktsperreMapper();
 	}
 	
 	@Override
 	public Profil getProfilById(int id) throws IllegalArgumentException {
 		return this.profilMapper.findByKey(id);
+
 	}
 
 	@Override
@@ -106,9 +118,16 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Kontaktsperre insertKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{
+			kontaktsperreMapper.insertKontaktsperre(k);
+		}	catch(Exception e) {
+			
+		}
 		return null;
 	}
 

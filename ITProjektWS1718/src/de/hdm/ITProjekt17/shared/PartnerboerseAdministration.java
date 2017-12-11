@@ -19,6 +19,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	public Profil getProfilById(int id) throws IllegalArgumentException;
+
+	//test 
 	
 	
 	public Auswahleigenschaft insertAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException;

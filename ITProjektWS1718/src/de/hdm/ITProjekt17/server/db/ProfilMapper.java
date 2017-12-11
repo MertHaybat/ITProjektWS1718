@@ -23,8 +23,8 @@ public class ProfilMapper {
 	 * Gesch�tzter Konstruktor - verhindet die M�glichkeit, mit "new" 
 	 * neue Instanzen dieser Klasse zu erzeugen.
 	 */
-//	protected ProfilMapper(){	
-//	}
+	protected ProfilMapper(){	
+	}
 	
 	/**
 	 * Kann aufgerufen werden durch ProfilMapper.profilMapper. Sie stellt die
@@ -99,10 +99,8 @@ public class ProfilMapper {
 			e2.printStackTrace();
 		}
 		return pro;
-		
 	}
-	
-	
+
 	/**
 	 * Löschen des Objekt Profil in der Datenbank
 	 * @param pro
@@ -224,69 +222,51 @@ public class ProfilMapper {
 			       */
 			      return result;
 		 }
-	 
-	 
-	 
-	 
-	 
-	 
-	 //Nochmals anschauen....
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	/**
-	 * Es wird nur ein Profil-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
-	 * ist und nur einmal existiert.
-	 * @param id
-	 * @return pro
-	 */
-	public Profil findByKey(int id){
-		/**
-		 * Aufbau der Db Connection
-		 */
-		Connection con = DBConnection.connection();
-		/**
-		 * Try und Catch gehören zum Exception Handling 
-		 * Try = Versuch erst dies 
-		 * Catch = Wenn Try nicht geht versuch es so ..
-		 */
 
-		try{	
-		PreparedStatement stmt = con.prepareStatement("SELCECT * FROM profil WHERE id=?");
-		/**
-		 * Statement ausfüllen und an die DB senden
-		 */
-		ResultSet rs = stmt.executeQuery();
+		 	/**
+		 	 * Es wird nur ein Profil-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+		 	 * ist und nur einmal existiert.
+		 	 * @param id
+		 	 * @return pro
+		 	 */
+		 	public Profil findByKey(int id){
+		 		/**
+		 		 * Aufbau der Db Connection
+		 		 */
+		 		Connection con = DBConnection.connection();
+		 		/**
+		 		 * Try und Catch gehören zum Exception Handling 
+		 		 * Try = Versuch erst dies 
+		 		 * Catch = Wenn Try nicht geht versuch es so ..
+		 		 */
+
+		 		try{	
+		 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM profil WHERE id=?");
+		 			stmt.setInt(1, id);
+		
+		 			/**
+		 			 * Statement ausfüllen und an die DB senden
+		 			 */
+		 			ResultSet rs = stmt.executeQuery();
 			
-		if (rs.next()){
-			Profil pro = new Profil();
-	          pro.setId(rs.getInt("id"));
-	          pro.setVorname(rs.getString("vorname"));
-	          pro.setNachname(rs.getString("nachname"));
-	          pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
-	          pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
-	          pro.setReligion(rs.getString("religion"));
-	          pro.setHaarfarbe(rs.getString("haarfarbe"));
-	          pro.setRaucher(rs.getBoolean("raucher"));
+		 			if (rs.next()){
+		 				Profil pro = new Profil();
+		 				pro.setId(rs.getInt("id"));
+		 				pro.setVorname(rs.getString("vorname"));
+		 				pro.setNachname(rs.getString("nachname"));
+		 				pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
+		 				pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
+		 				pro.setReligion(rs.getString("religion"));
+		 				pro.setHaarfarbe(rs.getString("haarfarbe"));
+		 				pro.setRaucher(rs.getBoolean("raucher"));
 	          
-	          return pro;
-
-		}
-	}
-		catch (SQLException e2){
-			e2.printStackTrace();
-			return null;
-		}
-
+		 				return pro;
+		 			}
+		 		}
+		 		catch (SQLException e2){
+		 			e2.printStackTrace();
+		 			return null;
+		 		}
 		return null;
 	}
 }

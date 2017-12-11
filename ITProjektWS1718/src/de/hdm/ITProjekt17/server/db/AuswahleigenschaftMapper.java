@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
+import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 
 public class AuswahleigenschaftMapper {
 
@@ -52,55 +54,46 @@ public class AuswahleigenschaftMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public ArrayList<Auswahleigenschaft> getAll() throws Exception {
+	public Vector<Auswahleigenschaft> getAll() throws Exception {
 		/**
 		 * Aufbau einer DB Connection
 		 */
 		Connection con = DBConnection.connection();
 		/**
-		 * Erstellen eines Auswahleigenschafts-Vektors namens ArrayList
+		 * Erstellen eines Auswahleigenschafts-Vektors namens Vector
 		 */
-		ArrayList<Auswahleigenschaft> result = new ArrayList<Auswahleigenschaft>();
-		try {
-			/**
-			 * Erstellen eines Leeren Statements
-			 */
-			Statement stmt = con.createStatement();
+		Vector<Auswahleigenschaft> result = new Vector<Auswahleigenschaft>();
+		
+	try {
+    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM auswahleigenschaft ");
+    	
+      
+    	ResultSet rs = stmt.executeQuery();
+        
+        /**
+         * Für jeden Eintrag im Suchergebnis wird nun ein Auswahleigenschaft-Objekt erstellt.
+         */
+        while (rs.next()) {
+          Auswahleigenschaft aus = new Auswahleigenschaft();
+          aus.setId(rs.getInt("id"));
+          aus.setWert(rs.getString("wert"));
+          aus.setEigenschaftid(rs.getInt("eigenschaftid"));
+          /**
+           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+           */
+          result.addElement(aus);
+        }
+      }
+      catch (SQLException e) {
+        e.printStackTrace();
+      }
 
-			/**
-			 * Zunächst schauen wir nach, welches der momentan höchste
-			 * Primärschlüsselwert ist.
-			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `auswahleigenschaft`");
-
-			while (rs.next()) {
-				Auswahleigenschaft c = new Auswahleigenschaft();
-				c.setId(rs.getInt("id"));
-				c.setWert(rs.getString("wert"));
-				c.setEigenschaftid(rs.getInt("eigenschaftid"));
-				
-				result.add(c);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-
+      /**
+       *  Ergebnisvektor zurückgeben
+       */
+      return result;
+	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public Auswahleigenschaft insertAuswahleigenschaft(Auswahleigenschaft aus){
 		/**
@@ -148,8 +141,8 @@ public class AuswahleigenschaftMapper {
 		
 	}
 	/**
-	 * Löschen des Objekt Kontaktsperre in der Datenbank
-	 * @param pro
+	 * Löschen des Objekt Auswahleigenschaft in der Datenbank
+	 * @param aus
 	 */
 	public void deleteAuswahleigenschaft (Auswahleigenschaft aus) {
 		/**
@@ -215,64 +208,48 @@ public class AuswahleigenschaftMapper {
 		     */
 		    return aus;
 		  }
-	 
-	
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 //nochmal anschauen
-	 
-	 public Auswahleigenschaft findByKey(int id) {
-			/**
-			 * Aufbau der DB Connection
-			 */
-			Connection con = DBConnection.connection();
-			/**
-			 * Try und Catch gehören zum Exception Handling 
-			 * Try = Versuch erst dies 
-			 * Catch = Wenn Try nicht geht versuch es so ..
-			 */
-			try {
-				/**
-				 * Erstellen eines Leeren Statements
-				 */
-				Statement stmt = con.createStatement();
-				/**
-				 * Das Ergebnis der Abfrage wird in rs gespeichert
-				 */
-				ResultSet rs = stmt.executeQuery("SELECT * FROM `auswahleigenschaft` WHERE `id` = " + id);
 
-				if (rs.next()) {
-					/**
-					 * Erstellen eines Auswahleigenschafts-Objekts namens p
-					 */
-					Auswahleigenschaft p = new Auswahleigenschaft();
-					p.setId(rs.getInt("id"));
-					p.setWert(rs.getString("wert"));
-					
-					/**
-					 * Werte die aus der Db zurückgegeben werden, werden gesetzt und zurückgegeben (id, wert)
-					 */
-					return p;
-				}
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-				return null;
-			}
+		/**
+	 	 * Es wird nur ein Auswahleigenschaft-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+	 	 * ist und nur einmal existiert.
+	 	 * @param id
+	 	 * @return aus
+	 	 */
+	 	public Auswahleigenschaft findByKey(int id){
+	 		/**
+	 		 * Aufbau der Db Connection
+	 		 */
+	 		Connection con = DBConnection.connection();
+	 		/**
+	 		 * Try und Catch gehören zum Exception Handling 
+	 		 * Try = Versuch erst dies 
+	 		 * Catch = Wenn Try nicht geht versuch es so ..
+	 		 */
 
-			return null;
-		}
+	 		try{	
+	 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM auswahleigenschaft WHERE id=?");
+	 			stmt.setInt(1, id);
 	
+	 			/**
+	 			 * Statement ausfüllen und an die DB senden
+	 			 */
+	 			ResultSet rs = stmt.executeQuery();
+		
+	 			if (rs.next()){
+	 				Auswahleigenschaft aus = new Auswahleigenschaft();
+	 				aus.setId(rs.getInt("id"));
+	 				aus.setWert(rs.getString("wert"));
+	 				aus.setEigenschaftid(rs.getInt("eigenschaftid"));
+	 			
+       
+	 				return aus;
+	 			}
+	 		}
+	 		catch (SQLException e2){
+	 			e2.printStackTrace();
+	 			return null;
+	 		}
+	return null;
+	 	}
 	
 }

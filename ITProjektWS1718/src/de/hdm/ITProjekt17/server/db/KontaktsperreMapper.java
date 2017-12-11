@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
+import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 
 	public class KontaktsperreMapper {
 			/**
@@ -39,7 +40,11 @@ import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 				return kontaktsperreMapper;
 			}
 			
-			
+		/**
+		 * Mit der Insert Methode wird es ermöglicht Kontakte zu sperren.
+		 * @param sperre
+		 * @return
+		 */
 		 public Kontaktsperre insertKontaktsperre(Kontaktsperre sperre){
 				/**
 				 * Aufbau der DB Connection
@@ -60,7 +65,7 @@ import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 				     	
 				      if(rs.next()){
 				    	  	/**
-							 * Varaible merk erhält den höchsten Primärschlüssel inkrementiert um 1
+							 * Varaible sperre erhält den höchsten Primärschlüssel inkrementiert um 1
 							 */
 				    	  	sperre.setId(rs.getInt("maxid") + 1);	    	  	
 				    	  	/**
@@ -86,8 +91,10 @@ import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 				
 			}
 			/**
-			 * Löschen des Objekt Kontaktsperre in der Datenbank
-			 * @param pro
+			 * Löschen des Objekt Kontaktsperre in der Datenbank.
+			 * 
+			 *Hier wird eine Kontaktsperre nach der vergebenen Kontaktsperre-Id in der Tabelle Kontaktsperre gelöscht
+			 * @param sperre
 			 */
 			public void deleteKontaktsperre (Kontaktsperre sperre) {
 				/**
@@ -103,7 +110,7 @@ import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 			    	/**
 				      * Durchführung der Löschoperation
 				      */
-			     PreparedStatement stmt = con.prepareStatement("DELETE FROM kontaktsperre " + "WHERE id= ? ");
+			     PreparedStatement stmt = con.prepareStatement("DELETE FROM kontaktsperre WHERE id=? ");
 			     stmt.setInt(1, sperre.getId());
 			     stmt.executeUpdate();
 
@@ -114,140 +121,186 @@ import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 			    }
 			  }
 			
+
 			/**
-			 * Erneutes schreiben in die Datenbank um das Kontaktsperre Objekt zu aktualisieren
-			 * @param pro
-			 * @return pro
+			 * Mit der Methode GetAll werden alle Kontaktsperre in einem Ergebnis-Vektor namens Kontaktsperre gespeichert und zurückgegeben
+			 * @return
 			 */
-			 public Kontaktsperre updateKontaktsperre(Kontaktsperre sperre){
-				 	String sql = "UPDATE kontaktsperre SET  profilId_sperrender=?, profilId_gesperrter=? WHERE id=?";
-				 /**
-				 	 * Aufbau der Db Connection
+			 public Vector<Kontaktsperre> getAllKontaktsperre() {
+				 
+				 	/**
+				 	 * Aufbau der DB Connection
 				 	 */
 				    Connection con = DBConnection.connection();
-				    /**
-					 * Try und Catch gehören zum Exception Handling 
-					 * Try = Versuch erst dies 
-					 * Catch = Wenn Try nicht geht versuch es so ..
-					 */
-				    try {
+				  
+				    Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
 				    
-				    	PreparedStatement stmt = con.prepareStatement(sql);
+				    try {
+				    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre ");
 				    	
-				    	
-				    	stmt.setInt(1, sperre.getProfilId_sperrender());
-				    	stmt.setInt(2, sperre.getProfilId_gesperrter());
+				      
+				    	ResultSet rs = stmt.executeQuery();
+				        
+				        /**
+				         * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
+				         */
+				        while (rs.next()) {
+				          Kontaktsperre sperre = new Kontaktsperre();
+				          sperre.setId(rs.getInt("id"));
+				          sperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
+				          sperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+				          /**
+				           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+				           */
+				          result.addElement(sperre);
+				        }
+				      }
+				      catch (SQLException e) {
+				        e.printStackTrace();
+				      }
 
-				    	stmt.setInt(8, sperre.getId());
-				    	stmt.executeUpdate();
-				    	
-				    	System.out.println("Updated");
-				   
-				    }
-				    catch (SQLException e2) {
-				      e2.printStackTrace();
-				    }
-
-				    /**
-				     *  Das Profil wird zurückgegeben
-				     */
-				    return sperre;
-				  }
-			 
-			 public Vector<Kontaktsperre> getAllKontaktsperre() {
-					/**
-					 * Aufbau der DB Connection
-					 */
-					 Connection con = DBConnection.connection();
-					 	/**
-					 	 * Kontaktsperre-Vektor Objekt wird erstellt
-					 	 */
-						 Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
-						 /**
-						  * Try und Catch gehören zum Exception Handling 
-						  * Try = Versuch erst dies 
-						  * Catch = Wenn Try nicht geht versuch es so ..
-						  */
-						 try {
-							 Statement stmt = con.createStatement();
-
-							 ResultSet rs = stmt.executeQuery("SELECT id, profilId_sperrender, profilId_gesperrter "
-							  + "FROM kontaktsperre "  
-							  + "' ORDER BY id");
-
-							    /**
-							     * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
-							     */
-							    while (rs.next()) {
-							    Kontaktsperre kSperre = new Kontaktsperre();
-							    kSperre.setId(rs.getInt("id"));
-							    kSperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-							    kSperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
-							         
-							     /**
-							      * Hinzufügen des neuen Objekts zum Ergebnisvektor
-							      */
-							     result.addElement(kSperre);
-							    }
-							 }
-							  catch (SQLException e) {
-							   e.printStackTrace();
-						 }
-					return result;
-					} 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 //Nochmals anschaun ob dies so passt....
-			 
-			 
-			 
-			 
-			 
-			 /**
-				 * Es wird nur ein Kontaktsperre-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
-				 * ist und nur einmal existiert.
-				 * @param id
-				 * @return p
+				      /**
+				       *  Ergebnisvektor zurückgeben
+				       */
+				      return result;
+			 }
+			 	/**
+				 * Mit der Methode GetAllKontaktsperreDesSperrenden Profils werden alle Kontaktsperren eines identifizierbaren sperrers in 
+				 * einem Ergebnis-Vektor namens Kontaktsperre gespeichert und zurückgegeben
+				 * @return
 				 */
-				public Kontaktsperre findByKey(int id){
-					/**
-					 * Db Connection wird aufgebaut
-					 */
-					Connection con = DBConnection.connection();
-					/**
-					 * Try und Catch gehören zum Exception Handling 
-					 * Try = Versuch erst dies 
-					 * Catch = Wenn Try nicht geht versuch es so ..
-					 */
-					try{
-					Statement stmt = con.createStatement();		
-					/**
-					 * Statement wird ausgefüllt und an die DB gesendet
-					 */
-					ResultSet rs = stmt.executeQuery("SELECT * FROM kontaktsperre WHERE id = " + id);
-					
-					if (rs.next()){
-						Kontaktsperre p = new Kontaktsperre();
-						p.setId(rs.getInt("id"));
-						p.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-						p.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
-						
-						return p;
-					}
-				}
-					catch (SQLException e2){
-						e2.printStackTrace();
-						return null;
-					}
+				 public Vector<Kontaktsperre> getAllKontaktsperrenDesSperrenden(int profilId_sperrender) {
+					 
+					 	/**
+					 	 * Aufbau der DB Connection
+					 	 */
+					    Connection con = DBConnection.connection();
+					  
+					    Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
+					    
+					    try {
+					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre WHERE profilId_sperrender=? ");
+					    	stmt.setInt(1, profilId_sperrender);
+					      
+					    	ResultSet rs = stmt.executeQuery();
+					        
+					        /**
+					         * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
+					         */
+					        while (rs.next()) {
+					          Kontaktsperre sperre = new Kontaktsperre();
+					        
+					          sperre.setId(rs.getInt("id"));
+					          sperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
+					          sperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+					          /**
+					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+					           */
+					          
+					          System.out.println("Degga funkt");
+					          
+					          result.addElement(sperre);
+					        }
+					      }
+					      catch (SQLException e) {
+					        e.printStackTrace();
+					      }
 
-					return null;
-				}
+					      /**
+					       *  Ergebnisvektor zurückgeben
+					       */
+					      return result;
+				 }
+				/**
+			 	 * Es wird nur ein Kontaktsperre-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+			 	 * ist und nur einmal existiert.
+			 	 * @param id
+			 	 * @return sperre
+			 	 */
+			 	public Kontaktsperre findByKey(int id){
+			 		/**
+			 		 * Aufbau der Db Connection
+			 		 */
+			 		Connection con = DBConnection.connection();
+			 		/**
+			 		 * Try und Catch gehören zum Exception Handling 
+			 		 * Try = Versuch erst dies 
+			 		 * Catch = Wenn Try nicht geht versuch es so ..
+			 		 */
+			 		try{	
+			 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre WHERE id=?");
+			 			stmt.setInt(1, id);
+			
+			 			/**
+			 			 * Statement ausfüllen und an die DB senden
+			 			 */
+			 			ResultSet rs = stmt.executeQuery();
+				
+			 			if (rs.next()){
+			 				Kontaktsperre sperre = new Kontaktsperre();
+			 				sperre.setId(rs.getInt("id"));
+			 				sperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
+			 				sperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+			 			
+		          
+			 				return sperre;
+			 			}
+			 		}
+			 		catch (SQLException e2){
+			 			e2.printStackTrace();
+			 			return null;
+			 		}
+			return null;
+		}
+				
+				
+				
+				
+				
+				
+						
+				
+				
+				// Updatefunktion implementiert, nicht sicher ob richtig... bitte nochmals anschauen
+				
+				
+				/**
+				 * Erneutes schreiben in die Datenbank um das Kontaktsperre Objekt zu aktualisieren
+				 * @param sperre
+				 * @return sperre
+				 */
+				 public Kontaktsperre updateKontaktsperre(Kontaktsperre sperre){
+					 	String sql = "UPDATE kontaktsperre SET  profilId_sperrender=?, profilId_gesperrter=? WHERE id=?";
+					 /**
+					 	 * Aufbau der Db Connection
+					 	 */
+					    Connection con = DBConnection.connection();
+					    /**
+						 * Try und Catch gehören zum Exception Handling 
+						 * Try = Versuch erst dies 
+						 * Catch = Wenn Try nicht geht versuch es so ..
+						 */
+					    try {
+					    
+					    	PreparedStatement stmt = con.prepareStatement(sql);
+					    	
+					    	
+					    	stmt.setInt(1, sperre.getProfilId_sperrender());
+					    	stmt.setInt(2, sperre.getProfilId_gesperrter());
+
+					    	stmt.setInt(2, sperre.getId());
+					    	stmt.executeUpdate();
+					    	
+					    
+					   
+					    }
+					    catch (SQLException e2) {
+					      e2.printStackTrace();
+					    }
+
+					    /**
+					     *  Das Profil wird zurückgegeben
+					     */
+					    return sperre;
+					  }		
 	}

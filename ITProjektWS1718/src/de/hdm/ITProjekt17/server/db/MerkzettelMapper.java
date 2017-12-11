@@ -43,7 +43,11 @@ public class MerkzettelMapper {
 		}
 		
 		
-		 
+		 /**
+		  * Mit der Insert Mehthode kann der Teilnehmer andere Teilnehmer zum Merkzettel hinzufügen
+		  * @param merk
+		  * @return
+		  */
 		 public Merkzettel insertMerkzettel(Merkzettel merk){
 				/**
 				 * Aufbau der DB Connection
@@ -89,11 +93,9 @@ public class MerkzettelMapper {
 				return merk;
 				
 			}
-		 
-		 
 			/**
 			 * Löschen des Objekt Merkzettel in der Datenbank
-			 * @param pro
+			 * @param merk
 			 */
 			public void deleteMerkzettel(Merkzettel merk) {
 				/**
@@ -108,6 +110,7 @@ public class MerkzettelMapper {
 			    try {
 			    	/**
 				      * Durchführung der Löschoperation
+				      *
 				      */
 			     PreparedStatement stmt = con.prepareStatement("DELETE FROM merkzettel " + "WHERE id= ? ");
 			     stmt.setInt(1, merk.getId());
@@ -120,89 +123,126 @@ public class MerkzettelMapper {
 			    }
 			  }
 			
-			
-			
 			/**
-			 * Erneutes schreiben in die Datenbank um das Merkzettel Objekt zu aktualisieren
-			 * @param pro
-			 * @return pro
+			 * Mit der Methode GetAll werden alle Merkzettel in einem Ergebnis-Vektor namens Merkzettel gespeichert und zurückgegeben
+			 * @return
 			 */
-			 public Merkzettel updateMerkzettel(Merkzettel merk) {
-				 	String sql = "UPDATE merkzettel SET  profilId_merkender=?, profilId_gemerkter=? WHERE id=?";
-				 /**
-				 	 * Aufbau der Db Connection
+			 public Vector<Merkzettel> getAllMerkezettel() {
+				 
+				 	/**
+				 	 * Aufbau der DB Connection
 				 	 */
 				    Connection con = DBConnection.connection();
-				    /**
-					 * Try und Catch gehören zum Exception Handling 
-					 * Try = Versuch erst dies 
-					 * Catch = Wenn Try nicht geht versuch es so ..
-					 */
+				  
+				    Vector<Merkzettel> result = new Vector<Merkzettel>();
+				    
 				    try {
-				    
-				    	PreparedStatement stmt = con.prepareStatement(sql);
+				    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel ");
 				    	
-				    	
-				    	stmt.setInt(1, merk.getProfilId_merkender());
-				    	stmt.setInt(2, merk.getProfilId_gemerkter());
-				    
-				    
+				      
+				    	ResultSet rs = stmt.executeQuery();
+				        
+				        /**
+				         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+				         */
+				        while (rs.next()) {
+				          Merkzettel merk = new Merkzettel();
+				          merk.setId(rs.getInt("id"));
+				          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
+				          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+				          /**
+				           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+				           */
+				          result.addElement(merk);
+				        }
+				      }
+				      catch (SQLException e) {
+				        e.printStackTrace();
+				      }
 
-				    	stmt.setInt(8, merk.getId());
-				    	stmt.executeUpdate();
-				    	
-				    	System.out.println("Updated");
-				   
-				    }
-				    catch (SQLException e2) {
-				      e2.printStackTrace();
-				    }
-
-				    /**
-				     *  Das Profil wird zurückgegeben
-				     */
-				    return merk;
-				  }
-			 
+				      /**
+				       *  Ergebnisvektor zurückgeben
+				       */
+				      return result;
+			 }
 				/**
-				 * Mit der Methode getAllMerkzettel werden Merkzettel in einem Ergebnis Vektor namens Merkzettel gespeichert und zurückgegeben
+			 	 * Es wird nur ein Merkzettel-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+			 	 * ist und nur einmal existiert.
+			 	 * @param id
+			 	 * @return pro
+			 	 */
+			 	public Merkzettel findByKey(int id){
+			 		/**
+			 		 * Aufbau der Db Connection
+			 		 */
+			 		Connection con = DBConnection.connection();
+			 		/**
+			 		 * Try und Catch gehören zum Exception Handling 
+			 		 * Try = Versuch erst dies 
+			 		 * Catch = Wenn Try nicht geht versuch es so ..
+			 		 */
+
+			 		try{	
+			 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE id=?");
+			 			stmt.setInt(1, id);
+			
+			 			/**
+			 			 * Statement ausfüllen und an die DB senden
+			 			 */
+			 			ResultSet rs = stmt.executeQuery();
+				
+			 			if (rs.next()){
+			 				Merkzettel merk = new Merkzettel();
+			 				merk.setId(rs.getInt("id"));
+			 				merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
+			 				merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+			 			
+		          
+			 				return merk;
+			 			}
+			 		}
+			 		catch (SQLException e2){
+			 			e2.printStackTrace();
+			 			return null;
+			 		}
+			return null;
+		}
+			
+			 	/**
+				 * Mit der Methode GetAllMerkzettelDesMerkers werden alle Merkzettel eines identifizierbaren merkers in 
+				 * einem Ergebnis-Vektor namens Merkzettel gespeichert und zurückgegeben
 				 * @return
 				 */
-				 public Vector<Merkzettel> getAllMerkzettel() {
+				 public Vector<Merkzettel> getAllMerkezettelDesMerkers(int profilId_merkender) {
+					 
 					 	/**
-						 * Aufbau der DB Connection
-						 */
+					 	 * Aufbau der DB Connection
+					 	 */
 					    Connection con = DBConnection.connection();
-					    /**
-					     * Erzeugung eines Merkzettel Vektors zur Speicherung von Merkzettel Variblen
-					     */
+					  
 					    Vector<Merkzettel> result = new Vector<Merkzettel>();
-					    /**
-						 * Try und Catch gehören zum Exception Handling 
-						 * Try = Versuch erst dies 
-						 * Catch = Wenn Try nicht geht versuch es so ..
-						 */
+					    
 					    try {
-					        Statement stmt = con.createStatement();
+					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilId_merkender=? ");
+					    	stmt.setInt(1, profilId_merkender);
+					      
+					    	ResultSet rs = stmt.executeQuery();
+					        
 					        /**
-					         * Statement ausfüllen und an die DB senden
-					         */
-					        ResultSet rs = stmt.executeQuery("SELECT id, profilId_merkender, profilId_gemerkter "
-					            + "FROM merkzettel "  
-					            + "' ORDER BY id");
-
-					        /**
-					         *  Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt
+					         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
 					         */
 					        while (rs.next()) {
 					          Merkzettel merk = new Merkzettel();
+					        
 					          merk.setId(rs.getInt("id"));
 					          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
 					          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
-					         
 					          /**
-					           * Hinzufügen des neuen Objekts zum Ergebnisvektor
+					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */
+					          
+					          System.out.println("Degga funkt");
+					          
 					          result.addElement(merk);
 					        }
 					      }
@@ -213,64 +253,70 @@ public class MerkzettelMapper {
 					      /**
 					       *  Ergebnisvektor zurückgeben
 					       */
-					    return result;
-					    }
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 //Nochmals anschauen....
-			 
-			 
-			 
-			 
-			 
-			 
-			 /**
-				 * Mit der Methode findByKey kann ein Merkzettel via ID abgerufen werden
-				 * @param id
-				 * @return
-				 */
-				public Merkzettel findByKey(int id){
-					/**
-					 * Aufbau einer DB Connection
-					 */
-					Connection con = DBConnection.connection();
-					/**
-					 * Try und Catch gehören zum Exception Handling 
-					 * Try = Versuch erst dies 
-					 * Catch = Wenn Try nicht geht versuch es so ..
-					 */
-					try{
-						/**
-						 * Erstellen eines leeren Statements
-						 */
-					Statement stmt = con.createStatement();		
-					/**
-					 * Abfragen alles (*) aus der Tabelle Merkzettel
-					 */
-					ResultSet rs = stmt.executeQuery("SELECT * FROM `merkzettel` WHERE `id` = " + id);
-					
-					if (rs.next()){
-						/**
-						 * Erstellen eines Merkzettel-Objektes um Id, id des gesperrten und sperrenden darin zuspeichern und zurückzugeben
-						 */
-						Merkzettel p = new Merkzettel();
-						p.setId(rs.getInt("id"));
-						p.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
-						p.setProfilId_merkender(rs.getInt("profilId_merkender"));
-						return p;
-					}
-				}
-					catch (SQLException e2){
-						e2.printStackTrace();
-						return null;
-					}
+					      return result;
+				 }
+			 	
+			 	
+			 	
+			 	
+			 	
+			 	
+				 
+				 
+				 
+				 
+				 
+				 
 
-					return null;
-				}
+			 	
+			 	//Updatefunktion implementiert, ncht sicher ob richtig... Bitte Anschauen
+			 	
+			 	
+			 	
+			 	
+			 	/**
+				 * Erneutes schreiben in die Datenbank um das Merkzettel Objekt zu aktualisieren
+				 * VOm User ausgegangen hat dieser eine Usere ID die ihn identifiziert daher auch einen expliziten Fremdschlüssel in
+				 * dieser Tabelle somit muss die Merkende ProfilID hier als WHERE angegeben werden...
+				 * @param merk
+				 * @return merk
+				 */
+				 public Merkzettel updateMerkzettel(Merkzettel merk) {
+					 	String sql = "UPDATE merkzettel SET  profilId_merkender=?, profilId_gemerkter=? WHERE id =?";
+					 	/**
+					 	 * Aufbau der Db Connection
+					 	 */
+					    Connection con = DBConnection.connection();
+					    /**
+						 * Try und Catch gehören zum Exception Handling 
+						 * Try = Versuch erst dies 
+						 * Catch = Wenn Try nicht geht versuch es so ..
+						 */
+					    try {
+					    
+					    	PreparedStatement stmt = con.prepareStatement(sql);
+					    	
+					    
+					    	stmt.setInt(1, merk.getProfilId_merkender());
+					    	stmt.setInt(2, merk.getProfilId_gemerkter());
+					    	stmt.setInt(3, merk.getId());
+					    	
+					    
+
+					    	
+					    	stmt.executeUpdate();
+					    	
+					    
+					   
+					    }
+					    catch (SQLException e2) {
+					      e2.printStackTrace();
+					    }
+
+					    /**
+					     *  Das Profil wird zurückgegeben
+					     */
+					    return merk;
+					  }
+				 
 		 }

@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
-
+import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
 
@@ -46,91 +47,94 @@ public class FreitexteigenschaftMapper {
 		return freitexteigenschaftMapper;
 	}
 
-	// nochmals anschauen
-	public Freitexteigenschaft findByKey(int id) {
-		/**
-		 * Aufbau einer Db Connection
-		 */
-		Connection con = DBConnection.connection();
-		/**
-		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
-		 * Catch = Wenn Try nicht geht versuch es so ..
-		 */
-		try {
-			/**
-			 * Erstellen eines leeren Statements
-			 */
-			Statement stmt = con.createStatement();
-			/**
-			 * Freitexteigenschaft alles (*) aus Tabelle freitexteigenschaft und das
-			 * Ergebnis wird in rs gespeichert
-			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `freitexteigenschaft` WHERE `id` = " + id);
-
-			if (rs.next()) {
-				Freitexteigenschaft p = new Freitexteigenschaft();
-				p.setId(rs.getInt("id"));
-				p.setWert(rs.getString("wert"));
-
-				return p;
-			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-			return null;
-		}
-
-		return null;
-	}
-
 	/**
-	 * Mit dieser Methode können alle Freitexteigenschaften abgefragt werden
-	 * 
+ 	 * Es wird nur ein Freitexteigenschaft-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+ 	 * ist und nur einmal existiert.
+ 	 * @param id
+ 	 * @return aus
+ 	 */
+ 	public Freitexteigenschaft findByKey(int id){
+ 		/**
+ 		 * Aufbau der Db Connection
+ 		 */
+ 		Connection con = DBConnection.connection();
+ 		/**
+ 		 * Try und Catch gehören zum Exception Handling 
+ 		 * Try = Versuch erst dies 
+ 		 * Catch = Wenn Try nicht geht versuch es so ..
+ 		 */
+
+ 		try{	
+ 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM freitexteigenschaft WHERE id=?");
+ 			stmt.setInt(1, id);
+
+ 			/**
+ 			 * Statement ausfüllen und an die DB senden
+ 			 */
+ 			ResultSet rs = stmt.executeQuery();
+	
+ 			if (rs.next()){
+ 				Freitexteigenschaft frei = new Freitexteigenschaft();
+ 				frei.setId(rs.getInt("id"));
+ 				frei.setWert(rs.getString("wert"));
+ 				frei.setEigenschaftid(rs.getInt("eigenschaftid"));
+ 			
+   
+ 				return frei;
+ 			}
+ 		}
+ 		catch (SQLException e2){
+ 			e2.printStackTrace();
+ 			return null;
+ 		}
+return null;
+ 	}
+
+
+ 	/**
+	 * Die Mehtode getAll erlaubt alles von Freitexteigenschaft anzeigen zu lassen (id, wert und eigenschaftid)
 	 * @return
 	 * @throws Exception
 	 */
-	public ArrayList<Freitexteigenschaft> getAll() throws Exception {
+	public Vector<Freitexteigenschaft> getAll() throws Exception {
 		/**
-		 * Aufbau einer Db Connection
+		 * Aufbau einer DB Connection
 		 */
 		Connection con = DBConnection.connection();
-
 		/**
-		 * Erstellen eines Ergebnis Objektes namens result (ArrayList)
+		 * Erstellen eines Freitexteigenschaft-Vektors namens ArrayList
 		 */
-		ArrayList<Freitexteigenschaft> result = new ArrayList<Freitexteigenschaft>();
-		/**
-		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
-		 * Catch = Wenn Try nicht geht versuch es so ..
-		 */
-		try {
-			/**
-			 * Erstellen eines leeren Statements
-			 */
-			Statement stmt = con.createStatement();
-			/**
-			 * Freitexteigenschaft alles (*) aus Tabelle freitexteigenschaft und das
-			 * Ergebnis wird in der Varaible rs gespeichert
-			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `freitexteigenschaft`");
-			/**
-			 * Ergebnis von rs durchläuft die while-Schleife und erstellt ein
-			 * Freitexteigenschafts-Objekt, welche die id, wert und
-			 * eigenschaftid setzt und mit result.add(c) in dem Objekt
-			 * Freitexteigenschaft abspeichert
-			 */
-			while (rs.next()) {
-				Freitexteigenschaft c = new Freitexteigenschaft();
-				c.setId(rs.getInt("id"));
-				c.setWert(rs.getString("wert"));
-				c.setEigenschaftid(rs.getInt("eigenschaftid"));
+		Vector<Freitexteigenschaft> result = new Vector<Freitexteigenschaft>();
+		
+	try {
+    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM freitexteigenschaft ");
+    	
+      
+    	ResultSet rs = stmt.executeQuery();
+        
+        /**
+         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+         */
+        while (rs.next()) {
+          Freitexteigenschaft frei = new Freitexteigenschaft();
+          frei.setId(rs.getInt("id"));
+          frei.setWert(rs.getString("wert"));
+          frei.setEigenschaftid(rs.getInt("eigenschaftid"));
+          /**
+           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+           */
+          result.addElement(frei);
+        }
+      }
+      catch (SQLException e) {
+        e.printStackTrace();
+      }
 
-				result.add(c);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-
+      /**
+       *  Ergebnisvektor zurückgeben
+       */
+      return result;
+	
 	}
 
 	public Freitexteigenschaft insertFreitexteigenschaft(Freitexteigenschaft frei) {

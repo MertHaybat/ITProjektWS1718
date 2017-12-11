@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
-
+import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
@@ -44,82 +45,95 @@ public class InfoMapper {
 		return infoMapper;
 	}
 
-	//nochmal anschauen
-	public Info findByKey(int id) {
-		Connection con = DBConnection.connection();
-
-		try {
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `info` WHERE `id` = " + id);
-
-			if (rs.next()) {
-				Info p = new Info();
-				p.setId(rs.getInt("id"));
-				p.setText(rs.getString("text"));
-
-				return p;
-			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-			return null;
-		}
-
-		return null;
-	}
-
 	/**
-	 * Durch die GetAll Methode werden alle Informationen, welche in der Tabelle
-	 * Info gespeichert sind ausgelesen und zurückgegeben.
-	 * 
+ 	 * Es wird nur ein Info-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+ 	 * ist und nur einmal existiert.
+ 	 * @param id
+ 	 * @return in
+ 	 */
+ 	public Info findByKey(int id){
+ 		/**
+ 		 * Aufbau der Db Connection
+ 		 */
+ 		Connection con = DBConnection.connection();
+ 		/**
+ 		 * Try und Catch gehören zum Exception Handling 
+ 		 * Try = Versuch erst dies 
+ 		 * Catch = Wenn Try nicht geht versuch es so ..
+ 		 */
+
+ 		try{	
+ 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE id=?");
+ 			stmt.setInt(1, id);
+
+ 			/**
+ 			 * Statement ausfüllen und an die DB senden
+ 			 */
+ 			ResultSet rs = stmt.executeQuery();
+	
+ 			if (rs.next()){
+ 				Info in = new Info();
+ 				in.setId(rs.getInt("id"));
+ 				in.setText(rs.getString("text"));
+ 		        in.setProfilId(rs.getInt("profilid"));
+ 		        in.setEigenschaftid(rs.getInt("eigenschaftid"));
+ 		        
+ 				return in;
+ 			}
+ 		}
+ 		catch (SQLException e2){
+ 			e2.printStackTrace();
+ 			return null;
+ 		}
+return null;
+ 	}
+	
+	/**
+	 * Die Methode getAll erlaubt alles von Info anzeigen zu lassen (id)
 	 * @return
 	 * @throws Exception
 	 */
-	public ArrayList<Info> getAll() throws Exception {
+	public Vector<Info> getAll() throws Exception {
 		/**
 		 * Aufbau einer DB Connection
 		 */
 		Connection con = DBConnection.connection();
 		/**
-		 * Erstellen einer ArrayList Info
+		 * Erstellen eines Info-Vektors namens Info
 		 */
-		ArrayList<Info> result = new ArrayList<Info>();
+		Vector<Info> result = new Vector<Info>();
+		
+	try {
+    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info ");
+    	
+      
+    	ResultSet rs = stmt.executeQuery();
+        
+        /**
+         * Für jeden Eintrag im Suchergebnis wird nun ein Info-Objekt erstellt.
+         */
+        while (rs.next()) {
+          Info in = new Info();
+          in.setId(rs.getInt("id"));
+          in.setText(rs.getString("text"));
+          in.setEigenschaftid(rs.getInt("eigenschaftid"));
+          in.setProfilId(rs.getInt("profilid"));
+          /**
+           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+           */
+          result.addElement(in);
+        }
+      }
+      catch (SQLException e) {
+        e.printStackTrace();
+      }
 
-		try {
-			/**
-			 * Erstellen eines leeren Statements
-			 */
-			Statement stmt = con.createStatement();
-
-			/**
-			 * Abfrage alles (*) aus Tabelle info, welches in rs gespeichert
-			 * wird
-			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `info`");
-
-			/**
-			 * Die while-Schleife erzeugt beim durchlauf ein Info Objekt in
-			 * dieses wird die (Id, text, eigenschaftid und profilid) gesetzt
-			 * und in das Info Objekt als Ergebnis abgespeichert
-			 */
-			while (rs.next()) {
-				Info c = new Info();
-				c.setId(rs.getInt("id"));
-				c.setText(rs.getString("text"));
-				c.setEigenschaftid(rs.getInt("eigenschaftid"));
-				c.setProfilId(rs.getInt("profilid"));
-
-				result.add(c);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-
+      /**
+       *  Ergebnisvektor zurückgeben
+       */
+      return result;
+	
 	}
-
-	
-	
-	
 	
 	public Info insertInfo(Info in) {
 		/**
@@ -144,16 +158,17 @@ public class InfoMapper {
 				 */
 				in.setId(rs.getInt("maxid") + 1);
 				/**
-				 * Durchführen der Einfüge Operation via Prepared Statement
+				 * Durchführen der Einfügeoperation via Prepared Statement
 				 */
 				PreparedStatement stmt1 = con.prepareStatement(
-						"INSERT INTO info (id, text, profilid) " + "VALUES (?,?,?) ",
+						"INSERT INTO info (id, text, profilid, eigenschaftid) " + "VALUES (?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);
-				stmt1.setInt(1, in.getId());
-				stmt1.setString(2, in.getText());
-				stmt1.setInt(3, in.getProfilId());
-
-				stmt1.executeUpdate();
+						stmt1.setInt(1, in.getId());
+						stmt1.setString(2, in.getText());
+						stmt1.setInt(3, in.getProfilId());
+						stmt1.setInt(4, in.getEigenschaftid());
+						
+						stmt1.executeUpdate();
 			}
 		} catch (SQLException e2) {
 			e2.printStackTrace();

@@ -43,7 +43,11 @@ public class SuchprofilMapper {
 	}
 	
 		 
-		 
+		 /**
+		  * Diese Methode erlaubt es Daten in die Tabelle Suchprofil einzupflegen
+		  * @param such
+		  * @return
+		  */
 		 public Suchprofil insertSuchprofil(Suchprofil such){
 				/**
 				 * Aufbau der DB Connection
@@ -94,8 +98,8 @@ public class SuchprofilMapper {
 				
 			}
 			/**
-			 * Löschen des Objekt Suchprofil in der Datenbank
-			 * @param pro
+			 * Löschen aller Daten des Suchprofils in der Datenbank
+			 * @param such
 			 */
 			public void deleteProfil(Suchprofil such) {
 				/**
@@ -111,7 +115,7 @@ public class SuchprofilMapper {
 			    	/**
 				      * Durchführung der Löschoperation
 				      */
-			     PreparedStatement stmt = con.prepareStatement("DELETE FROM profil " + "WHERE id= ? ");
+			     PreparedStatement stmt = con.prepareStatement("DELETE FROM suchprofil " + "WHERE id= ? ");
 			     stmt.setInt(1, such.getId());
 			     stmt.executeUpdate();
 
@@ -124,12 +128,12 @@ public class SuchprofilMapper {
 			
 			
 			/**
-			 * Erneutes schreiben in die Datenbank um das Profil Objekt zu aktualisieren
-			 * @param pro
-			 * @return pro
+			 * Erneutes schreiben in die Datenbank um das Suchprofil Objekt zu aktualisieren
+			 * @param such
+			 * @return such
 			 */
 			 public Suchprofil updateProfil(Suchprofil such) {
-				 	String sql = "UPDATE profil SET  minalter=?, maxalter=?, geburtsdatum=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=? WHERE id=?";
+				 	String sql = "UPDATE suchprofil SET  minalter=?, maxalter=?, geburtsdatum=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=? WHERE id=?";
 				 /**
 				 	 * Aufbau der Db Connection
 				 	 */
@@ -163,7 +167,7 @@ public class SuchprofilMapper {
 				    }
 
 				    /**
-				     *  Das Profil wird zurückgegeben
+				     *  Das Suchprofil wird zurückgegeben
 				     */
 				    return such;
 				  }
@@ -172,7 +176,7 @@ public class SuchprofilMapper {
 				 * Mit der Methode GetAll werden alle Suchprofil in einem Ergebnis-Vektor namens Profil gespeichert und zurückgegeben
 				 * @return
 				 */
-				 public Vector<Suchprofil> getAllProfil() {
+				 public Vector<Suchprofil> getAllSuchprofil() {
 					 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -215,76 +219,52 @@ public class SuchprofilMapper {
 					       */
 					      return result;
 				 }
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 // Nochmals anschaun......
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 
-			 /**
-				 * Durch die Methode findByKey kann ein Suchprofil anhand seines Primärschlüssels zurückgegeben werden
-				 * @param id
-				 * @return
-				 */
-				public Suchprofil findByKey(int id){
-					/**
-					 * Aufbau einer Db Connection
+			
+				 /**
+					 * Es wird nur ein Suchprofil-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+					 * ist und nur einmal existiert.
+					 * @param id
+					 * @return such
 					 */
-					Connection con = DBConnection.connection();
-					/**
-					 * Try und Catch gehören zum Exception Handling 
-					 * Try = Versuch erst dies 
-					 * Catch = Wenn Try nicht geht versuch es so ..
-					 */
-					try{
+					public Suchprofil findByKey(int id){
 						/**
-						 * Erstellen eines leeren Statements
+						 * Aufbau der Db Connection
 						 */
-					Statement stmt = con.createStatement();		
-					/**
-					 * Auswahl alles (*) aus der Tabelle Suchprofil und das Ergebnis wird in der Variablen result gespeichert
-					 */
-					ResultSet rs = stmt.executeQuery("SELECT * FROM `suchprofil` WHERE `id` = " + id);
-					
-					if (rs.next()){
+						Connection con = DBConnection.connection();
 						/**
-						 * Erstellen eines Suchprofil-Objektes und setzten der Werte 
+						 * Try und Catch gehören zum Exception Handling 
+						 * Try = Versuch erst dies 
+						 * Catch = Wenn Try nicht geht versuch es so ..
 						 */
-						Suchprofil p = new Suchprofil();
-						p.setId(rs.getInt("id"));
-						p.setMinAlter(rs.getInt("minAlter"));
-						p.setMaxAlter(rs.getInt("maxAlter"));
-						p.setGeburtsdatum(rs.getDate("geburtsdatum"));
-						p.setKoerpergroesse(rs.getInt("koerpergroesse"));
-						p.setReligion(rs.getString("religion"));
-						p.setHaarfarbe(rs.getString("haarfarbe"));
-						p.setRaucher(rs.getBoolean("raucher"));
+
+						try{	
+						PreparedStatement stmt = con.prepareStatement("SELECT * FROM suchprofil WHERE id=?");
+						stmt.setInt(1, id);
 						
 						/**
-						 * Rückgabe des Suchprofils p 
+						 * Statement ausfüllen und an die DB senden
 						 */
-						return p;
+						ResultSet rs = stmt.executeQuery();
+							
+						if (rs.next()){
+							Suchprofil such = new Suchprofil();
+					          such.setId(rs.getInt("id"));
+					          such.setMinAlter(rs.getInt("minalter"));
+					          such.setMaxAlter(rs.getInt("maxalter"));
+					          such.setGeburtsdatum(rs.getDate("geburtsdatum"));
+					          such.setKoerpergroesse(rs.getInt("koerpergroesse"));
+					          such.setReligion(rs.getString("religion"));
+					          such.setHaarfarbe(rs.getString("haarfarbe"));
+					          such.setRaucher(rs.getBoolean("raucher"));
+					          
+					         return such;
+						}
 					}
-				}
-					catch (SQLException e2){
-						e2.printStackTrace();
+						catch (SQLException e2){
+							e2.printStackTrace();
+							return null;
+						}
+
 						return null;
 					}
-
-					return null;
-				}	 
 }

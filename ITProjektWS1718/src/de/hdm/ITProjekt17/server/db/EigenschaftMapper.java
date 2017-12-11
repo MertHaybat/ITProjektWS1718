@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
-
+import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
+import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class EigenschaftMapper {
@@ -45,95 +47,90 @@ public class EigenschaftMapper {
 	}
 
 	/**
-	 * Die Methode findByKey ermöglicht es eine Eigenschaft via Schlüssel zu
-	 * finden
-	 * 
-	 * @param id
-	 * @return
-	 */
+ 	 * Es wird nur ein Eigenschaft-Objekt zurückgegeben, da ein KEy(Primärschlüssel) eindeutig
+ 	 * ist und nur einmal existiert.
+ 	 * @param id
+ 	 * @return eig
+ 	 */
+ 	public Eigenschaft findByKey(int id){
+ 		/**
+ 		 * Aufbau der Db Connection
+ 		 */
+ 		Connection con = DBConnection.connection();
+ 		/**
+ 		 * Try und Catch gehören zum Exception Handling 
+ 		 * Try = Versuch erst dies 
+ 		 * Catch = Wenn Try nicht geht versuch es so ..
+ 		 */
 
-	// nochmal anschauen
-	public Eigenschaft findByKey(int id) {
-		/**
-		 * Aufbau einer DB Connection
-		 */
-		Connection con = DBConnection.connection();
-		/**
-		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
-		 * Catch = Wenn Try nicht geht versuch es so ..
-		 */
-		try {
-			/**
-			 * Erstellen eines leeren Statements
-			 */
-			Statement stmt = con.createStatement();
-			/**
-			 * eigenschaft alles (*) aus der Eigenschaftstabelle
-			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft` WHERE `id` = " + id);
+ 		try{	
+ 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM eigenschaft WHERE id=?");
+ 			stmt.setInt(1, id);
 
-			if (rs.next()) {
-				Eigenschaft p = new Eigenschaft();
-				p.setId(rs.getInt("id"));
+ 			/**
+ 			 * Statement ausfüllen und an die DB senden
+ 			 */
+ 			ResultSet rs = stmt.executeQuery();
+	
+ 			if (rs.next()){
+ 				Eigenschaft eig = new Eigenschaft();
+ 				eig.setId(rs.getInt("id"));
+ 				
+ 			
+   
+ 				return eig;
+ 			}
+ 		}
+ 		catch (SQLException e2){
+ 			e2.printStackTrace();
+ 			return null;
+ 		}
+return null;
+ 	}
 
-				return p;
-			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
-			return null;
-		}
-
-		return null;
-	}
-
-	/**
-	 * Durch die GetAll Methode können alle Eigenschaften angezeigt werden
-	 * 
+ 	/**
+	 * Die Mehtode getAll erlaubt alles von Eigenschaft anzeigen zu lassen (id)
 	 * @return
 	 * @throws Exception
 	 */
-	public ArrayList<Eigenschaft> getAll() throws Exception {
+	public Vector<Eigenschaft> getAll() throws Exception {
 		/**
 		 * Aufbau einer DB Connection
 		 */
 		Connection con = DBConnection.connection();
 		/**
-		 * Erstellen eines Eigenschaft-Vektor-Objekts
+		 * Erstellen eines Eigenschaft-Vektors namens Vector
 		 */
-		ArrayList<Eigenschaft> result = new ArrayList<Eigenschaft>();
-		/**
-		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
-		 * Catch = Wenn Try nicht geht versuch es so ..
-		 */
-		try {
-			/**
-			 * Erstellen eines leeren Statements
-			 */
-			Statement stmt = con.createStatement();
+		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+		
+	try {
+    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM eigenschaft ");
+    	
+      
+    	ResultSet rs = stmt.executeQuery();
+        
+        /**
+         * Für jeden Eintrag im Suchergebnis wird nun ein Eigenschaft-Objekt erstellt.
+         */
+        while (rs.next()) {
+          Eigenschaft eig = new Eigenschaft();
+          eig.setId(rs.getInt("id"));
+         
+          /**
+           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+           */
+          result.addElement(eig);
+        }
+      }
+      catch (SQLException e) {
+        e.printStackTrace();
+      }
 
-			/**
-			 * eigenschaft alles (*) aus der Eigenschaftstabelle
-			 */
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `eigenschaft`");
-
-			while (rs.next()) {
-				/**
-				 * Erstellen eines EIgenschafts-Objekts
-				 */
-				Eigenschaft c = new Eigenschaft();
-				/**
-				 * Es wird eine ID gesetzt welche zum Ergebnis Vektor ArrayList
-				 * hinzugefügt wird
-				 */
-				c.setId(rs.getInt("id"));
-
-				result.add(c);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-
+      /**
+       *  Ergebnisvektor zurückgeben
+       */
+      return result;
+	
 	}
 
 	public Eigenschaft insertEigenschaft(Eigenschaft eig) {
@@ -175,7 +172,7 @@ public class EigenschaftMapper {
 	}
 
 	/**
-	 * Löschen des Objekt Kontaktsperre in der Datenbank
+	 * Löschen des Objekt Eigenschaft in der Datenbank
 	 * 
 	 * @param pro
 	 */
@@ -202,11 +199,11 @@ public class EigenschaftMapper {
 	}
 
 	/**
-	 * Erneutes schreiben in die Datenbank um das eigenschafteigenschaft Objekt zu
+	 * Erneutes schreiben in die Datenbank um das Eigenschaft-Objekt zu
 	 * aktualisieren
 	 * 
-	 * @param aus
-	 * @return aus
+	 * @param eig
+	 * @return eig
 	 */
 	public Eigenschaft updateEigenschaft(Eigenschaft eig) {
 		String sql = "UPDATE eigenschaft SET  id=? WHERE  id=?";

@@ -26,11 +26,11 @@ public interface PartnerboerseAdministrationAsync {
 
 	void deleteAuswahleigenschaft(Auswahleigenschaft aus, AsyncCallback<Auswahleigenschaft> callback);
 	
-	void insertEigenschaft(Eigenschaft e, AsyncCallback<Eigenschaft> callback);
+	void insertEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
 
-	void updateEigenschaft(Eigenschaft e, AsyncCallback<Eigenschaft> callback);
+	void updateEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
 
-	void deleteEigenschaft(Eigenschaft e, AsyncCallback<Eigenschaft> callback);
+	void deleteEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
 
 	void insertFreitexteigenschaft(Freitexteigenschaft frei, AsyncCallback<Freitexteigenschaft> callback);
 
@@ -38,11 +38,11 @@ public interface PartnerboerseAdministrationAsync {
 
 	void deleteFreitexteigenschaft(Freitexteigenschaft frei, AsyncCallback<Freitexteigenschaft> callback);
 
-	void insertInfo(Info info, AsyncCallback<Info> callback);
+	void insertInfo(Info in, AsyncCallback<Info> callback);
 
-	void updateInfo(Info info, AsyncCallback<Info> callback);
+	void updateInfo(Info in, AsyncCallback<Info> callback);
 
-	void deleteInfo(Info info, AsyncCallback<Info> callback);
+	void deleteInfo(Info in, AsyncCallback<Info> callback);
 
 	void insertKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 

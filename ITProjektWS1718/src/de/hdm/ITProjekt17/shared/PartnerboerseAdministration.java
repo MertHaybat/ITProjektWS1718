@@ -27,17 +27,17 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Auswahleigenschaft updateAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException;
 	public Auswahleigenschaft deleteAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException;
 	
-	public Eigenschaft insertEigenschaft(Eigenschaft e) throws IllegalArgumentException;
-	public Eigenschaft updateEigenschaft(Eigenschaft e) throws IllegalArgumentException;
-	public Eigenschaft deleteEigenschaft(Eigenschaft e) throws IllegalArgumentException;
+	public Eigenschaft insertEigenschaft(Eigenschaft eig) throws IllegalArgumentException;
+	public Eigenschaft updateEigenschaft(Eigenschaft eig) throws IllegalArgumentException;
+	public Eigenschaft deleteEigenschaft(Eigenschaft eig) throws IllegalArgumentException;
 	
 	public Freitexteigenschaft insertFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException;
 	public Freitexteigenschaft updateFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException;
 	public Freitexteigenschaft deleteFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException;
 	
-	public Info insertInfo(Info info) throws IllegalArgumentException;
-	public Info updateInfo(Info info) throws IllegalArgumentException;
-	public Info deleteInfo(Info info) throws IllegalArgumentException;
+	public Info insertInfo(Info in) throws IllegalArgumentException;
+	public Info updateInfo(Info in) throws IllegalArgumentException;
+	public Info deleteInfo(Info in) throws IllegalArgumentException;
 	
 	public Kontaktsperre insertKontaktsperre(Kontaktsperre k) throws IllegalArgumentException;
 	public Kontaktsperre updateKontaktsperre(Kontaktsperre k) throws IllegalArgumentException;

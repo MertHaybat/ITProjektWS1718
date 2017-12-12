@@ -46,75 +46,140 @@ implements PartnerboerseAdministration {
 
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Auswahleigenschaft insertAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			auswahleigenschaftMapper.insertAuswahleigenschaft(aus);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Auswahleigenschaft updateAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			auswahleigenschaftMapper.updateAuswahleigenschaft(aus);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Auswahleigenschaft deleteAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			auswahleigenschaftMapper.deleteAuswahleigenschaft(aus);
+		} catch(Exception e){
+			
+		}
+		return null;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	public Eigenschaft insertEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		try {
+			eigenschaftMapper.insertEigenschaft(eig);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
-	public Eigenschaft insertEigenschaft(Eigenschaft e) throws IllegalArgumentException {
+	public Eigenschaft updateEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			eigenschaftMapper.updateEigenschaft(eig);
+		} catch(Exception e){
+			
+		}
+		
 		return null;
 	}
 
 	@Override
-	public Eigenschaft updateEigenschaft(Eigenschaft e) throws IllegalArgumentException {
+	public Eigenschaft deleteEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			eigenschaftMapper.deleteEigenschaft(eig);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
-	@Override
-	public Eigenschaft deleteEigenschaft(Eigenschaft e) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Freitexteigenschaft insertFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			freitexteigenschaftMapper.insertFreitexteigenschaft(frei);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Freitexteigenschaft updateFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			freitexteigenschaftMapper.updateFreitexteigenschaft(frei);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Freitexteigenschaft deleteFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			freitexteigenschaftMapper.deleteFreitexteigenschaft(frei);
+		} catch(Exception e){
+			
+		}
+		return null;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	public Info insertInfo(Info in) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		try {
+			infoMapper.insertInfo(in);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
-	public Info insertInfo(Info info) throws IllegalArgumentException {
+	public Info updateInfo(Info in) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try {
+			infoMapper.updateInfo(in);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
-	public Info updateInfo(Info info) throws IllegalArgumentException {
+	public Info deleteInfo(Info in) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Info deleteInfo(Info info) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		try {
+			infoMapper.deleteInfo(in);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 

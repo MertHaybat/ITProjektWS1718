@@ -24,6 +24,8 @@ implements PartnerboerseAdministration {
 	private InfoMapper infoMapper = null;
 	private ProfilMapper profilMapper = null;
 	private KontaktsperreMapper kontaktsperreMapper = null;
+	private MerkzettelMapper merkzettelMapper = null;
+	private SuchprofilMapper suchprofilMapper = null;
 	
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
@@ -38,6 +40,8 @@ implements PartnerboerseAdministration {
 		this.infoMapper = InfoMapper.infoMapper();
 		this.profilMapper = ProfilMapper.profilMapper();
 		this.kontaktsperreMapper = KontaktsperreMapper.kontaktsperreMapper();
+		this.merkzettelMapper = MerkzettelMapper.merkzettelMapper();
+		this.suchprofilMapper = SuchprofilMapper.suchprofilMapper();
 	}
 	
 	@Override
@@ -199,66 +203,118 @@ implements PartnerboerseAdministration {
 	@Override
 	public Kontaktsperre updateKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{
+			kontaktsperreMapper.updateKontaktsperre(k);
+			}	catch(Exception e){
+				
+		}
 		return null;
 	}
 
 	@Override
 	public Kontaktsperre deleteKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ kontaktsperreMapper.deleteKontaktsperre(k);
+		} catch (Exception e){
+			
+		}
 		return null;
 	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public Merkzettel insertMerkzettel(Merkzettel merk) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ merkzettelMapper.insertMerkzettel(merk);
+		} catch (Exception e) {
+			
+		}
 		return null;
 	}
+	
 
 	@Override
 	public Merkzettel updateMerkzettel(Merkzettel merk) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ merkzettelMapper.updateMerkzettel(merk);
+		} catch (Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Merkzettel deleteMerkzettel(Merkzettel merk) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ merkzettelMapper.deleteMerkzettel(merk);
+		} catch(Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Profil insertProfil(Profil pro) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ profilMapper.insertProfil(pro);
+		} catch (Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Profil updateProfil(Profil pro) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ profilMapper.updateProfil(pro);
+		} catch (Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Profil deleteProfil(Profil pro) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ profilMapper.deleteProfil(pro);
+		} catch (Exception e){
+			
+		}
 		return null;
 	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 	@Override
 	public Suchprofil insertSuchprofil(Suchprofil such) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ suchprofilMapper.insertSuchprofil(such);
+		} catch (Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Suchprofil updateSuchprofil(Suchprofil such) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ suchprofilMapper.updateProfil(such);
+		
+		} catch (Exception e){
+			
+		}
 		return null;
 	}
 
 	@Override
 	public Suchprofil deleteSuchprofil(Suchprofil such) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		try{ suchprofilMapper.deleteProfil(such);
+		
+		} catch (Exception e){
+			
+		}
 		return null;
 	}
 	

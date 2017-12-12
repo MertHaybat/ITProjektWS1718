@@ -7,7 +7,6 @@ import de.hdm.ITProjekt17.shared.bo.*;
 
 @RemoteServiceRelativePath("partnerboerseadministration")
 public interface PartnerboerseAdministration extends RemoteService {
-	
 	public void init() throws IllegalArgumentException;
 	
 	/**
@@ -20,7 +19,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	 */
 	public Profil getProfilById(int id) throws IllegalArgumentException;
 
-	//test 
+	 
 	
 	
 	public Auswahleigenschaft insertAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException;

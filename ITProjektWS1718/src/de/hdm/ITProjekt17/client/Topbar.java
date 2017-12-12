@@ -6,7 +6,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Topbar extends VerticalPanel{
 	
-	//test commit fatjona
+	//Test Commit
 	
 	private VerticalPanel vtoppanel = new VerticalPanel();
 	private Button btn1 = new Button("Hallo1");

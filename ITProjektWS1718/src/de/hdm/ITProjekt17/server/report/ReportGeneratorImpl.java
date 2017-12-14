@@ -44,6 +44,32 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	    a.init();
 	    this.partnerboerseadministration = a;
 	  }
+	
+	
+	
+	
+	
+	//---------Nicht-implementierte-Mehtoden-des-ReportGenerator-Interfaces-auf-der-Client-Seite----------
+
+	@Override
+	public AllInfosOfProfilReport createAllInfosOfProfilReport(Profil pro) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PartnervorschlaegeOfProfilNichtAngesehenReport createPartnervorschlaegeOfProfilNichtAngesehenReport(
+			Profil pro) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PartnervorschlaegeAnhandSuchprofilReport createPartnervorschlaegeAnhandSuchprofilReport(Profil pro,
+			Suchprofil such) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

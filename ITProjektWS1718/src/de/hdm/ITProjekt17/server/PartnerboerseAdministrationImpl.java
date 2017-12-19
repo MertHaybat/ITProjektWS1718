@@ -45,9 +45,14 @@ implements PartnerboerseAdministration {
 		this.merkzettelMapper = MerkzettelMapper.merkzettelMapper();
 		this.suchprofilMapper = SuchprofilMapper.suchprofilMapper();
 	}
+	
+	@Override
+	public Profil getProfilById(int id) throws IllegalArgumentException {
+		return this.profilMapper.findByKey(id);
 
+	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Auswahleigenschaft insertAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -76,12 +81,12 @@ implements PartnerboerseAdministration {
 		try {
 			auswahleigenschaftMapper.deleteAuswahleigenschaft(aus);
 		} catch(Exception e){
-			
+				
 		}
 		return null;
 	}
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Eigenschaft insertEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -116,7 +121,7 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Freitexteigenschaft insertFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -150,7 +155,7 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Info insertInfo(Info in) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -185,8 +190,7 @@ implements PartnerboerseAdministration {
 	}
 
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Kontaktsperre insertKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -197,8 +201,6 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
-	
-
 
 	@Override
 	public Kontaktsperre updateKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
@@ -220,17 +222,7 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
-	
-	public Kontaktsperre findById(int id) throws IllegalArgumentException {
-		
-		return this.kontaktsperreMapper.findByKey(id);
-	}
-	
-	public Vector <Kontaktsperre> getAllKontaktsperre() throws IllegalArgumentException {
-		return this.kontaktsperreMapper.getAllKontaktsperre();
-	}
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public Merkzettel insertMerkzettel(Merkzettel merk) throws IllegalArgumentException {
@@ -241,8 +233,6 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
-	
-	
 	
 
 	@Override
@@ -264,47 +254,16 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
-	
-	@Override
-	public Merkzettel findByKey(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return this.merkzettelMapper.findByKey(id);
-	}
-	
-	public Vector <Merkzettel> getAllMerkzettel() throws IllegalArgumentException{
-		return this.merkzettelMapper.getAllMerkezettel();
-	}
-	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-//	@Override
-//	public Profil insertProfil(Profil pro) throws IllegalArgumentException {
-//		// TODO Auto-generated method stub
-//		try{ profilMapper.insertProfil(pro);
-//		} catch (Exception e){
-//			
-//		}
-//		return null;
-//	}
-	
-	@Override
-	public Profil insertProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion, String haarfarbe, boolean raucher) throws IllegalArgumentException {
-		Profil pro = new Profil();
-		pro.setGeburtsdatum(geburtsdatum);
-		pro.setHaarfarbe(haarfarbe);
-		pro.setKoerpergroesse(koerpergroesse);
-		pro.setNachname(nachname);
-		pro.setVorname(vorname);
-		pro.setRaucher(raucher);
-		pro.setReligion(religion);
-		
-		pro.setId(1);
-		
-		return this.profilMapper.insertProfil(pro);
-	}
 
-		
-	
+	@Override
+	public Profil insertProfil(Profil pro) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		try{ profilMapper.insertProfil(pro);
+		} catch (Exception e){
+			
+		}
+		return null;
+	}
 
 	@Override
 	public Profil updateProfil(Profil pro) throws IllegalArgumentException {
@@ -325,20 +284,8 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
-
 	
-	@Override
-	public Profil getProfilById(int id) throws IllegalArgumentException {
-		return this.profilMapper.findByKey(id);
-
-	}
-	
-	public Vector <Profil> getAllProfil () throws IllegalArgumentException {
-		return this.profilMapper.getAllProfil();
-	}
-	
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 	@Override
@@ -373,15 +320,102 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
-	
+	@Override
+	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Info findByKeyInfo(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Info> getAllInfo() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Kontaktsperre findById(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Kontaktsperre> getAllKontaktsperre() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Merkzettel findByKey(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Merkzettel> getAllMerkzettel() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Profil insertProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+			String haarfarbe, boolean raucher) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Profil> getAllProfil() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return this.suchprofilMapper.findByKey(id);
+		return null;
+	}
+
+	@Override
+	public Vector<Suchprofil> getAllSuchprofil() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	public Vector <Suchprofil> getAllSuchprofil() throws IllegalArgumentException {
-		return this.suchprofilMapper.getAllSuchprofil();
-	}
 
 }

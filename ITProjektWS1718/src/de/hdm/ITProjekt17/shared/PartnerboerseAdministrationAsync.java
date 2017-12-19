@@ -25,6 +25,10 @@ public interface PartnerboerseAdministrationAsync {
 	void updateAuswahleigenschaft(Auswahleigenschaft aus, AsyncCallback<Auswahleigenschaft> callback);
 
 	void deleteAuswahleigenschaft(Auswahleigenschaft aus, AsyncCallback<Auswahleigenschaft> callback);
+	
+	void getAllAuswahleigenschaft(AsyncCallback<Vector<Auswahleigenschaft>> callback);
+
+	void findByKeyAuswahleigenschaft(int id, AsyncCallback<Auswahleigenschaft> callback);
 //_________________________________________________________________________________________________________________________
 	
 	void insertEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
@@ -32,6 +36,10 @@ public interface PartnerboerseAdministrationAsync {
 	void updateEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
 
 	void deleteEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
+	
+	void findbyKeyEigenschaft(int id, AsyncCallback<Eigenschaft> callback);
+
+	void getAllEigenschaft(AsyncCallback<Vector<Eigenschaft>> callback);
 //_________________________________________________________________________________________________________________________	
 
 	void insertFreitexteigenschaft(Freitexteigenschaft frei, AsyncCallback<Freitexteigenschaft> callback);
@@ -40,12 +48,20 @@ public interface PartnerboerseAdministrationAsync {
 
 	void deleteFreitexteigenschaft(Freitexteigenschaft frei, AsyncCallback<Freitexteigenschaft> callback);
 	
+	void findByKeyFreitexteigenschaft(int id, AsyncCallback<Freitexteigenschaft> callback);
+
+	void getAllFreitexteigenschaft(AsyncCallback<Vector<Freitexteigenschaft>> callback);
+	
 //_________________________________________________________________________________________________________________________
 	void insertInfo(Info in, AsyncCallback<Info> callback);
 
 	void updateInfo(Info in, AsyncCallback<Info> callback);
 
 	void deleteInfo(Info in, AsyncCallback<Info> callback);
+	
+	void findByKeyInfo(int id, AsyncCallback<Info> callback);
+
+	void getAllInfo(AsyncCallback<Vector<Info>> callback);
 	
 //_________________________________________________________________________________________________________________________
 

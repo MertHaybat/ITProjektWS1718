@@ -63,4 +63,5 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Suchprofil deleteSuchprofil(Suchprofil such) throws IllegalArgumentException;
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException;
 	public Vector <Suchprofil> getAllSuchprofil () throws IllegalArgumentException;
+
 }

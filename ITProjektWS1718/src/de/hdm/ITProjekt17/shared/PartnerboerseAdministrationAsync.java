@@ -48,8 +48,9 @@ public interface PartnerboerseAdministrationAsync {
 	void deleteInfo(Info in, AsyncCallback<Info> callback);
 	
 //_________________________________________________________________________________________________________________________
-	void insertKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 
+	void insertKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
+	
 	void updateKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 
 	void deleteKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);

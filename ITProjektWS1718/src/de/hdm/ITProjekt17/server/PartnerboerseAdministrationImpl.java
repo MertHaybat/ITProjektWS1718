@@ -85,6 +85,18 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
+	
+	@Override
+	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
@@ -118,6 +130,18 @@ implements PartnerboerseAdministration {
 		} catch(Exception e){
 			
 		}
+		return null;
+	}
+
+	@Override
+	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -155,6 +179,18 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
+	@Override
+	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Info insertInfo(Info in) throws IllegalArgumentException {
@@ -189,7 +225,18 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
-	
+	@Override
+	public Info findByKeyInfo(int id) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector<Info> getAllInfo() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Kontaktsperre insertKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
@@ -317,54 +364,6 @@ implements PartnerboerseAdministration {
 		} catch (Exception e){
 			
 		}
-		return null;
-	}
-
-	@Override
-	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Info findByKeyInfo(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Vector<Info> getAllInfo() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

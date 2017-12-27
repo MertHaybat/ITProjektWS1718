@@ -19,11 +19,11 @@ import de.hdm.ITProjekt17.shared.LoginServiceAsync;
 
 public class ITProjektWS1718 implements EntryPoint{
 	/* 
-	 * Panel, Label und Anchor für die Anmeldung
+	 * Panel, Label und Anchor fï¿½r die Anmeldung
 	 */
 	private LoginInfo loginInfo = null;
 	private VerticalPanel loginPanel = new VerticalPanel();
-	private Label loginLabel = new Label("Please sign in to your Google Account to access the Partnerbörse application.");
+	private Label loginLabel = new Label("Please sign in to your Google Account to access the PartnerbÃ¶rse application.");
 	private Anchor signInLink = new Anchor("Sign In");
 	private Anchor signOutLink = new Anchor("Sign Out");
 	

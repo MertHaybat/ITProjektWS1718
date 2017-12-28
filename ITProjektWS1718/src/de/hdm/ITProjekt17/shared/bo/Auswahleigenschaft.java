@@ -23,6 +23,9 @@ public class Auswahleigenschaft extends Eigenschaft {
 	private String wert = "";
 	private int eigenschaftid = 0;
 	
+	public Auswahleigenschaft(){
+		
+	}
 	
 	
 	//---------------Get-Methoden----------------------------

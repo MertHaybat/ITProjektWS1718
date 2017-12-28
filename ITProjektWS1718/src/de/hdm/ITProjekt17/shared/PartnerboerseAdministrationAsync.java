@@ -20,44 +20,44 @@ public interface PartnerboerseAdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
 
-	void insertAuswahleigenschaft(Auswahleigenschaft aus, AsyncCallback<Auswahleigenschaft> callback);
+	void createAuswahleigenschaft(String wert, int eigenschaftid, AsyncCallback<Auswahleigenschaft> callback);
 
-	void updateAuswahleigenschaft(Auswahleigenschaft aus, AsyncCallback<Auswahleigenschaft> callback);
+	void save(Auswahleigenschaft aus, AsyncCallback<Void> callback);
 
-	void deleteAuswahleigenschaft(Auswahleigenschaft aus, AsyncCallback<Auswahleigenschaft> callback);
+	void delete(Auswahleigenschaft aus, AsyncCallback<Void> callback);
 	
 	void getAllAuswahleigenschaft(AsyncCallback<Vector<Auswahleigenschaft>> callback);
 
 	void findByKeyAuswahleigenschaft(int id, AsyncCallback<Auswahleigenschaft> callback);
 //_________________________________________________________________________________________________________________________
 	
-	void insertEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
+	void createEigenschaft(int eigenschaftid, AsyncCallback<Eigenschaft> callback);
 
-	void updateEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
+	void save(Eigenschaft eig, AsyncCallback<Void> callback);
 
-	void deleteEigenschaft(Eigenschaft eig, AsyncCallback<Eigenschaft> callback);
+	void delete(Eigenschaft eig, AsyncCallback<Void> callback);
 	
 	void findbyKeyEigenschaft(int id, AsyncCallback<Eigenschaft> callback);
 
 	void getAllEigenschaft(AsyncCallback<Vector<Eigenschaft>> callback);
 //_________________________________________________________________________________________________________________________	
 
-	void insertFreitexteigenschaft(Freitexteigenschaft frei, AsyncCallback<Freitexteigenschaft> callback);
+	void createFreitexteigenschaft(String wert, int eigenschaftid, AsyncCallback<Freitexteigenschaft> callback);
 
-	void updateFreitexteigenschaft(Freitexteigenschaft frei, AsyncCallback<Freitexteigenschaft> callback);
+	void save(Freitexteigenschaft frei, AsyncCallback<Void> callback);
 
-	void deleteFreitexteigenschaft(Freitexteigenschaft frei, AsyncCallback<Freitexteigenschaft> callback);
+	void delete(Freitexteigenschaft frei, AsyncCallback<Void> callback);
 	
 	void findByKeyFreitexteigenschaft(int id, AsyncCallback<Freitexteigenschaft> callback);
 
 	void getAllFreitexteigenschaft(AsyncCallback<Vector<Freitexteigenschaft>> callback);
 	
 //_________________________________________________________________________________________________________________________
-	void insertInfo(Info in, AsyncCallback<Info> callback);
+	void createInfo(int profilid, String text, int eigenschaftid, AsyncCallback<Info> callback);
 
-	void updateInfo(Info in, AsyncCallback<Info> callback);
+	void save(Info in, AsyncCallback<Void> callback);
 
-	void deleteInfo(Info in, AsyncCallback<Info> callback);
+	void delete(Info in, AsyncCallback<Void> callback);
 	
 	void findByKeyInfo(int id, AsyncCallback<Info> callback);
 

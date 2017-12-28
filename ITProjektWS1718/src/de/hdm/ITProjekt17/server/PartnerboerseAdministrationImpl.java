@@ -54,36 +54,34 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public Auswahleigenschaft insertAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException {
+	public Auswahleigenschaft createAuswahleigenschaft(String wert, int eigenschaftid) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		try {
-			auswahleigenschaftMapper.insertAuswahleigenschaft(aus);
-		} catch(Exception e){
-			
-		}
-		return null;
+		Auswahleigenschaft aus = new Auswahleigenschaft();
+		aus.setEigenschaftid(eigenschaftid);
+		aus.setWert(wert);
+		
+		aus.setId(1);
+		return this.auswahleigenschaftMapper.insertAuswahleigenschaft(aus);
 	}
 
 	@Override
-	public Auswahleigenschaft updateAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException {
+	public void save(Auswahleigenschaft aus) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
 			auswahleigenschaftMapper.updateAuswahleigenschaft(aus);
 		} catch(Exception e){
 			
 		}
-		return null;
 	}
 
 	@Override
-	public Auswahleigenschaft deleteAuswahleigenschaft(Auswahleigenschaft aus) throws IllegalArgumentException {
+	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
 			auswahleigenschaftMapper.deleteAuswahleigenschaft(aus);
 		} catch(Exception e){
 				
 		}
-		return null;
 	}
 	
 	@Override
@@ -100,37 +98,32 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public Eigenschaft insertEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
+	public Eigenschaft createEigenschaft(int eigenschaftid) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		try {
-			eigenschaftMapper.insertEigenschaft(eig);
-		} catch(Exception e){
-			
-		}
-		return null;
+		Eigenschaft eig = new Eigenschaft();
+		
+		eig.setId(1);
+		return this.eigenschaftMapper.insertEigenschaft(eig);
 	}
 
 	@Override
-	public Eigenschaft updateEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
+	public void save(Eigenschaft eig) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
 			eigenschaftMapper.updateEigenschaft(eig);
 		} catch(Exception e){
 			
 		}
-		
-		return null;
 	}
 
 	@Override
-	public Eigenschaft deleteEigenschaft(Eigenschaft eig) throws IllegalArgumentException {
+	public void delete(Eigenschaft eig) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
 			eigenschaftMapper.deleteEigenschaft(eig);
 		} catch(Exception e){
 			
 		}
-		return null;
 	}
 
 	@Override
@@ -147,36 +140,34 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public Freitexteigenschaft insertFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException {
+	public Freitexteigenschaft createFreitexteigenschaft(String wert, int eigenschaftid) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		try {
-			freitexteigenschaftMapper.insertFreitexteigenschaft(frei);
-		} catch(Exception e){
-			
-		}
-		return null;
+		Freitexteigenschaft frei = new Freitexteigenschaft();
+		frei.setEigenschaftid(eigenschaftid);
+		frei.setWert(wert);
+		
+		frei.setId(1);
+		return this.freitexteigenschaftMapper.insertFreitexteigenschaft(frei);
 	}
 
 	@Override
-	public Freitexteigenschaft updateFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException {
+	public void save(Freitexteigenschaft frei) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
 			freitexteigenschaftMapper.updateFreitexteigenschaft(frei);
 		} catch(Exception e){
 			
 		}
-		return null;
 	}
 
 	@Override
-	public Freitexteigenschaft deleteFreitexteigenschaft(Freitexteigenschaft frei) throws IllegalArgumentException {
+	public void delete(Freitexteigenschaft frei) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
 			freitexteigenschaftMapper.deleteFreitexteigenschaft(frei);
 		} catch(Exception e){
 			
 		}
-		return null;
 	}
 
 	@Override
@@ -193,36 +184,35 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public Info insertInfo(Info in) throws IllegalArgumentException {
+	public Info createInfo(int profilid, String text, int eigenschaftid) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		try {
-			infoMapper.insertInfo(in);
-		} catch(Exception e){
-			
-		}
-		return null;
+		Info in = new Info();
+		in.setProfilId(profilid);
+		in.setText(text);
+		in.setEigenschaftid(eigenschaftid);
+		
+		in.setId(1);
+		return this.infoMapper.insertInfo(in);
 	}
 
 	@Override
-	public Info updateInfo(Info in) throws IllegalArgumentException {
+	public void save(Info in) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
 			infoMapper.updateInfo(in);
 		} catch(Exception e){
 			
 		}
-		return null;
 	}
 
 	@Override
-	public Info deleteInfo(Info in) throws IllegalArgumentException {
+	public void delete(Info in) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
 			infoMapper.deleteInfo(in);
 		} catch(Exception e){
 			
 		}
-		return null;
 	}
 
 	@Override

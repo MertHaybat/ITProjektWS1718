@@ -65,9 +65,9 @@ public interface PartnerboerseAdministrationAsync {
 	
 //_________________________________________________________________________________________________________________________
 
-	void insertKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
+	void createKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 	
-	void updateKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
+	void save(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 
 	void deleteKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 	
@@ -77,9 +77,9 @@ public interface PartnerboerseAdministrationAsync {
 
 
 //_________________________________________________________________________________________________________________________
-	void insertMerkzettel(Merkzettel merk, AsyncCallback<Merkzettel> callback);
+	void createMerkzettel(Merkzettel merk, AsyncCallback<Merkzettel> callback);
 
-	void updateMerkzettel(Merkzettel merk, AsyncCallback<Merkzettel> callback);
+	void save(Merkzettel merk, AsyncCallback<Merkzettel> callback);
 
 	void deleteMerkzettel(Merkzettel merk, AsyncCallback<Merkzettel> callback);
 
@@ -88,10 +88,13 @@ public interface PartnerboerseAdministrationAsync {
 	void getAllMerkzettel(AsyncCallback<Vector<Merkzettel>> callback);
 	
 //_________________________________________________________________________________________________________________________
-	void insertProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+	void createProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, boolean raucher, AsyncCallback<Profil> callback);
 
-	void updateProfil(Profil pro, AsyncCallback<Profil> callback);
+	/////
+	void insertProfil(Profil pro, AsyncCallback<Profil> callback);
+	/////
+	void save(Profil pro, AsyncCallback<Profil> callback);
 
 	void deleteProfil(Profil pro, AsyncCallback<Profil> callback);
 
@@ -100,14 +103,16 @@ public interface PartnerboerseAdministrationAsync {
 	void getAllProfil(AsyncCallback<Vector<Profil>> callback);
 	
 //_________________________________________________________________________________________________________________________
-	void insertSuchprofil(Suchprofil such, AsyncCallback<Suchprofil> callback);
+	void createSuchprofil(Suchprofil such, AsyncCallback<Suchprofil> callback);
 
-	void updateSuchprofil(Suchprofil such, AsyncCallback<Suchprofil> callback);
+	void save(Suchprofil such, AsyncCallback<Suchprofil> callback);
 
 	void deleteSuchprofil(Suchprofil such, AsyncCallback<Suchprofil> callback);
 	
 	void findByKey1(int id, AsyncCallback<Suchprofil> callback);
 
 	void getAllSuchprofil(AsyncCallback<Vector<Suchprofil>> callback);
+
+
 
 }

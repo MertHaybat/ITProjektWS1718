@@ -34,7 +34,6 @@ public class Auswahleigenschaft extends Eigenschaft {
 	}
 
 
-
 	/**
 	 * Abfragen der Auswahleigenschaft
 	 * @return

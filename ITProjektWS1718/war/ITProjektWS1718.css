@@ -46,8 +46,8 @@ h1 {
 
 /** Most GWT widgets already have a style name defined */
 .topbarbutton {
-	width:19px;
-	height:20px;
+	width: 250px;
+	height: 34px;
 }
 .gwt-DialogBox {
   width: 400px;

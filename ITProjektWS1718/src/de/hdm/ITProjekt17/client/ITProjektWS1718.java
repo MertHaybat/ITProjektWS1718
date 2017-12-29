@@ -7,6 +7,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.ITProjekt17.client.gui.Menubar;
+import de.hdm.ITProjekt17.client.gui.Topbar;
 import de.hdm.ITProjekt17.shared.LoginService;
 import de.hdm.ITProjekt17.shared.LoginServiceAsync;
 
@@ -66,8 +68,8 @@ public class ITProjektWS1718 implements EntryPoint{
 		RootPanel.get("Navigator").add(mb);
 		Topbar tp = new Topbar();
 		RootPanel.get("Topbar").add(tp);
-		BeispielSeite b = new BeispielSeite();
-		b.add(signOutLink);
-		RootPanel.get("Details").add(b);
+//		BeispielSeite b = new BeispielSeite();
+//		b.add(signOutLink);
+//		RootPanel.get("Details").add(b);
 	}
 }

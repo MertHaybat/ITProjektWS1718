@@ -23,6 +23,9 @@ public class Kontaktsperre extends BusinessObject {
 	private int profilId_sperrender = 0;
 	private int profilId_gesperrter = 0;
 	
+	public Kontaktsperre(){
+		
+	}
 	
 	//--------------Get-Methoden-----------------------------
 	

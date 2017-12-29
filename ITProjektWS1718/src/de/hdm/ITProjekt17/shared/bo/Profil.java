@@ -54,9 +54,15 @@ public class Profil extends BusinessObject {
 	 */
 
 	
-	public Profil(){
-		
-	}
+//	public Profil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String haarfarbe, String religion, boolean raucher){
+//		this.vorname = vorname;
+//		this.nachname = nachname;
+//		this.geburtsdatum = geburtsdatum;
+//		this.koerpergroesse = koerpergroesse;
+//		this.haarfarbe = haarfarbe;
+//		this.religion = religion;
+//		this.raucher = raucher;
+//	}
 
 	
 	//--------------Get-Methoden--------------------

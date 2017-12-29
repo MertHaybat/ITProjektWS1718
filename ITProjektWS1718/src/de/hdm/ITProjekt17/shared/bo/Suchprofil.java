@@ -64,6 +64,10 @@ public class Suchprofil extends BusinessObject {
 	 */
 	private Boolean raucher = false; 
 	
+	public Suchprofil(){
+		
+	}
+	
 	//------------------------------------------------------------------
 	//----------------------Set-Methoden--------------------------------
 	

@@ -22,7 +22,9 @@ public class Freitexteigenschaft extends Eigenschaft{
 	 */
 	private int eigenschaftid = 0;
 
-	
+	public Freitexteigenschaft(){
+		
+	}
 	
 	//---------------Get-Methoden---------------------------
 	

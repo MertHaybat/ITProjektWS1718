@@ -24,6 +24,10 @@ public class Merkzettel extends BusinessObject{
 	private int profilId_merkender= 0;
 	private int profilId_gemerkter = 0;
 	
+	public Merkzettel(){
+		
+	}
+	
 	//---------------Get-Methoden--------------------------
 	
 	public int getProfilId_merkender() {

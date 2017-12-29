@@ -10,7 +10,7 @@ import java.util.Vector;
  * 
  * @author Thies
  */
-public class HTMLReportWriter extends ReportWriter {
+public abstract class HTMLReportWriter extends ReportWriter {
 
   /**
    * Diese Variable wird mit dem Ergebnis einer Umwandlung (vgl.

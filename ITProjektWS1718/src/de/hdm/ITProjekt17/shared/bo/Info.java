@@ -31,7 +31,13 @@ public class Info extends BusinessObject{
 	 */
 	private int eigenschaftid = 0;
 	
+	public Info(){
+		
+	}
 	
+	public Info(String text){
+		this.text = text;
+	}
 	
 	//-----------------------Get-Methoden-----------------------------
 	

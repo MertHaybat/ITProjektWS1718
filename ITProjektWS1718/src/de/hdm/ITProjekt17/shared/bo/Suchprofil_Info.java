@@ -15,6 +15,10 @@ public class Suchprofil_Info extends BusinessObject {
 	 */
 	private int infoid;
 	
+	public Suchprofil_Info(){
+		
+	}
+	
 	//------------------------Get-Methoden--------------------------------
 	/**
 	 * Methode zum auslesen der Suchprofil Id

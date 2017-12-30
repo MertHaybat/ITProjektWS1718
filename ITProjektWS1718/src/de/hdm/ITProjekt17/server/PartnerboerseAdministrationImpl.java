@@ -81,13 +81,14 @@ implements PartnerboerseAdministration {
 	@Override
 	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.auswahleigenschaftMapper.findByKey(id);
 	}
 
 	@Override
 	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return this.auswahleigenschaftMapper.getAll();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,13 +124,13 @@ implements PartnerboerseAdministration {
 	@Override
 	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.eigenschaftMapper.findByKey(id);
 	}
 
 	@Override
 	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.eigenschaftMapper.getAll();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,13 +168,13 @@ implements PartnerboerseAdministration {
 	@Override
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.freitexteigenschaftMapper.findByKey(id);
 	}
 
 	@Override
 	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.freitexteigenschaftMapper.getAll();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,13 +213,13 @@ implements PartnerboerseAdministration {
 	@Override
 	public Info findByKeyInfo(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.infoMapper.findByKey(id);
 	}
 
 	@Override
 	public Vector<Info> getAllInfo() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.infoMapper.getAll();
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

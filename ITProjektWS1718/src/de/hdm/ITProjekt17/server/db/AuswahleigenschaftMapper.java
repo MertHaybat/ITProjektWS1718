@@ -54,7 +54,7 @@ public class AuswahleigenschaftMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public Vector<Auswahleigenschaft> getAll() throws Exception {
+	public Vector<Auswahleigenschaft> getAll() {
 		/**
 		 * Aufbau einer DB Connection
 		 */

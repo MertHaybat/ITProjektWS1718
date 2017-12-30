@@ -96,7 +96,7 @@ return null;
 	 * @return
 	 * @throws Exception
 	 */
-	public Vector<Freitexteigenschaft> getAll() throws Exception {
+	public Vector<Freitexteigenschaft> getAll() {
 		/**
 		 * Aufbau einer DB Connection
 		 */

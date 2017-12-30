@@ -93,7 +93,7 @@ return null;
 	 * @return
 	 * @throws Exception
 	 */
-	public Vector<Eigenschaft> getAll() throws Exception {
+	public Vector<Eigenschaft> getAll() {
 		/**
 		 * Aufbau einer DB Connection
 		 */

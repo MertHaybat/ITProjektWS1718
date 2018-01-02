@@ -79,17 +79,19 @@ public class ProfilMapper {
 		    	  	 * DurchfÃ¼hren der EinfÃ¼ge Operation via Prepared Statement
 		    	  	 */
 		    	  		PreparedStatement stmt1 = con.prepareStatement(
-		    	  				"INSERT INTO profil(id, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher) "
-		    	  				+ "VALUES (?,?,?,?,?,?,?,?) ",
+		    	  				"INSERT INTO profil(id, email, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht) "
+		    	  				+ "VALUES (?,?,?,?,?,?,?,?,?,?) ",
 		    	  				Statement.RETURN_GENERATED_KEYS);
 		    	  				stmt1.setInt(1, pro.getId());
-		    	  				stmt1.setString(2, pro.getVorname());
-		    	  				stmt1.setString(3, pro.getNachname());
-		    	  				stmt1.setDate(4, (Date) pro.getGeburtsdatum());
-		    	  				stmt1.setInt(5, pro.getKoerpergroesse());
-		    	  				stmt1.setString(6, pro.getReligion());
-		    	  				stmt1.setString(7, pro.getHaarfarbe());
-		    	  				stmt1.setBoolean(8, pro.getRaucher());
+		    	  				stmt1.setString(2, pro.getEmail());
+		    	  				stmt1.setString(3, pro.getVorname());
+		    	  				stmt1.setString(4, pro.getNachname());
+		    	  				stmt1.setDate(5, (Date) pro.getGeburtsdatum());
+		    	  				stmt1.setInt(6, pro.getKoerpergroesse());
+		    	  				stmt1.setString(7, pro.getReligion());
+		    	  				stmt1.setString(8, pro.getHaarfarbe());
+		    	  				stmt1.setBoolean(9, pro.getRaucher());
+		    	  				stmt1.setBoolean(10, pro.getGeschlecht());
 		    	  				
 		    	  				
 		    	  				stmt1.executeUpdate();
@@ -136,7 +138,7 @@ public class ProfilMapper {
 	 * @return pro
 	 */
 	 public Profil updateProfil(Profil pro) {
-		 	String sql = "UPDATE profil SET  vorname=?, nachname=?, geburtsdatum=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=? WHERE id=?";
+		 	String sql = "UPDATE profil SET  email=?, vorname=?, nachname=?, geburtsdatum=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=?, geschlecht=? WHERE id=?";
 		 /**
 		 	 * Aufbau der Db Connection
 		 	 */
@@ -150,16 +152,17 @@ public class ProfilMapper {
 		    
 		    	PreparedStatement stmt = con.prepareStatement(sql);
 		    	
-		    	
-		    	stmt.setString(1, pro.getVorname());
-		    	stmt.setString(2, pro.getNachname());
-		    	stmt.setDate(3, (Date) pro.getGeburtsdatum());
-		    	stmt.setInt(4, pro.getKoerpergroesse());
-		    	stmt.setString(5, pro.getReligion());
-		    	stmt.setString(6, pro.getHaarfarbe());
-		    	stmt.setBoolean(7, pro.getRaucher());
+		    	stmt.setString(1, pro.getEmail());
+		    	stmt.setString(2, pro.getVorname());
+		    	stmt.setString(3, pro.getNachname());
+		    	stmt.setDate(4, (Date) pro.getGeburtsdatum());
+		    	stmt.setInt(5, pro.getKoerpergroesse());
+		    	stmt.setString(6, pro.getReligion());
+		    	stmt.setString(7, pro.getHaarfarbe());
+		    	stmt.setBoolean(8, pro.getRaucher());
+		    	stmt.setBoolean(9, pro.getGeschlecht());
 
-		    	stmt.setInt(8, pro.getId());
+		    	stmt.setInt(10, pro.getId());
 		    	stmt.executeUpdate();
 		    	
 		    	System.out.println("Updated");
@@ -199,6 +202,7 @@ public class ProfilMapper {
 			        while (rs.next()) {
 			          Profil pro = new Profil();
 			          pro.setId(rs.getInt("id"));
+			          pro.setEmail(rs.getString("email"));
 			          pro.setVorname(rs.getString("vorname"));
 			          pro.setNachname(rs.getString("nachname"));
 			          pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
@@ -206,6 +210,7 @@ public class ProfilMapper {
 			          pro.setReligion(rs.getString("religion"));
 			          pro.setHaarfarbe(rs.getString("haarfarbe"));
 			          pro.setRaucher(rs.getBoolean("raucher"));
+			          pro.setGeschlecht(rs.getBoolean("geschlecht"));
 			          
 			          /**
 			           *  HinzufÃ¼gen des neuen Objekts zum Ergebnisvektor
@@ -252,6 +257,7 @@ public class ProfilMapper {
 		 			if (rs.next()){
 		 				Profil pro = new Profil();
 		 				pro.setId(rs.getInt("id"));
+		 				pro.setEmail(rs.getString("email"));
 		 				pro.setVorname(rs.getString("vorname"));
 		 				pro.setNachname(rs.getString("nachname"));
 		 				pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
@@ -259,6 +265,7 @@ public class ProfilMapper {
 		 				pro.setReligion(rs.getString("religion"));
 		 				pro.setHaarfarbe(rs.getString("haarfarbe"));
 		 				pro.setRaucher(rs.getBoolean("raucher"));
+		 				pro.setGeschlecht(rs.getBoolean("geschlecht"));
 	          
 		 				return pro;
 		 			}
@@ -269,4 +276,38 @@ public class ProfilMapper {
 		 		}
 		return null;
 	}
+		 	
+		 	public Profil findByEmail(String email) {
+				/**
+				 * Aufbau der Db Connection
+				 */
+				Connection con = DBConnection.connection();
+				/**
+				 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
+				 * Catch = Wenn Try nicht geht versuch es so ..
+				 */
+
+				try {
+					PreparedStatement stmt = con.prepareStatement("SELECT email FROM profil");
+					stmt.setString(1, email);
+
+					/**
+					 * Statement ausfüllen und an die DB senden
+					 */
+					ResultSet rs = stmt.executeQuery();
+
+					if (rs.next()) {
+						Profil pro = new Profil();
+						pro.setEmail(rs.getString("email"));
+
+						return pro;
+					}
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+					return null;
+				}
+
+				return null;
+			}
+
 }

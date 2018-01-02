@@ -19,6 +19,9 @@ public class Topbar extends VerticalPanel{
 	private FlexTable ft1 = new FlexTable();
 	
 	private Startseite startseite = new Startseite();
+//	private Platzhalter platzhalter = new Platzhalter();
+	private Suchen suchen = new Suchen();
+	private Impressum impressum = new Impressum();
 	
 	public Topbar(){
 		btn1.setStylePrimaryName("topbarbutton");
@@ -40,7 +43,35 @@ public class Topbar extends VerticalPanel{
 			
 		});
 		
+//		btn2.addClickHandler(new ClickHandler(){
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//			RootPanel.get("Details").clear();
+//			RootPanel.get("Details").add(platzhalter);
+//			}
+//			
+//		});	
 		
+		btn3.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(suchen);
+			}
+			
+		});
+		
+		btn4.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(impressum);
+			}
+			
+		});
 		
 		
 		vpanel.add(ft1);

@@ -21,6 +21,7 @@ public class Menubar extends VerticalPanel{
 		vpanel.add(ft1);
 		this.add(vpanel);
 
+		
 	}
 
 }

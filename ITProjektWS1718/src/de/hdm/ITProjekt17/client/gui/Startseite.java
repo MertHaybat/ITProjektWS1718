@@ -10,7 +10,7 @@ public class Startseite extends VerticalPanel{
 	private VerticalPanel vpanel = new VerticalPanel();
 	private FlexTable ft1 = new FlexTable();
 	private Anchor an1 =new Anchor("Text"); 
-	private HTML html1 = new HTML("hallo");
+	private HTML html1 = new HTML("<div class='Startseite'>");
 	
 	public Startseite(){
 		ft1.setWidget(0,0,an1);

@@ -22,7 +22,7 @@ public class Impressum extends VerticalPanel{
 				+ "Medien<br>wird rechtlich vertreten durch die Hochschule der Med"
 				+ "ien Stuttgart. <br> <br><A HREF=\"https://www.hdm-stuttgart.de/"
 				+ "impressum\"TARGET=\"_blank\">Impressum der Hochschule</A>"
-				+ "</div>)");
+				+ "</div>");
 
 	public Impressum(){
 		ft1.setWidget(0,0,an1);

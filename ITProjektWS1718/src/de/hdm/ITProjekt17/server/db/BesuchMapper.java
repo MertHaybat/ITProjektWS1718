@@ -65,7 +65,7 @@ public class BesuchMapper {
 
 		Connection con = DBConnection.connection();
 
-		ArrayList<Besuch> besuchteProfile = findByKey(besuch.getBesuchenderNutzerID());
+		Vector<Besuch> besuchteProfile = findByKey(besuch.getBesuchenderNutzerID());
 
 		for (int i = 0; i < besuchteProfile.size(); i++) {
 			if (besuchteProfile.get(i).getBesuchterNutzerID() == besuch.getBesuchterNutzerID()) {

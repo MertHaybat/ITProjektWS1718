@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Besuch;
 
@@ -126,11 +127,11 @@ public class BesuchMapper {
 		 * @return besuche
 		 */
 	  
-	  public ArrayList<Besuch> findByKey(int profilid) {
+	  public Vector<Besuch> findByKey(int profilid) {
 
 		    Connection con = DBConnection.connection();
 
-		    ArrayList<Besuch> besuch = new ArrayList<Besuch>();
+		    Vector<Besuch> besuch = new Vector<Besuch>();
 
 		    try {
 		    PreparedStatement stmt = con.prepareStatement ("SELECT * FROM besuch "
@@ -139,13 +140,14 @@ public class BesuchMapper {
 
 		      ResultSet rs = stmt.executeQuery();
 
-		      	if (rs.next()) {
+		      	while (rs.next()) {
 		        Besuch besuche = new Besuch();
 		        besuche.setId(rs.getInt("besuchid"));
 		        besuche.setBesuchenderNutzerID(rs.getInt("besuchendernutzer"));
 		        besuche.setBesuchterNutzerID(rs.getInt("besuchternutzer"));
 
-		       // besuche.add(besuch);
+		        
+		        besuch.addElement(besuche);
 		      }
 		    }
 		    catch (SQLException e2) {

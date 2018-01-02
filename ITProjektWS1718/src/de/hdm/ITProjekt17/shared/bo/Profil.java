@@ -16,6 +16,19 @@ public class Profil extends BusinessObject {
 	//-----------Variablen-der-Klasse-Profil-----------------------
 	
 	/**
+	 * Variable Geschlecht im Profil; Gibt an, ob die Person weiblich oder männlich ist
+	 */
+	private boolean geschlecht = false;
+	
+	
+	/**
+	 * Variable Email im Profil; Gibt die Email der Person an.
+	 */
+	
+	private String email = "";
+
+	
+	/**
 	 * Variable Vorname im Profil; Gibt den Vornamen der Person an.
 	 */
 	private String vorname ="";
@@ -66,6 +79,23 @@ public class Profil extends BusinessObject {
 
 	
 	//--------------Get-Methoden--------------------
+	
+	/**
+	 * Auslesen der Variable Email
+	 * @return email
+	 */
+	public String getEmail(){
+		return this.email;
+	}
+/**
+	 * Auslesen der Variable Geschlecht
+	 * @return geschlecht
+	 */
+	
+	public boolean getGeschlecht(){
+		return this.geschlecht;
+	}
+
 	
 	/**
 	 * Auslesen der Variable Vorname.
@@ -124,6 +154,22 @@ public class Profil extends BusinessObject {
 	
 	
 	//-------------Set-Methoden--------------------
+	
+	/**
+	 * Setzen der Variable Email
+	 * @param email
+	 */
+	public void setEmail(String email){
+		this.email = email;
+	}
+/**
+	 * Setzen der Variable Geschlecht
+	 * @param geschlecht
+	 */
+	public void setGeschlecht(boolean geschlecht){
+		this.geschlecht = geschlecht;
+	}
+
 	
 	/**
 	 * Setzen der Variable Vorname.
@@ -190,12 +236,14 @@ public class Profil extends BusinessObject {
 	public String toString(){
 		return super.toString() + 
 					"Profil-ID: #" + this.getId() +
+					" Email: #" + this.getEmail() +
 					" Vorname: #" + this.getVorname() + 
 					" Nachname: #" + this.getNachname() + 
 					" Geburtsdatum: #" + this.getGeburtsdatum() + 
 					" Haarfarbe: #" + this.getHaarfarbe() + 
 					" Körpergröße: #" + this.getKoerpergroesse() + 
 					" Religion: #" + this.getReligion() + 
-					" Raucher: #" + this.getRaucher();
+					" Raucher: #" + this.getRaucher() +
+					" Geschlecht: #" + this.getGeschlecht();
 	}
 }

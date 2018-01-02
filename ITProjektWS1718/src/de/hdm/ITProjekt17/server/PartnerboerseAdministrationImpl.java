@@ -11,10 +11,12 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 
 @SuppressWarnings("serial")
 public class PartnerboerseAdministrationImpl extends RemoteServiceServlet 
@@ -28,7 +30,7 @@ implements PartnerboerseAdministration {
 	private KontaktsperreMapper kontaktsperreMapper = null;
 	private MerkzettelMapper merkzettelMapper = null;
 	private SuchprofilMapper suchprofilMapper = null;
-	
+//	private BesuchMapper besuchMapper = null;
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
 		
@@ -44,6 +46,7 @@ implements PartnerboerseAdministration {
 		this.kontaktsperreMapper = KontaktsperreMapper.kontaktsperreMapper();
 		this.merkzettelMapper = MerkzettelMapper.merkzettelMapper();
 		this.suchprofilMapper = SuchprofilMapper.suchprofilMapper();
+//		this.besuchMapper = BesuchMapper.besuchMapper();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -350,7 +353,7 @@ implements PartnerboerseAdministration {
 	@Override
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.suchprofilMapper.findByKey(id);
 	}
 
 	@Override
@@ -413,11 +416,44 @@ implements PartnerboerseAdministration {
 	@Override
 	public Vector<Profil> getAllProfil() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return profilMapper.getAllProfil();
 		
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	
+//	public Vector<Profil> getBesuchteProfile(int profilid) 
+//	{
+//		Vector<Besuch> alleBesuche = new Vector<Besuch>();
+//		Vector<Profil> alleBesuchtenProfile = new Vector<Profil>();
+//		
+//		alleBesuche = besuchMapper.findByUser(profilid);
+//		for(int i = 0; i < alleBesuche.size(); i++)
+//		{
+//			alleBesuchtenProfile.add(getProfil(alleBesuche.get(i).getBesuchterNutzerID()));
+//		}
+//		
+//		return alleBesuchtenProfile;
+//	}
+//	
+//	public ArrayList<Profil> getUnbesuchteProfile(int profilid) throws IllegalArgumentException
+//	{
+//		Vector<Profil> alleProfile = profilMapper.getAllProfil();
+//		Vector<Profil> besuchteProfile = getBesuchteProfile(profilid);
+//		System.out.println("Size besuchteProfile: " + besuchteProfile.size() );
+//		
+//		for(int e = 0; e < besuchteProfile.size(); e++)
+//		{
+//			alleProfile.remove(besuchteProfile.get(e));
+//		}
+//		for(int i = 0; i < alleProfile.size(); i++)
+//		{
+//			if(isGesperrt(profilid, alleProfile.get(i).getId()))
+//			{
+//				alleProfile.remove(i);
+//			}
+//		}
+//		
+//		return alleProfile;
+//	}
 
 }

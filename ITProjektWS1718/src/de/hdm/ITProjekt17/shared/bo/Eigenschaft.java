@@ -8,7 +8,7 @@ package de.hdm.ITProjekt17.shared.bo;
  * @author dezzyanthony
  *
  */
-public class Eigenschaft extends BusinessObject {
+public abstract class Eigenschaft extends BusinessObject {
 
 
 	private static final long serialVersionUID = 1L;
@@ -17,6 +17,12 @@ public class Eigenschaft extends BusinessObject {
 	public Eigenschaft(){
 		
 	}
+	
+	public abstract int getEigenschaftid();
+	public abstract String getWert();
+	public abstract void setEigenschaftid(int eigenschaftid);
+	public abstract void setWert(String wert);
+	
 	
 	/*
 	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse

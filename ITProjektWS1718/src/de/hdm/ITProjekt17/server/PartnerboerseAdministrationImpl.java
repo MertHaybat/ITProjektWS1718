@@ -421,39 +421,6 @@ implements PartnerboerseAdministration {
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//	public Vector<Profil> getBesuchteProfile(int profilid) 
-//	{
-//		Vector<Besuch> alleBesuche = new Vector<Besuch>();
-//		Vector<Profil> alleBesuchtenProfile = new Vector<Profil>();
-//		
-//		alleBesuche = besuchMapper.findByUser(profilid);
-//		for(int i = 0; i < alleBesuche.size(); i++)
-//		{
-//			alleBesuchtenProfile.add(getProfil(alleBesuche.get(i).getBesuchterNutzerID()));
-//		}
-//		
-//		return alleBesuchtenProfile;
-//	}
-//	
-//	public ArrayList<Profil> getUnbesuchteProfile(int profilid) throws IllegalArgumentException
-//	{
-//		Vector<Profil> alleProfile = profilMapper.getAllProfil();
-//		Vector<Profil> besuchteProfile = getBesuchteProfile(profilid);
-//		System.out.println("Size besuchteProfile: " + besuchteProfile.size() );
-//		
-//		for(int e = 0; e < besuchteProfile.size(); e++)
-//		{
-//			alleProfile.remove(besuchteProfile.get(e));
-//		}
-//		for(int i = 0; i < alleProfile.size(); i++)
-//		{
-//			if(isGesperrt(profilid, alleProfile.get(i).getId()))
-//			{
-//				alleProfile.remove(i);
-//			}
-//		}
-//		
-//		return alleProfile;
-//	}
+	
 
 }

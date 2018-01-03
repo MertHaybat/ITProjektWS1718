@@ -69,19 +69,18 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void save(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 
-	void deleteKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
+	void deleteKontaktsperre(Kontaktsperre sperre, AsyncCallback<Void> callback);
 	
 	void findById(int id, AsyncCallback<Kontaktsperre> callback);
 	
-	void getAllKontaktsperre(AsyncCallback<Vector<Kontaktsperre>> callback);
+	void getAllKontaktsperre(int profilId_sperrender, AsyncCallback<Vector<Kontaktsperre>> callback);
 
 
-//_________________________________________________________________________________________________________________________
-	void createMerkzettel(Merkzettel merk, AsyncCallback<Merkzettel> callback);
+	void createMerkzettel(int profilId_gemerkter, int profilId_merkender, AsyncCallback<Merkzettel> callback);
 
-	void save(Merkzettel merk, AsyncCallback<Merkzettel> callback);
+	void save(Merkzettel merk, AsyncCallback<Void> callback);
 
-	void deleteMerkzettel(Merkzettel merk, AsyncCallback<Merkzettel> callback);
+	void deleteMerkzettel(Merkzettel merk, AsyncCallback<Void> callback);
 
 	void findByKey(int id, AsyncCallback<Merkzettel> callback);
 	

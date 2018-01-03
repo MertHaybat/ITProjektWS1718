@@ -94,7 +94,7 @@ public interface PartnerboerseAdministrationAsync {
 	/////
 	void save(Profil pro, AsyncCallback<Profil> callback);
 
-	void deleteProfil(Profil pro, AsyncCallback<Profil> callback);
+	void deleteProfil(Profil pro, AsyncCallback<Void> callback);
 
 	void getProfilById(int id, AsyncCallback<Profil> callback);
 

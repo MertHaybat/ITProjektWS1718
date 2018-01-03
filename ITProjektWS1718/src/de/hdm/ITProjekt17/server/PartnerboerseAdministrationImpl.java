@@ -18,7 +18,6 @@ import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import ClickandLove_Gruppe09_source_code.ClickandLove_Gruppe09.ClickandLove_Gruppe09.src.de.hdm.gruppe09.clickandlove.shared.bo.Sperre;
 
 
 
@@ -99,46 +98,46 @@ implements PartnerboerseAdministration {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@Override
-	public Eigenschaft createEigenschaft(int eigenschaftid) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		Eigenschaft eig = new Eigenschaft();
-		
-		eig.setId(1);
-		return this.eigenschaftMapper.insertEigenschaft(eig);
-	}
-
-	@Override
-	public void save(Eigenschaft eig) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		try {
-			eigenschaftMapper.updateEigenschaft(eig);
-		} catch(Exception e){
-			
-		}
-	}
-
-	@Override
-	public void delete(Eigenschaft eig) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		try {
-			eigenschaftMapper.deleteEigenschaft(eig);
-		} catch(Exception e){
-			
-		}
-	}
-
-	@Override
-	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return this.eigenschaftMapper.findByKey(id);
-	}
-
-	@Override
-	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return this.eigenschaftMapper.getAll();
-	}
+//	@Override
+//	public Eigenschaft createEigenschaft(int eigenschaftid) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		Eigenschaft eig = new Eigenschaft();
+//		
+//		eig.setId(1);
+//		return this.eigenschaftMapper.insertEigenschaft(eig);
+//	}
+//
+//	@Override
+//	public void save(Eigenschaft eig) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		try {
+//			eigenschaftMapper.updateEigenschaft(eig);
+//		} catch(Exception e){
+//			
+//		}
+//	}
+//
+//	@Override
+//	public void delete(Eigenschaft eig) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		try {
+//			eigenschaftMapper.deleteEigenschaft(eig);
+//		} catch(Exception e){
+//			
+//		}
+//	}
+//
+//	@Override
+//	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		return this.eigenschaftMapper.findByKey(id);
+//	}
+//
+//	@Override
+//	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		return this.eigenschaftMapper.getAll();
+//	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
@@ -297,6 +296,13 @@ implements PartnerboerseAdministration {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	
+	public Vector<Merkzettel> getAllMerkzettel ( int profilId_merkender) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return merkzettelMapper.getAllMerkezettelDesMerkers(profilId_merkender);
+	}
+	
+	
 	@Override
 	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException {
 		
@@ -416,62 +422,62 @@ implements PartnerboerseAdministration {
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public Profil getByEmail(String email) throws IllegalArgumentException {
-		return profilMapper.findByEmail(email);
-	}
+//	public Profil getByEmail(String email) throws IllegalArgumentException {
+//		return profilMapper.findByEmail(email);
+//	}
+//	
+//	
+//	@Override
+//	public Profil createProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+//			String haarfarbe, boolean raucher) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		   Profil pro = new Profil();
+//		    pro.setVorname(vorname);
+//		    pro.setNachname(nachname);
+//		    pro.setGeburtsdatum(geburtsdatum);
+//		    pro.setKoerpergroesse(koerpergroesse);
+//		    pro.setReligion(religion);
+//		    pro.setHaarfarbe(haarfarbe);
+//		    pro.setGeschlecht(geschlecht);
+//		    pro.setRaucher(raucher);
+//		    
+//		    /*
+//		     * Setzen einer vorläufigen Kundennr. Der insert-Aufruf liefert dann ein
+//		     * Objekt, dessen Nummer mit der Datenbank konsistent ist.
+//		     */
+//		    pro.setId(1);
+//		    
+//		    return this.profilMapper.insertProfil(pro);
+//
+//	}
 	
-	
-	@Override
-	public Profil createProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, boolean raucher) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		   Profil pro = new Profil();
-		    pro.setVorname(vorname);
-		    pro.setNachname(nachname);
-		    pro.setGeburtsdatum(geburtsdatum);
-		    pro.setKoerpergroesse(koerpergroesse);
-		    pro.setReligion(religion);
-		    pro.setHaarfarbe(haarfarbe);
-		    pro.setGeschlecht(geschlecht);
-		    pro.setRaucher(raucher);
-		    
-		    /*
-		     * Setzen einer vorläufigen Kundennr. Der insert-Aufruf liefert dann ein
-		     * Objekt, dessen Nummer mit der Datenbank konsistent ist.
-		     */
-		    pro.setId(1);
-		    
-		    return this.profilMapper.insertProfil(pro);
-
-	}
-	
-	public Profil save(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, boolean raucher) {
-		
-		Profil pro = new Profil();
-		Profil vorhandenesProfil = getByEmail(email);
-		
-		
-		try{ 
-			pro.setId(vorhandenesProfil.getId());
-			pro.setEmail(email);
-			pro.setGeburtsdatum(geburtsdatum);
-			pro.setHaarfarbe(haarfarbe);
-			pro.setGeschlecht(geschlecht);
-			pro.setKoerpergroesse(koerpergroesse);
-			pro.setRaucher(raucher);
-			pro.setReligion(religion);
-			pro.setVorname(vorname);
-			pro.setNachname(nachname);		
-			
-			profilMapper.updateProfil(pro);
-		
-		} catch (Exception e){
-			
-			System.out.println("Die Aktualisierung konnte nicht durchgeführt werden");
-		}
-		return pro;
-	}
+//	public Profil save(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+//			String haarfarbe, boolean raucher) {
+//		
+//		Profil pro = new Profil();
+//		Profil vorhandenesProfil = getByEmail(email);
+//		
+//		
+//		try{ 
+//			pro.setId(vorhandenesProfil.getId());
+//			pro.setEmail(email);
+//			pro.setGeburtsdatum(geburtsdatum);
+//			pro.setHaarfarbe(haarfarbe);
+//			pro.setGeschlecht(geschlecht);
+//			pro.setKoerpergroesse(koerpergroesse);
+//			pro.setRaucher(raucher);
+//			pro.setReligion(religion);
+//			pro.setVorname(vorname);
+//			pro.setNachname(nachname);		
+//			
+//			profilMapper.updateProfil(pro);
+//		
+//		} catch (Exception e){
+//			
+//			System.out.println("Die Aktualisierung konnte nicht durchgeführt werden");
+//		}
+//		return pro;
+//	}
 	
 	@Override
 	public Profil deleteProfil(Profil pro) throws IllegalArgumentException {
@@ -489,32 +495,32 @@ implements PartnerboerseAdministration {
 		return this.profilMapper.findByKey(id);
 	}
 	
-	@Override
-	public Vector<Profil> getAllProfil() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return profilMapper.getAllProfil();
-		
-	}
-	
-	public Profil pruefenAufExistenz(String email) throws IllegalArgumentException {
-		
-		Profil profil = new Profil();
-		Profil existingProfil = getByEmail(email);
-		
-		if(existingProfil == null)
-		{
-		System.out.println("Bitte mit Ihrem Gmail-Konto anmelden.");	
-		}
-		
-		else
-			
-		{
-			
-			profil = existingProfil;
-			
-		}
-		return profil;
-	}
+//	@Override
+//	public Vector<Profil> getAllProfil() throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		return profilMapper.getAllProfil();
+//		
+//	}
+//	
+//	public Profil pruefenAufExistenz(String email) throws IllegalArgumentException {
+//		
+//		Profil profil = new Profil();
+//		Profil existingProfil = getByEmail(email);
+//		
+//		if(existingProfil == null)
+//		{
+//		System.out.println("Bitte mit Ihrem Gmail-Konto anmelden.");	
+//		}
+//		
+//		else
+//			
+//		{
+//			
+//			profil = existingProfil;
+//			
+//		}
+//		return profil;
+//	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public Vector<Profil> showVisitedProfiles(int profilid) 
@@ -534,24 +540,24 @@ implements PartnerboerseAdministration {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	public Vector<Profil> getUnvisitedProfiles(int profilid) throws IllegalArgumentException
-	{
-		Vector<Profil> unvisitedProfiles = profilMapper.getAllProfil();
-		Vector<Profil> visitedProfiles = showVisitedProfiles(profilid);
-		System.out.println("Size visited Profiles: " + visitedProfiles.size() );
-		
-		for(int e = 0; e < visitedProfiles.size(); e++)
-		{
-			unvisitedProfiles.remove(visitedProfiles.get(e));
-		}
-		for(int i = 0; i < unvisitedProfiles.size(); i++)
-		{
-			if(isGesperrt(profilid, unvisitedProfiles.get(i).getId()))
-			{
-				unvisitedProfiles.remove(i);
-			}
-		}
-		
-		return unvisitedProfiles;
-	}
+//	public Vector<Profil> getUnvisitedProfiles(int profilid) throws IllegalArgumentException
+//	{
+//		Vector<Profil> unvisitedProfiles = profilMapper.getAllProfil();
+//		Vector<Profil> visitedProfiles = showVisitedProfiles(profilid);
+//		System.out.println("Size visited Profiles: " + visitedProfiles.size() );
+//		
+//		for(int e = 0; e < visitedProfiles.size(); e++)
+//		{
+//			unvisitedProfiles.remove(visitedProfiles.get(e));
+//		}
+//		for(int i = 0; i < unvisitedProfiles.size(); i++)
+//		{
+//			if(isGesperrt(profilid, unvisitedProfiles.get(i).getId()))
+//			{
+//				unvisitedProfiles.remove(i);
+//			}
+//		}
+//		
+//		return unvisitedProfiles;
+//	}
 }

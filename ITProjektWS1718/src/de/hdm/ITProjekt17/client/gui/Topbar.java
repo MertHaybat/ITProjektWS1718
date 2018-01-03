@@ -7,9 +7,11 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.ITProjekt17.shared.bo.Profil;
+
 public class Topbar extends VerticalPanel{
 	
-	
+	private Profilseite profil = new Profilseite();
 	private VerticalPanel vpanel = new VerticalPanel();
 	private Button btn1 = new Button("Startseite");
 	private Button btn2 = new Button("Platzhalterbutton");
@@ -23,7 +25,7 @@ public class Topbar extends VerticalPanel{
 	private Suchen suchen = new Suchen();
 	private Impressum impressum = new Impressum();
 	
-	public Topbar(){
+	public Topbar(Profil profil){
 		btn1.setStylePrimaryName("topbarbutton");
 		btn2.setStylePrimaryName("topbarbutton");
 		btn3.setStylePrimaryName("topbarbutton");

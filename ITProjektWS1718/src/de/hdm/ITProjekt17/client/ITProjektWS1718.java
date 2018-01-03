@@ -1,6 +1,9 @@
 package de.hdm.ITProjekt17.client;
 
+import java.util.Vector;
+
 import com.google.gwt.core.client.*;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Label;
@@ -8,9 +11,12 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.client.gui.Menubar;
+import de.hdm.ITProjekt17.client.gui.Profilseite;
 import de.hdm.ITProjekt17.client.gui.Topbar;
 import de.hdm.ITProjekt17.shared.LoginService;
 import de.hdm.ITProjekt17.shared.LoginServiceAsync;
+import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
+import de.hdm.ITProjekt17.shared.bo.Profil;
 
 
 /**
@@ -29,6 +35,8 @@ public class ITProjektWS1718 implements EntryPoint{
 	private Anchor signInLink = new Anchor("Sign In");
 	private Anchor signOutLink = new Anchor("Sign Out");
 	
+	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
+	
 	@Override
 	public void onModuleLoad() {
 		// Check login status using login service.
@@ -44,7 +52,40 @@ public class ITProjektWS1718 implements EntryPoint{
 			public void onSuccess(LoginInfo result) {
 			loginInfo = result;
 			if (loginInfo.isLoggedIn()) {
-				loadPartnerboerse();
+				pbverwaltung.getAllProfil(new AsyncCallback<Vector<Profil>>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Login fehlgeschlagen");
+					}
+
+					@Override
+					public void onSuccess(Vector<Profil> result) {
+						boolean isUserRegistered = false;
+						for (Profil profil : result){
+							//Überprüfung ob User bereits registriert ist
+							if(profil.getEmail() == loginInfo.getEmailAddress()){
+								isUserRegistered = true;
+								/**
+								 * Falls User registriert ist wird die Partnerbörse geladen
+								 * @param id des jeweiligen Person-Objekts
+								 */
+								loadPartnerboerse(profil);
+								break;
+							}
+						}
+						if (isUserRegistered == false){
+							RootPanel.get("Details").clear();
+							/**
+							 * Falls User noch nicht registriert ist wird der User zur Profilseite weitergeleitet, 
+							 * indem er aufgefordert wird, seine Daten einzutragen.
+							 */
+							RootPanel.get("Details").add(new Profilseite());
+						}
+					}
+
+				});
+				
 			}else{
 				loadLogin();
 			}
@@ -62,11 +103,11 @@ public class ITProjektWS1718 implements EntryPoint{
 		RootPanel.get("Details").add(loginPanel);
 	}
 	
-	private void loadPartnerboerse(){
+	private void loadPartnerboerse(Profil profil){
 		signOutLink.setHref(loginInfo.getLogoutUrl());
-		Menubar mb = new Menubar();
+		Menubar mb = new Menubar(profil);
 		RootPanel.get("Navigator").add(mb);
-		Topbar tp = new Topbar();
+		Topbar tp = new Topbar(profil);
 		RootPanel.get("Topbar").add(tp);
 //		BeispielSeite b = new BeispielSeite();
 //		b.add(signOutLink);

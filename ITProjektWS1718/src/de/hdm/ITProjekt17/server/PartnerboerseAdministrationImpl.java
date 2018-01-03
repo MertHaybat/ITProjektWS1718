@@ -10,12 +10,16 @@ import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
+import de.hdm.ITProjekt17.shared.bo.Besuch;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+import ClickandLove_Gruppe09_source_code.ClickandLove_Gruppe09.ClickandLove_Gruppe09.src.de.hdm.gruppe09.clickandlove.shared.bo.Sperre;
+
 
 
 @SuppressWarnings("serial")
@@ -30,7 +34,7 @@ implements PartnerboerseAdministration {
 	private KontaktsperreMapper kontaktsperreMapper = null;
 	private MerkzettelMapper merkzettelMapper = null;
 	private SuchprofilMapper suchprofilMapper = null;
-//	private BesuchMapper besuchMapper = null;
+	private BesuchMapper besuchMapper = null;
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
 		
@@ -46,7 +50,7 @@ implements PartnerboerseAdministration {
 		this.kontaktsperreMapper = KontaktsperreMapper.kontaktsperreMapper();
 		this.merkzettelMapper = MerkzettelMapper.merkzettelMapper();
 		this.suchprofilMapper = SuchprofilMapper.suchprofilMapper();
-//		this.besuchMapper = BesuchMapper.besuchMapper();
+		this.besuchMapper = BesuchMapper.besuchMapper();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,37 +230,29 @@ implements PartnerboerseAdministration {
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@Override
-	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		try{
-			kontaktsperreMapper.insertKontaktsperre(k);
-		}	catch(Exception e) {
-			
-		}
-		return null;
-	}
+//	@Override
+//	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		try{
+//			kontaktsperreMapper.insertKontaktsperre(k);
+//		}	catch(Exception e) {
+//			
+//		}
+//		return null;
+//	}
 
-	@Override
-	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		try{
-			kontaktsperreMapper.updateKontaktsperre(k);
-			}	catch(Exception e){
-				
-		}
-		return null;
-	}
+//	@Override
+//	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		try{
+//			kontaktsperreMapper.updateKontaktsperre(k);
+//			}	catch(Exception e){
+//				
+//		}
+//		return null;
+//	}
 
-	@Override
-	public Kontaktsperre deleteKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		try{ kontaktsperreMapper.deleteKontaktsperre(k);
-		} catch (Exception e){
-			
-		}
-		return null;
-	}
+
 	
 	@Override
 	public Kontaktsperre findById(int id) throws IllegalArgumentException {
@@ -265,44 +261,99 @@ implements PartnerboerseAdministration {
 	}
 
 	@Override
-	public Vector<Kontaktsperre> getAllKontaktsperre() throws IllegalArgumentException {
+	public Vector<Kontaktsperre> getAllKontaktsperre( int profilId_sperrender) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return kontaktsperreMapper.getAllKontaktsperrenDesSperrenden(profilId_sperrender);
 	}
+	
+	
+	public void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException
+	{
+		
+			Kontaktsperre sperre = new Kontaktsperre();
+			
+			sperre.setProfilId_sperrender(profilId_sperrender);
+			sperre.setProfilId_gesperrter(profilId_gesperrter);
+			
+			kontaktsperreMapper.insertKontaktsperre(sperre);
+	}
+	
+	@Override
+	public void deleteKontaktsperre (Kontaktsperre sperre ) throws IllegalArgumentException {
+		
+		sperre.setProfilId_gesperrter(0);
+		sperre.setProfilId_sperrender(0);
+		
+		try{
+		kontaktsperreMapper.updateKontaktsperre(sperre);
+		
+
+		kontaktsperreMapper.deleteKontaktsperre(sperre);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public Merkzettel createMerkzettel(Merkzettel merk) throws IllegalArgumentException {
+	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException {
+		
+		
+		Merkzettel merk = new Merkzettel();
+		
+		
+		merk.setProfilId_gemerkter(profilId_gemerkter);
+		
+		merk.setProfilId_merkender(profilId_merkender);
+				
+		
 		// TODO Auto-generated method stub
-		try{ merkzettelMapper.insertMerkzettel(merk);
-		} catch (Exception e) {
-			
-		}
-		return null;
+//		try { 
+//			
+//			merkzettelMapper.insertMerkzettel(merk);
+//			
+//		} 
+//		
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		return this.merkzettelMapper.insertMerkzettel(merk);
 	}
 	
 
 	@Override
-	public Merkzettel save(Merkzettel merk) throws IllegalArgumentException {
+	public void save(Merkzettel merk) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try{ merkzettelMapper.updateMerkzettel(merk);
 		} catch (Exception e){
 			
 		}
-		return null;
 	}
 
-	@Override
-	public Merkzettel deleteMerkzettel(Merkzettel merk) throws IllegalArgumentException {
+	
+	
+	public void  deleteMerkzettel(Merkzettel merk) throws IllegalArgumentException {
+		
+		merk.setProfilId_gemerkter(0);
+		
+		merk.setProfilId_merkender(0);
+		
 		// TODO Auto-generated method stub
-		try{ merkzettelMapper.deleteMerkzettel(merk);
-		} catch(Exception e){
+		
+		try { 
+			merkzettelMapper.updateMerkzettel(merk);
 			
+			merkzettelMapper.deleteMerkzettel(merk);
+			} 
+		catch (Exception e) {
+			
+			e.printStackTrace();
 		}
-		return null;
+		
+//		return null;
 	}
-
-
 	
 	@Override
 	public Merkzettel findByKey(int id) throws IllegalArgumentException {
@@ -365,7 +416,11 @@ implements PartnerboerseAdministration {
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+	public Profil getByEmail(String email) throws IllegalArgumentException {
+		return profilMapper.findByEmail(email);
+	}
+	
+	
 	@Override
 	public Profil createProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, boolean raucher) throws IllegalArgumentException {
@@ -377,6 +432,7 @@ implements PartnerboerseAdministration {
 		    pro.setKoerpergroesse(koerpergroesse);
 		    pro.setReligion(religion);
 		    pro.setHaarfarbe(haarfarbe);
+		    pro.setGeschlecht(geschlecht);
 		    pro.setRaucher(raucher);
 		    
 		    /*
@@ -389,13 +445,32 @@ implements PartnerboerseAdministration {
 
 	}
 	
-	public Profil save(Profil pro){
-		try{ profilMapper.updateProfil(pro);
+	public Profil save(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+			String haarfarbe, boolean raucher) {
+		
+		Profil pro = new Profil();
+		Profil vorhandenesProfil = getByEmail(email);
+		
+		
+		try{ 
+			pro.setId(vorhandenesProfil.getId());
+			pro.setEmail(email);
+			pro.setGeburtsdatum(geburtsdatum);
+			pro.setHaarfarbe(haarfarbe);
+			pro.setGeschlecht(geschlecht);
+			pro.setKoerpergroesse(koerpergroesse);
+			pro.setRaucher(raucher);
+			pro.setReligion(religion);
+			pro.setVorname(vorname);
+			pro.setNachname(nachname);		
+			
+			profilMapper.updateProfil(pro);
 		
 		} catch (Exception e){
 			
+			System.out.println("Die Aktualisierung konnte nicht durchgeführt werden");
 		}
-		return null;
+		return pro;
 	}
 	
 	@Override
@@ -420,8 +495,63 @@ implements PartnerboerseAdministration {
 		return profilMapper.getAllProfil();
 		
 	}
+	
+	public Profil pruefenAufExistenz(String email) throws IllegalArgumentException {
+		
+		Profil profil = new Profil();
+		Profil existingProfil = getByEmail(email);
+		
+		if(existingProfil == null)
+		{
+		System.out.println("Bitte mit Ihrem Gmail-Konto anmelden.");	
+		}
+		
+		else
+			
+		{
+			
+			profil = existingProfil;
+			
+		}
+		return profil;
+	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public Vector<Profil> showVisitedProfiles(int profilid) 
+	{
+		Vector<Besuch> allBesuche = new Vector<Besuch>();
+		Vector<Profil> allBesuchtenProfile = new Vector<Profil>();
+		
+		allBesuche = besuchMapper.findByKey(profilid);
+		for(int i = 0; i < allBesuche.size(); i++)
+		{
+			allBesuchtenProfile.add(getProfilById(allBesuche.get(i).getBesuchterNutzerID()));
+		}
+		
+		return allBesuchtenProfile;
+	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+	public Vector<Profil> getUnvisitedProfiles(int profilid) throws IllegalArgumentException
+	{
+		Vector<Profil> unvisitedProfiles = profilMapper.getAllProfil();
+		Vector<Profil> visitedProfiles = showVisitedProfiles(profilid);
+		System.out.println("Size visited Profiles: " + visitedProfiles.size() );
+		
+		for(int e = 0; e < visitedProfiles.size(); e++)
+		{
+			unvisitedProfiles.remove(visitedProfiles.get(e));
+		}
+		for(int i = 0; i < unvisitedProfiles.size(); i++)
+		{
+			if(isGesperrt(profilid, unvisitedProfiles.get(i).getId()))
+			{
+				unvisitedProfiles.remove(i);
+			}
+		}
+		
+		return unvisitedProfiles;
+	}
 }

@@ -7,7 +7,7 @@ package de.hdm.ITProjekt17.shared.bo;
  * @author Mert
  *
  */
-public class Ähnlichkeitsmaß extends BusinessObject{
+public class Ã„hnlichkeitsmaÃŸ extends BusinessObject{
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -17,7 +17,7 @@ public class Ähnlichkeitsmaß extends BusinessObject{
 	private int suchprofilid;
 	private double index;
 	
-	public Ähnlichkeitsmaß(){
+	public Ã„hnlichkeitsmaÃŸ(){
 		
 	}
 	

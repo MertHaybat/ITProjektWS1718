@@ -10,7 +10,19 @@ public class Startseite extends VerticalPanel{
 	private VerticalPanel vpanel = new VerticalPanel();
 	private FlexTable ft1 = new FlexTable();
 	private Anchor an1 =new Anchor("Text"); 
-	private HTML html1 = new HTML("<div class='Startseite'>");
+	private HTML html1 = new HTML("<article> <h2>Die kostenlose Partnerbörse</h2> "
+				+ "<section>"
+				+ "<h3>Finde die Liebe deines Lebens</h3> "
+				+ "<p>"
+				+ "Herzlich Willkommen auf der Partnerbörse </br>"
+				+ "Hier kannst du nach Herzenslust mit anderen Mitgliedern flirten , dich zum Dating und Ausgehen verabreden oder andere Singles mit den gleichen Interessen kennen lernen."
+				+ "Es warten viele spannende und neue Bekanntschaften auf dich.</br>"
+				+ "Viel Spaß und viel Glück.</br> "
+				+ "Falls du Fragen zur Funktion hast oder Support benötigst, kannst du unsere Kontaktdaten im Impressum finden. </p>"
+				+ "	</section>	"
+				+ "</article>");
+	
+	
 	
 	public Startseite(){
 		ft1.setWidget(0,0,an1);

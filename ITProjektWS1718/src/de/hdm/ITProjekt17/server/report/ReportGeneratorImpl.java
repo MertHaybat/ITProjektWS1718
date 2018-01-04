@@ -45,21 +45,62 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	    this.partnerboerseadministration = a;
 	  }
 	
-	
+	/**
+	 * Auslesen zugehöriger PartnerAdministration (interner Gebrauch)
+	 * @return partnerboerseadministration
+	 */
+	protected PartnerboerseAdministration getPartnerboerse(){
+		return this.partnerboerseadministration;
+	}
 	
 	
 	
 	//---------Nicht-implementierte-Mehtoden-des-ReportGenerator-Interfaces-auf-der-Client-Seite----------
 
 	@Override
-	public AllInfosOfProfilReport createAllInfosOfProfilReport(Profil pro) throws IllegalArgumentException {
+	public AllInfosOfProfilReport createAllInfosOfProfilReport(Profil pro, int score) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
+		if (this.getPartnerboerse() == null){
+			return null;
+		}
+		
+		AllInfosOfProfilReport result = new AllInfosOfProfilReport();
+		
+		String scoreString = Integer.toString(score);
+		
+		Row topRow = new Row();
+		topRow.addColumn(new Column(pro.getVorname() + " " + pro.getNachname()));
+		topRow.addColumn(new Column(scoreString));
+		
+//		Auslesen sämtlicher Pflichattribute
+		Row geschlechtRow = new Row();
+		geschlechtRow.addColumn(new Column("Geschlecht"));
+//		geschlechtRow.addColumn(new Column(pro.getGeschlecht()).toString());
+		Row haarfarbeRow = new Row();
+		haarfarbeRow.addColumn(new Column("Haarfarbe"));
+		haarfarbeRow.addColumn(new Column(pro.getHaarfarbe()));
+		Row religionRow = new Row();
+		religionRow.addColumn(new Column("Religion"));
+		religionRow.addColumn(new Column(pro.getReligion()));
+		Row raucherRow = new Row();
+		raucherRow.addColumn(new Column("Raucher"));
+//		raucherRow.addColumn(new Column(pro.getRaucher()).toString());
+		
+		result.addRow(geschlechtRow);
+		result.addRow(haarfarbeRow);
+		result.addRow(religionRow);
+		result.addRow(raucherRow);
 		return null;
+		
+		/* Auslesen aller Infos des Profils
+		 * 
+		 */
+		
+//		Vector<Info> infos = partnerboerseadministration.;
 	}
 
 	@Override
-	public PartnervorschlaegeOfProfilNichtAngesehenReport createPartnervorschlaegeOfProfilNichtAngesehenReport(
-			Profil pro) throws IllegalArgumentException {
+	public PartnervorschlaegeOfProfilNichtAngesehenReport createPartnervorschlaegeOfProfilNichtAngesehenReport(Profil pro) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return null;
 	}

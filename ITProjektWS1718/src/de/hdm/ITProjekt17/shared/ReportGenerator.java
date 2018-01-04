@@ -33,7 +33,7 @@ public interface ReportGenerator extends RemoteService {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	 public abstract  AllInfosOfProfilReport createAllInfosOfProfilReport (Profil pro) throws IllegalArgumentException;
+	 public abstract  AllInfosOfProfilReport createAllInfosOfProfilReport(Profil pro, int score) throws IllegalArgumentException;
 	 
 	 /**
 	  * Diese Methode sucht alle vom Profil/Teilnehmer nicht angesehenen Profile und zeigt diese an.

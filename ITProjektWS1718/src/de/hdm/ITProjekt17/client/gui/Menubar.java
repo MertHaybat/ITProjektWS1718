@@ -16,7 +16,7 @@ public class Menubar extends VerticalPanel{
 	private Button btn2= new Button("Platzhalter");
 	private FlexTable ft1 = new FlexTable();
 	
-	public Menubar(Profil profil){
+	public Menubar(final Profil profil){
 		btn1.setStylePrimaryName("menubarbutton");
 		btn2.setStylePrimaryName("menubarbutton");
 		ft1.setWidget(0, 0, btn1);

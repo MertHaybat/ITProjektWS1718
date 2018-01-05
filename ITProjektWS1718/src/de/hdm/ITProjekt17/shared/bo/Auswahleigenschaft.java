@@ -21,7 +21,6 @@ public class Auswahleigenschaft extends Eigenschaft {
 	 * Variable auswahlEigenschaft ist eine Auswahl, welche der Teilnehmer auswählt
 	 */
 	private String wert = "";
-	private int eigenschaftid = 0;
 	
 	public Auswahleigenschaft(){
 		
@@ -29,13 +28,6 @@ public class Auswahleigenschaft extends Eigenschaft {
 	
 	
 	//---------------Get-Methoden----------------------------
-	
-	
-
-	public int getEigenschaftid() {
-		return eigenschaftid;
-	}
-
 
 	/**
 	 * Abfragen der Auswahleigenschaft
@@ -56,11 +48,6 @@ public class Auswahleigenschaft extends Eigenschaft {
 	public void setWert(String wert){
 		this.wert = wert;
 	}
-
-	public void setEigenschaftid(int eigenschaftid) {
-		this.eigenschaftid = eigenschaftid;
-		
-	}
 	
 	/*
 	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
@@ -68,10 +55,8 @@ public class Auswahleigenschaft extends Eigenschaft {
 	public String toString(){
 		return super.toString() + 
 					" Auswahleigenschaft-ID: #" + this.getId() + 
-					" Wert: #" + this.getWert() +
-					" Eigenschaft-Id: #" + this.getEigenschaftid();
-				
-					
+					" Wert: #" + this.getWert();
+			
 	}
 	
 }

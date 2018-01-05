@@ -27,9 +27,14 @@ public class Info extends BusinessObject{
 	 */
 	private String text ="";
 	/**
-	 * Variable eigenschaftid ist die ID von Eigenschaft als FS
+	 * Variable freitexteigenschaftid ist die ID von Freitexteigenschaft als FS
 	 */
-	private int eigenschaftid = 0;
+	private int freitexteigenschaftid = 0;
+	/**
+	 * Variable auswahleigenschaftid ist die ID von Auswahleigenschaft als FS
+	 */
+	private int auswahleigenschaftid = 0;
+	
 	
 	public Info(){
 		
@@ -57,11 +62,18 @@ public class Info extends BusinessObject{
 		return text;
 	}
 	/**
-	 * Auslesen der Eigenschaft id
+	 * Auslesen der Freitexteigenschaft id
 	 * @return
 	 */
-	public int getEigenschaftid(){
-		return eigenschaftid;
+	public int getFreitexteigenschaftid(){
+		return freitexteigenschaftid;
+	}
+	/**
+	 * Auslesen der Auswahleigenschaft id
+	 * @return
+	 */
+	public int getAuswahleigenschaftid(){
+		return auswahleigenschaftid;
 	}
 	
 	
@@ -84,11 +96,18 @@ public class Info extends BusinessObject{
 		this.text = text;
 	}
 	/**
-	 * Setzen einer Eigenschaft id
-	 * @param eigenschaftid
+	 * Setzen einer Freitexteigenschaft id
+	 * @param freitexteigenschaftid
 	 */
-	public void setEigenschaftid(int eigenschaftid){
-		this.eigenschaftid = eigenschaftid;
+	public void setFreitexteigenschaftid(int freitexteigenschaftid){
+		this.freitexteigenschaftid = freitexteigenschaftid;
+	}
+	/**
+	 * Setzen einer Auswahleigenschaft id
+	 * @param auswahleigenschaftid
+	 */
+	public void setAuswahleigenschaftid(int auswahleigenschaftid){
+		this.auswahleigenschaftid = auswahleigenschaftid;
 	}
 	
 	/*
@@ -99,9 +118,8 @@ public class Info extends BusinessObject{
 					"Info-ID: #" + this.getId() +
 					" Profil-Id: #" + this.getProfilId() + 
 					" Text: #" + this.getText() +
-					" Eigenschaft-Id: #" + this.getEigenschaftid();
-				
-					
+					" Freitexteigenschaft-Id: #" + this.getFreitexteigenschaftid() +
+					" Auswahleigenschaft-Id: #" + this.getAuswahleigenschaftid();
 	}
 	
 	

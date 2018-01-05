@@ -17,10 +17,6 @@ public class Freitexteigenschaft extends Eigenschaft{
 	 * Variablen wert, welche den Wert später speichert der als freitext geschreiben wird
 	 */
 	private String wert = "";
-	/**
-	 * Variable eigenschaftid ist als Fredmschlüssel in dieser Klasse gespeichert
-	 */
-	private int eigenschaftid = 0;
 
 	public Freitexteigenschaft(){
 		
@@ -28,20 +24,12 @@ public class Freitexteigenschaft extends Eigenschaft{
 	
 	//---------------Get-Methoden---------------------------
 	
-	public int getEigenschaftid() {
-		return eigenschaftid;
-	}
-	
 	public String getWert() {
 		return this.wert;
 	}
 
 	//---------------Set-Methoden-----------------------------
 	
-	public void setEigenschaftid(int eigenschaftid) {
-		this.eigenschaftid = eigenschaftid;
-	}
-
 	public void setWert(String wert) {
 		this.wert = wert;
 	}
@@ -52,8 +40,7 @@ public class Freitexteigenschaft extends Eigenschaft{
 	public String toString(){
 		return super.toString() + 
 					"Freitexteigenschaft-ID: #" + this.getId() +
-					" Wert: #" + this.getWert() +
-					" Eigenschaft-Id: #" + this.getEigenschaftid();
+					" Wert: #" + this.getWert();
 				
 					
 	}

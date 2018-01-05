@@ -17,20 +17,9 @@ public abstract class Eigenschaft extends BusinessObject {
 	public Eigenschaft(){
 		
 	}
-	
-	public abstract int getEigenschaftid();
+
 	public abstract String getWert();
-	public abstract void setEigenschaftid(int eigenschaftid);
 	public abstract void setWert(String wert);
-	
-	
-	/*
-	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
-	 */
-	public String toString(){
-		return super.toString() + 
-					" Eigenschaft-ID: #" + this.getId();
 			
-	}
-	
 }
+	

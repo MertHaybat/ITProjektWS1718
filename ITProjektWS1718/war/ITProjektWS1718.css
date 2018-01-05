@@ -54,6 +54,7 @@ h1 {
 	height: 34px;
 }
 .menubarbutton{
+	border-radius: 25px;
 	background-color: lavenderblush;
     width: 220px;
     height: 45px;

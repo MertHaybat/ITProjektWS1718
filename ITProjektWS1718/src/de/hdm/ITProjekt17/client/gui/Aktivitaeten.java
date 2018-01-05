@@ -187,6 +187,7 @@ public class Aktivitaeten extends VerticalPanel {
 		private Button loeschen = new Button("Besuch Löschen");
 		private Button merkzettel = new Button("Zu Merkzettel hinzufügen");
 		private Button abbrechen = new Button("Abbrechen");
+		private Button entsperren = new Button("Besuch Entsperren");
 		
 		private FlexTable ft1 = new FlexTable();
 		
@@ -209,11 +210,35 @@ public class Aktivitaeten extends VerticalPanel {
 			ft1.setWidget(7, 1, tbgeschlecht);
 			ft1.setWidget(8, 0, merkzettel);
 			ft1.setWidget(8, 1, abbrechen);
-			ft1.setWidget(8, 2, loeschen);
+			ft1.setWidget(8, 2, loeschen);			
 			ft1.setWidget(8, 3, sperren);
+			ft1.setWidget(8, 3, entsperren);
 			
 			vpanel.add(ft1);
 			this.add(vpanel);
+			
+			entsperren.addClickHandler(new ClickHandler(){
+
+				@Override
+				public void onClick(ClickEvent event) {
+					Kontaktsperre ks = new Kontaktsperre();
+					ks.setProfilId_sperrender(profil_eigenes.getId());
+					ks.setProfilId_gesperrter(profil_besucher.getId());
+					pbverwaltung.deleteKontaktsperre(ks, new AsyncCallback<Void>(){
+
+						@Override
+						public void onFailure(Throwable caught) {
+							
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							Window.alert("Kontakt wurde entsperrt");
+						}
+						
+					});
+				}
+			});
 			
 			sperren.addClickHandler(new ClickHandler(){
 
@@ -248,7 +273,7 @@ public class Aktivitaeten extends VerticalPanel {
 				
 			});
 			
-//			pbverwaltung.getProfilById(profil.getId(), new AsyncCallback<Profil>(){
+//			pbverwaltung.getProfilById(profil_besucher.getId(), new AsyncCallback<Profil>(){
 //
 //				@Override
 //				public void onFailure(Throwable caught) {

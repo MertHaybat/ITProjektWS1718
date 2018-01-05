@@ -31,15 +31,19 @@ public class Menubar extends VerticalPanel { //StackPanel für auskommentierten 
 //	}
 	
 	private VerticalPanel vpanel = new VerticalPanel();
-	private Button btn1= new Button("Profil");
-	private Button btn2= new Button("Aktivitäten");
+	private Button btn1 = new Button("Profil");
+	private Button btn2 = new Button("Aktivitäten");
+	private Button btn3 = new Button("Merkzettel");
 	private FlexTable ft1 = new FlexTable();
 	
 	public Menubar(final Profil profil){
 		btn1.setStylePrimaryName("menubarbutton");
 		btn2.setStylePrimaryName("menubarbutton");
+		btn3.setStylePrimaryName("menubarbutton");
+		
 		ft1.setWidget(0, 0, btn1);
 		ft1.setWidget(1, 0, btn2);
+		ft1.setWidget(2, 0, btn3);
 		
 		btn1.addClickHandler(new ClickHandler(){
 			@Override
@@ -58,6 +62,17 @@ public class Menubar extends VerticalPanel { //StackPanel für auskommentierten 
 			}
 			
 		});
+		
+		btn3.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(new Merkzettelseite(profil));
+			}
+			
+		});
+		
 		vpanel.add(ft1);
 		this.add(vpanel);
 

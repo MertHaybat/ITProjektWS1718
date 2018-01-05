@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
+import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 
@@ -267,4 +268,49 @@ public class SuchprofilMapper {
 
 						return null;
 					}
+					
+					
+					
+					public Vector<Suchprofil> getSuchprofilIdByProfilId(int profilid) {
+						 
+					 	/**
+					 	 * Aufbau der DB Connection
+					 	 */
+					    Connection con = DBConnection.connection();
+					  
+					    Vector<Suchprofil> result = new Vector<Suchprofil>();
+					    
+					    try {
+					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM suchprofil WHERE profilid=? ");
+					    	stmt.setInt(1, profilid);
+					      
+					    	ResultSet rs = stmt.executeQuery();
+					        
+					        /**
+					         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+					         */
+					        while (rs.next()) {
+					          Suchprofil such = new Suchprofil();
+					        
+					          such.setId(rs.getInt("id"));
+					        
+					          /**
+					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+					           */
+					          
+					          System.out.println("Funktioniert");
+					          
+					          result.addElement(such);
+					        }
+					      }
+					      catch (SQLException e) {
+					        e.printStackTrace();
+					      }
+
+					      /**
+					       *  Ergebnisvektor zurückgeben
+					       */
+					      return result;
+				 }
+
 }

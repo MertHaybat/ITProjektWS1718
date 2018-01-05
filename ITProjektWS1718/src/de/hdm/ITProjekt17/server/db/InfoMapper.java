@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
+import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class InfoMapper {
@@ -76,7 +77,8 @@ public class InfoMapper {
  				in.setId(rs.getInt("id"));
  				in.setText(rs.getString("text"));
  		        in.setProfilId(rs.getInt("profilid"));
- 		        in.setEigenschaftid(rs.getInt("eigenschaftid"));
+ 		        in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+ 		        in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
  		        
  				return in;
  			}
@@ -116,7 +118,8 @@ return null;
           Info in = new Info();
           in.setId(rs.getInt("id"));
           in.setText(rs.getString("text"));
-          in.setEigenschaftid(rs.getInt("eigenschaftid"));
+          in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+          in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
           in.setProfilId(rs.getInt("profilid"));
           /**
            *  Hinzufügen des neuen Objekts zum Ergebnisvektor
@@ -161,12 +164,13 @@ return null;
 				 * Durchführen der Einfügeoperation via Prepared Statement
 				 */
 				PreparedStatement stmt1 = con.prepareStatement(
-						"INSERT INTO info (id, text, profilid, eigenschaftid) " + "VALUES (?,?,?,?) ",
+						"INSERT INTO info (id, text, profilid, auswahleigenschaftid, freitexteigenschaftid) " + "VALUES (?,?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);
 						stmt1.setInt(1, in.getId());
 						stmt1.setString(2, in.getText());
 						stmt1.setInt(3, in.getProfilId());
-						stmt1.setInt(4, in.getEigenschaftid());
+						stmt1.setInt(4, in.getAuswahleigenschaftid());
+						stmt1.setInt(5, in.getFreitexteigenschaftid());
 						
 						stmt1.executeUpdate();
 			}
@@ -212,7 +216,7 @@ return null;
 	 * @return in
 	 */
 	public Info updateInfo(Info in) {
-		String sql = "UPDATE Info SET text=?, profilid=?  WHERE id=?";
+		String sql = "UPDATE Info SET text=?, profilid=?, auswahleigenschaftid=?, freitexteigenschaftid=? WHERE id=?";
 		/**
 		 * Aufbau der Db Connection
 		 */
@@ -228,7 +232,10 @@ return null;
 			stmt.setString(1, in.getText());
 			stmt.setInt(2, in.getProfilId());
 
-			stmt.setInt(3, in.getId());
+			stmt.setInt(3, in.getAuswahleigenschaftid());
+			stmt.setInt(4, in.getFreitexteigenschaftid());
+			stmt.setInt(5, in.getId());
+
 			stmt.executeUpdate();
 
 			System.out.println("Updated");
@@ -242,5 +249,219 @@ return null;
 		 */
 		return in;
 	}
+	
+	
+	
+	
+	
+	
+	public Vector<Info> getInfoIdByProfilId(int profilid) {
+		 
+	 	/**
+	 	 * Aufbau der DB Connection
+	 	 */
+	    Connection con = DBConnection.connection();
+	  
+	    Vector<Info> result = new Vector<Info>();
+	    
+	    try {
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE profilid=? ");
+	    	stmt.setInt(1, profilid);
+	      
+	    	ResultSet rs = stmt.executeQuery();
+	        
+	        /**
+	         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+	         */
+	        while (rs.next()) {
+	          Info info = new Info();
+	        
 
+	          info.setId(rs.getInt("id"));
+	          /**
+	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+	           */
+	          
+	          System.out.println("Funktioniert");
+	          
+	          result.addElement(info);
+	        }
+	      }
+	      catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+
+	      /**
+	       *  Ergebnisvektor zurückgeben
+	       */
+	      return result;
+ }
+
+	public Vector<Info> getAllInfosAsAuswahleigenschaft(int auswahleigenschaftid){
+		 
+	 	/**
+	 	 * Aufbau der DB Connection
+	 	 */
+	    Connection con = DBConnection.connection();
+	  
+	    Vector<Info> result = new Vector<Info>();
+	    
+	    try {
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE auswahleigenschaftid=? ");
+	    	stmt.setInt(1, auswahleigenschaftid);
+	      
+	    	ResultSet rs = stmt.executeQuery();
+	        
+	        /**
+	         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+	         */
+	        while (rs.next()) {
+	          Info info = new Info();
+	        
+
+	          info.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+	          /**
+	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+	           */
+	          
+	          System.out.println("Funktioniert");
+	          
+	          result.addElement(info);
+	        }
+	      }
+	      catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+
+	      /**
+	       *  Ergebnisvektor zurückgeben
+	       */
+		return result;
+	}
+	
+	public Vector<Info> getAllInfosAsAuswahleigenschaftByProfilId(int auswahleigenschaftid, int profilid){
+		 
+	 	/**
+	 	 * Aufbau der DB Connection
+	 	 */
+	    Connection con = DBConnection.connection();
+	  
+	    Vector<Info> result = new Vector<Info>();
+	    
+	    try {
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE auswahleigenschaftid=? ");
+	    	stmt.setInt(1, auswahleigenschaftid);
+	      
+	    	ResultSet rs = stmt.executeQuery();
+	        
+	        /**
+	         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+	         */
+	        while (rs.next()) {
+	          Info info = new Info();
+	        
+
+	          info.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+	          /**
+	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+	           */
+	          
+	          System.out.println("Funktioniert");
+	          
+	          result.addElement(info);
+	        }
+	      }
+	      catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+
+	      /**
+	       *  Ergebnisvektor zurückgeben
+	       */
+		return result;
+	}
+	
+	public Vector<Info> getAllInfosAsFreitexteigenschaft(int freitexteigenschaftid){
+		 
+	 	/**
+	 	 * Aufbau der DB Connection
+	 	 */
+	    Connection con = DBConnection.connection();
+	  
+	    Vector<Info> result = new Vector<Info>();
+	    
+	    try {
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE freitexteigenschaftid=? ");
+	    	stmt.setInt(1, freitexteigenschaftid);
+	      
+	    	ResultSet rs = stmt.executeQuery();
+	        
+	        /**
+	         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+	         */
+	        while (rs.next()) {
+	          Info info = new Info();
+	        
+
+	          info.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
+	          /**
+	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+	           */
+	          
+	          System.out.println("Funktioniert");
+	          
+	          result.addElement(info);
+	        }
+	      }
+	      catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+
+	      /**
+	       *  Ergebnisvektor zurückgeben
+	       */
+		return result;
+	}
+	
+	public Vector<Info> getAllInfosAsFreitexteigenschaftById(int freitexteigenschaftid, int profilid){
+		 
+	 	/**
+	 	 * Aufbau der DB Connection
+	 	 */
+	    Connection con = DBConnection.connection();
+	  
+	    Vector<Info> result = new Vector<Info>();
+	    
+	    try {
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE freitexteigenschaftid=? ");
+	    	stmt.setInt(1, freitexteigenschaftid);
+	      
+	    	ResultSet rs = stmt.executeQuery();
+	        
+	        /**
+	         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+	         */
+	        while (rs.next()) {
+	          Info info = new Info();
+	        
+
+	          info.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
+	          /**
+	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+	           */
+	          
+	          System.out.println("Funktioniert");
+	          
+	          result.addElement(info);
+	        }
+	      }
+	      catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+
+	      /**
+	       *  Ergebnisvektor zurückgeben
+	       */
+		return result;
+	}
 }

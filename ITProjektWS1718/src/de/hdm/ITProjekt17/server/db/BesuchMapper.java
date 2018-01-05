@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Besuch;
+import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 
 /**
  * Die Mapper-Klasse stellt Methoden zur Verfügung die
@@ -157,4 +158,85 @@ public class BesuchMapper {
 		    return besuch;
 		  }
 
+	  
+	  public Vector<Besuch> getAllBesucheDesBesuchenden(int besuchenderNutzerID) {
+			 
+		 	/**
+		 	 * Aufbau der DB Connection
+		 	 */
+		    Connection con = DBConnection.connection();
+		  
+		    Vector<Besuch> result = new Vector<Besuch>();
+		    
+		    try {
+		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE  besuchenderNutzerID=? ");
+		    	stmt.setInt(1,  besuchenderNutzerID);
+		      
+		    	ResultSet rs = stmt.executeQuery();
+		        
+		        /**
+		         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+		         */
+		        while (rs.next()) {
+		          Besuch besuche = new Besuch();
+		        
+		          besuche.setId(rs.getInt("id"));
+		          besuche.setBesuchenderNutzerID(rs.getInt("besuchenderNutzerID"));
+		          besuche.setBesuchterNutzerID(rs.getInt("besuchterNutzerID"));
+		          /**
+		           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+		           */
+		          
+		          System.out.println("Degga funkt");
+		          
+		          result.addElement(besuche);
+		        }
+		      }
+		      catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+
+		      /**
+		       *  Ergebnisvektor zurückgeben
+		       */
+		      return result;
+	 }
+	  public Besuch update(Besuch besuche) {
+		 	String sql = "UPDATE besuch SET  besuchenderNutzerID=?, besuchterNutzerID=? WHERE id =?";
+		 	/**
+		 	 * Aufbau der Db Connection
+		 	 */
+		    Connection con = DBConnection.connection();
+		    /**
+			 * Try und Catch gehören zum Exception Handling 
+			 * Try = Versuch erst dies 
+			 * Catch = Wenn Try nicht geht versuch es so ..
+			 */
+		    try {
+		    
+		    	PreparedStatement stmt = con.prepareStatement(sql);
+		    	
+		    
+		    	stmt.setInt(1, besuche.getBesuchenderNutzerID());
+		    	stmt.setInt(2, besuche.getBesuchterNutzerID());
+		    	stmt.setInt(3, besuche.getId());
+		    	
+		    
+
+		    	
+		    	stmt.executeUpdate();
+		    	
+		    
+		   
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+
+		    /**
+		     *  Das Profil wird zurückgegeben
+		     */
+		    return besuche;
+		  }
+	  
 }

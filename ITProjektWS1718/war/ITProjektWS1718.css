@@ -17,7 +17,11 @@
     margin-top: 20px;
     background-color: #13117b;
 }
-
+/**#Navigator {
+	background-color: #13117b;
+    height: 170px;
+    width: 230px;
+}*/
 #Foot {
 	background-color: #13117b;
     height: 80px;
@@ -48,6 +52,14 @@ h1 {
 .topbarbutton {
 	width: 250px;
 	height: 34px;
+}
+.menubarbutton{
+	background-color: lavenderblush;
+    width: 220px;
+    height: 45px;
+    color: cadetblue;
+    font-size: 25px;
+    border-color: lavenderblush;
 }
 .gwt-DialogBox {
   width: 400px;

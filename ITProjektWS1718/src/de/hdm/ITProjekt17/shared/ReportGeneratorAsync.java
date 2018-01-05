@@ -19,7 +19,7 @@ public interface ReportGeneratorAsync {
 
 	void init(AsyncCallback<Void> callback);
 
-	void createAllInfosOfProfilReport(Profil pro, AsyncCallback<AllInfosOfProfilReport> callback);
+	void createAllInfosOfProfilReport(Profil pro, int score, AsyncCallback<AllInfosOfProfilReport> callback);
 
 	void createPartnervorschlaegeOfProfilNichtAngesehenReport(Profil pro,
 			AsyncCallback<PartnervorschlaegeOfProfilNichtAngesehenReport> callback);

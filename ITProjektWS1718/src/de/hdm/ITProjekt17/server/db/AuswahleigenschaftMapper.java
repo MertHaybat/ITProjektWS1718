@@ -77,7 +77,6 @@ public class AuswahleigenschaftMapper {
           Auswahleigenschaft aus = new Auswahleigenschaft();
           aus.setId(rs.getInt("id"));
           aus.setWert(rs.getString("wert"));
-          aus.setEigenschaftid(rs.getInt("eigenschaftid"));
           /**
            *  Hinzufügen des neuen Objekts zum Ergebnisvektor
            */
@@ -122,12 +121,11 @@ public class AuswahleigenschaftMapper {
 		    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 		    	  	 */
 		    	  		PreparedStatement stmt1 = con.prepareStatement(
-		    	  				"INSERT INTO auswahleigenschaft (id, wert, eigenschaftid) "
-		    	  				+ "VALUES (?,?,?) ",
+		    	  				"INSERT INTO auswahleigenschaft (id, wert) "
+		    	  				+ "VALUES (?,?) ",
 		    	  				Statement.RETURN_GENERATED_KEYS);
 		    	  				stmt1.setInt(1, aus.getId());
 		    	  				stmt1.setString(2, aus.getWert());
-		    	  				stmt1.setInt(3, aus.getEigenschaftid());
 		    	  				
 		    	  				
 		    	  				
@@ -175,7 +173,7 @@ public class AuswahleigenschaftMapper {
 	 * @return aus
 	 */
 	 public Auswahleigenschaft updateAuswahleigenschaft(Auswahleigenschaft aus){
-		 	String sql = "UPDATE auswahleigenschaft SET  wert=?, eigenschaftid=? WHERE id=?";
+		 	String sql = "UPDATE auswahleigenschaft SET  wert=? WHERE id=?";
 		 /**
 		 	 * Aufbau der Db Connection
 		 	 */
@@ -191,7 +189,6 @@ public class AuswahleigenschaftMapper {
 		    	
 		    	
 		    	stmt.setString(1, aus.getWert());
-		    	stmt.setInt(2, aus.getEigenschaftid());
 
 		    	stmt.setInt(3, aus.getId());
 		    	stmt.executeUpdate();
@@ -239,7 +236,6 @@ public class AuswahleigenschaftMapper {
 	 				Auswahleigenschaft aus = new Auswahleigenschaft();
 	 				aus.setId(rs.getInt("id"));
 	 				aus.setWert(rs.getString("wert"));
-	 				aus.setEigenschaftid(rs.getInt("eigenschaftid"));
 	 			
        
 	 				return aus;

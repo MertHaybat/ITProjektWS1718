@@ -77,8 +77,6 @@ public class FreitexteigenschaftMapper {
  				Freitexteigenschaft frei = new Freitexteigenschaft();
  				frei.setId(rs.getInt("id"));
  				frei.setWert(rs.getString("wert"));
- 				frei.setEigenschaftid(rs.getInt("eigenschaftid"));
- 			
    
  				return frei;
  			}
@@ -119,7 +117,6 @@ return null;
           Freitexteigenschaft frei = new Freitexteigenschaft();
           frei.setId(rs.getInt("id"));
           frei.setWert(rs.getString("wert"));
-          frei.setEigenschaftid(rs.getInt("eigenschaftid"));
           /**
            *  Hinzufügen des neuen Objekts zum Ergebnisvektor
            */
@@ -163,11 +160,10 @@ return null;
 				 * Durchführen der Einfüge Operation via Prepared Statement
 				 */
 				PreparedStatement stmt1 = con.prepareStatement(
-						"INSERT INTO freitexteigenschaft (id, wert, eigenschaftid) " + "VALUES (?,?,?) ",
+						"INSERT INTO freitexteigenschaft (id, wert) " + "VALUES (?,?) ",
 						Statement.RETURN_GENERATED_KEYS);
 				stmt1.setInt(1, frei.getId());
 				stmt1.setString(2, frei.getWert());
-				stmt1.setInt(3, frei.getEigenschaftid());
 
 				stmt1.executeUpdate();
 			}
@@ -227,7 +223,6 @@ return null;
 			PreparedStatement stmt = con.prepareStatement(sql);
 
 			stmt.setString(1, frei.getWert());
-			stmt.setInt(2, frei.getEigenschaftid());
 
 			stmt.setInt(3, frei.getId());
 			stmt.executeUpdate();

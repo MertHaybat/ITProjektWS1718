@@ -31,7 +31,7 @@ public interface PartnerboerseAdministrationAsync {
 	void findByKeyAuswahleigenschaft(int id, AsyncCallback<Auswahleigenschaft> callback);
 //_________________________________________________________________________________________________________________________
 	
-	void createEigenschaft(int eigenschaftid, AsyncCallback<Eigenschaft> callback);
+//	void createEigenschaft(int eigenschaftid, AsyncCallback<Eigenschaft> callback);
 
 	void save(Eigenschaft eig, AsyncCallback<Void> callback);
 
@@ -63,6 +63,8 @@ public interface PartnerboerseAdministrationAsync {
 
 	void getAllInfo(AsyncCallback<Vector<Info>> callback);
 	
+	void getAllInfobyProfilid(int profilid, AsyncCallback<Vector<Info>> callback);
+	
 //_________________________________________________________________________________________________________________________
 
 	void createKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
@@ -74,6 +76,10 @@ public interface PartnerboerseAdministrationAsync {
 	void findById(int id, AsyncCallback<Kontaktsperre> callback);
 	
 	void getAllKontaktsperre(int profilId_sperrender, AsyncCallback<Vector<Kontaktsperre>> callback);
+	
+	void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter, AsyncCallback<Void> callback);
+
+	
 
 
 	void createMerkzettel(int profilId_gemerkter, int profilId_merkender, AsyncCallback<Merkzettel> callback);
@@ -84,32 +90,47 @@ public interface PartnerboerseAdministrationAsync {
 
 	void findByKey(int id, AsyncCallback<Merkzettel> callback);
 	
-	void getAllMerkzettel(AsyncCallback<Vector<Merkzettel>> callback);
+	void getAllMerkzettel(int profilId_merkender, AsyncCallback<Vector<Merkzettel>> callback);
 	
-//_________________________________________________________________________________________________________________________
-	void createProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, boolean raucher, AsyncCallback<Profil> callback);
+void createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse,
+			String religion, String haarfarbe, boolean raucher, boolean geschlecht, AsyncCallback<Profil> callback);
 
 	
 	/////
-	void save(Profil pro, AsyncCallback<Profil> callback);
+//	void save(Profil pro, AsyncCallback<Profil> callback);
 
-	void deleteProfil(Profil pro, AsyncCallback<Void> callback);
+	void deleteProfil(int profilid, AsyncCallback<Void> callback);
 
 	void getProfilById(int id, AsyncCallback<Profil> callback);
 
 	void getAllProfil(AsyncCallback<Vector<Profil>> callback);
 	
-//_________________________________________________________________________________________________________________________
-	void createSuchprofil(Suchprofil such, AsyncCallback<Suchprofil> callback);
+void createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+			String haarfarbe, boolean raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId,
+			AsyncCallback<Suchprofil> callback);
 
 	void save(Suchprofil such, AsyncCallback<Suchprofil> callback);
 
-	void deleteSuchprofil(Suchprofil such, AsyncCallback<Suchprofil> callback);
+	void deleteSuchprofil(int profilid, AsyncCallback<Void> callback);
 	
 	void findByKey1(int id, AsyncCallback<Suchprofil> callback);
 
 	void getAllSuchprofil(AsyncCallback<Vector<Suchprofil>> callback);
+
+	
+	void getSuchprofilbyProfilId(int profilid, AsyncCallback<Vector<Suchprofil>> callback);
+
+	void getInfoIdByProfilId(int profilid, AsyncCallback<Vector<Info>> callback);
+
+	void saveProfil(String email, boolean geschlecht, String vorname, String nachname, Date geburtsdatum, int koerpergroesse,
+			String religion, String haarfarbe, boolean raucher, AsyncCallback<Profil> callback);
+
+	
+	
+	
+	
+	void getAllKontaktsperre(AsyncCallback<Vector<Kontaktsperre>> callback);
+
 
 
 

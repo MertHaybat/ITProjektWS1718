@@ -106,8 +106,11 @@ public class Suchprofil_InfoMapper {
 			    	/**
 				      * Durchführung der Löschoperation
 				      */
-			     PreparedStatement stmt = con.prepareStatement("DELETE FROM suchprofil_info " + "WHERE id= ? ");
+			     PreparedStatement stmt = con.prepareStatement("DELETE FROM suchprofil_info " + "WHERE infoid= ?, suchprofilid=?");
 			     stmt.setInt(1, suchinfo.getId());
+			     stmt.setInt(2, suchinfo.getInfoId());
+			     stmt.setInt(3, suchinfo.getSuchprofilId());
+			     
 			     stmt.executeUpdate();
 
 			  
@@ -247,4 +250,45 @@ public class Suchprofil_InfoMapper {
 
 					return null;
 		}
+				
+				 public Vector<Suchprofil_Info> getAllSuchprofilInfos(int infoid, int suchprofilid) {
+					 
+					 	/**
+					 	 * Aufbau der DB Connection
+					 	 */
+					    Connection con = DBConnection.connection();
+					  
+					    Vector<Suchprofil_Info> result = new Vector<Suchprofil_Info>();
+					    
+					    try {
+					    	PreparedStatement stmt = con.prepareStatement("SELECT id FROM suchprofil_Info WHERE infoid=?, suchprofilid=? ");
+					    	stmt.setInt(1, infoid);
+					    	stmt.setInt(2, suchprofilid);
+					    	ResultSet rs = stmt.executeQuery();
+					        
+					        /**
+					         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+					         */
+					        while (rs.next()) {
+					        	Suchprofil_Info suchinfo = new Suchprofil_Info();
+					        
+					          suchinfo.setId(rs.getInt("id"));
+					          /**
+					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+					           */
+					          
+					          System.out.println("Funktioniert");
+					          
+					          result.addElement(suchinfo);
+					        }
+					      }
+					      catch (SQLException e) {
+					        e.printStackTrace();
+					      }
+
+					      /**
+					       *  Ergebnisvektor zurückgeben
+					       */
+					      return result;
+				 }
 }

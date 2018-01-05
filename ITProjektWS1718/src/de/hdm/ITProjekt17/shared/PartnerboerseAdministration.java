@@ -27,7 +27,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException;
 	public Vector <Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException; 
 	
-	public Eigenschaft createEigenschaft(int eigenschaftid) throws IllegalArgumentException;
+//	public Eigenschaft createEigenschaft(int eigenschaftid) throws IllegalArgumentException;
 	public void save(Eigenschaft eig) throws IllegalArgumentException;
 	public void delete(Eigenschaft eig) throws IllegalArgumentException;
 	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException;
@@ -44,33 +44,43 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public void delete(Info in) throws IllegalArgumentException;
 	public Info findByKeyInfo(int id) throws IllegalArgumentException;
 	public Vector <Info> getAllInfo() throws IllegalArgumentException;
+	public Vector<Info> getAllInfobyProfilid (int profilid) throws IllegalArgumentException; 
 	
 	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException;
 	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException;
 	public void deleteKontaktsperre(Kontaktsperre sperre) throws IllegalArgumentException;
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
-//	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
+	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
+	public void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
 	
 	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;
 	public void deleteMerkzettel(Merkzettel merk) throws IllegalArgumentException;
 	public Merkzettel findByKey (int id) throws IllegalArgumentException; 
-	public Vector <Merkzettel> getAllMerkzettel() throws IllegalArgumentException;
+	public Vector <Merkzettel> getAllMerkzettel(int profilId_merkender) throws IllegalArgumentException;
 	
-	Profil createProfil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+	Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+			String haarfarbe, boolean raucher, boolean geschlecht) throws IllegalArgumentException;
+	public void deleteProfil(int profilid) throws IllegalArgumentException;
+	public Profil saveProfil(String email, boolean geschlecht, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, boolean raucher) throws IllegalArgumentException;
-	public void deleteProfil(Profil pro) throws IllegalArgumentException;
-	public Profil save(Profil pro) throws IllegalArgumentException;
 	public Profil getProfilById (int id) throws IllegalArgumentException;
 	public Vector <Profil> getAllProfil() throws IllegalArgumentException;
 	
-	public Suchprofil createSuchprofil(Suchprofil such) throws IllegalArgumentException;
+	public Suchprofil createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+			String haarfarbe, boolean raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException;
 	public Suchprofil save(Suchprofil such) throws IllegalArgumentException;
-	public Suchprofil deleteSuchprofil(Suchprofil such) throws IllegalArgumentException;
+	public void deleteSuchprofil(int profilid) throws IllegalArgumentException;
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException;
 	public Vector <Suchprofil> getAllSuchprofil () throws IllegalArgumentException;
 
 	Vector<Kontaktsperre> getAllKontaktsperre(int profilId_sperrender) throws IllegalArgumentException;
 
+	Vector<Suchprofil> getSuchprofilbyProfilId(int profilid) throws IllegalArgumentException;
+
+	Vector<Info> getInfoIdByProfilId(int profilid) throws IllegalArgumentException;
+///////
+//	Profil save(Profil pro);
+///////
 
 }

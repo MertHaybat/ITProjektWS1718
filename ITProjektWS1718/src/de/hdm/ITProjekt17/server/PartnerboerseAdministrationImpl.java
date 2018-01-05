@@ -10,6 +10,7 @@ import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
+import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
 import de.hdm.ITProjekt17.shared.bo.Besuch;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ implements PartnerboerseAdministration {
 	private KontaktsperreMapper kontaktsperreMapper = null;
 	private MerkzettelMapper merkzettelMapper = null;
 	private SuchprofilMapper suchprofilMapper = null;
+	private Suchprofil_InfoMapper suchprofil_infoMapper = null;
 	private BesuchMapper besuchMapper = null;
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
@@ -49,6 +51,7 @@ implements PartnerboerseAdministration {
 		this.kontaktsperreMapper = KontaktsperreMapper.kontaktsperreMapper();
 		this.merkzettelMapper = MerkzettelMapper.merkzettelMapper();
 		this.suchprofilMapper = SuchprofilMapper.suchprofilMapper();
+		this.suchprofil_infoMapper = Suchprofil_InfoMapper.suchprofil_InfoMapper();
 		this.besuchMapper = BesuchMapper.besuchMapper();
 	}
 
@@ -99,14 +102,14 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	@Override
-	public Eigenschaft createEigenschaft(int eigenschaftid) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		Eigenschaft eig = new Eigenschaft();
-		
-		eig.setId(1);
-		return this.eigenschaftMapper.insertEigenschaft(eig);
-	}
+//	@Override
+//	public Eigenschaft createEigenschaft(int eigenschaftid) throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		Eigenschaft eig = new Eigenschaft();
+//		
+//		eig.setId(1);
+//		return this.eigenschaftMapper.insertEigenschaft(eig);
+//	}
 
 	@Override
 	public void save(Eigenschaft eig) throws IllegalArgumentException {
@@ -185,6 +188,12 @@ implements PartnerboerseAdministration {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Vector<Info> getAllInfobyProfilid (int profilid) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return infoMapper.getInfoIdByProfilId(profilid);
+	}
+	
 	@Override
 	public Info createInfo(int profilid, String text, int eigenschaftid) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -230,27 +239,27 @@ implements PartnerboerseAdministration {
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	@Override
-//	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
-//		// TODO Auto-generated method stub
-//		try{
-//			kontaktsperreMapper.insertKontaktsperre(k);
-//		}	catch(Exception e) {
-//			
-//		}
-//		return null;
-//	}
+	@Override
+	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		try{
+			kontaktsperreMapper.insertKontaktsperre(k);
+		}	catch(Exception e) {
+			
+		}
+		return null;
+	}
 
-//	@Override
-//	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException {
-//		// TODO Auto-generated method stub
-//		try{
-//			kontaktsperreMapper.updateKontaktsperre(k);
-//			}	catch(Exception e){
-//				
-//		}
-//		return null;
-//	}
+	@Override
+	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		try{
+			kontaktsperreMapper.updateKontaktsperre(k);
+			}	catch(Exception e){
+				
+		}
+		return null;
+	}
 
 
 	
@@ -368,25 +377,35 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
-	@Override
-	public Vector<Merkzettel> getAllMerkzettel() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Vector<Merkzettel> getAllMerkzettel() throws IllegalArgumentException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	@Override
-	public Suchprofil createSuchprofil(Suchprofil such) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		try{ suchprofilMapper.insertSuchprofil(such);
-		} catch (Exception e){
+	
+	public Suchprofil createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+			String haarfarbe, boolean raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException {
+
+			Suchprofil suchpro = new Suchprofil();
+			suchpro.setGeburtsdatum(geburtsdatum);
+			suchpro.setHaarfarbe(haarfarbe);
+			suchpro.setKoerpergroesse(koerpergroesse);
+			suchpro.setMaxAlter(maxAlter);
+			suchpro.setMinAlter(minAlter);
+			suchpro.setProfilId(profilId);
+			suchpro.setRaucher(raucher);
+			suchpro.setReligion(religion);
 			
-		}
-		return null;
+
+			return suchprofilMapper.insertSuchprofil(suchpro);
 	}
 
+	
+	
 	@Override
 	public Suchprofil save(Suchprofil such) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -397,17 +416,46 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
+	
+	
+	
 
+	// Vergleiche deleteProfil(AP-Schicht)!!!!!!!!!!!!!!!!!
 	@Override
-	public Suchprofil deleteSuchprofil(Suchprofil such) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		try{ suchprofilMapper.deleteProfil(such);
+	/**
+	 * Hier wird das Suchprofil gelöscht
+	 * Um das Suchprofil zu löschen, müssen erst die Daten aus der Tabelle Suchprofil_Info gelöscht werden um das Suchprofil löschen zu können
+	 */
+	public void deleteSuchprofil(int profilid) throws IllegalArgumentException {
+		Vector <Suchprofil> suchprofil = getSuchprofilbyProfilId(profilid);
+		Vector <Info> info = getInfoIdByProfilId(profilid);
+		Suchprofil_Info suchinfo = new Suchprofil_Info();
+
+		for(int s = 0; s < suchprofil.size(); s++)
+		{
+			for(int i = 0; i < info.size(); i++)
+			{ 
+				 suchinfo = getAllSuchprofilInfos(suchprofil.get(s).getId(), info.get(i).getId());
+				
+				 
+				}
+			
+			suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
+		}		
 		
-		} catch (Exception e){
+		
+		Vector<Suchprofil> suchpro = getSuchprofilbyProfilId(profilid);
+		
+		for ( int i = 0; i < suchpro.size(); i++) 
+		{
+			suchprofilMapper.deleteProfil(suchpro.elementAt(i));
 			
 		}
-		return null;
+		
 	}
+	
+	
+	
 
 	@Override
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException {
@@ -418,8 +466,46 @@ implements PartnerboerseAdministration {
 	@Override
 	public Vector<Suchprofil> getAllSuchprofil() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.suchprofilMapper.getAllSuchprofil();
 	}
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public Suchprofil_Info getAllSuchprofilInfos (int infoid, int suchprofilid) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		Vector<Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(infoid, suchprofilid);;
+		Suchprofil_Info si = new Suchprofil_Info();
+		for(int i = 0; i < suchinfo.size(); i++) {
+			si.setId(suchinfo.get(i).getId());
+		}
+		return si;
+	}
+	
+//	public void deleteSuchprofilInfo (int profilid){
+//		Vector <Suchprofil> suchp = suchprofilMapper.getSuchprofilIdByProfilId(profilid);
+//		Vector <Info> info = infoMapper.getInfoIdByProfilId(profilid);
+//		Vector <Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(infoid, suchprofilid);
+//		
+//		
+//		for(int i=0; i < suchp.size(); i ++){
+//			
+//			if(suchp.get(i).getId())
+//		}
+		
+		
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -455,7 +541,7 @@ implements PartnerboerseAdministration {
 
 	}
 	
-	public Profil save(String email, boolean geschlecht, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+	public Profil saveProfil(String email, boolean geschlecht, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, boolean raucher) {
 		
 		Profil pro = new Profil();
@@ -485,52 +571,95 @@ implements PartnerboerseAdministration {
 	}
 	
 	@Override
-	public void deleteProfil(Profil pro) throws IllegalArgumentException {
+	public void deleteProfil(int profilid) throws IllegalArgumentException {
 		
 		// TODO Auto-generated method stub
-		
-		//Aushwaleigenschaft
-				
-		//Freitexteigenschaft
-
-		//SuchprofilInfo
-
-		//Info
-
-		//Suchprofil
-
-		//Eigenschaft
+			
 		
 		//Kontaktsperre
 		
-		Vector<Kontaktsperre> sperre= getAllKontaktsperre(pro.getId());
+		Vector<Kontaktsperre> sperre= getAllKontaktsperre(profilid);
 		
 		for ( int i = 0; i < sperre.size(); i++) 
 		{
 			kontaktsperreMapper.deleteKontaktsperre(sperre.elementAt(i));
 			
-			
 		}
 		
-//		Vector <Kontaktsperre> alleKontaktsperrenEinesProfils = kontaktsperreMapper.getAllKontaktsperrenDesSperrenden(profilId_sperrender);
-//		for(int k = 0; k < alleKontaktsperrenEinesProfils.size(); k++) 
-//		{
-//			kontaktsperreMapper.deleteKontaktsperre(alleKontaktsperrenEinesProfils.size() k++) ;
-//		}
-}
-//		this.getAllKontaktsperre (profilId_sperrender) ;
-//		this.deleteKontaktsperre(sperre);
 		
 		//Merkzettel
+	
+		Vector<Merkzettel> merk= getAllMerkzettel(profilid);
+		
+		for ( int i = 0; i < merk.size(); i++) 
+		{
+			merkzettelMapper.deleteMerkzettel(merk.elementAt(i));
+			
+		}
 								
 		//Besuch
 		
-		//Profil
-//	}
+		Vector<Besuch> besuche= getAllBesuche(profilid);
+		
+		for ( int i = 0; i < besuche.size(); i++) 
+		{
+			besuchMapper.delete(besuche.elementAt(i));
+			
+		}
+	
+		//SuchprofilInfo
+		
+		Vector <Suchprofil> suchprofil = getSuchprofilbyProfilId(profilid);
+		Vector <Info> info = getInfoIdByProfilId(profilid);
+		Suchprofil_Info suchinfo = new Suchprofil_Info();
 
-		    // Anschließend den Kunden entfernen
+		for(int s = 0; s < suchprofil.size(); s++)
+		{
+			for(int i = 0; i < info.size(); i++)
+			{ 
+				 suchinfo = getAllSuchprofilInfos(suchprofil.get(s).getId(), info.get(i).getId());
+				
+				 
+				}
+			
+			suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
+		}		
+		
+		
+		//Suchprofil
+
+		Vector<Suchprofil> suchpro = getSuchprofilbyProfilId(profilid);
+		
+		for ( int i = 0; i < suchpro.size(); i++) 
+		{
+			suchprofilMapper.deleteProfil(suchpro.elementAt(i));
+			
+		}
+	
+		
+		//Info
+		
+		
+		//Aushwaleigenschaft
+		
+		
+				
+		//Freitexteigenschaft
+		
+		
+		
+		
+		//Eigenschaft
+		
+		
+	    
+
+		// Anschließend das Profil entfernen
 		  
-
+		profilMapper.deleteProfil(getProfilById(profilid));
+	}
+	
+	
 	
 	@Override
 	public Profil getProfilById(int id) throws IllegalArgumentException {
@@ -581,6 +710,30 @@ implements PartnerboerseAdministration {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	
+	public void  deleteBesuche(Besuch besuche) throws IllegalArgumentException {
+			
+			besuche.setBesuchenderNutzerID(0);
+			
+			besuche.setBesuchterNutzerID(0);
+			
+			// TODO Auto-generated method stub
+			
+			try { 
+				besuchMapper.update(besuche);
+				
+				besuchMapper.delete(besuche);
+				} 
+			catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+	}
+	
+	public Vector<Besuch> getAllBesuche (int besuchenderNutzerID) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return besuchMapper.getAllBesucheDesBesuchenden(besuchenderNutzerID);
+	}
 
 	public Vector<Profil> getUnvisitedProfiles(int profilid) throws IllegalArgumentException
 	{
@@ -615,6 +768,28 @@ implements PartnerboerseAdministration {
 	}
 	}
 	return sperrListe;
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public Vector<Suchprofil> getSuchprofilbyProfilId(int profilid) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return suchprofilMapper.getSuchprofilIdByProfilId(profilid);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public Vector<Info> getInfoIdByProfilId( int profilid) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return infoMapper.getInfoIdByProfilId(profilid);
+	}
+
+	@Override
+	public Vector<Kontaktsperre> getAllKontaktsperre() throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

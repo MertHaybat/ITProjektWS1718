@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
+import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class InfoMapper {
@@ -242,5 +243,52 @@ return null;
 		 */
 		return in;
 	}
+	
+	
+	
+	
+	
+	
+	public Vector<Info> getInfoIdByProfilId(int profilid) {
+		 
+	 	/**
+	 	 * Aufbau der DB Connection
+	 	 */
+	    Connection con = DBConnection.connection();
+	  
+	    Vector<Info> result = new Vector<Info>();
+	    
+	    try {
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE profilid=? ");
+	    	stmt.setInt(1, profilid);
+	      
+	    	ResultSet rs = stmt.executeQuery();
+	        
+	        /**
+	         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+	         */
+	        while (rs.next()) {
+	          Info info = new Info();
+	        
+
+	          info.setId(rs.getInt("id"));
+	          /**
+	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+	           */
+	          
+	          System.out.println("Funktioniert");
+	          
+	          result.addElement(info);
+	        }
+	      }
+	      catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+
+	      /**
+	       *  Ergebnisvektor zurückgeben
+	       */
+	      return result;
+ }
 
 }

@@ -7,10 +7,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -20,6 +20,7 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
+import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class Suchen extends VerticalPanel {
 	
@@ -36,7 +37,6 @@ public class Suchen extends VerticalPanel {
 	private TextBox tbhaarfarbe = new TextBox();
 	private TextBox tbreligion = new TextBox();
 	private TextBox tbkörpergröße = new TextBox();
-	private TextBox tbraucher = new TextBox();
 	private TextBox tbminalter = new TextBox();
 	private TextBox tbmaxalter = new TextBox();
 
@@ -65,11 +65,13 @@ public class Suchen extends VerticalPanel {
 	private FlexTable ft1 = new FlexTable();
 	
 	private VerticalPanel vpanel = new VerticalPanel();
+	
+	
 
 	
 	public Suchen() {
 
-		
+	      
 		ft1.setWidget(0, 0, lb1);
 		ft1.setWidget(0, 1, tbvorname);
 		ft1.setWidget(1, 0, lb2);
@@ -147,13 +149,21 @@ public class Suchen extends VerticalPanel {
 
 		}
 	
-//	public Suchen(final Suchprofil suchprofil){
-//	tbvorname.setValue(suchen.getVorname());
-//	tbnachname.setValue(suchen.getNachname());
-//	geburtsdatum.setValue(suchen.getGeburtsdatum());
-//	tbhaarfarbe.setValue(suchen.getHaarfarbe());
-//	tbreligion.setValue(suchen.getReligion());
-//	}
+	public Suchen(final Profil profil){
+	tbvorname.setValue(profil.getVorname());
+	tbnachname.setValue(profil.getNachname());
+	geburtsdatum.setValue(profil.getGeburtsdatum());
+	tbhaarfarbe.setValue(profil.getHaarfarbe());
+	tbreligion.setValue(profil.getReligion());
+	rbgeschlechtMännlich.setValue(profil.getGeschlecht());
+	rbgeschlechtWeiblich.setValue(profil.getGeschlecht());
+	rbraucher.setValue(profil.getRaucher());
+	rbraucheregal.setValue(profil.getRaucher());
+	rbnichtraucher.setValue(profil.getRaucher());
+
+	
+
+	}
 
 }
 

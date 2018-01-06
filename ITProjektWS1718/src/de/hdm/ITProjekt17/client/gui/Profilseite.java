@@ -44,6 +44,7 @@ public class Profilseite extends VerticalPanel{
 	private Label lb6 = new Label("Körpergröße: ");
 	private Label lb7 = new Label("Raucher: ");
 	private Label lb8 = new Label("Geschlecht: ");
+	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");
 	
 	private Button ok = new Button("Best�tigen");
 	private Button abbrechen = new Button("Abbrechen");
@@ -78,21 +79,23 @@ public class Profilseite extends VerticalPanel{
 
 		// Create a date picker
 		final DatePicker datepicker_geburtsdatum = new DatePicker();
-		
+		final Label text = new Label();
+
 		
 		 // Set the value in the text box when the user selects a date
 			datepicker_geburtsdatum.addValueChangeHandler(new ValueChangeHandler<Date>(){
 
-				final Label text = new Label();
 				@Override
 				public void onValueChange(ValueChangeEvent<Date> event) {
-					Date date = event.getValue();
-					String dateString = DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_TIME_MEDIUM).format(new Date());
-					text.setText(dateString);
+//					Date date = event.getValue();
+//		            String dateString = df.format(date);
+////		                    DateTimeFormat.getFormat("MM/dd/yyyy").format(date);
+//		                    text.setText(dateString);
 				}
 			});
 			
 		    datepicker_geburtsdatum.setValue(new Date(), true);
+		    
 		    
 		    ok.addClickHandler(new ClickHandler(){
 
@@ -137,22 +140,6 @@ public class Profilseite extends VerticalPanel{
 //		tbraucher.setValue(profil.getRaucher());
 //		tbgeschlecht.setValue(profil.getGeschlecht());
 		
-		// Create a date picker
-				final DatePicker datepicker_geburtsdatum = new DatePicker();
-				
-				
-			 // Set the value in the text box when the user selects a date
-				datepicker_geburtsdatum.addValueChangeHandler(new ValueChangeHandler<Date>(){
 
-					final Label text = new Label();
-					@Override
-					public void onValueChange(ValueChangeEvent<Date> event) {
-						Date date = event.getValue();
-						String dateString = DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_TIME_MEDIUM).format(new Date());
-						text.setText(dateString);
-					}
-				});
-				
-			    datepicker_geburtsdatum.setValue(new Date(), true);
 	}
 }

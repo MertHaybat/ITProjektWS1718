@@ -124,6 +124,55 @@ public class MerkzettelMapper {
 			  }
 			
 			/**
+			 * Löschen des Objekt Merkzettel in der Datenbank
+			 * @param merk
+			 */
+			public void deleteGemerkterAusMerkzettel(Merkzettel merk) {
+				/**
+				 * Aufbau der DB Connection
+				 */
+			    Connection con = DBConnection.connection();
+			    /**
+				 * Try und Catch gehören zum Exception Handling 
+				 * Try = Versuch erst dies 
+				 * Catch = Wenn Try nicht geht versuch es so ..
+				 */
+			    try {
+			    	/**
+				      * Durchführung der Löschoperation
+				      *
+				      */
+			     PreparedStatement stmt = con.prepareStatement("DELETE FROM merkzettel " + "WHERE profilid_gemerkter= ? ");
+			     stmt.setInt(1, merk.getProfilId_gemerkter());
+			     stmt.executeUpdate();
+		  
+		    }
+		    catch (SQLException e2) {
+		      e2.printStackTrace();
+		    }
+		  }
+			
+			/**
+			 * Löschen eines Merkzettels bei angabe von merkender und gemerkter Teilnehmer ID's.
+			 * @param profilId_merkender
+			 * @param profilId_gemerkter
+			 */
+			public void deleteByProfilIds(int profilId_merkender, int profilId_gemerkter) {
+			    Connection con = DBConnection.connection();
+
+			    try {
+			      Statement stmt = con.createStatement();
+			  
+			      stmt.executeUpdate("DELETE FROM merkzettel " + "WHERE profilId_merkender=" + profilId_merkender+" AND profilId_gemerkter="+profilId_gemerkter);
+
+			    }
+			    catch (SQLException e2) {
+			      e2.printStackTrace();
+			    }
+			  }
+
+			
+			/**
 			 * Mit der Methode GetAll werden alle Merkzettel in einem Ergebnis-Vektor namens Merkzettel gespeichert und zurückgegeben
 			 * @return
 			 */
@@ -256,6 +305,55 @@ public class MerkzettelMapper {
 					      return result;
 				 }
 			 	
+				 
+					/**
+					 * Mit der Methode GetAllMerkzettelDesMerkers werden alle Merkzettel eines identifizierbaren merkers in 
+					 * einem Ergebnis-Vektor namens Merkzettel gespeichert und zurückgegeben
+					 * @return
+					 */
+					 public Vector<Merkzettel> merkzettel_showGemerkteProfile(int profilId_gemerkter) {
+						 
+						 	/**
+						 	 * Aufbau der DB Connection
+						 	 */
+						    Connection con = DBConnection.connection();
+						  
+						    Vector<Merkzettel> result = new Vector<Merkzettel>();
+						    
+						    try {
+						    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilId_gemerkter=? ");
+						    	stmt.setInt(1, profilId_gemerkter);
+						      
+						    	ResultSet rs = stmt.executeQuery();
+						        
+						        /**
+						         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+						         */
+						        while (rs.next()) {
+						          Merkzettel merk = new Merkzettel();
+						        
+						          merk.setId(rs.getInt("id"));
+						          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
+						          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+						          /**
+						           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+						           */
+						          
+						          System.out.println("Degga funkt");
+						          
+						          result.addElement(merk);
+						        }
+						      }
+						      catch (SQLException e) {
+						        e.printStackTrace();
+						      }
+
+						      /**
+						       *  Ergebnisvektor zurückgeben
+						       */
+						      return result;
+					 }
+				 	
 			 	
 			 	
 			 	

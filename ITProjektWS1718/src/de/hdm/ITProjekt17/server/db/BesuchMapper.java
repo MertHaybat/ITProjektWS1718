@@ -120,6 +120,27 @@ public class BesuchMapper {
 			e2.printStackTrace();
 		}
 	}
+	
+	/**
+	 * BEsuche werden gelöscht durch beide Profil Ids vom besuchter und besuchender Nutzer.
+	 * @param besuchenderNutzerID
+	 * @param besuchterNutzerID
+	 */
+	public void deleteByProfilId(int besuchenderNutzerID, int besuchterNutzerID) {
+	    Connection con = DBConnection.connection();
+
+	    try {
+	      Statement stmt = con.createStatement();
+	  
+	      stmt.executeUpdate("DELETE FROM besuch " + "WHERE besuchenderNutzerID=" + besuchenderNutzerID+" AND besuchterNutzerID="+besuchterNutzerID);
+
+	    }
+	    catch (SQLException e2) {
+	      e2.printStackTrace();
+	    }
+	  }
+	
+	
 
 	/**
 		 * Diese Methode ermöglicht es Besuche aus der Datenbank, anhand deren ID auszulesen.

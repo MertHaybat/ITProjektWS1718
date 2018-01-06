@@ -269,8 +269,7 @@ public class SuchprofilMapper {
 						return null;
 					}
 					
-					
-					
+
 					public Vector<Suchprofil> getSuchprofilIdByProfilId(int profilid) {
 						 
 					 	/**
@@ -289,17 +288,22 @@ public class SuchprofilMapper {
 					        /**
 					         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
 					         */
-					        while (rs.next()) {
-					          Suchprofil such = new Suchprofil();
-					        
-					          such.setId(rs.getInt("id"));
-					        
+					       if (rs.next()) {
+					        	Suchprofil such = new Suchprofil();
+						          such.setId(rs.getInt("id"));
+						          such.setMinAlter(rs.getInt("minalter"));
+						          such.setMaxAlter(rs.getInt("maxalter"));
+						          such.setGeburtsdatum(rs.getDate("geburtsdatum"));
+						          such.setKoerpergroesse(rs.getInt("koerpergroesse"));
+						          such.setReligion(rs.getString("religion"));
+						          such.setHaarfarbe(rs.getString("haarfarbe"));
+						          such.setRaucher(rs.getBoolean("raucher"));
+						          
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */
 					          
-					          System.out.println("Funktioniert");
-					          
+					         
 					          result.addElement(such);
 					        }
 					      }

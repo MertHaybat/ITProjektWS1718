@@ -121,6 +121,26 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 			    }
 			  }
 			
+			
+			/**
+			 * Es wird eine Löschung durchgeführt bei dem beide ID angegeben werden.
+			 * Somit löscht sich auch die Sperre heraus.
+			 * @param profilId_sperrender
+			 * @param profilId_gesperrter
+			 */
+			public void deleteByProfilIds(int profilId_sperrender, int profilId_gesperrter) {
+			    Connection con = DBConnection.connection();
+
+			    try {
+			      Statement stmt = con.createStatement();
+			  
+			      stmt.executeUpdate("DELETE FROM kontaktsperre " + "WHERE profilId_sperrender=" + profilId_sperrender+" AND profilId_gesperrter="+profilId_gesperrter);
+
+			    }
+			    catch (SQLException e2) {
+			      e2.printStackTrace();
+			    }
+			  }
 
 			/**
 			 * Mit der Methode GetAll werden alle Kontaktsperre in einem Ergebnis-Vektor namens Kontaktsperre gespeichert und zurückgegeben

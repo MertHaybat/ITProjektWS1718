@@ -282,32 +282,39 @@ public class ProfilMapper {
 				 * Aufbau der Db Connection
 				 */
 				Connection con = DBConnection.connection();
+				Profil profil = new Profil();
 				/**
-				 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
+				 * Try und Catch gehï¿½ren zum Exception Handling Try = Versuch erst dies
 				 * Catch = Wenn Try nicht geht versuch es so ..
 				 */
 
 				try {
-					PreparedStatement stmt = con.prepareStatement("SELECT email FROM profil");
-					stmt.setString(1, email);
-
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery("SELECT * FROM profil " + "WHERE email='" + email + "*;");
+					
 					/**
-					 * Statement ausfüllen und an die DB senden
+					 * Statement ausfï¿½llen und an die DB senden
 					 */
-					ResultSet rs = stmt.executeQuery();
-
 					if (rs.next()) {
 						Profil pro = new Profil();
-						pro.setEmail(rs.getString("email"));
-
-						return pro;
+						pro.setId(rs.getInt("id"));
+		 				pro.setEmail(rs.getString("email"));
+		 				pro.setVorname(rs.getString("vorname"));
+		 				pro.setNachname(rs.getString("nachname"));
+		 				pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
+		 				pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
+		 				pro.setReligion(rs.getString("religion"));
+		 				pro.setHaarfarbe(rs.getString("haarfarbe"));
+		 				pro.setRaucher(rs.getBoolean("raucher"));
+		 				pro.setGeschlecht(rs.getBoolean("geschlecht"));
+	          			profil = pro;
 					}
 				} catch (SQLException e2) {
 					e2.printStackTrace();
 					return null;
 				}
 
-				return null;
+				return profil;
 			}
 
 }

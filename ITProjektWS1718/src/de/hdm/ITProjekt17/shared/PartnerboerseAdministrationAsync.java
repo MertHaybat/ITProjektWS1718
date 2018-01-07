@@ -20,7 +20,7 @@ public interface PartnerboerseAdministrationAsync {
 
 	void init(AsyncCallback<Void> callback);
 
-	void createAuswahleigenschaft(String wert, int eigenschaftid, AsyncCallback<Auswahleigenschaft> callback);
+	void createAuswahleigenschaft(String wert, AsyncCallback<Auswahleigenschaft> callback);
 
 	void save(Auswahleigenschaft aus, AsyncCallback<Void> callback);
 
@@ -42,7 +42,7 @@ public interface PartnerboerseAdministrationAsync {
 	void getAllEigenschaft(AsyncCallback<Vector<Eigenschaft>> callback);
 //_________________________________________________________________________________________________________________________	
 
-	void createFreitexteigenschaft(String wert, int eigenschaftid, AsyncCallback<Freitexteigenschaft> callback);
+	void createFreitexteigenschaft(String wert, AsyncCallback<Freitexteigenschaft> callback);
 
 	void save(Freitexteigenschaft frei, AsyncCallback<Void> callback);
 
@@ -63,7 +63,7 @@ public interface PartnerboerseAdministrationAsync {
 
 	void getAllInfo(AsyncCallback<Vector<Info>> callback);
 	
-	void getAllInfobyProfilid(int profilid, AsyncCallback<Vector<Info>> callback);
+	void getAllInfobyProfil(Profil pro, AsyncCallback<Vector<Info>> callback);
 	
 //_________________________________________________________________________________________________________________________
 

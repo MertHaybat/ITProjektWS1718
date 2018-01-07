@@ -57,10 +57,9 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public Auswahleigenschaft createAuswahleigenschaft(String wert, int eigenschaftid) throws IllegalArgumentException {
+	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		Auswahleigenschaft aus = new Auswahleigenschaft();
-		aus.setEigenschaftid(eigenschaftid);
 		aus.setWert(wert);
 		
 		aus.setId(1);
@@ -145,10 +144,9 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public Freitexteigenschaft createFreitexteigenschaft(String wert, int eigenschaftid) throws IllegalArgumentException {
+	public Freitexteigenschaft createFreitexteigenschaft(String wert) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		Freitexteigenschaft frei = new Freitexteigenschaft();
-		frei.setEigenschaftid(eigenschaftid);
 		frei.setWert(wert);
 		
 		frei.setId(1);
@@ -189,18 +187,19 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Vector<Info> getAllInfobyProfilid (int profilid) throws IllegalArgumentException {
+	public Vector<Info> getAllInfobyProfil(Profil pro) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return infoMapper.getInfoIdByProfilId(profilid);
+		return infoMapper.getInfoIdByProfilId(pro);
 	}
 	
 	@Override
-	public Info createInfo(int profilid, String text, int eigenschaftid) throws IllegalArgumentException {
+	public Info createInfo(int profilid, String text, int auswahleigenschaftid, int freitexteigenschaftid) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		Info in = new Info();
 		in.setProfilId(profilid);
 		in.setText(text);
-		in.setEigenschaftid(eigenschaftid);
+		in.setAuswahleigenschaftid(auswahleigenschaftid);
+		in.setFreitexteigenschaftid(freitexteigenschaftid);
 		
 		in.setId(1);
 		return this.infoMapper.insertInfo(in);
@@ -242,7 +241,7 @@ implements PartnerboerseAdministration {
 	
 	/**
 	 * Methode um ein einzelnes Profil auf die Sperrliste zu setzen.
-	 * LoggedIn steht für den Sperrenden User der andere Teilnehmer auf die Sperrliste setzt.
+	 * LoggedIn steht fÃ¼r den Sperrenden User der andere Teilnehmer auf die Sperrliste setzt.
 	 */
 	public void createKontaktsperre(int loggedinProfilID, int profilId_gesperrter) throws IllegalArgumentException
 	{
@@ -253,9 +252,9 @@ implements PartnerboerseAdministration {
 	}
 
 	/**
-	 * Methode zum Löschen eines Profils von der Merkliste.
+	 * Methode zum LÃ¶schen eines Profils von der Merkliste.
 	 * Alle Profile bleiben auch bei Blockierung eines Kontaktes in der Methode getAllProfils vorhanden.
-	 * Mit dieser wird das zu entsperrende Profil verglichen und bei Übereinstimmung die Blockierung aufgehoben.
+	 * Mit dieser wird das zu entsperrende Profil verglichen und bei Ãœbereinstimmung die Blockierung aufgehoben.
 	 */
 	public void deleteProfilVonKontaksperre(int loggedinProfiId, Vector<Profil> allProfils) throws IllegalArgumentException 
 	{
@@ -265,7 +264,7 @@ implements PartnerboerseAdministration {
 	}
 	
 	/**
-	 * Auslesen aller gesperrten Profile eines Profils. Über die Profil Id des Users.
+	 * Auslesen aller gesperrten Profile eines Profils. Ãœber die Profil Id des Users.
 	 * 
 	 */
 	public Vector<Profil> showBlockedContacts (int profilId) throws IllegalArgumentException 
@@ -302,7 +301,7 @@ implements PartnerboerseAdministration {
 
 
 	/**
-	 * Mit dieses Methode soll man mit dem Klick auf das Profil dieses anschauen können.
+	 * Mit dieses Methode soll man mit dem Klick auf das Profil dieses anschauen kÃ¶nnen.
 	 * @param loggedinProfilId
 	 * @param profilVonMerk
 	 * @return
@@ -313,7 +312,7 @@ implements PartnerboerseAdministration {
 	
 	/**
 	 * Mit diesere Methode werden alle Merkzettel anhand der Profil Id des Merkenden angezeigt.
-	 * DIes ist eine Hilfsmethode für andere Operationen in dieser Klasse.
+	 * DIes ist eine Hilfsmethode fÃ¼r andere Operationen in dieser Klasse.
 	 */
 	public Vector<Merkzettel> getAllMerkzettel ( int profilId_merkender) throws IllegalArgumentException {
 		
@@ -322,7 +321,7 @@ implements PartnerboerseAdministration {
 	
 	/**
 	 * Methode um ein einzelnes Profil auf den Merkzettel zu setzen.
-	 * LoggedIn steht für den Merkenden User der andere Teilnehmer auf seine Merkliste(Merkzettel) setzt.
+	 * LoggedIn steht fÃ¼r den Merkenden User der andere Teilnehmer auf seine Merkliste(Merkzettel) setzt.
 	 */
 	public void createMerzettel(int loggedinProfilID, int profilId_gemerkter) throws IllegalArgumentException
 	{
@@ -333,7 +332,7 @@ implements PartnerboerseAdministration {
 	}
 
 	/**
-	 * Methode zum Löschen eines Profils von der Merkliste.
+	 * Methode zum LÃ¶schen eines Profils von der Merkliste.
 	 */
 	public void deleteProfilVonMerkliste(int loggedinProfiId, Vector<Profil> profils) throws IllegalArgumentException 
 	{
@@ -396,8 +395,8 @@ implements PartnerboerseAdministration {
 	// Vergleiche deleteProfil(AP-Schicht)!!!!!!!!!!!!!!!!!
 	@Override
 	/**
-	 * Hier wird das Suchprofil gelöscht
-	 * Um das Suchprofil zu löschen, müssen erst die Daten aus der Tabelle Suchprofil_Info gelöscht werden um das Suchprofil löschen zu können
+	 * Hier wird das Suchprofil gelÃ¶scht
+	 * Um das Suchprofil zu lÃ¶schen, mÃ¼ssen erst die Daten aus der Tabelle Suchprofil_Info gelÃ¶scht werden um das Suchprofil lÃ¶schen zu kÃ¶nnen
 	 */
 	public void deleteSuchprofil(int profilid) throws IllegalArgumentException {
 		Vector <Suchprofil> suchprofil = getSuchprofilbyProfilId(profilid);
@@ -428,8 +427,8 @@ implements PartnerboerseAdministration {
 	}
 	
 	/**
-	 * Mit dieser Hilfsmethode können alle Suchprofile des einzelenen Teilnehmers herausgesucht und angezeigt werden.
-	 * Dies geschieht über die Profil Id des Users.
+	 * Mit dieser Hilfsmethode kÃ¶nnen alle Suchprofile des einzelenen Teilnehmers herausgesucht und angezeigt werden.
+	 * Dies geschieht Ã¼ber die Profil Id des Users.
 	 * @param profilId
 	 * @return
 	 */
@@ -440,7 +439,7 @@ implements PartnerboerseAdministration {
 	
 
 	/**
-	 * Mit dieser Methode werden alle Suchprofile über die Suchprofil Id aus der Db heraus herausgefiltert.
+	 * Mit dieser Methode werden alle Suchprofile Ã¼ber die Suchprofil Id aus der Db heraus herausgefiltert.
 	 */
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException {
 		
@@ -448,7 +447,7 @@ implements PartnerboerseAdministration {
 	}
 
 	/**
-	 * Diese Methode zeigt alle Suchprofile der Partnerbörse an.
+	 * Diese Methode zeigt alle Suchprofile der PartnerbÃ¶rse an.
 	 */
 	public Vector<Suchprofil> getAllSuchprofil() throws IllegalArgumentException {
 		
@@ -456,7 +455,7 @@ implements PartnerboerseAdministration {
 	}
 	
 	/**
-	 * Es ist möglich ein Suchprofil des einzelnen Users anhand der Profil ID heauszusuchen.
+	 * Es ist mÃ¶glich ein Suchprofil des einzelnen Users anhand der Profil ID heauszusuchen.
 	 */
 	public Vector<Suchprofil> getSuchprofilbyProfilId(int profilid) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -514,7 +513,7 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////Profil/////////////////////////////////////////////////////////////////////////////
 	/**
-	 * Auslesen aller Profil-Objekte der Partnerbörse in der Datenbank.
+	 * Auslesen aller Profil-Objekte der PartnerbÃ¶rse in der Datenbank.
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
@@ -585,14 +584,14 @@ implements PartnerboerseAdministration {
 		
 		} catch (Exception e){
 			
-			System.out.println("Die Aktualisierung konnte nicht durchgeführt werden");
+			System.out.println("Die Aktualisierung konnte nicht durchgefÃ¼hrt werden");
 		}
 		return pro;
 
 	}
 	
 	/**
-	 * Hier wird ein erstelltes Profil gänzlich aus der Partnerbörse entfernt mit all seinen Daten und Informationen.
+	 * Hier wird ein erstelltes Profil gÃ¤nzlich aus der PartnerbÃ¶rse entfernt mit all seinen Daten und Informationen.
 	 */
 	public void deleteProfil(int profilid) throws IllegalArgumentException {
 
@@ -677,7 +676,7 @@ implements PartnerboerseAdministration {
 		
 	    
 
-		// Anschließend das Profil entfernen
+		// AnschlieÃŸend das Profil entfernen
 		  
 		profilMapper.deleteProfil(getProfilById(profilid));
 	}
@@ -685,14 +684,14 @@ implements PartnerboerseAdministration {
 	
 	
 	/**
-	 * Es werden Profile der Partnerbörse anhand der Profil Id aus der Datenbnak gefiltert.
+	 * Es werden Profile der PartnerbÃ¶rse anhand der Profil Id aus der Datenbnak gefiltert.
 	 */
 	public Profil getProfilById(int id) throws IllegalArgumentException {
 		return this.profilMapper.findByKey(id);
 	}
 	
 	/**
-	 * Hier werden alle Profile der Partnerbörse herausgefiltert die sich in der Datenbank befinden.
+	 * Hier werden alle Profile der PartnerbÃ¶rse herausgefiltert die sich in der Datenbank befinden.
 	 */
 	public Vector<Profil> getAllProfil() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -701,7 +700,7 @@ implements PartnerboerseAdministration {
 	}
 	
 	/**
-	 * Diese Methode ist für den Login wichtig, da sie prüft ob eine Gmal bereits in der Datenbank vorhanden ist.
+	 * Diese Methode ist fÃ¼r den Login wichtig, da sie prÃ¼ft ob eine Gmal bereits in der Datenbank vorhanden ist.
 	 * Gmail ist genau so einzigartig wie eine ID, denn diese gibt es nur einmal.
 	 * @param email
 	 * @return
@@ -745,7 +744,7 @@ implements PartnerboerseAdministration {
 	/////////////////////////////////////Besuch////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Methode zum Löschen von Besuchen.
+	 * Methode zum LÃ¶schen von Besuchen.
 	 */
 	public void deleteBesuche(int loggedinProfiId, Vector<Profil> profils) throws IllegalArgumentException 
 	{
@@ -761,7 +760,7 @@ implements PartnerboerseAdministration {
 
 	/**
 	 * Hier werden nicht besuchte Profile angezeigt.
-	 * Dies geschieht durch Prüfung, welche Profile schon besucht wurden, welche nicht besucht wurden und welche gesperrt sind.
+	 * Dies geschieht durch PrÃ¼fung, welche Profile schon besucht wurden, welche nicht besucht wurden und welche gesperrt sind.
 	 * @param profilid
 	 * @return
 	 * @throws IllegalArgumentException
@@ -778,7 +777,7 @@ implements PartnerboerseAdministration {
 		}
 		for(int unVisited = 0; unVisited < unvisitedProfiles.size(); unVisited++)
 		{
-			if(sperrPrüfung(profilid, unvisitedProfiles.get(unVisited).getId()) == true)
+			if(sperrPrÃ¼fung(profilid, unvisitedProfiles.get(unVisited).getId()) == true)
 			{
 				unvisitedProfiles.remove(unVisited);
 			}
@@ -788,12 +787,12 @@ implements PartnerboerseAdministration {
 	}
 	
 	/**
-	 * Diese Methode wird für die Methode getUnvisitedProfils benötigt um zu prüfen welche Profile gesperrt sind.
+	 * Diese Methode wird fÃ¼r die Methode getUnvisitedProfils benÃ¶tigt um zu prÃ¼fen welche Profile gesperrt sind.
 	 * @param profilId_sperrender
 	 * @param profilId_gesperrter
 	 * @return
 	 */
-	public boolean sperrPrüfung(int profilId_sperrender, int profilId_gesperrter)
+	public boolean sperrPrÃ¼fung(int profilId_sperrender, int profilId_gesperrter)
 	{
 	Vector<Kontaktsperre> sperrL = getAllKontaktsperre(profilId_sperrender);
 	boolean sperrListe = false;
@@ -843,7 +842,7 @@ implements PartnerboerseAdministration {
 //	}
 //	for(int i = 0; i < unvisitedProfiles.size(); i++)
 //	{
-//		if(sperrPrüfung(profilid, unvisitedProfiles.get(i).getId()) == true)
+//		if(sperrPrÃ¼fung(profilid, unvisitedProfiles.get(i).getId()) == true)
 //		{
 //			unvisitedProfiles.remove(i);
 //		}
@@ -852,7 +851,7 @@ implements PartnerboerseAdministration {
 //	return unvisitedProfiles;
 //}
 //
-//public boolean sperrPrüfung(int profilId_sperrender, int profilId_gesperrter)
+//public boolean sperrPrÃ¼fung(int profilId_sperrender, int profilId_gesperrter)
 //{
 //Vector<Kontaktsperre> sperrL = getAllKontaktsperre(profilId_sperrender);
 //boolean sperrListe = false;

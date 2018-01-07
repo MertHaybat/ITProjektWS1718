@@ -255,7 +255,7 @@ return null;
 	
 	
 	
-	public Vector<Info> getInfoIdByProfilId(int profilid) {
+	public Vector<Info> getInfoIdByProfilId(Profil pro) {
 		 
 	 	/**
 	 	 * Aufbau der DB Connection
@@ -266,7 +266,7 @@ return null;
 	    
 	    try {
 	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE profilid=? ");
-	    	stmt.setInt(1, profilid);
+	    	stmt.setInt(1, pro.getId());
 	      
 	    	ResultSet rs = stmt.executeQuery();
 	        

@@ -21,7 +21,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	
-	public Auswahleigenschaft createAuswahleigenschaft(String wert, int eigenschaftid) throws IllegalArgumentException;
+	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException;
 	public void save(Auswahleigenschaft aus) throws IllegalArgumentException;
 	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException;
 	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException;
@@ -33,7 +33,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException;
 	public Vector <Eigenschaft> getAllEigenschaft() throws IllegalArgumentException;
 	
-	public Freitexteigenschaft createFreitexteigenschaft(String wert, int eigenschaftid) throws IllegalArgumentException;
+	public Freitexteigenschaft createFreitexteigenschaft(String wert) throws IllegalArgumentException;
 	public void save(Freitexteigenschaft frei) throws IllegalArgumentException;
 	public void delete(Freitexteigenschaft frei) throws IllegalArgumentException;
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException;
@@ -44,14 +44,14 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public void delete(Info in) throws IllegalArgumentException;
 	public Info findByKeyInfo(int id) throws IllegalArgumentException;
 	public Vector <Info> getAllInfo() throws IllegalArgumentException;
-	public Vector<Info> getAllInfobyProfilid (int profilid) throws IllegalArgumentException; 
+	public Vector<Info> getAllInfobyProfil(Profil pro) throws IllegalArgumentException; 
 	
 	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException;
 	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException;
 	public void deleteKontaktsperre(Kontaktsperre sperre) throws IllegalArgumentException;
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
 	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
-	public void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
+	public void kontaktsperreHinzufÃ¼gen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
 	
 	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;

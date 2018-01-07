@@ -3,7 +3,7 @@ package de.hdm.ITProjekt17.shared.bo;
 import java.util.Date;
 
 /**
- * Realisierung eines exemplarischen Profils der Partnerbörse. 
+ * Realisierung eines exemplarischen Profils der PartnerbÃ¶rse. 
  * @author DennisLehle
  * @author Mert
  *
@@ -16,7 +16,7 @@ public class Profil extends BusinessObject {
 	//-----------Variablen-der-Klasse-Profil-----------------------
 	
 	/**
-	 * Variable Geschlecht im Profil; Gibt an, ob die Person weiblich oder männlich ist
+	 * Variable Geschlecht im Profil; Gibt an, ob die Person weiblich oder mÃ¤nnlich ist
 	 */
 	private boolean geschlecht = false;
 	
@@ -39,7 +39,7 @@ public class Profil extends BusinessObject {
 	private Date geburtsdatum = null;
 	
 	/**
-	 * Variable Körpergrösse im Profil; Gibt die Grösse der Person an.
+	 * Variable KÃ¶rpergrÃ¶sse im Profil; Gibt die GrÃ¶sse der Person an.
 	 */
 	private int koerpergroesse = 0;
 	
@@ -60,7 +60,7 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Raucher im Profil; Gibt an, ob die Person raucht oder nicht.
 	 */
-	private boolean raucher = false;
+	private String raucher = "";
 	/**
 	 * Auslesen der Variable nachname
 	 * @return
@@ -122,7 +122,7 @@ public class Profil extends BusinessObject {
 	}
 	
 	/**
-	 * Auslesen der Variable Körpergrösse.
+	 * Auslesen der Variable KÃ¶rpergrÃ¶sse.
 	 * @return
 	 */
 	public int getKoerpergroesse(){
@@ -148,7 +148,7 @@ public class Profil extends BusinessObject {
 	 * Auslesen der Variable Raucher.
 	 * @return
 	 */
-	public boolean getRaucher() {
+	public String getRaucher() {
 		return this.raucher;
 	}
 	
@@ -204,7 +204,7 @@ public class Profil extends BusinessObject {
 	}
 	
 	/**
-	 * Setzen der Variable Körpergrösse.
+	 * Setzen der Variable KÃ¶rpergrÃ¶sse.
 	 * @param koerpergroesse
 	 */
 	public void setKoerpergroesse(int koerpergroesse){
@@ -222,7 +222,7 @@ public class Profil extends BusinessObject {
 	 * Setzen der Variable Raucher
 	 * @param raucher
 	 */
-	public void setRaucher(boolean raucher) {
+	public void setRaucher(String raucher) {
 		this.raucher = raucher;
 	}
 	
@@ -241,7 +241,7 @@ public class Profil extends BusinessObject {
 					" Nachname: #" + this.getNachname() + 
 					" Geburtsdatum: #" + this.getGeburtsdatum() + 
 					" Haarfarbe: #" + this.getHaarfarbe() + 
-					" Körpergröße: #" + this.getKoerpergroesse() + 
+					" KÃ¶rpergrÃ¶ÃŸe: #" + this.getKoerpergroesse() + 
 					" Religion: #" + this.getReligion() + 
 					" Raucher: #" + this.getRaucher() +
 					" Geschlecht: #" + this.getGeschlecht();

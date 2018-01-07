@@ -69,8 +69,19 @@ public class Suchen extends VerticalPanel {
 	
 
 	
-	public Suchen() {
+	public Suchen(final Profil profil){
+	tbvorname.setValue(profil.getVorname());
+	tbnachname.setValue(profil.getNachname());
+	geburtsdatum.setValue(profil.getGeburtsdatum());
+	tbhaarfarbe.setValue(profil.getHaarfarbe());
+	tbreligion.setValue(profil.getReligion());
+	rbgeschlechtMännlich.setValue(profil.getGeschlecht());
+	rbgeschlechtWeiblich.setValue(profil.getGeschlecht());
+//	rbraucher.setValue(profil.getRaucher());
+//	rbraucheregal.setValue(profil.getRaucher());
+//	rbnichtraucher.setValue(profil.getRaucher());
 
+	
 	      
 		ft1.setWidget(0, 0, lb1);
 		ft1.setWidget(0, 1, tbvorname);
@@ -149,21 +160,7 @@ public class Suchen extends VerticalPanel {
 
 		}
 	
-	public Suchen(final Profil profil){
-	tbvorname.setValue(profil.getVorname());
-	tbnachname.setValue(profil.getNachname());
-	geburtsdatum.setValue(profil.getGeburtsdatum());
-	tbhaarfarbe.setValue(profil.getHaarfarbe());
-	tbreligion.setValue(profil.getReligion());
-	rbgeschlechtMännlich.setValue(profil.getGeschlecht());
-	rbgeschlechtWeiblich.setValue(profil.getGeschlecht());
-	rbraucher.setValue(profil.getRaucher());
-	rbraucheregal.setValue(profil.getRaucher());
-	rbnichtraucher.setValue(profil.getRaucher());
 
-	
-
-	}
 
 }
 

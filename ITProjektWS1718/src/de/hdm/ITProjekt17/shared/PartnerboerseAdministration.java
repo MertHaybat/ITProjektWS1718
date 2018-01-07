@@ -51,8 +51,11 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public void deleteKontaktsperre(Kontaktsperre sperre, Profil pro) throws IllegalArgumentException;
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
 	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
+
 	Vector<Kontaktsperre> getAllKontaktsperre(Kontaktsperre sprr) throws IllegalArgumentException;
-	
+
+	//public void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
+
 	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;
 	public void deleteMerkzettel(Merkzettel merk, Profil pro) throws IllegalArgumentException;
@@ -66,6 +69,9 @@ public interface PartnerboerseAdministration extends RemoteService {
 			String haarfarbe, boolean raucher) throws IllegalArgumentException;
 	public Profil getProfilById (int id) throws IllegalArgumentException;
 	public Vector <Profil> getAllProfil() throws IllegalArgumentException;
+	public Profil checkProfil(String email) throws IllegalArgumentException;
+	
+	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) throws IllegalArgumentException;
 	
 	public Suchprofil createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, boolean raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException;

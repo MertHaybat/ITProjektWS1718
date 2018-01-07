@@ -1,5 +1,7 @@
 package de.hdm.ITProjekt17.server.report;
 
+import java.util.Vector;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import de.hdm.ITProjekt17.server.PartnerboerseAdministrationImpl;
@@ -10,14 +12,15 @@ import de.hdm.ITProjekt17.shared.report.*;
 
 /**
  * Implementierung des ReportGenerator Interfaces.
- * Technische Relaisierung wie bei PartnerboerseAdministrationImpl (RPC-Fähigkeit für Übermittlung zwischen CLient und Server)
+ * Technische Relaisierung wie bei PartnerboerseAdministrationImpl (RPC-FÃ¤higkeit fÃ¼r Ãœbermittlung zwischen CLient und Server)
  * @author Dennis Lehle
  *
  */
+@SuppressWarnings("serial")
 public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportGenerator{
 	
 	/**
-	 * Der ReportGenerator benötigt Zugriff auf die PartnerboerseAdministrations Klasse,
+	 * Der ReportGenerator benÃ¶tigt Zugriff auf die PartnerboerseAdministrations Klasse,
 	 * weil diese den Zugriff auf die BusinesObjekte hat.
 	 */
 	private PartnerboerseAdministration partnerboerseadministration = null;
@@ -33,11 +36,11 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	  }
 	
 	/**
-	 * Initialisierungemethode -> Schau Erklärung ReportGeneratorImpl.
+	 * Initialisierungemethode -> Schau ErklÃ¤rung ReportGeneratorImpl.
 	 */
 	public void init() throws IllegalArgumentException {
 	    /*
-	     * Ein ReportGeneratorImpl-Objekt instantiiert für seinen Eigenbedarf eine
+	     * Ein ReportGeneratorImpl-Objekt instantiiert fÃ¼r seinen Eigenbedarf eine
 	     * PartnerboerseAdministrationImpl-Instanz.
 	     */
 	    PartnerboerseAdministrationImpl a = new PartnerboerseAdministrationImpl();
@@ -46,7 +49,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	  }
 	
 	/**
-	 * Auslesen zugeh�riger PartnerAdministration (interner Gebrauch)
+	 * Auslesen zugehöriger PartnerAdministration (interner Gebrauch)
 	 * @return partnerboerseadministration
 	 */
 	protected PartnerboerseAdministration getPartnerboerse(){
@@ -72,10 +75,19 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		topRow.addColumn(new Column(pro.getVorname() + " " + pro.getNachname()));
 		topRow.addColumn(new Column(scoreString));
 		
-//		Auslesen s�mtlicher Pflichattribute
+//		Auslesen sämtlicher Pflichattribute
+		Row emailRow = new Row();
+		emailRow.addColumn(new Column("Email"));
+		emailRow.addColumn(new Column(pro.getEmail()));
+		Row geburtsdatumRow = new Row();
+		geburtsdatumRow.addColumn(new Column("Geburtsdatum"));
+		geburtsdatumRow.addColumn(new Column(String.valueOf(pro.getGeburtsdatum())));
+		Row koerpergroesseRow = new Row();
+		koerpergroesseRow.addColumn(new Column("Körpergröße"));
+		koerpergroesseRow.addColumn(new Column(String.valueOf(pro.getKoerpergroesse())));
 		Row geschlechtRow = new Row();
 		geschlechtRow.addColumn(new Column("Geschlecht"));
-//		geschlechtRow.addColumn(new Column(pro.getGeschlecht()).toString());
+		geschlechtRow.addColumn(new Column(String.valueOf(pro.getGeschlecht())));
 		Row haarfarbeRow = new Row();
 		haarfarbeRow.addColumn(new Column("Haarfarbe"));
 		haarfarbeRow.addColumn(new Column(pro.getHaarfarbe()));
@@ -84,17 +96,22 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		religionRow.addColumn(new Column(pro.getReligion()));
 		Row raucherRow = new Row();
 		raucherRow.addColumn(new Column("Raucher"));
-//		raucherRow.addColumn(new Column(pro.getRaucher()).toString());
+		raucherRow.addColumn(new Column(pro.getRaucher()));
 		
+		result.addRow(emailRow);
+		result.addRow(geburtsdatumRow);
+		result.addRow(koerpergroesseRow);
 		result.addRow(geschlechtRow);
 		result.addRow(haarfarbeRow);
 		result.addRow(religionRow);
 		result.addRow(raucherRow);
 		return null;
 		
-		/* Auslesen aller Infos des Profils
+		/** Auslesen aller Infos des Profils
 		 * 
 		 */
+		
+		Vector <Info> allInfos = partnerboerseadministration.getAllInfobyProfilid(pro);
 		
 //		Vector<Info> infos = partnerboerseadministration.;
 	}

@@ -262,7 +262,7 @@ public class MerkzettelMapper {
 				 * einem Ergebnis-Vektor namens Merkzettel gespeichert und zurückgegeben
 				 * @return
 				 */
-				 public Vector<Merkzettel> getAllMerkezettelDesMerkers(int profilId_merkender) {
+				 public Vector<Merkzettel> getAllMerkezettelDesMerkers(Merkzettel merk) {
 					 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -273,7 +273,7 @@ public class MerkzettelMapper {
 					    
 					    try {
 					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilId_merkender=? ");
-					    	stmt.setInt(1, profilId_merkender);
+					    	stmt.setInt(1, merk.getProfilId_merkender());
 					      
 					    	ResultSet rs = stmt.executeQuery();
 					        
@@ -281,11 +281,11 @@ public class MerkzettelMapper {
 					         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
 					         */
 					        while (rs.next()) {
-					          Merkzettel merk = new Merkzettel();
+					          Merkzettel merke = new Merkzettel();
 					        
-					          merk.setId(rs.getInt("id"));
-					          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
-					          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+					          merke.setId(rs.getInt("id"));
+					          merke.setProfilId_merkender(rs.getInt("profilId_merkender"));
+					          merke.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */

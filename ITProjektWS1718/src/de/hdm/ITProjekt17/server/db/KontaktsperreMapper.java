@@ -189,7 +189,7 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 				 * einem Ergebnis-Vektor namens Kontaktsperre gespeichert und zurückgegeben
 				 * @return
 				 */
-				 public Vector<Kontaktsperre> getAllKontaktsperrenDesSperrenden(int profilId_sperrender) {
+				 public Vector<Kontaktsperre> getAllKontaktsperrenDesSperrenden(Kontaktsperre sperre) {
 					 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -200,7 +200,7 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 					    
 					    try {
 					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre WHERE profilId_sperrender=? ");
-					    	stmt.setInt(1, profilId_sperrender);
+					    	stmt.setInt(1, sperre.getProfilId_sperrender());
 					      
 					    	ResultSet rs = stmt.executeQuery();
 					        
@@ -208,11 +208,11 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 					         * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
 					         */
 					        while (rs.next()) {
-					          Kontaktsperre sperre = new Kontaktsperre();
+					          Kontaktsperre spe = new Kontaktsperre();
 					        
-					          sperre.setId(rs.getInt("id"));
-					          sperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-					          sperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+					          spe.setId(rs.getInt("id"));
+					          spe.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
+					          spe.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */

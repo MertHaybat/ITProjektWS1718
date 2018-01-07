@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Besuch;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
+import de.hdm.ITProjekt17.shared.bo.Profil;
 
 /**
  * Die Mapper-Klasse stellt Methoden zur Verfügung die
@@ -149,7 +150,7 @@ public class BesuchMapper {
 		 * @return besuche
 		 */
 	  
-	  public Vector<Besuch> findByKey(int profilid) {
+	  public Vector<Besuch> findByKey(int besuchenderNutzerID) {
 
 		    Connection con = DBConnection.connection();
 
@@ -157,7 +158,7 @@ public class BesuchMapper {
 
 		    try {
 		    PreparedStatement stmt = con.prepareStatement ("SELECT * FROM besuch "
-		          + "WHERE besuchendernutzer=" + profilid +" ORDER BY besuchid");
+		          + "WHERE besuchenderNutzerID=" + besuchenderNutzerID +" ORDER BY besuchid");
 		     
 
 		      ResultSet rs = stmt.executeQuery();
@@ -165,8 +166,8 @@ public class BesuchMapper {
 		      	while (rs.next()) {
 		        Besuch besuche = new Besuch();
 		        besuche.setId(rs.getInt("besuchid"));
-		        besuche.setBesuchenderNutzerID(rs.getInt("besuchendernutzer"));
-		        besuche.setBesuchterNutzerID(rs.getInt("besuchternutzer"));
+		        besuche.setBesuchenderNutzerID(rs.getInt("besuchenderNutzerID"));
+		        besuche.setBesuchterNutzerID(rs.getInt("besuchterNutzerID"));
 
 		        
 		        besuch.addElement(besuche);
@@ -180,7 +181,9 @@ public class BesuchMapper {
 		  }
 
 	  
-	  public Vector<Besuch> getAllBesucheDesBesuchenden(int besuchenderNutzerID) {
+	  
+	  
+	  public Vector<Besuch> getAllBesucheDesBesuchenden(Besuch besuch) {
 			 
 		 	/**
 		 	 * Aufbau der DB Connection
@@ -191,7 +194,7 @@ public class BesuchMapper {
 		    
 		    try {
 		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE  besuchenderNutzerID=? ");
-		    	stmt.setInt(1,  besuchenderNutzerID);
+		    	stmt.setInt(1, besuch.getBesuchenderNutzerID());
 		      
 		    	ResultSet rs = stmt.executeQuery();
 		        
@@ -208,8 +211,7 @@ public class BesuchMapper {
 		           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 		           */
 		          
-		          System.out.println("Degga funkt");
-		          
+		      
 		          result.addElement(besuche);
 		        }
 		      }
@@ -222,6 +224,8 @@ public class BesuchMapper {
 		       */
 		      return result;
 	 }
+	  
+	  
 	  public Besuch update(Besuch besuche) {
 		 	String sql = "UPDATE besuch SET  besuchenderNutzerID=?, besuchterNutzerID=? WHERE id =?";
 		 	/**

@@ -71,13 +71,16 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void save(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 
-	void deleteKontaktsperre(Kontaktsperre sperre, AsyncCallback<Void> callback);
+	void deleteKontaktsperre(Kontaktsperre sperre,Profil pro, AsyncCallback<Void> callback);
 	
 	void findById(int id, AsyncCallback<Kontaktsperre> callback);
 	
 	void getAllKontaktsperre(int profilId_sperrender, AsyncCallback<Vector<Kontaktsperre>> callback);
 	
-	void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter, AsyncCallback<Void> callback);
+	void getAllKontaktsperre(Kontaktsperre sprr, AsyncCallback<Vector<Kontaktsperre>> callback);
+
+	void getAllKontaktsperre(AsyncCallback<Vector<Kontaktsperre>> callback);
+
 
 	
 
@@ -86,7 +89,7 @@ public interface PartnerboerseAdministrationAsync {
 
 	void save(Merkzettel merk, AsyncCallback<Void> callback);
 
-	void deleteMerkzettel(Merkzettel merk, AsyncCallback<Void> callback);
+	void deleteMerkzettel(Merkzettel merk, Profil pro, AsyncCallback<Void> callback);
 
 	void findByKey(int id, AsyncCallback<Merkzettel> callback);
 	
@@ -129,7 +132,9 @@ void createSuchprofil(String vorname, String nachname, Date geburtsdatum, int ko
 	
 	
 	
-	void getAllKontaktsperre(AsyncCallback<Vector<Kontaktsperre>> callback);
+	
+
+	
 
 
 

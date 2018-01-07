@@ -48,14 +48,14 @@ public interface PartnerboerseAdministration extends RemoteService {
 	
 	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException;
 	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException;
-	public void deleteKontaktsperre(Kontaktsperre sperre) throws IllegalArgumentException;
+	public void deleteKontaktsperre(Kontaktsperre sperre, Profil pro) throws IllegalArgumentException;
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
 	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
-	public void kontaktsperreHinzufÃ¼gen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
+	Vector<Kontaktsperre> getAllKontaktsperre(Kontaktsperre sprr) throws IllegalArgumentException;
 	
 	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;
-	public void deleteMerkzettel(Merkzettel merk) throws IllegalArgumentException;
+	public void deleteMerkzettel(Merkzettel merk, Profil pro) throws IllegalArgumentException;
 	public Merkzettel findByKey (int id) throws IllegalArgumentException; 
 	public Vector <Merkzettel> getAllMerkzettel(int profilId_merkender) throws IllegalArgumentException;
 	
@@ -82,5 +82,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 ///////
 //	Profil save(Profil pro);
 ///////
+
+
 
 }

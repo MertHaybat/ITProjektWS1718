@@ -51,7 +51,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public void deleteKontaktsperre(Kontaktsperre sperre) throws IllegalArgumentException;
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
 	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
-	public void kontaktsperreHinzufÃ¼gen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
+	public void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
 	
 	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;

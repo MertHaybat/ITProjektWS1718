@@ -22,10 +22,9 @@ public class Topbar extends VerticalPanel{
 	
 	private Startseite startseite = new Startseite();
 //	private Platzhalter platzhalter = new Platzhalter();
-	private Suchen suchen = new Suchen();
 	private Impressum impressum = new Impressum();
 	
-	public Topbar(Profil profil){
+	public Topbar(final Profil profil){
 		btn1.setStylePrimaryName("topbarbutton");
 		btn2.setStylePrimaryName("topbarbutton");
 		btn3.setStylePrimaryName("topbarbutton");
@@ -60,7 +59,7 @@ public class Topbar extends VerticalPanel{
 			@Override
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(suchen);
+			RootPanel.get("Details").add(new Suchen(profil));
 			}
 			
 		});

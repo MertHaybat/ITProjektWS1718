@@ -1,6 +1,5 @@
 package de.hdm.ITProjekt17.client.gui;
 
-
 import java.util.Date;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -8,8 +7,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
@@ -23,10 +20,10 @@ import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
-public class Profilseite extends VerticalPanel{
+public class Info extends VerticalPanel{
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
-	
+
 	private TextBox tbvorname = new TextBox();
 	private TextBox tbnachname = new TextBox();
 	private DateBox geburtsdatum = new DateBox();
@@ -46,16 +43,22 @@ public class Profilseite extends VerticalPanel{
 	private Label lb8 = new Label("Geschlecht: ");
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");
 	
-	private Button ok = new Button("Bestätigen");
-	private Button abbrechen = new Button("Abbrechen");
-	private Button infoEigenschaftenAnzeigen = new Button ("weitere Profilinformationen anzeigen");
+	private Button bearbeiten = new Button("bearbeiten");
 	
 	private FlexTable ft1 = new FlexTable();
 
 	private VerticalPanel vpanel = new VerticalPanel();
 	
-	public Profilseite(){
-		Window.alert("Willkommen auf MOFOS. Tragen Sie bitte nachfolgend die Daten zu Ihrer Person ein.");
+	public Info(final Profil profil) {
+		tbvorname.setValue(profil.getVorname());
+		tbnachname.setValue(profil.getNachname());
+		geburtsdatum.setValue(profil.getGeburtsdatum());
+		tbhaarfarbe.setValue(profil.getHaarfarbe());
+		tbreligion.setValue(profil.getReligion());
+		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
+		tbraucher.setValue(profil.getRaucher());
+		tbgeschlecht.setValue(String.valueOf(profil.getGeschlecht()));
+		
 		
 		ft1.setWidget(0, 0, lb1);
 		ft1.setWidget(0, 1, tbvorname);
@@ -72,13 +75,11 @@ public class Profilseite extends VerticalPanel{
 		ft1.setWidget(6, 0, lb7);
 		ft1.setWidget(6, 1, tbraucher);
 		ft1.setWidget(7, 0, lb8);
-		ft1.setWidget(7, 1, tbgeschlecht);
-		ft1.setWidget(8, 0, ok);
-		ft1.setWidget(8, 1, abbrechen);
-		ft1.setWidget(8, 2, infoEigenschaftenAnzeigen);
+		ft1.setWidget(7, 1, tbgeschlecht);	
+		ft1.setWidget(8, 1, bearbeiten);
 		vpanel.add(ft1);
 		this.add(vpanel);
-
+		
 		// Create a date picker
 		final DatePicker datepicker_geburtsdatum = new DatePicker();
 		final Label text = new Label();
@@ -98,62 +99,22 @@ public class Profilseite extends VerticalPanel{
 			
 		    datepicker_geburtsdatum.setValue(new Date(), true);
 		    
-		    
-		    ok.addClickHandler(new ClickHandler(){
+		    bearbeiten.addClickHandler(new ClickHandler(){
 
 				@Override
 				public void onClick(ClickEvent event) {
-//					
-//					pbverwaltung.createProfil(tbvorname.getValue(), tbnachname.getValue(), geburtsdatum.getValue(), 
-//							Integer.parseInt(tbkörpergröße.getValue()),
-//							tbreligion.getValue(), tbhaarfarbe.getValue(), Boolean.parseBoolean(tbraucher.getValue()), new AsyncCallback<Profil>(){
-//
-//								@Override
-//								public void onFailure(Throwable caught) {
-//									// TODO Auto-generated method stub
-//									
-//								}
-//
-//								@Override
-//								public void onSuccess(Profil result) {
-//									RootPanel.get("Details").clear();
-//									RootPanel.get("Details").add(new Profilseite(result));
-//								}
-//
-//							
-//						
-//					});
+					// TODO Auto-generated method stub
 					
+					RootPanel.get("Details").clear();
+					RootPanel.get("Details").add(new Profilseite(profil));
 				}
+		    	
 		    	
 		    });
 		    
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(this);
+		}
+	
 
-		
-		RootPanel.get("Details").clear();
-		RootPanel.get("Details").add(this);
-	}
-	
-	public Profilseite(final Profil profil){
-		tbvorname.setValue(profil.getVorname());
-		tbnachname.setValue(profil.getNachname());
-		geburtsdatum.setValue(profil.getGeburtsdatum());
-		tbhaarfarbe.setValue(profil.getHaarfarbe());
-		tbreligion.setValue(profil.getReligion());
-		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
-		tbraucher.setValue(profil.getRaucher());
-		tbgeschlecht.setValue(String.valueOf(profil.getGeschlecht()));
-	
-	    infoEigenschaftenAnzeigen.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				
-				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(new Suchen(profil));
-			}
-		});
-	    
-	}
 }

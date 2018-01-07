@@ -61,7 +61,7 @@ public class ITProjektWS1718 implements EntryPoint{
 				profil.setId(1);
 				profil.setKoerpergroesse(196);
 				profil.setNachname("nachname");
-				profil.setRaucher(true);
+				profil.setRaucher("nein");
 				profil.setReligion("katholisch");
 				profil.setVorname("vorname");
 				loadPartnerboerse(profil);

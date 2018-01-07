@@ -308,7 +308,7 @@ implements PartnerboerseAdministration {
 	 * @return
 	 */
 	public Vector <Profil> getProfilByMerkzettel(int loggedinProfilId, Vector <Profil> profilVonMerk){
-	
+		
 	}
 	
 	/**
@@ -345,11 +345,11 @@ implements PartnerboerseAdministration {
 	/**
 	 * Auslesen aller gemerkten Profile eines Profils.
 	 */
-	public Vector<Profil> showMerklisteOfProfil(int profilId) throws IllegalArgumentException
+	public Vector<Profil> showMerklisteOfProfil(Profil pro) throws IllegalArgumentException
 	{
 		Vector<Merkzettel> result = new Vector<Merkzettel>();
 		Vector<Profil> profils = new Vector<Profil>();
-		result = merkzettelMapper.getAllMerkezettelDesMerkers(profilId);
+		result = merkzettelMapper.getAllMerkezettelDesMerkers(pro.getId());
 		for (int i = 0; i < result.size(); i++) {
 			profils.add(getProfilById(result.get(i).getProfilId_gemerkter()));
 		}
@@ -596,9 +596,12 @@ implements PartnerboerseAdministration {
 	 */
 	public void deleteProfil(int profilid) throws IllegalArgumentException {
 
+	//	Vector <Profil> profil = this.getAllProfils();
+		//Vector <Merkzettel> merk = this.getAllMerkzettel(profilid);
+		
 		//Kontaktsperre
 		
-		Vector<Kontaktsperre> sperre= getAllKontaktsperre(profilid);
+		Vector<Kontaktsperre> sperre= getAllKontaktsperre();
 		
 		for ( int i = 0; i < sperre.size(); i++) 
 		{

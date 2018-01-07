@@ -131,6 +131,10 @@ void createSuchprofil(String vorname, String nachname, Date geburtsdatum, int ko
 	
 	void getAllKontaktsperre(AsyncCallback<Vector<Kontaktsperre>> callback);
 
+	void checkProfil(String email, AsyncCallback<Profil> callback);
+
+	void berechneAhnlichkeitProfilProfil(Profil p1, Profil p2, AsyncCallback<Double> callback);
+
 
 
 

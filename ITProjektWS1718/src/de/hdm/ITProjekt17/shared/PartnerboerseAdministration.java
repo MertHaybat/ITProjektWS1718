@@ -66,6 +66,9 @@ public interface PartnerboerseAdministration extends RemoteService {
 			String haarfarbe, boolean raucher) throws IllegalArgumentException;
 	public Profil getProfilById (int id) throws IllegalArgumentException;
 	public Vector <Profil> getAllProfil() throws IllegalArgumentException;
+	public Profil checkProfil(String email) throws IllegalArgumentException;
+	
+	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) throws IllegalArgumentException;
 	
 	public Suchprofil createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, boolean raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException;

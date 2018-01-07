@@ -11,6 +11,7 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
+import de.hdm.ITProjekt17.shared.bo.Ähnlichkeitsmaß;
 import de.hdm.ITProjekt17.shared.bo.Besuch;
 
 import java.util.ArrayList;
@@ -828,6 +829,54 @@ implements PartnerboerseAdministration {
 			besuch.setBesuchterNutzerID(visitedProfil.getId());
 			besuchMapper.insert(besuch);	
 	}
+	
+	public Profil checkProfil(String email) throws IllegalArgumentException {
+				
+		if(profilMapper.findByEmail(email) == null)
+		{
+			return null;
+		}
+		else
+		{
+			return profilMapper.findByEmail(email);
+		}
+		
+	}
+	/**
+	 * Ähnlichkeitsmaß von Profil zu Profil
+	 * @param p1, p2
+	 * @return prozent
+	 * @throws IllegalArgumentException
+	 */
+	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) throws IllegalArgumentException
+	{
+		double aehnlichkeitstreffer = 0;
+		double prozent = 0;
+		Profil profil1 = profilMapper.findByKey(p1.getId());
+		Profil profil2 = profilMapper.findByKey(p2.getId());
+		
+		if (profil1 != null && profil2 != null){
+			if (profil1.getHaarfarbe() == profil2.getHaarfarbe()){
+				aehnlichkeitstreffer++;	
+			}
+			if (profil1.getKoerpergroesse() == profil2.getKoerpergroesse()){
+				aehnlichkeitstreffer++;	
+			}
+			if (profil1.getRaucher() == profil2.getRaucher()){
+				aehnlichkeitstreffer++;	
+			}
+			if (profil1.getReligion() == profil2.getReligion()){
+				aehnlichkeitstreffer++;	
+			}
+			prozent = aehnlichkeitstreffer*25;
+		}
+		
+			return prozent;
+		
+			
+	}
+
+	
 }
 
 //public Vector<Profil> getUnvisitedProfiles(int profilid) throws IllegalArgumentException

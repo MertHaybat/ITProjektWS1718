@@ -144,7 +144,7 @@ public class BesuchMapper {
 	
 
 	/**
-		 * Diese Methode ermöglicht es Besuche aus der Datenbank, anhand deren ID auszulesen.
+		 * Diese Methode ermöglicht es Besuche aus der Datenbank, anhand deren ID des besuchender Nutzer auszulesen.
 		 * 
 		 * @param profilid
 		 * @return besuche
@@ -183,7 +183,7 @@ public class BesuchMapper {
 	  
 	  
 	  
-	  public Vector<Besuch> getAllBesucheDesBesuchenden(Besuch besuch) {
+	  public Vector<Besuch> getAllBesucheDesBesuchenden(int besuchenderNutzerID) {
 			 
 		 	/**
 		 	 * Aufbau der DB Connection
@@ -194,7 +194,7 @@ public class BesuchMapper {
 		    
 		    try {
 		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE  besuchenderNutzerID=? ");
-		    	stmt.setInt(1, besuch.getBesuchenderNutzerID());
+		    	stmt.setInt(1, besuchenderNutzerID);
 		      
 		    	ResultSet rs = stmt.executeQuery();
 		        

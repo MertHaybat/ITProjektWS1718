@@ -189,7 +189,7 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 				 * einem Ergebnis-Vektor namens Kontaktsperre gespeichert und zurückgegeben
 				 * @return
 				 */
-				 public Vector<Kontaktsperre> getAllKontaktsperrenDesSperrenden(Kontaktsperre sperre) {
+				 public Vector<Kontaktsperre> getAllKontaktsperrenDesSperrenden(int profilId_sperrender) {
 					 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -200,7 +200,7 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 					    
 					    try {
 					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre WHERE profilId_sperrender=? ");
-					    	stmt.setInt(1, sperre.getProfilId_sperrender());
+					    	stmt.setInt(1, profilId_sperrender);
 					      
 					    	ResultSet rs = stmt.executeQuery();
 					        
@@ -219,7 +219,7 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 					          
 					          System.out.println("Degga funkt");
 					          
-					          result.addElement(sperre);
+					          result.addElement(spe);
 					        }
 					      }
 					      catch (SQLException e) {

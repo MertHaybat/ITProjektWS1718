@@ -255,12 +255,10 @@ implements PartnerboerseAdministration {
 	/**
 	 * Hier wird eine Kontaktsperre aufgehoben.
 	 */
-	public void deleteProfilVonKontaktsperre(Kontaktsperre sperr, Profil pro) throws IllegalArgumentException 
+	public void deleteProfilVonKontaktsperre(Profil pro) throws IllegalArgumentException 
 	{
 		Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
 		result = this.getAllKontaktsperre(pro.getId());	
-		
-		result = this.getAllKontaktsperre(sperr);
 		
 
 		    if (result != null) {
@@ -277,7 +275,7 @@ implements PartnerboerseAdministration {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-		public Vector<Kontaktsperre> showBlockedProfilsOf(Kontaktsperre sperre, Profil pro) throws IllegalArgumentException
+		public Vector<Kontaktsperre> showBlockedProfilsOf(Profil pro) throws IllegalArgumentException
 		{
 			Vector<Kontaktsperre> allBlockedProfils = new Vector<Kontaktsperre>();
 			
@@ -297,17 +295,17 @@ implements PartnerboerseAdministration {
 
 
 	@Override
-	public Vector<Kontaktsperre> getAllKontaktsperre(Kontaktsperre sprr) throws IllegalArgumentException {
+	public Vector<Kontaktsperre> getAllKontaktsperre(int profilId_sperrender) throws IllegalArgumentException {
 
-		return kontaktsperreMapper.getAllKontaktsperrenDesSperrenden(sprr);
+		return kontaktsperreMapper.getAllKontaktsperrenDesSperrenden(profilId_sperrender);
 	}
 	
 	
 	@Override
-	public Kontaktsperre save(Kontaktsperre sprr) throws IllegalArgumentException {
+	public Kontaktsperre save(Kontaktsperre sperre) throws IllegalArgumentException {
 		
 		try{
-			kontaktsperreMapper.updateKontaktsperre(sprr);
+			kontaktsperreMapper.updateKontaktsperre(sperre);
 			}	catch(Exception e){
 				
 		}
@@ -333,9 +331,9 @@ implements PartnerboerseAdministration {
 	 * Mit diesere Methode werden alle Merkzettel anhand der Profil Id des Merkenden angezeigt.
 	 * DIes ist eine Hilfsmethode fÃ¼r andere Operationen in dieser Klasse.
 	 */
-	public Vector<Merkzettel> getAllMerkzettel (Merkzettel merk) throws IllegalArgumentException {
+	public Vector<Merkzettel> getAllMerkzettel (int profilId_merkender) throws IllegalArgumentException {
 		
-		return merkzettelMapper.getAllMerkezettelDesMerkers(merk);
+		return merkzettelMapper.getAllMerkezettelDesMerkers(profilId_merkender);
 	}
 	
 	/**
@@ -353,7 +351,7 @@ implements PartnerboerseAdministration {
 	/**
 	 * Methode zum Loeschen eines Profils von der Merkliste.
 	 */
-	public void deleteProfilVonMerkliste(Merkzettel merk, Profil pro) throws IllegalArgumentException 
+	public void deleteProfilVonMerkliste(Profil pro) throws IllegalArgumentException 
 	{
 		Vector<Merkzettel> result = new Vector<Merkzettel>();
 		
@@ -374,7 +372,7 @@ implements PartnerboerseAdministration {
  * @return
  * @throws IllegalArgumentException
  */
-	public Vector<Merkzettel> showMerklisteOfProfil(Merkzettel merk, Profil pro) throws IllegalArgumentException
+	public Vector<Merkzettel> showMerklisteOfProfil(Profil pro) throws IllegalArgumentException
 	{
 		Vector<Merkzettel> allGemerkteProfile = new Vector<Merkzettel>();
 	
@@ -762,19 +760,18 @@ implements PartnerboerseAdministration {
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public Vector<Besuch> showVisitedProfiles(Besuch besuch, Profil pro) 
-	{
+	public Vector<Besuch> showVisitedProfiles(Profil pro) {
+		
 		Vector<Besuch> allBesuche = new Vector<Besuch>();
-		allBesuche = this.besuchMapper.findByKey(pro.getId());
+		allBesuche = this.getAllBesuche(pro.getId());
 		
-		for(int i = 0; i < allBesuche.size(); i++)
-		{
-		
-		}
-		
-		return allBesuche;
-	}
-	
+		if (allBesuche != null) {
+			 
+				 return allBesuche;
+
+		} 
+		return null;
+}
 	
 	
 	/////////////////////////////////////Besuch////////////////////////////////////////////////////////////////////////////////////
@@ -782,10 +779,10 @@ implements PartnerboerseAdministration {
 	/**
 	 * Methode zum Löschen von Besuchen.
 	 */
-	public void deleteBesuche(Besuch besuch, Profil pro) throws IllegalArgumentException 
+	public void deleteBesuche(Profil pro) throws IllegalArgumentException 
 	{
 		Vector<Besuch> allBesuche = new Vector<Besuch>();
-		allBesuche = this.besuchMapper.findByKey(pro.getId());
+		allBesuche = this.getAllBesuche(pro.getId());
 			
 
 		    if (allBesuche != null) {
@@ -794,10 +791,15 @@ implements PartnerboerseAdministration {
 		}
 	}
 }
-	
-	public Vector<Besuch> getAllBesuche (Besuch besuch) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return besuchMapper.getAllBesucheDesBesuchenden(besuch);
+	/**
+	 * Hilfsmethode zu anzeige aller Profile die vom besuchten aus besucht wurden.
+	 * @param besuchenderNutzerID
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	public Vector<Besuch> getAllBesuche (int besuchenderNutzerID) throws IllegalArgumentException {
+		
+		return besuchMapper.getAllBesucheDesBesuchenden(besuchenderNutzerID);
 	}
 
 	/**
@@ -807,13 +809,13 @@ implements PartnerboerseAdministration {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public Vector<Besuch> getUnvisitedProfiles(Besuch besuch) throws IllegalArgumentException
+	public Vector<Besuch> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException
 	{
 		/**
 		 * Besuche des Besuchenden werden hier abgerufen und in 
 		 */
-		Vector<Besuch> AllProfiles = this.getAllBesuche(besuch);
-		Vector<Besuch> visitedProfiles = this.besuchMapper.findByKey(besuch);
+		Vector<Besuch> unvisitedProfiles = this.getAllBesuche(pro.getId());
+		Vector<Besuch> visitedProfiles = this.besuchMapper.findByKey(pro.getId());
 		System.out.println("Size visited Profiles: " + visitedProfiles.size() );
 		
 		for(int visited = 0; visited < visitedProfiles.size(); visited++)
@@ -822,7 +824,7 @@ implements PartnerboerseAdministration {
 		}
 		for(int unVisited = 0; unVisited < unvisitedProfiles.size(); unVisited++)
 		{
-			if(sperrPruefung(pro.getId(), unvisitedProfiles.get(unVisited).getId()) == true)
+			if(sperrPruefung(pro) == true)
 			{
 				unvisitedProfiles.remove(unVisited);
 			}
@@ -837,14 +839,14 @@ implements PartnerboerseAdministration {
 	 * @param profilId_gesperrter
 	 * @return
 	 */
-	public boolean sperrPruefung(Kontaktsperre k)
+	public boolean sperrPruefung(Profil pro)
 	{
-	Vector<Kontaktsperre> sperrL = getAllKontaktsperre(k);
+	Vector<Kontaktsperre> sperrL = getAllKontaktsperre(pro.getId());
 	boolean sperrListe = false;
 	
 	for(int i = 0; i < sperrL.size(); i++)
 	{
-		if(sperrL.get(i).getId() == k.getProfilId_gesperrter())
+		if(sperrL.get(i).getId() == pro.getId());
 		{
 			sperrListe = true;
 		}

@@ -262,7 +262,7 @@ public class MerkzettelMapper {
 				 * einem Ergebnis-Vektor namens Merkzettel gespeichert und zurückgegeben
 				 * @return
 				 */
-				 public Vector<Merkzettel> getAllMerkezettelDesMerkers(Merkzettel merk) {
+				 public Vector<Merkzettel> getAllMerkezettelDesMerkers(int profilId_merkender) {
 					 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -273,7 +273,7 @@ public class MerkzettelMapper {
 					    
 					    try {
 					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilId_merkender=? ");
-					    	stmt.setInt(1, merk.getProfilId_merkender());
+					    	stmt.setInt(1, profilId_merkender);
 					      
 					    	ResultSet rs = stmt.executeQuery();
 					        
@@ -292,7 +292,7 @@ public class MerkzettelMapper {
 					          
 					          System.out.println("Degga funkt");
 					          
-					          result.addElement(merk);
+					          result.addElement(merke);
 					        }
 					      }
 					      catch (SQLException e) {

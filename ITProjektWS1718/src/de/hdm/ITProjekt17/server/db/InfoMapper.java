@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
+import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
@@ -297,7 +299,7 @@ return null;
 	      return result;
  }
 
-	public Vector<Info> getAllInfosAsAuswahleigenschaft(int auswahleigenschaftid){
+	public Vector<Info> getAllInfosAsAuswahleigenschaft(Auswahleigenschaft aus){
 		 
 	 	/**
 	 	 * Aufbau der DB Connection
@@ -308,7 +310,7 @@ return null;
 	    
 	    try {
 	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE auswahleigenschaftid=? ");
-	    	stmt.setInt(1, auswahleigenschaftid);
+	    	stmt.setInt(1, aus.getId());
 	      
 	    	ResultSet rs = stmt.executeQuery();
 	        
@@ -339,7 +341,7 @@ return null;
 		return result;
 	}
 	
-	public Vector<Info> getAllInfosAsAuswahleigenschaftByProfilId(int auswahleigenschaftid, int profilid){
+	public Vector<Info> getAllInfosAsAuswahleigenschaftByProfilId(Auswahleigenschaft aus, Profil pro){
 		 
 	 	/**
 	 	 * Aufbau der DB Connection
@@ -349,8 +351,9 @@ return null;
 	    Vector<Info> result = new Vector<Info>();
 	    
 	    try {
-	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE auswahleigenschaftid=? ");
-	    	stmt.setInt(1, auswahleigenschaftid);
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE auswahleigenschaftid=?, profilid=? ");
+	    	stmt.setInt(1, aus.getId());
+	    	stmt.setInt(2, pro.getId());
 	      
 	    	ResultSet rs = stmt.executeQuery();
 	        
@@ -362,6 +365,7 @@ return null;
 	        
 
 	          info.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+	          info.setProfilId(rs.getInt("profilid"));
 	          /**
 	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 	           */
@@ -381,7 +385,7 @@ return null;
 		return result;
 	}
 	
-	public Vector<Info> getAllInfosAsFreitexteigenschaft(int freitexteigenschaftid){
+	public Vector<Info> getAllInfosAsFreitexteigenschaft(Freitexteigenschaft frei){
 		 
 	 	/**
 	 	 * Aufbau der DB Connection
@@ -392,7 +396,7 @@ return null;
 	    
 	    try {
 	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE freitexteigenschaftid=? ");
-	    	stmt.setInt(1, freitexteigenschaftid);
+	    	stmt.setInt(1, frei.getId());
 	      
 	    	ResultSet rs = stmt.executeQuery();
 	        
@@ -423,7 +427,7 @@ return null;
 		return result;
 	}
 	
-	public Vector<Info> getAllInfosAsFreitexteigenschaftById(int freitexteigenschaftid, int profilid){
+	public Vector<Info> getAllInfosAsFreitexteigenschaftById(Freitexteigenschaft frei, Profil pro){
 		 
 	 	/**
 	 	 * Aufbau der DB Connection
@@ -433,8 +437,9 @@ return null;
 	    Vector<Info> result = new Vector<Info>();
 	    
 	    try {
-	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE freitexteigenschaftid=? ");
-	    	stmt.setInt(1, freitexteigenschaftid);
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM info WHERE freitexteigenschaftid=?, profilid=? ");
+	    	stmt.setInt(1, frei.getId());
+	    	stmt.setInt(2, pro.getId());
 	      
 	    	ResultSet rs = stmt.executeQuery();
 	        
@@ -446,6 +451,7 @@ return null;
 	        
 
 	          info.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
+	          info.setProfilId(rs.getInt("profilid"));
 	          /**
 	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 	           */

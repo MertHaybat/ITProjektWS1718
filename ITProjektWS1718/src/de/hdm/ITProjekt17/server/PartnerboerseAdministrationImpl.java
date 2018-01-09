@@ -11,7 +11,6 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
-import de.hdm.ITProjekt17.shared.bo.Ähnlichkeitsmaß;
 import de.hdm.ITProjekt17.shared.bo.Besuch;
 
 import java.util.ArrayList;
@@ -81,12 +80,28 @@ implements PartnerboerseAdministration {
 	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
-			auswahleigenschaftMapper.deleteAuswahleigenschaft(aus);
+			Vector<Info> auswahlinfo = this.getAllInfosAsAuswahleigenschaft(aus);
+			if (auswahlinfo != null){
+				for(Info aus1 : auswahlinfo){
+					this.delete(aus1);
+				} 
+				auswahleigenschaftMapper.deleteAuswahleigenschaft(aus);
+			}
 		} catch(Exception e){
-				
+			
 		}
 	}
+
 	
+	public Vector<Info> getAllInfosAsAuswahleigenschaft(Auswahleigenschaft aus){
+		try {
+			return this.infoMapper.getAllInfosAsAuswahleigenschaft(aus);
+		} catch (Exception e){
+		
+		}
+		return null;
+	}
+
 	@Override
 	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -168,10 +183,26 @@ implements PartnerboerseAdministration {
 	public void delete(Freitexteigenschaft frei) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
-			freitexteigenschaftMapper.deleteFreitexteigenschaft(frei);
+			Vector<Info> freitextinfo = this.getAllInfosAsFreitexteigenschaft(frei);
+			if (freitextinfo != null){
+				for(Info frei1 : freitextinfo){
+					this.delete(frei1);
+				} 
+				freitexteigenschaftMapper.deleteFreitexteigenschaft(frei);
+			}
 		} catch(Exception e){
 			
 		}
+	}
+
+	
+	public Vector<Info> getAllInfosAsFreitexteigenschaft(Freitexteigenschaft frei){
+		try {
+			return this.infoMapper.getAllInfosAsFreitexteigenschaft(frei);
+		} catch (Exception e){
+		
+		}
+		return null;
 	}
 
 	@Override

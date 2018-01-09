@@ -262,7 +262,7 @@ public class MerkzettelMapper {
 				 * einem Ergebnis-Vektor namens Merkzettel gespeichert und zurückgegeben
 				 * @return
 				 */
-				 public Vector<Merkzettel> getAllMerkezettelDesMerkers(int profilId_merkender) {
+				 public Vector<Merkzettel> getAllMerkezettelDesMerkers(Profil pro) {
 					 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -273,7 +273,7 @@ public class MerkzettelMapper {
 					    
 					    try {
 					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilId_merkender=? ");
-					    	stmt.setInt(1, profilId_merkender);
+					    	stmt.setInt(1, pro.getId());
 					      
 					    	ResultSet rs = stmt.executeQuery();
 					        

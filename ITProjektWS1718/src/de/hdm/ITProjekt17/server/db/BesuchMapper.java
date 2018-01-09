@@ -183,7 +183,7 @@ public class BesuchMapper {
 	  
 	  
 	  
-	  public Vector<Besuch> getAllBesucheDesBesuchenden(int besuchenderNutzerID) {
+	  public Vector<Besuch> getAllBesucheDesBesuchenden(Profil pro) {
 			 
 		 	/**
 		 	 * Aufbau der DB Connection
@@ -194,7 +194,7 @@ public class BesuchMapper {
 		    
 		    try {
 		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE  besuchenderNutzerID=? ");
-		    	stmt.setInt(1, besuchenderNutzerID);
+		    	stmt.setInt(1, pro.getId());
 		      
 		    	ResultSet rs = stmt.executeQuery();
 		        

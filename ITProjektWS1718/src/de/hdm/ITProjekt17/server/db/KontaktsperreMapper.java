@@ -9,6 +9,7 @@ import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
+import de.hdm.ITProjekt17.shared.bo.Profil;
 
 	public class KontaktsperreMapper {
 			/**
@@ -189,7 +190,7 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 				 * einem Ergebnis-Vektor namens Kontaktsperre gespeichert und zurückgegeben
 				 * @return
 				 */
-				 public Vector<Kontaktsperre> getAllKontaktsperrenDesSperrenden(int profilId_sperrender) {
+				 public Vector<Kontaktsperre> getAllKontaktsperrenDesSperrenden(Profil pro) {
 					 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -200,7 +201,7 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 					    
 					    try {
 					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre WHERE profilId_sperrender=? ");
-					    	stmt.setInt(1, profilId_sperrender);
+					    	stmt.setInt(1, pro.getId());
 					      
 					    	ResultSet rs = stmt.executeQuery();
 					        

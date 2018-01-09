@@ -48,19 +48,17 @@ public interface PartnerboerseAdministration extends RemoteService {
 	
 	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException;
 	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException;
-	public void deleteKontaktsperre(Kontaktsperre sperre, Profil pro) throws IllegalArgumentException;
+	public void deleteKontaktsperreOf(Profil pro) throws IllegalArgumentException;
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
 	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
-
-	Vector<Kontaktsperre> getAllKontaktsperre(Kontaktsperre sprr) throws IllegalArgumentException;
+	public Vector<Kontaktsperre> getAllKontaktsperreOf(Profil pro) throws IllegalArgumentException;
 
 	//public void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
 
 	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;
-	public void deleteMerkzettel(Merkzettel merk, Profil pro) throws IllegalArgumentException;
 	public Merkzettel findByKey (int id) throws IllegalArgumentException; 
-	public Vector <Merkzettel> getAllMerkzettel(int profilId_merkender) throws IllegalArgumentException;
+	public Vector<Merkzettel> getAllMerkzettelOf(Profil pro) throws IllegalArgumentException;
 	
 	Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, boolean raucher, boolean geschlecht) throws IllegalArgumentException;
@@ -80,7 +78,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException;
 	public Vector <Suchprofil> getAllSuchprofil () throws IllegalArgumentException;
 
-	Vector<Kontaktsperre> getAllKontaktsperre(int profilId_sperrender) throws IllegalArgumentException;
+
 
 	Vector<Suchprofil> getSuchprofilbyProfilId(int profilid) throws IllegalArgumentException;
 
@@ -88,6 +86,11 @@ public interface PartnerboerseAdministration extends RemoteService {
 ///////
 //	Profil save(Profil pro);
 ///////
+
+	void deleteMerkzettel(Profil pro);
+
+	
+	
 
 
 

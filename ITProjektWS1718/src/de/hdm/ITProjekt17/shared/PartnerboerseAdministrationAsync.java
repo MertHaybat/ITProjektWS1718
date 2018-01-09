@@ -71,13 +71,11 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void save(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 
-	void deleteKontaktsperre(Kontaktsperre sperre,Profil pro, AsyncCallback<Void> callback);
+	void deleteKontaktsperreOf(Profil pro, AsyncCallback<Void> callback);
 	
 	void findById(int id, AsyncCallback<Kontaktsperre> callback);
 	
-	void getAllKontaktsperre(int profilId_sperrender, AsyncCallback<Vector<Kontaktsperre>> callback);
-	
-	void getAllKontaktsperre(Kontaktsperre sprr, AsyncCallback<Vector<Kontaktsperre>> callback);
+	void getAllKontaktsperreOf(Profil pro, AsyncCallback<Vector<Kontaktsperre>> callback);
 
 	void getAllKontaktsperre(AsyncCallback<Vector<Kontaktsperre>> callback);
 
@@ -89,11 +87,11 @@ public interface PartnerboerseAdministrationAsync {
 
 	void save(Merkzettel merk, AsyncCallback<Void> callback);
 
-	void deleteMerkzettel(Merkzettel merk, Profil pro, AsyncCallback<Void> callback);
+	void deleteMerkzettel(Profil pro, AsyncCallback<Void> callback);
 
 	void findByKey(int id, AsyncCallback<Merkzettel> callback);
 	
-	void getAllMerkzettel(int profilId_merkender, AsyncCallback<Vector<Merkzettel>> callback);
+	void getAllMerkzettelOf(Profil pro, AsyncCallback<Vector<Merkzettel>> callback);
 	
 void createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse,
 			String religion, String haarfarbe, boolean raucher, boolean geschlecht, AsyncCallback<Profil> callback);
@@ -139,6 +137,10 @@ void createSuchprofil(String vorname, String nachname, Date geburtsdatum, int ko
 	void checkProfil(String email, AsyncCallback<Profil> callback);
 
 	void berechneAhnlichkeitProfilProfil(Profil p1, Profil p2, AsyncCallback<Double> callback);
+
+	
+
+	
 
 
 

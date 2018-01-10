@@ -14,6 +14,7 @@ import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
+import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
 
 public class InfoMapper {
 
@@ -201,7 +202,7 @@ return null;
 			/**
 			 * Durchführung der Löschoperation
 			 */
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE id= ? ");
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE id=? ");
 			stmt.setInt(1, in.getId());
 			stmt.executeUpdate();
 
@@ -210,6 +211,116 @@ return null;
 		}
 	}
 
+	/**
+	 * Löschen der Referenz zwischen den Objekten Info und Profil in der Datenbank
+	 * 
+	 * @param pro
+	 */
+	public void deleteInfoOf(Profil pro) {
+		/**
+		 * Aufbau der DB Connection
+		 */
+		Connection con = DBConnection.connection();
+		/**
+		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
+		try {
+			/**
+			 * Durchführung der Löschoperation
+			 */
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE profilid= ? ");
+			stmt.setInt(1, pro.getId());
+			stmt.executeUpdate();
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Löschen der Referenz zwischen den Objekten Info und Profil in der Datenbank
+	 * 
+	 * @param pro
+	 */
+	public void deleteInfoOf(Suchprofil_Info suchinfo) {
+		/**
+		 * Aufbau der DB Connection
+		 */
+		Connection con = DBConnection.connection();
+		/**
+		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
+		try {
+			/**
+			 * Durchführung der Löschoperation
+			 */
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE infoid=?, suchprofilid=? ");
+			stmt.setInt(1, suchinfo.getInfoId());
+			stmt.setInt(2, suchinfo.getSuchprofilId());
+			stmt.executeUpdate();
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * Löschen der Referenz zwischen den Objekten Info und Auswahleigenschaft in der Datenbank
+	 * 
+	 * @param aus
+	 */
+	public void deleteInfoOf(Auswahleigenschaft aus) {
+		/**
+		 * Aufbau der DB Connection
+		 */
+		Connection con = DBConnection.connection();
+		/**
+		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
+		try {
+			/**
+			 * Durchführung der Löschoperation
+			 */
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE auswahleigenschaftid= ? ");
+			stmt.setInt(1, aus.getId());
+			stmt.executeUpdate();
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Löschen der Referenz zwischen den Objekten Info und Profil in der Datenbank
+	 * 
+	 * @param frei
+	 */
+	public void deleteInfoOf(Freitexteigenschaft frei) {
+		/**
+		 * Aufbau der DB Connection
+		 */
+		Connection con = DBConnection.connection();
+		/**
+		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
+		try {
+			/**
+			 * Durchführung der Löschoperation
+			 */
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE freitexteigenschaftid= ? ");
+			stmt.setInt(1, frei.getId());
+			stmt.executeUpdate();
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Erneutes schreiben in die Datenbank um das Info Objekt zu
 	 * aktualisieren
@@ -320,7 +431,6 @@ return null;
 	        while (rs.next()) {
 	          Info info = new Info();
 	        
-
 	          info.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
 	          /**
 	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor

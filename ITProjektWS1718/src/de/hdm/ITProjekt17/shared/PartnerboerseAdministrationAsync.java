@@ -26,6 +26,8 @@ public interface PartnerboerseAdministrationAsync {
 
 	void delete(Auswahleigenschaft aus, AsyncCallback<Void> callback);
 	
+	void getAllInfosAsAuswahleigenschaft(Auswahleigenschaft aus, AsyncCallback<Vector<Info>> callback);
+	
 	void getAllAuswahleigenschaft(AsyncCallback<Vector<Auswahleigenschaft>> callback);
 
 	void findByKeyAuswahleigenschaft(int id, AsyncCallback<Auswahleigenschaft> callback);
@@ -48,12 +50,14 @@ public interface PartnerboerseAdministrationAsync {
 
 	void delete(Freitexteigenschaft frei, AsyncCallback<Void> callback);
 	
+	void getAllInfosAsFreitexteigenschaft(Freitexteigenschaft frei, AsyncCallback<Vector<Info>> callback);
+	
 	void findByKeyFreitexteigenschaft(int id, AsyncCallback<Freitexteigenschaft> callback);
 
 	void getAllFreitexteigenschaft(AsyncCallback<Vector<Freitexteigenschaft>> callback);
 	
 //_________________________________________________________________________________________________________________________
-	void createInfo(int profilid, String text, int eigenschaftid, AsyncCallback<Info> callback);
+	void createInfo(Profil pro, String text, Auswahleigenschaft aus, Freitexteigenschaft frei, AsyncCallback<Info> callback);
 
 	void save(Info in, AsyncCallback<Void> callback);
 

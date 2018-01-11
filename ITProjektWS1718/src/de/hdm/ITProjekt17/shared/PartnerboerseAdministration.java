@@ -24,6 +24,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException;
 	public void save(Auswahleigenschaft aus) throws IllegalArgumentException;
 	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException;
+	public Vector<Info> getAllInfosAsAuswahleigenschaft(Auswahleigenschaft aus);
 	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException;
 	public Vector <Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException; 
 	
@@ -36,10 +37,11 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Freitexteigenschaft createFreitexteigenschaft(String wert) throws IllegalArgumentException;
 	public void save(Freitexteigenschaft frei) throws IllegalArgumentException;
 	public void delete(Freitexteigenschaft frei) throws IllegalArgumentException;
+	public Vector<Info> getAllInfosAsFreitexteigenschaft(Freitexteigenschaft frei);
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException;
 	public Vector <Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException;
 	
-	public Info createInfo(int profilid, String text, int eigenschaftid) throws IllegalArgumentException;
+	public Info createInfo(Profil pro, String text, Auswahleigenschaft aus, Freitexteigenschaft frei) throws IllegalArgumentException;
 	public void save(Info in) throws IllegalArgumentException;
 	public void delete(Info in) throws IllegalArgumentException;
 	public Info findByKeyInfo(int id) throws IllegalArgumentException;

@@ -62,7 +62,12 @@ public class Suchprofil extends BusinessObject {
 	/**
 	 * Variable raucher gibt an ob der zusuchende Teilnehmer raucher ist oder nicht.
 	 */
-	private Boolean raucher = false; 
+	private String raucher = ""; 
+	
+	/**
+	 * Variable geschlecht gibt an welches Geschlecht der zusuchende Teilnehmer ist.
+	 */
+	private boolean geschlecht = false; 
 	
 	public Suchprofil(){
 		
@@ -129,11 +134,19 @@ public class Suchprofil extends BusinessObject {
 	}
 	
 	/**
-	 * Setzen ob zusuchender Teilenhmer Raucht
+	 * Setzen ob zusuchender Teilnehmer Raucht
 	 * @param raucher
 	 */
-	public void setRaucher(boolean raucher){
+	public void setRaucher(String raucher){
 		this.raucher = raucher;
+	}
+	
+	/**
+	 * Setzen welches Geschlecht der Teilnehmer hat
+	 * @param raucher
+	 */
+	public void setGeschlecht(boolean geschlecht){
+		this.geschlecht = geschlecht;
 	}
 	
 
@@ -202,8 +215,16 @@ public class Suchprofil extends BusinessObject {
 	 * Abfragen ob zu suchendes Profil Raucher ist oder nicht.
 	 * @return
 	 */
-	public Boolean getRaucher(){
+	public String getRaucher(){
 		return raucher;
+	}
+	
+	/**
+	 * Abfragen ob zu suchendes Profil Raucher ist oder nicht.
+	 * @return
+	 */
+	public boolean getGeschlecht(){
+		return geschlecht;
 	}
 	
 	/*
@@ -218,6 +239,7 @@ public class Suchprofil extends BusinessObject {
 					" Haarfarbe: #" + this.getHaarfarbe() + 
 					" Körpergröße: #" + this.getKoerpergroesse() + 
 					" Religion: #" + this.getReligion() + 
-					" Raucher: #" + this.getRaucher();
+					" Raucher: #" + this.getRaucher() +
+					" Geschlecht: #" + this.getGeschlecht();
 	}
 }

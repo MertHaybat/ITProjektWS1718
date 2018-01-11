@@ -76,8 +76,8 @@ public class SuchprofilMapper {
 				    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 				    	  	 */
 				    	  		PreparedStatement stmt1 = con.prepareStatement(
-				    	  				"INSERT INTO suchprofil (id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher) "
-				    	  				+ "VALUES (?,?,?,?,?,?,?,?) ",
+				    	  				"INSERT INTO suchprofil (id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht) "
+				    	  				+ "VALUES (?,?,?,?,?,?,?,?,?) ",
 				    	  				Statement.RETURN_GENERATED_KEYS);
 				    	  				stmt1.setInt(1, such.getId());
 				    	  				stmt1.setInt(2, such.getMinAlter());
@@ -86,7 +86,8 @@ public class SuchprofilMapper {
 				    	  				stmt1.setInt(5, such.getKoerpergroesse());
 				    	  				stmt1.setString(6, such.getReligion());
 				    	  				stmt1.setString(7, such.getHaarfarbe());
-				    	  				stmt1.setBoolean(8, such.getRaucher());
+				    	  				stmt1.setString(8, such.getRaucher());
+				    	  				stmt1.setBoolean(9, such.getGeschlecht());
 				    	  				
 				    	  				
 				    	  				stmt1.executeUpdate();
@@ -155,7 +156,8 @@ public class SuchprofilMapper {
 				    	stmt.setInt(4, such.getKoerpergroesse());
 				    	stmt.setString(5, such.getReligion());
 				    	stmt.setString(6, such.getHaarfarbe());
-				    	stmt.setBoolean(7, such.getRaucher());
+				    	stmt.setString(7, such.getRaucher());
+				    	stmt.setBoolean(8, such.getGeschlecht());
 
 				    	stmt.setInt(8, such.getId());
 				    	stmt.executeUpdate();
@@ -203,7 +205,8 @@ public class SuchprofilMapper {
 					          suchp.setKoerpergroesse(rs.getInt("koerpergroesse"));
 					          suchp.setReligion(rs.getString("religion"));
 					          suchp.setHaarfarbe(rs.getString("haarfarbe"));
-					          suchp.setRaucher(rs.getBoolean("raucher"));
+					          suchp.setRaucher(rs.getString("raucher"));
+					          suchp.setGeschlecht(rs.getBoolean("geschlecht"));
 					          
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
@@ -256,7 +259,8 @@ public class SuchprofilMapper {
 					          such.setKoerpergroesse(rs.getInt("koerpergroesse"));
 					          such.setReligion(rs.getString("religion"));
 					          such.setHaarfarbe(rs.getString("haarfarbe"));
-					          such.setRaucher(rs.getBoolean("raucher"));
+					          such.setRaucher(rs.getString("raucher"));
+					          such.setGeschlecht(rs.getBoolean("geschlecht"));
 					          
 					         return such;
 						}
@@ -270,7 +274,7 @@ public class SuchprofilMapper {
 					}
 					
 
-					public Vector<Suchprofil> getSuchprofilIdByProfilId(int profilid) {
+					public Vector<Suchprofil> getSuchprofilIdByProfil(Profil pro) {
 						 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -281,7 +285,7 @@ public class SuchprofilMapper {
 					    
 					    try {
 					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM suchprofil WHERE profilid=? ");
-					    	stmt.setInt(1, profilid);
+					    	stmt.setInt(1, pro.getId());
 					      
 					    	ResultSet rs = stmt.executeQuery();
 					        
@@ -297,7 +301,8 @@ public class SuchprofilMapper {
 						          such.setKoerpergroesse(rs.getInt("koerpergroesse"));
 						          such.setReligion(rs.getString("religion"));
 						          such.setHaarfarbe(rs.getString("haarfarbe"));
-						          such.setRaucher(rs.getBoolean("raucher"));
+						          such.setRaucher(rs.getString("raucher"));
+						          such.setGeschlecht(rs.getBoolean("geschlecht"));
 						          
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor

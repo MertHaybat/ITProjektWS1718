@@ -127,13 +127,13 @@ public class BesuchMapper {
 	 * @param besuchenderNutzerID
 	 * @param besuchterNutzerID
 	 */
-	public void deleteByProfilId(int besuchenderNutzerID, int besuchterNutzerID) {
+	public void deleteByProfilId(Profil pro, int besuchterNutzerID) {
 	    Connection con = DBConnection.connection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 	  
-	      stmt.executeUpdate("DELETE FROM besuch " + "WHERE besuchenderNutzerID=" + besuchenderNutzerID+" AND besuchterNutzerID="+besuchterNutzerID);
+	      stmt.executeUpdate("DELETE FROM besuch " + "WHERE besuchenderNutzerID=" + pro.getId()+" AND besuchterNutzerID="+besuchterNutzerID);
 
 	    }
 	    catch (SQLException e2) {

@@ -244,10 +244,10 @@ implements PartnerboerseAdministration {
 	 * Methode um ein einzelnes Profil auf die Sperrliste zu setzen.
 	 * LoggedIn steht fuer den Sperrenden User der andere Teilnehmer auf die Sperrliste setzt.
 	 */
-	public void createKontaktsperre(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException
+	public void createKontaktsperre(Profil pro, int profilId_gesperrter) throws IllegalArgumentException
 	{
 			Kontaktsperre sperre = new Kontaktsperre();
-			sperre.setProfilId_sperrender(profilId_sperrender);
+			sperre.setProfilId_sperrender(pro.getId());
 			sperre.setProfilId_gesperrter(profilId_gesperrter);
 			kontaktsperreMapper.insertKontaktsperre(sperre);
 	}
@@ -255,7 +255,7 @@ implements PartnerboerseAdministration {
 	/**
 	 * Hier wird eine Kontaktsperre aufgehoben.
 	 */
-	public void deleteKontaktsperreOf(Profil pro) throws IllegalArgumentException 
+	public void deleteKontaktsperreOf(Profil pro, int profilId_gesperrter) throws IllegalArgumentException 
 	{
 		Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
 		result = this.getAllKontaktsperreOf(pro);	
@@ -263,7 +263,7 @@ implements PartnerboerseAdministration {
 
 		    if (result != null) {
 		      for (Kontaktsperre k : result) {
-		        this.kontaktsperreMapper.deleteKontaktsperre(k);
+		        this.kontaktsperreMapper.deleteByProfilIds(pro, k.getProfilId_gesperrter());
 		      }
 		     
    }
@@ -329,10 +329,10 @@ implements PartnerboerseAdministration {
 	 * Methode um ein einzelnes Profil auf den Merkzettel zu setzen.
 	 * LoggedIn steht fÃ¼r den Merkenden User der andere Teilnehmer auf seine Merkliste(Merkzettel) setzt.
 	 */
-	public void createMerzettel(int profilId_merkender, int profilId_gemerkter) throws IllegalArgumentException
+	public void createMerzettel(Profil pro, int profilId_gemerkter) throws IllegalArgumentException
 	{
 			Merkzettel merk = new Merkzettel();
-			merk.setProfilId_merkender(profilId_merkender);
+			merk.setProfilId_merkender(pro.getId());
 			merk.setProfilId_gemerkter(profilId_gemerkter);
 			merkzettelMapper.insertMerkzettel(merk);
 	}
@@ -340,7 +340,7 @@ implements PartnerboerseAdministration {
 	/**
 	 * Methode zum Loeschen eines Profils von der Merkliste.
 	 */
-	public void deleteProfilVonMerkliste(Profil pro) throws IllegalArgumentException 
+	public void deleteProfilVonMerkliste(Profil pro, int profilId_gemerkter) throws IllegalArgumentException 
 	{
 		Vector<Merkzettel> result = new Vector<Merkzettel>();
 		
@@ -348,7 +348,7 @@ implements PartnerboerseAdministration {
 
 		    if (result != null) {
 		      for (Merkzettel m : result) {
-		        this.merkzettelMapper.deleteMerkzettel(m);
+		        this.merkzettelMapper.deleteByProfilIds(pro, m.getProfilId_gemerkter());
 		      }
 		    }
 		}
@@ -664,6 +664,9 @@ implements PartnerboerseAdministration {
 				 suchinfo = getAllSuchprofilInfos(suchprofil.get(s).getId(), info.get(i).getId());
 				
 				 
+				 
+				 
+				 
 				}
 			
 			suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
@@ -768,7 +771,7 @@ implements PartnerboerseAdministration {
 	/**
 	 * Methode zum Löschen von Besuchen.
 	 */
-	public void deleteBesuche(Profil pro) throws IllegalArgumentException 
+	public void deleteBesuche(Profil pro, int besuchterNutzerID) throws IllegalArgumentException 
 	{
 		Vector<Besuch> allBesuche = new Vector<Besuch>();
 		allBesuche = this.getAllBesucheOf(pro);
@@ -776,7 +779,7 @@ implements PartnerboerseAdministration {
 
 		    if (allBesuche != null) {
 		      for (Besuch besuche : allBesuche) {
-		        this.besuchMapper.delete(besuche);
+		        this.besuchMapper.deleteByProfilId(pro, besuche.getBesuchterNutzerID());
 		}
 	}
 }

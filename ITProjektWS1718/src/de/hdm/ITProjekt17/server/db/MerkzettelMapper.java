@@ -157,13 +157,13 @@ public class MerkzettelMapper {
 			 * @param profilId_merkender
 			 * @param profilId_gemerkter
 			 */
-			public void deleteByProfilIds(int profilId_merkender, int profilId_gemerkter) {
+			public void deleteByProfilIds(Profil pro, int profilId_gemerkter) {
 			    Connection con = DBConnection.connection();
 
 			    try {
 			      Statement stmt = con.createStatement();
 			  
-			      stmt.executeUpdate("DELETE FROM merkzettel " + "WHERE profilId_merkender=" + profilId_merkender+" AND profilId_gemerkter="+profilId_gemerkter);
+			      stmt.executeUpdate("DELETE FROM merkzettel " + "WHERE profilId_merkender=" + pro.getId() +" AND profilId_gemerkter="+profilId_gemerkter);
 
 			    }
 			    catch (SQLException e2) {
@@ -353,24 +353,6 @@ public class MerkzettelMapper {
 						       */
 						      return result;
 					 }
-				 	
-			 	
-			 	
-			 	
-			 	
-			 	
-				 
-				 
-				 
-				 
-				 
-				 
-
-			 	
-			 	//Updatefunktion implementiert, ncht sicher ob richtig... Bitte Anschauen
-			 	
-			 	
-			 	
 			 	
 			 	/**
 				 * Erneutes schreiben in die Datenbank um das Merkzettel Objekt zu aktualisieren

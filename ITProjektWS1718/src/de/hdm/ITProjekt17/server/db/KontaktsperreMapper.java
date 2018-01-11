@@ -129,13 +129,13 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 			 * @param profilId_sperrender
 			 * @param profilId_gesperrter
 			 */
-			public void deleteByProfilIds(int profilId_sperrender, int profilId_gesperrter) {
+			public void deleteByProfilIds(Profil pro, int profilId_gesperrter) {
 			    Connection con = DBConnection.connection();
 
 			    try {
 			      Statement stmt = con.createStatement();
 			  
-			      stmt.executeUpdate("DELETE FROM kontaktsperre " + "WHERE profilId_sperrender=" + profilId_sperrender+" AND profilId_gesperrter="+profilId_gesperrter);
+			      stmt.executeUpdate("DELETE FROM kontaktsperre " + "WHERE profilId_sperrender=" + pro.getId() +" AND profilId_gesperrter="+profilId_gesperrter);
 
 			    }
 			    catch (SQLException e2) {
@@ -218,7 +218,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */
 					          
-					          System.out.println("Degga funkt");
+					         
 					          
 					          result.addElement(spe);
 					        }
@@ -273,17 +273,6 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 			 		}
 			return null;
 		}
-				
-				
-				
-				
-				
-				
-						
-				
-				
-				// Updatefunktion implementiert, nicht sicher ob richtig... bitte nochmals anschauen
-				
 				
 				/**
 				 * Erneutes schreiben in die Datenbank um das Kontaktsperre Objekt zu aktualisieren

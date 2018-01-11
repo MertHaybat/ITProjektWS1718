@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
+import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
@@ -251,7 +252,7 @@ public class Suchprofil_InfoMapper {
 					return null;
 		}
 				
-				 public Vector<Suchprofil_Info> getAllSuchprofilInfos(int infoid, int suchprofilid) {
+				 public Vector<Suchprofil_Info> getAllSuchprofilInfos(Info info, Suchprofil such) {
 					 
 					 	/**
 					 	 * Aufbau der DB Connection
@@ -261,9 +262,9 @@ public class Suchprofil_InfoMapper {
 					    Vector<Suchprofil_Info> result = new Vector<Suchprofil_Info>();
 					    
 					    try {
-					    	PreparedStatement stmt = con.prepareStatement("SELECT id FROM suchprofil_Info WHERE infoid=?, suchprofilid=? ");
-					    	stmt.setInt(1, infoid);
-					    	stmt.setInt(2, suchprofilid);
+					    	PreparedStatement stmt = con.prepareStatement("SELECT id FROM suchprofil_info WHERE infoid=?, suchprofilid=? ");
+					    	stmt.setInt(1, info.getId());
+					    	stmt.setInt(2, such.getId());
 					    	ResultSet rs = stmt.executeQuery();
 					        
 					        /**
@@ -291,4 +292,46 @@ public class Suchprofil_InfoMapper {
 					       */
 					      return result;
 				 }
-}
+				 public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info info){
+					 
+					 	/**
+					 	 * Aufbau der DB Connection
+					 	 */
+					    Connection con = DBConnection.connection();
+					  
+					    Vector<Suchprofil_Info> result = new Vector<Suchprofil_Info>();
+					    
+					    try {
+					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM suchprofil_info WHERE infoid=? ");
+					    	stmt.setInt(1, info.getId());
+					      
+					    	ResultSet rs = stmt.executeQuery();
+					        
+					        /**
+					         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+					         */
+					        while (rs.next()) {
+					          Suchprofil_Info suchproInfo = new Suchprofil_Info();
+					        
+
+					          suchproInfo.setInfoId(rs.getInt("infoid"));
+					          /**
+					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+					           */
+					          
+					          System.out.println("Funktioniert");
+					          
+					          result.addElement(suchproInfo);
+					        }
+					      }
+					      catch (SQLException e) {
+					        e.printStackTrace();
+					      }
+
+					      /**
+					       *  Ergebnisvektor zurückgeben
+					       */
+						return result;
+					}	
+			}
+

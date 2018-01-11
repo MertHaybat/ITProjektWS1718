@@ -115,6 +115,9 @@ implements PartnerboerseAdministration {
 		return this.auswahleigenschaftMapper.getAll();
 	}
 
+	public Vector<Auswahleigenschaft> getAllAuswahleigenschaftOf(Info in) throws IllegalArgumentException {
+		return this.auswahleigenschaftMapper.getAllAuswahleigenschaftOf(in);
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 //	@Override
@@ -204,6 +207,10 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
+	
+	public Vector<Freitexteigenschaft> getAllFreitexteigenschaftOf(Info in) throws IllegalArgumentException {
+		return this.freitexteigenschaftMapper.getAllFreitexteigenschaftOf(in);
+	}
 
 	@Override
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException {
@@ -248,14 +255,38 @@ implements PartnerboerseAdministration {
 	}
 
 	@Override
-	public void deleteInfo(Profil pro, Auswahleigenschaft aus, Freitexteigenschaft frei, Suchprofil_Info suchinfo, Info in) throws IllegalArgumentException {
+	public void delete(Info in) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		try {
-			this.deleteInfoOf(pro);
-			this.deleteInfoAs(aus);
-			this.deleteInfoAs(frei);
-			this.deleteInfoOf(suchinfo);
+			Vector<Auswahleigenschaft> auswahlinfo = new Vector<Auswahleigenschaft>();
+			
+			auswahlinfo = this.getAllAuswahleigenschaftOf(in);
+			if (auswahlinfo != null){
+				for (Auswahleigenschaft a : auswahlinfo) {
+					this.auswahleigenschaftMapper.deleteAuswahleigenschaft(a);
+				}
+			}
+			
+			Vector<Freitexteigenschaft> freitextinfo = new Vector<Freitexteigenschaft>();
+			
+			freitextinfo = this.getAllFreitexteigenschaftOf(in);
+			if (freitextinfo != null){
+				for (Freitexteigenschaft f : freitextinfo) {
+					this.freitexteigenschaftMapper.deleteFreitexteigenschaft(f);
+				}
+			}
+			
+			Vector<Suchprofil_Info> suchproInfo = new Vector<Suchprofil_Info>();
+			
+			suchproInfo = this.getAllSuchprofilInfoOf(in);
+			if (suchproInfo != null){
+				for (Suchprofil_Info spi : suchproInfo) {
+					this.suchprofil_infoMapper.deleteSuchprofil_Info(spi);
+				}
+			}
+			
 			infoMapper.deleteInfo(in);
+			
 		} catch(Exception e){
 			
 		}
@@ -292,7 +323,7 @@ implements PartnerboerseAdministration {
 			
 		}
 	}
-	public Vector<Profil> getAllInfosOf(Profil pro){
+	public Vector<Profil> getAllInfosOf(Profil pro) throws IllegalArgumentException {
 		try {
 			this.infoMapper.getInfoIdByProfilId(pro);
 		} catch (Exception e){
@@ -496,16 +527,16 @@ implements PartnerboerseAdministration {
 	 * Hier wird das Suchprofil gelÃ¶scht
 	 * Um das Suchprofil zu lÃ¶schen, mÃ¼ssen erst die Daten aus der Tabelle Suchprofil_Info gelÃ¶scht werden um das Suchprofil lÃ¶schen zu kÃ¶nnen
 	 */
-	public void deleteSuchprofil(int profilid) throws IllegalArgumentException {
-		Vector <Suchprofil> suchprofil = getSuchprofilbyProfilId(profilid);
-		Vector <Info> info = getInfoIdByProfilId(profilid);
+	public void deleteSuchprofil(Profil pro) throws IllegalArgumentException {
+		Vector <Suchprofil> suchprofil = getSuchprofilbyProfilId(pro);
+		Vector <Info> info = getInfoIdByProfilId(pro);
 		Suchprofil_Info suchinfo = new Suchprofil_Info();
 
 		for(int s = 0; s < suchprofil.size(); s++)
 		{
 			for(int i = 0; i < info.size(); i++)
 			{ 
-				 suchinfo = getAllSuchprofilInfos(suchprofil.get(s).getId(), info.get(i).getId());
+				 suchinfo = getAllSuchprofilInfos(info.elementAt(i), suchprofil.elementAt(i));
 				
 				 
 				}
@@ -514,7 +545,7 @@ implements PartnerboerseAdministration {
 		}		
 		
 		
-		Vector<Suchprofil> suchpro = getSuchprofilbyProfilId(profilid);
+		Vector<Suchprofil> suchpro = getSuchprofilbyProfilId(pro);
 		
 		for ( int i = 0; i < suchpro.size(); i++) 
 		{
@@ -559,6 +590,7 @@ implements PartnerboerseAdministration {
 		// TODO Auto-generated method stub
 		return suchprofilMapper.getSuchprofilIdByProfil(pro);
 	}
+//	Doppelt, eines muss entfernt werden!
 	
 	
 	@Override
@@ -574,9 +606,9 @@ implements PartnerboerseAdministration {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public Suchprofil_Info getAllSuchprofilInfos (int infoid, int suchprofilid) throws IllegalArgumentException {
+	public Suchprofil_Info getAllSuchprofilInfos (Info in, Suchprofil such) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		Vector<Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(infoid, suchprofilid);;
+		Vector<Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(in, such);
 		Suchprofil_Info si = new Suchprofil_Info();
 		for(int i = 0; i < suchinfo.size(); i++) {
 			si.setId(suchinfo.get(i).getId());
@@ -584,23 +616,25 @@ implements PartnerboerseAdministration {
 		return si;
 	}
 	
-//	public void deleteSuchprofilInfo (int profilid){
-//		Vector <Suchprofil> suchp = suchprofilMapper.getSuchprofilIdByProfilId(profilid);
-//		Vector <Info> info = infoMapper.getInfoIdByProfilId(profilid);
-//		Vector <Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(infoid, suchprofilid);
+//	public void deleteSuchprofilInfo (Profil pro){
+//		Vector <Suchprofil> suchp = suchprofilMapper.getSuchprofilIdByProfil(pro);
+//		Vector <Info> info = infoMapper.getInfoIdByProfilId(pro);
+//		Vector <Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(info, such);
 //		
 //		
 //		for(int i=0; i < suchp.size(); i ++){
 //			
-//			if(suchp.get(i).getId())
+//			if(suchp)
 //		}
-		
+//		
 		
 //	}
 	
 	
 	
-	
+	public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info in) throws IllegalArgumentException {
+		return this.suchprofil_infoMapper.getAllSuchprofilInfoOf(in);
+	}
 	
 	
 	
@@ -737,7 +771,7 @@ implements PartnerboerseAdministration {
 		{
 			for(int i = 0; i < info.size(); i++)
 			{ 
-				 suchinfo = getAllSuchprofilInfos(suchprofil.get(s).getId(), info.get(i).getId());
+				 suchinfo = getAllSuchprofilInfos(info.elementAt(i), suchprofil.elementAt(i));
 				
 				 
 				}
@@ -762,10 +796,17 @@ implements PartnerboerseAdministration {
 		Vector<Info> infos = this.getAllInfo();
 		Vector<Auswahleigenschaft> aus = this.getAllAuswahleigenschaft();
 		Vector<Freitexteigenschaft> frei = this.getAllFreitexteigenschaft();
-		for(int i = 0; i < info.size(); i++){
-//			deleteInfo(pro, aus.elementAt(i), infos.elementAt(i));
+		for (int i = 0; i < infos.size(); i++){
+			infoMapper.deleteInfo(infos.elementAt(i));
+		}
+		
+		for (int i = 0; i < aus.size(); i++) {
+			auswahleigenschaftMapper.deleteAuswahleigenschaft(aus.elementAt(i));
 		}
 
+		for (int i = 0; i < frei.size(); i++) {
+			freitexteigenschaftMapper.deleteFreitexteigenschaft(frei.elementAt(i));
+		}
 		
 		
 	    
@@ -792,6 +833,7 @@ implements PartnerboerseAdministration {
 		return profilMapper.getAllProfil();
 		
 	}
+	// Doppelt, eines muss entfernt werden
 	
 	/**
 	 * Diese Methode ist fÃ¼r den Login wichtig, da sie prÃ¼ft ob eine Gmal bereits in der Datenbank vorhanden ist.
@@ -821,7 +863,7 @@ implements PartnerboerseAdministration {
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public Vector<Besuch> showVisitedProfiles(Profil pro) {
+	public Vector<Besuch> showVisitedProfiles(Profil pro) throws IllegalArgumentException {
 		
 		Vector<Besuch> allBesuche = new Vector<Besuch>();
 		allBesuche = this.getAllBesucheOf(pro);
@@ -900,7 +942,7 @@ implements PartnerboerseAdministration {
 	 * @param profilId_gesperrter
 	 * @return
 	 */
-	public boolean sperrPruefung(Profil pro)
+	public boolean sperrPruefung(Profil pro) throws IllegalArgumentException
 	{
 	Vector<Kontaktsperre> sperrL = getAllKontaktsperreOf(pro);
 	boolean sperrListe = false;
@@ -963,6 +1005,7 @@ implements PartnerboerseAdministration {
 		Profil profil1 = profilMapper.findByKey(p1.getId());
 		Profil profil2 = profilMapper.findByKey(p2.getId());
 		
+		
 		if (profil1 != null && profil2 != null){
 			if (profil1.getHaarfarbe() == profil2.getHaarfarbe()){
 				aehnlichkeitstreffer++;	
@@ -976,7 +1019,10 @@ implements PartnerboerseAdministration {
 			if (profil1.getReligion() == profil2.getReligion()){
 				aehnlichkeitstreffer++;	
 			}
-			prozent = aehnlichkeitstreffer*25;
+			if (profil1.getGeschlecht() != profil2.getGeschlecht()){
+				aehnlichkeitstreffer++;
+			}
+			prozent = aehnlichkeitstreffer*20;
 		}
 		
 			return prozent;

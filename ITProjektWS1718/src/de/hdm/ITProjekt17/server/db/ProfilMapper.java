@@ -90,7 +90,7 @@ public class ProfilMapper {
 		    	  				stmt1.setInt(6, pro.getKoerpergroesse());
 		    	  				stmt1.setString(7, pro.getReligion());
 		    	  				stmt1.setString(8, pro.getHaarfarbe());
-		    	  				stmt1.setBoolean(9, pro.getRaucher());
+		    	  				stmt1.setString(9, pro.getRaucher());
 		    	  				stmt1.setBoolean(10, pro.getGeschlecht());
 		    	  				
 		    	  				
@@ -159,7 +159,7 @@ public class ProfilMapper {
 		    	stmt.setInt(5, pro.getKoerpergroesse());
 		    	stmt.setString(6, pro.getReligion());
 		    	stmt.setString(7, pro.getHaarfarbe());
-		    	stmt.setBoolean(8, pro.getRaucher());
+		    	stmt.setString(8, pro.getRaucher());
 		    	stmt.setBoolean(9, pro.getGeschlecht());
 
 		    	stmt.setInt(10, pro.getId());
@@ -209,7 +209,7 @@ public class ProfilMapper {
 			          pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
 			          pro.setReligion(rs.getString("religion"));
 			          pro.setHaarfarbe(rs.getString("haarfarbe"));
-			          pro.setRaucher(rs.getBoolean("raucher"));
+			          pro.setRaucher(rs.getString("raucher"));
 			          pro.setGeschlecht(rs.getBoolean("geschlecht"));
 			          
 			          /**
@@ -264,7 +264,7 @@ public class ProfilMapper {
 		 				pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
 		 				pro.setReligion(rs.getString("religion"));
 		 				pro.setHaarfarbe(rs.getString("haarfarbe"));
-		 				pro.setRaucher(rs.getBoolean("raucher"));
+		 				pro.setRaucher(rs.getString("raucher"));
 		 				pro.setGeschlecht(rs.getBoolean("geschlecht"));
 	          
 		 				return pro;
@@ -305,7 +305,7 @@ public class ProfilMapper {
 		 				pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
 		 				pro.setReligion(rs.getString("religion"));
 		 				pro.setHaarfarbe(rs.getString("haarfarbe"));
-		 				pro.setRaucher(rs.getBoolean("raucher"));
+		 				pro.setRaucher(rs.getString("raucher"));
 		 				pro.setGeschlecht(rs.getBoolean("geschlecht"));
 	          			profil = pro;
 					}

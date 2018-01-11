@@ -22,6 +22,8 @@ public class Auswahleigenschaft extends Eigenschaft {
 	 */
 	private String wert = "";
 	
+	private int infoid = 0;
+	
 	public Auswahleigenschaft(){
 		
 	}
@@ -37,6 +39,9 @@ public class Auswahleigenschaft extends Eigenschaft {
 		return this.wert;
 	}
 	
+	public int getInfoid(){
+		return this.infoid;
+	}
 	
 	//---------------Set-Methoden----------------------------
 	
@@ -47,6 +52,10 @@ public class Auswahleigenschaft extends Eigenschaft {
 	 */
 	public void setWert(String wert){
 		this.wert = wert;
+	}
+	
+	public void setInfoid(int infoid){
+		this.infoid = infoid;
 	}
 	
 	/*

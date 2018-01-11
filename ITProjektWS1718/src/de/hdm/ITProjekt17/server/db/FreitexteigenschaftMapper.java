@@ -11,6 +11,7 @@ import java.util.Vector;
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
+import de.hdm.ITProjekt17.shared.bo.Info;
 
 public class FreitexteigenschaftMapper {
 
@@ -239,4 +240,47 @@ return null;
 		return frei;
 	}
 
+	public Vector<Freitexteigenschaft> getAllFreitexteigenschaftOf(Info info){
+		 
+	 	/**
+	 	 * Aufbau der DB Connection
+	 	 */
+	    Connection con = DBConnection.connection();
+	  
+	    Vector<Freitexteigenschaft> result = new Vector<Freitexteigenschaft>();
+	    
+	    try {
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM freitexteigenschaft WHERE infoid=? ");
+	    	stmt.setInt(1, info.getId());
+	      
+	    	ResultSet rs = stmt.executeQuery();
+	        
+	        /**
+	         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+	         */
+	        while (rs.next()) {
+	          Freitexteigenschaft frei = new Freitexteigenschaft();
+	        
+
+	          frei.setInfoid(rs.getInt("infoid"));
+	          /**
+	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+	           */
+	          
+	          System.out.println("Funktioniert");
+	          
+	          result.addElement(frei);
+	        }
+	      }
+	      catch (SQLException e) {
+	        e.printStackTrace();
+	      }
+
+	      /**
+	       *  Ergebnisvektor zurückgeben
+	       */
+		return result;
+	}	
 }
+
+

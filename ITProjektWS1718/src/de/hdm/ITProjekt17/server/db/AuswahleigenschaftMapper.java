@@ -10,6 +10,8 @@ import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
+import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
+import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 
@@ -248,4 +250,45 @@ public class AuswahleigenschaftMapper {
 	return null;
 	 	}
 	
+	 	public Vector<Auswahleigenschaft> getAllAuswahleigenschaftOf(Info info){
+			 
+		 	/**
+		 	 * Aufbau der DB Connection
+		 	 */
+		    Connection con = DBConnection.connection();
+		  
+		    Vector<Auswahleigenschaft> result = new Vector<Auswahleigenschaft>();
+		    
+		    try {
+		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM auswahleigenschaft WHERE infoid=? ");
+		    	stmt.setInt(1, info.getId());
+		      
+		    	ResultSet rs = stmt.executeQuery();
+		        
+		        /**
+		         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+		         */
+		        while (rs.next()) {
+		          Auswahleigenschaft aus = new Auswahleigenschaft();
+		        
+
+		          aus.setInfoid(rs.getInt("infoid"));
+		          /**
+		           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+		           */
+		          
+		          System.out.println("Funktioniert");
+		          
+		          result.addElement(aus);
+		        }
+		      }
+		      catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+
+		      /**
+		       *  Ergebnisvektor zurückgeben
+		       */
+			return result;
+		}	
 }

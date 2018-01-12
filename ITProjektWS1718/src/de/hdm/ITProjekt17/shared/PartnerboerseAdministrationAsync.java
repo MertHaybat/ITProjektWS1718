@@ -89,11 +89,13 @@ public interface PartnerboerseAdministrationAsync {
 //	doppelt?
 //_________________________________________________________________________________________________________________________
 
-	void createKontaktsperre(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
+	void createKontaktsperre(Profil pro, int profilId_gesperrter, AsyncCallback<Kontaktsperre> callback);
 	
 	void save(Kontaktsperre k, AsyncCallback<Kontaktsperre> callback);
 
-	void deleteKontaktsperreOf(Profil pro, AsyncCallback<Void> callback);
+	void deleteKontaktsperreOf(Profil pro, int profilId_gesperrter, AsyncCallback<Void> callback);
+	
+	void showBlockedProfilsOf(Profil pro, AsyncCallback<Vector<Kontaktsperre>> callback);
 	
 	void findById(int id, AsyncCallback<Kontaktsperre> callback);
 	
@@ -101,15 +103,13 @@ public interface PartnerboerseAdministrationAsync {
 
 	void getAllKontaktsperre(AsyncCallback<Vector<Kontaktsperre>> callback);
 
-
+	//_________________________________________________________________________________________________________________________
 	
-
-
-	void createMerkzettel(int profilId_gemerkter, int profilId_merkender, AsyncCallback<Merkzettel> callback);
+	void createMerkzettel(Profil pro, int profilId_gemerkter, AsyncCallback<Merkzettel> callback);
 
 	void save(Merkzettel merk, AsyncCallback<Void> callback);
 
-	void deleteMerkzettel(Profil pro, AsyncCallback<Void> callback);
+	void deleteProfilVonMerkliste(Profil pro, int profilId_gemerkter, AsyncCallback<Void> callback);
 
 	void findByKey(int id, AsyncCallback<Merkzettel> callback);
 	
@@ -117,11 +117,12 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void showMerklisteOf(Profil pro, AsyncCallback<Vector<Merkzettel>> callback);
 	
+	//_________________________________________________________________________________________________________________________
 	
 	void createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse,
 			String religion, String haarfarbe, String raucher, boolean geschlecht, AsyncCallback<Profil> callback);
 
-	void save(Profil pro, AsyncCallback<Profil> callback);
+	void save(Profil pro, AsyncCallback<Void> callback);
 
 	void delete(Profil pro, AsyncCallback<Void> callback);
 
@@ -133,6 +134,7 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void pruefenAufExistenz(String email, AsyncCallback<Profil> callback);
 	
+	//_________________________________________________________________________________________________________________________
 	
 	void createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, String raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId,
@@ -148,15 +150,17 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void findSuchprofilByProfilId(Profil pro, AsyncCallback<Vector<Suchprofil>> callback);
 
+	//_________________________________________________________________________________________________________________________
 	
 	void getAllSuchprofilInfos(Info in, Suchprofil such, AsyncCallback<Suchprofil_Info> callback);
 	
 	void getAllSuchprofilInfoOf(Info in, AsyncCallback<Vector<Suchprofil_Info>> callback);
 
+	//_________________________________________________________________________________________________________________________
 	
 	void showVisitedProfiles(Profil pro, AsyncCallback<Vector<Besuch>> callback);
 	
-	void deleteBesuche(Profil pro, AsyncCallback<Void> callback);
+	void deleteBesuche(Profil pro, int besuchterNutzerID, AsyncCallback<Void> callback);
 	
 	void getAllBesucheOf(Profil pro, AsyncCallback<Vector<Besuch>> callback);
 	
@@ -166,6 +170,7 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void visit(Profil pro, AsyncCallback<Void> callback);
 
+	//_________________________________________________________________________________________________________________________
 	
 	void berechneAhnlichkeitProfilProfil(Profil p1, Profil p2, AsyncCallback<Double> callback);
 

@@ -55,27 +55,25 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector<Info> getAllInfo() throws IllegalArgumentException;
 	public Vector<Info> getAllInfobyProfil(Profil pro) throws IllegalArgumentException; 
 	
-	public Kontaktsperre createKontaktsperre(Kontaktsperre k) throws IllegalArgumentException;
+	public Kontaktsperre createKontaktsperre(Profil pro, int profilId_gesperrter) throws IllegalArgumentException;
 	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException;
-	public void deleteKontaktsperreOf(Profil pro) throws IllegalArgumentException;
+	public void deleteKontaktsperreOf(Profil pro, int profilId_gesperrter) throws IllegalArgumentException;
 	public Vector<Kontaktsperre> showBlockedProfilsOf(Profil pro) throws IllegalArgumentException;
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
 	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
 	public Vector<Kontaktsperre> getAllKontaktsperreOf(Profil pro) throws IllegalArgumentException;
 
-	//public void kontaktsperreHinzufügen(int profilId_sperrender, int profilId_gesperrter) throws IllegalArgumentException;
-
-	public Merkzettel createMerkzettel(int profilId_gemerkter, int profilId_merkender) throws IllegalArgumentException;
+	public Merkzettel createMerkzettel(Profil pro, int profilId_gemerkter) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;
 	public Merkzettel findByKey (int id) throws IllegalArgumentException; 
 	public Vector<Merkzettel> getAllMerkzettelOf(Profil pro) throws IllegalArgumentException;
-	public void deleteProfilVonMerkliste(Profil pro) throws IllegalArgumentException;
+	public void deleteProfilVonMerkliste(Profil pro, int profilId_gemerkter) throws IllegalArgumentException;
 	public Vector<Merkzettel> showMerklisteOf(Profil pro) throws IllegalArgumentException;
 	
 	Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, String raucher, boolean geschlecht) throws IllegalArgumentException;
 	public void delete(Profil pro) throws IllegalArgumentException;
-	public Profil save(Profil pro) throws IllegalArgumentException;
+	public void save(Profil pro) throws IllegalArgumentException;
 	public Profil getProfilById (int id) throws IllegalArgumentException;
 	public Vector <Profil> getAllProfil() throws IllegalArgumentException;
 	public Profil checkProfil(String email) throws IllegalArgumentException;
@@ -93,14 +91,10 @@ public interface PartnerboerseAdministration extends RemoteService {
 
 	public Suchprofil_Info getAllSuchprofilInfos (Info in, Suchprofil such) throws IllegalArgumentException;
 	public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info in) throws IllegalArgumentException;
-///////
-//	Profil save(Profil pro);
-///////
 
-	void deleteMerkzettel(Profil pro);
 
 	public Vector<Besuch> showVisitedProfiles(Profil pro) throws IllegalArgumentException;
-	public void deleteBesuche(Profil pro) throws IllegalArgumentException;
+	public void deleteBesuche(Profil pro, int besuchterNutzerID) throws IllegalArgumentException;
 	public Vector<Besuch> getAllBesucheOf(Profil pro) throws IllegalArgumentException;
 	public Vector<Besuch> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException;
 	public boolean sperrPruefung(Profil pro) throws IllegalArgumentException;

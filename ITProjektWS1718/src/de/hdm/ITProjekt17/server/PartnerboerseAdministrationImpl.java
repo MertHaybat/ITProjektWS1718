@@ -13,7 +13,6 @@ import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
 import de.hdm.ITProjekt17.shared.bo.Besuch;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -26,16 +25,66 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class PartnerboerseAdministrationImpl extends RemoteServiceServlet 
 implements PartnerboerseAdministration {
 
+	/**
+	   * Referenz auf den AuswahleigenschaftMapper, der Auswahleigenschaftsobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private AuswahleigenschaftMapper auswahleigenschaftMapper = null;
+	
+	/**
+	   * Referenz auf den EigenschaftMapper, der Eigenschaftsobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private EigenschaftMapper eigenschaftMapper = null;
+	
+	/**
+	   * Referenz auf den FreitexteigenschaftMapper, der Freitexteigenschaftsobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private FreitexteigenschaftMapper freitexteigenschaftMapper = null;
+	
+	/**
+	   * Referenz auf den InfoMapper, der Infoobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private InfoMapper infoMapper = null;
+	
+	/**
+	   * Referenz auf den ProfilMapper, der Profilobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private ProfilMapper profilMapper = null;
+	
+	/**
+	   * Referenz auf den KontaktsperreMapper, der Kontaktsperrobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private KontaktsperreMapper kontaktsperreMapper = null;
+	
+	/**
+	   * Referenz auf den MerkzettelMapper, der Merkzettelobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private MerkzettelMapper merkzettelMapper = null;
+	
+	/**
+	   * Referenz auf den SuchprofilMapper, der Suchprofilobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private SuchprofilMapper suchprofilMapper = null;
+	
+	/**
+	   * Referenz auf den Suchprofil_InfoMapper, der Suchprofil_Infoobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private Suchprofil_InfoMapper suchprofil_infoMapper = null;
+	
+	/**
+	   * Referenz auf den BesuchMapper, der Besuchobjekte mit der Datenbank
+	   * abgleicht.
+	   */
 	private BesuchMapper besuchMapper = null;
+	
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
 		
@@ -58,7 +107,7 @@ implements PartnerboerseAdministration {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		Auswahleigenschaft aus = new Auswahleigenschaft();
 		aus.setWert(wert);
 		
@@ -68,7 +117,7 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public void save(Auswahleigenschaft aus) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		try {
 			auswahleigenschaftMapper.updateAuswahleigenschaft(aus);
 		} catch(Exception e){
@@ -78,7 +127,7 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		try {
 			Vector<Info> auswahlinfo = this.getAllInfosAsAuswahleigenschaft(aus);
 			if (auswahlinfo != null){
@@ -104,15 +153,18 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		return this.auswahleigenschaftMapper.findByKey(id);
 	}
 
 	@Override
 	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		
-		return this.auswahleigenschaftMapper.getAll();
+		try {
+			return this.auswahleigenschaftMapper.getAll();
+		} catch (Exception e){
+			
+		}
+		return null;
 	}
 
 	public Vector<Auswahleigenschaft> getAllAuswahleigenschaftOf(Info in) throws IllegalArgumentException {
@@ -131,7 +183,7 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public void save(Eigenschaft eig) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+
 		try {
 			eigenschaftMapper.updateEigenschaft(eig);
 		} catch(Exception e){
@@ -141,7 +193,7 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public void delete(Eigenschaft eig) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		try {
 			eigenschaftMapper.deleteEigenschaft(eig);
 		} catch(Exception e){
@@ -151,20 +203,24 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		return this.eigenschaftMapper.findByKey(id);
 	}
 
 	@Override
 	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return this.eigenschaftMapper.getAll();
+		try {
+			return this.eigenschaftMapper.getAll();
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Freitexteigenschaft createFreitexteigenschaft(String wert) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		Freitexteigenschaft frei = new Freitexteigenschaft();
 		frei.setWert(wert);
 		
@@ -174,7 +230,7 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public void save(Freitexteigenschaft frei) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		try {
 			freitexteigenschaftMapper.updateFreitexteigenschaft(frei);
 		} catch(Exception e){
@@ -184,7 +240,7 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public void delete(Freitexteigenschaft frei) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		try {
 			Vector<Info> freitextinfo = this.getAllInfosAsFreitexteigenschaft(frei);
 			if (freitextinfo != null){
@@ -214,26 +270,26 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		return this.freitexteigenschaftMapper.findByKey(id);
 	}
 
 	@Override
 	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		return this.freitexteigenschaftMapper.getAll();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public Vector<Info> getAllInfobyProfil(Profil pro) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		return infoMapper.getInfoIdByProfilId(pro);
 	}
 	
 	@Override
 	public Info createInfo(Profil pro, String text, Auswahleigenschaft aus, Freitexteigenschaft frei) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		Info in = new Info();
 		in.setProfilId(pro.getId());
 		in.setText(text);
@@ -246,7 +302,7 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public void save(Info in) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		try {
 			infoMapper.updateInfo(in);
 		} catch(Exception e){
@@ -256,7 +312,7 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public void delete(Info in) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		try {
 			Vector<Auswahleigenschaft> auswahlinfo = new Vector<Auswahleigenschaft>();
 			
@@ -334,14 +390,22 @@ implements PartnerboerseAdministration {
 	
 	@Override
 	public Info findByKeyInfo(int id) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return this.infoMapper.findByKey(id);
+		try {
+			return this.infoMapper.findByKey(id);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 
 	@Override
 	public Vector<Info> getAllInfo() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return this.infoMapper.getAll();
+		try {
+			return this.infoMapper.getAll();
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 
 	//////////////////////////////////////////////Kontaktsperre///////////////////////////////////////////////////////////////////////////
@@ -350,12 +414,13 @@ implements PartnerboerseAdministration {
 	 * Methode um ein einzelnes Profil auf die Sperrliste zu setzen.
 	 * LoggedIn steht fuer den Sperrenden User der andere Teilnehmer auf die Sperrliste setzt.
 	 */
-	public void createKontaktsperre(Profil pro, int profilId_gesperrter) throws IllegalArgumentException
+	public Kontaktsperre createKontaktsperre(Profil pro, int profilId_gesperrter) throws IllegalArgumentException
 	{
 			Kontaktsperre sperre = new Kontaktsperre();
 			sperre.setProfilId_sperrender(pro.getId());
 			sperre.setProfilId_gesperrter(profilId_gesperrter);
 			kontaktsperreMapper.insertKontaktsperre(sperre);
+			return sperre;
 	}
 
 	/**
@@ -418,10 +483,28 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
+	@Override
+	public Kontaktsperre findById(int id) throws IllegalArgumentException {
+		try {
+			this.kontaktsperreMapper.findByKey(id);
+		} catch(Exception e){
+			
+		}
+		return null;
+	}
+	
+	@Override
+	public Vector<Kontaktsperre> getAllKontaktsperre() throws IllegalArgumentException {
+		try {
+			this.kontaktsperreMapper.getAllKontaktsperre();
+		} catch (Exception e){
+			
+		}
+		return null;
+	}
+
 
 	////////////////////////////////////////Merkzettel/////////////////////////////////////////////////////////////////////////////////
-
-
 	/**
 	 * Mit diesere Methode werden alle Merkzettel anhand der Profil Id des Merkenden angezeigt.
 	 * DIes ist eine Hilfsmethode fÃ¼r andere Operationen in dieser Klasse.
@@ -435,12 +518,16 @@ implements PartnerboerseAdministration {
 	 * Methode um ein einzelnes Profil auf den Merkzettel zu setzen.
 	 * LoggedIn steht fÃ¼r den Merkenden User der andere Teilnehmer auf seine Merkliste(Merkzettel) setzt.
 	 */
-	public void createMerzettel(Profil pro, int profilId_gemerkter) throws IllegalArgumentException
-	{
-			Merkzettel merk = new Merkzettel();
-			merk.setProfilId_merkender(pro.getId());
-			merk.setProfilId_gemerkter(profilId_gemerkter);
-			merkzettelMapper.insertMerkzettel(merk);
+	
+	@Override
+	public Merkzettel createMerkzettel(Profil pro, int profilId_gemerkter) throws IllegalArgumentException {
+		Merkzettel merk = new Merkzettel();
+		merk.setProfilId_merkender(pro.getId());
+		merk.setProfilId_gemerkter(profilId_gemerkter);
+		
+		merk.setId(1);
+		return this.merkzettelMapper.insertMerkzettel(merk);
+	
 	}
 
 	/**
@@ -460,13 +547,12 @@ implements PartnerboerseAdministration {
 		}
 		
 	
-	
-/**
- * Auslesen aller User eines Profils die vom Teilnehmer auf den Merkzettel gesetzt wurden.
- * @param merk
- * @return
- * @throws IllegalArgumentException
- */
+	/**
+	 * Auslesen aller User eines Profils die vom Teilnehmer auf den Merkzettel gesetzt wurden.
+	 * @param merk
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	public Vector<Merkzettel> showMerklisteOf(Profil pro) throws IllegalArgumentException
 	{
 		Vector<Merkzettel> allGemerkteProfile = new Vector<Merkzettel>();
@@ -483,8 +569,6 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
-	
-	
 
 	@Override
 	public void save(Merkzettel merk) throws IllegalArgumentException {
@@ -493,6 +577,16 @@ implements PartnerboerseAdministration {
 		} catch (Exception e){
 			
 		}
+	}
+
+	@Override
+	public Merkzettel findByKey(int id) throws IllegalArgumentException {
+		try {
+			this.merkzettelMapper.findByKey(id);
+		} catch (Exception e){
+			
+		}
+		return null;
 	}
 	
 	
@@ -562,8 +656,12 @@ implements PartnerboerseAdministration {
 	 * @return
 	 */
 	public Vector <Suchprofil> findSuchprofilByProfilId(Profil pro){
-		
-		return this.suchprofilMapper.getSuchprofilIdByProfil(pro);
+		try {
+			return this.suchprofilMapper.getSuchprofilIdByProfil(pro);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 	
 
@@ -571,8 +669,12 @@ implements PartnerboerseAdministration {
 	 * Mit dieser Methode werden alle Suchprofile Ã¼ber die Suchprofil Id aus der Db heraus herausgefiltert.
 	 */
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException {
-		
-		return this.suchprofilMapper.findByKey(id);
+		try {
+			return this.suchprofilMapper.findByKey(id);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 
 	/**
@@ -587,17 +689,21 @@ implements PartnerboerseAdministration {
 	 * Es ist mÃ¶glich ein Suchprofil des einzelnen Users anhand der Profil ID heauszusuchen.
 	 */
 	public Vector<Suchprofil> getSuchprofilbyProfilId(Profil pro) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return suchprofilMapper.getSuchprofilIdByProfil(pro);
+		try {
+			return suchprofilMapper.getSuchprofilIdByProfil(pro);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 //	Doppelt, eines muss entfernt werden!
 	
 	
 	@Override
 	public Suchprofil save(Suchprofil such) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		try{ suchprofilMapper.updateProfil(such);
 		
+		try{ 
+			suchprofilMapper.updateProfil(such);
 		} catch (Exception e){
 			
 		}
@@ -607,7 +713,7 @@ implements PartnerboerseAdministration {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public Suchprofil_Info getAllSuchprofilInfos (Info in, Suchprofil such) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		
 		Vector<Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(in, such);
 		Suchprofil_Info si = new Suchprofil_Info();
 		for(int i = 0; i < suchinfo.size(); i++) {
@@ -633,7 +739,12 @@ implements PartnerboerseAdministration {
 	
 	
 	public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info in) throws IllegalArgumentException {
-		return this.suchprofil_infoMapper.getAllSuchprofilInfoOf(in);
+		try {
+			return this.suchprofil_infoMapper.getAllSuchprofilInfoOf(in);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 	
 	
@@ -650,7 +761,12 @@ implements PartnerboerseAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Vector <Profil> getAllProfils() throws IllegalArgumentException{
-		return this.profilMapper.getAllProfil();
+		try {
+			return this.profilMapper.getAllProfil();
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 	
 	
@@ -661,7 +777,12 @@ implements PartnerboerseAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Profil getByEmail(String email) throws IllegalArgumentException {
-		return profilMapper.findByEmail(email);
+		try{
+			return profilMapper.findByEmail(email);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 	
 	
@@ -720,6 +841,16 @@ implements PartnerboerseAdministration {
 		}
 		return pro;
 
+	}
+	
+
+	@Override
+	public void save(Profil pro) throws IllegalArgumentException {
+		try {
+			this.profilMapper.updateProfil(pro);
+		} catch (Exception e){
+			
+		}
 	}
 	
 	/**
@@ -825,16 +956,24 @@ implements PartnerboerseAdministration {
 	 * Es werden Profile der PartnerbÃ¶rse anhand der Profil Id aus der Datenbnak gefiltert.
 	 */
 	public Profil getProfilById(int id) throws IllegalArgumentException {
-		return this.profilMapper.findByKey(id);
+		try {
+			return this.profilMapper.findByKey(id);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 	
 	/**
 	 * Hier werden alle Profile der PartnerbÃ¶rse herausgefiltert die sich in der Datenbank befinden.
 	 */
 	public Vector<Profil> getAllProfil() throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return profilMapper.getAllProfil();
-		
+		try {
+			return profilMapper.getAllProfil();
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 	// Doppelt, eines muss entfernt werden
 	
@@ -904,8 +1043,12 @@ implements PartnerboerseAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Vector<Besuch> getAllBesucheOf(Profil pro) throws IllegalArgumentException {
-		
-		return besuchMapper.getAllBesucheDesBesuchenden(pro);
+		try {
+			return besuchMapper.getAllBesucheDesBesuchenden(pro);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 
 	/**
@@ -965,8 +1108,12 @@ implements PartnerboerseAdministration {
 
 	@Override
 	public Vector<Info> getInfoIdByProfilId(Profil pro) throws IllegalArgumentException {
-		
-		return infoMapper.getInfoIdByProfilId(pro);
+		try {
+			return infoMapper.getInfoIdByProfilId(pro);
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 
 	/**
@@ -1033,5 +1180,4 @@ implements PartnerboerseAdministration {
 			
 	}
 
-	
 }

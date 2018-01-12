@@ -71,7 +71,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector<Merkzettel> showMerklisteOf(Profil pro) throws IllegalArgumentException;
 	
 	Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, boolean geschlecht) throws IllegalArgumentException;
+			String haarfarbe, String raucher, String geschlecht) throws IllegalArgumentException;
 	public void delete(Profil pro) throws IllegalArgumentException;
 	public void save(Profil pro) throws IllegalArgumentException;
 	public Profil getProfilById (int id) throws IllegalArgumentException;

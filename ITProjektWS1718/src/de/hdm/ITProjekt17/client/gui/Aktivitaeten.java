@@ -240,27 +240,27 @@ public class Aktivitaeten extends VerticalPanel {
 //				}
 //			});
 			
-			sperren.addClickHandler(new ClickHandler(){
-
-				@Override
-				public void onClick(ClickEvent event) {
-					Kontaktsperre ks = new Kontaktsperre();
-					ks.setProfilId_sperrender(profil_eigenes.getId());
-					ks.setProfilId_gesperrter(profil_besucher.getId());
-					pbverwaltung.createKontaktsperre(ks, new AsyncCallback<Kontaktsperre>(){
-
-						@Override
-						public void onFailure(Throwable caught) {							
-						}
-
-						@Override
-						public void onSuccess(Kontaktsperre result) {
-							Window.alert("Sie haben die Person erfolgreich gesperrt");
-						}
-						
-					});
-				}
-			});
+//			sperren.addClickHandler(new ClickHandler(){
+//
+//				@Override
+//				public void onClick(ClickEvent event) {
+//					Kontaktsperre ks = new Kontaktsperre();
+//					ks.setProfilId_sperrender(profil_eigenes.getId());
+//					ks.setProfilId_gesperrter(profil_besucher.getId());
+//					pbverwaltung.createKontaktsperre(ks, new AsyncCallback<Kontaktsperre>(){
+//
+//						@Override
+//						public void onFailure(Throwable caught) {							
+//						}
+//
+//						@Override
+//						public void onSuccess(Kontaktsperre result) {
+//							Window.alert("Sie haben die Person erfolgreich gesperrt");
+//						}
+//						
+//					});
+//				}
+//			});
 			
 			loeschen.addClickHandler(new ClickHandler(){
 

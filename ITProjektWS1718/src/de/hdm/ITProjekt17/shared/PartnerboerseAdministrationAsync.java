@@ -119,7 +119,7 @@ public interface PartnerboerseAdministrationAsync {
 	
 	
 	void createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse,
-			String religion, String haarfarbe, String raucher, boolean geschlecht, AsyncCallback<Profil> callback);
+			String religion, String haarfarbe, String raucher, String geschlecht, AsyncCallback<Profil> callback);
 
 	void save(Profil pro, AsyncCallback<Profil> callback);
 

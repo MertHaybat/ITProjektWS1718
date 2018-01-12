@@ -56,7 +56,7 @@ public class ITProjektWS1718 implements EntryPoint{
 			if (loginInfo.isLoggedIn()) {
 				
 				profil.setEmail("blabla@web.de");
-				profil.setGeschlecht(true);
+				profil.setGeschlecht("Männlich");
 				profil.setHaarfarbe("schwarz");
 				profil.setId(1);
 				profil.setKoerpergroesse(196);

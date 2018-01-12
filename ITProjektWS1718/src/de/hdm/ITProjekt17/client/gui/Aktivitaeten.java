@@ -217,28 +217,28 @@ public class Aktivitaeten extends VerticalPanel {
 			vpanel.add(ft1);
 			this.add(vpanel);
 			
-			entsperren.addClickHandler(new ClickHandler(){
-
-				@Override
-				public void onClick(ClickEvent event) {
-					Kontaktsperre ks = new Kontaktsperre();
-					ks.setProfilId_sperrender(profil_eigenes.getId());
-					ks.setProfilId_gesperrter(profil_besucher.getId());
-					pbverwaltung.deleteKontaktsperre(ks, new AsyncCallback<Void>(){
-
-						@Override
-						public void onFailure(Throwable caught) {
-							
-						}
-
-						@Override
-						public void onSuccess(Void result) {
-							Window.alert("Kontakt wurde entsperrt");
-						}
-						
-					});
-				}
-			});
+//			entsperren.addClickHandler(new ClickHandler(){
+//
+//				@Override
+//				public void onClick(ClickEvent event) {
+//					Kontaktsperre ks = new Kontaktsperre();
+//					ks.setProfilId_sperrender(profil_eigenes.getId());
+//					ks.setProfilId_gesperrter(profil_besucher.getId());
+//					pbverwaltung.deleteKontaktsperre(ks, new AsyncCallback<Void>(){
+//
+//						@Override
+//						public void onFailure(Throwable caught) {
+//							
+//						}
+//
+//						@Override
+//						public void onSuccess(Void result) {
+//							Window.alert("Kontakt wurde entsperrt");
+//						}
+//						
+//					});
+//				}
+//			});
 			
 			sperren.addClickHandler(new ClickHandler(){
 

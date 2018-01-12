@@ -13,6 +13,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -22,20 +23,23 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Profil;
+import javafx.scene.control.Alert;
 
 public class Profilseite extends VerticalPanel{
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 	
+	private TextBox tbemail = new TextBox();
 	private TextBox tbvorname = new TextBox();
 	private TextBox tbnachname = new TextBox();
 	private DateBox geburtsdatum = new DateBox();
 	private TextBox tbhaarfarbe = new TextBox();
 	private TextBox tbreligion = new TextBox();
 	private TextBox tbkörpergröße = new TextBox();
-	private TextBox tbraucher = new TextBox();
-	private TextBox tbgeschlecht = new TextBox();
+	private ListBox lbraucher = new ListBox();
+	private ListBox lbgeschlecht = new ListBox();
 	
+	private Label lb9 = new Label("Email");
 	private Label lb1 = new Label("Vorname: ");
 	private Label lb2 = new Label("Nachname: ");
 	private Label lb3 = new Label("Geburtsdatum: ");
@@ -54,31 +58,48 @@ public class Profilseite extends VerticalPanel{
 
 	private VerticalPanel vpanel = new VerticalPanel();
 	
+	
 	public Profilseite(){
 		Window.alert("Willkommen auf MOFOS. Tragen Sie bitte nachfolgend die Daten zu Ihrer Person ein.");
 		
-		ft1.setWidget(0, 0, lb1);
-		ft1.setWidget(0, 1, tbvorname);
-		ft1.setWidget(1, 0, lb2);
-		ft1.setWidget(1, 1, tbnachname);
-		ft1.setWidget(2, 0, lb3);
-		ft1.setWidget(2, 1, geburtsdatum);
-		ft1.setWidget(3, 0, lb4);
-		ft1.setWidget(3, 1, tbhaarfarbe);
-		ft1.setWidget(4, 0, lb5);
-		ft1.setWidget(4, 1, tbreligion);
-		ft1.setWidget(5, 0, lb6);
-		ft1.setWidget(5, 1, tbkörpergröße);
-		ft1.setWidget(6, 0, lb7);
-		ft1.setWidget(6, 1, tbraucher);
-		ft1.setWidget(7, 0, lb8);
-		ft1.setWidget(7, 1, tbgeschlecht);
-		ft1.setWidget(8, 0, ok);
-		ft1.setWidget(8, 1, abbrechen);
-		ft1.setWidget(8, 2, infoEigenschaftenAnzeigen);
+		ft1.setWidget(0,0,lb9);
+		ft1.setWidget(0, 1, tbemail);
+		ft1.setWidget(1, 0, lb1);
+		ft1.setWidget(1, 1, tbvorname);
+		ft1.setWidget(2, 0, lb2);
+		ft1.setWidget(2, 1, tbnachname);
+		ft1.setWidget(3, 0, lb8);
+		ft1.setWidget(3, 1, lbgeschlecht);
+		ft1.setWidget(4, 0, lb3);
+		ft1.setWidget(4, 1, geburtsdatum);
+		ft1.setWidget(5, 0, lb4);
+		ft1.setWidget(5, 1, tbhaarfarbe);
+		ft1.setWidget(6, 0, lb5);
+		ft1.setWidget(6, 1, tbreligion);
+		ft1.setWidget(7, 0, lb6);
+		ft1.setWidget(7, 1, tbkörpergröße);
+		ft1.setWidget(8, 0, lb7);
+		ft1.setWidget(8, 1, lbraucher);
+		ft1.setWidget(9, 0, ok);
+		ft1.setWidget(9, 1, abbrechen);
+		ft1.setWidget(9, 2, infoEigenschaftenAnzeigen);
 		vpanel.add(ft1);
 		this.add(vpanel);
+		
+		//ListBox Raucher befüllen.
+		
+	      lbraucher.addItem("Ja");
+	      lbraucher.addItem("Nein");
+	      lbraucher.addItem("Gelegentlich");
+	      lbraucher.addItem("Partyraucher");
+	      lbraucher.addItem("Nur nach dem Sex");		
+		  
+		//ListBox Geschlecht befüllen.
+			
+	      lbgeschlecht.addItem("Männlich");
+	      lbgeschlecht.addItem("Weiblich");
 
+		
 		// Create a date picker
 		final DatePicker datepicker_geburtsdatum = new DatePicker();
 		final Label text = new Label();
@@ -103,26 +124,26 @@ public class Profilseite extends VerticalPanel{
 
 				@Override
 				public void onClick(ClickEvent event) {
-//					
-//					pbverwaltung.createProfil(tbvorname.getValue(), tbnachname.getValue(), geburtsdatum.getValue(), 
-//							Integer.parseInt(tbkörpergröße.getValue()),
-//							tbreligion.getValue(), tbhaarfarbe.getValue(), Boolean.parseBoolean(tbraucher.getValue()), new AsyncCallback<Profil>(){
-//
-//								@Override
-//								public void onFailure(Throwable caught) {
-//									// TODO Auto-generated method stub
-//									
-//								}
-//
-//								@Override
-//								public void onSuccess(Profil result) {
-//									RootPanel.get("Details").clear();
-//									RootPanel.get("Details").add(new Profilseite(result));
-//								}
-//
-//							
-//						
-//					});
+					
+					pbverwaltung.createProfil(tbemail.getValue(), tbvorname.getValue(), tbnachname.getValue(), geburtsdatum.getValue(), 
+							Integer.parseInt(tbkörpergröße.getValue()),
+							tbreligion.getValue(), tbhaarfarbe.getValue(), lbraucher.getSelectedValue(), lbgeschlecht.getSelectedValue(), new AsyncCallback<Profil>(){
+
+								@Override
+								public void onFailure(Throwable caught) {
+									// TODO Auto-generated method stub
+							Window.alert("Fehlerhafte Eingabe");		
+								}
+
+								@Override
+								public void onSuccess(Profil result) {
+									RootPanel.get("Details").clear();
+									RootPanel.get("Details").add(new Profilseite(result));
+								}
+
+							
+						
+					});
 					
 				}
 		    	
@@ -135,14 +156,15 @@ public class Profilseite extends VerticalPanel{
 	}
 	
 	public Profilseite(final Profil profil){
+		tbemail.setValue(profil.getEmail());
 		tbvorname.setValue(profil.getVorname());
 		tbnachname.setValue(profil.getNachname());
 		geburtsdatum.setValue(profil.getGeburtsdatum());
 		tbhaarfarbe.setValue(profil.getHaarfarbe());
 		tbreligion.setValue(profil.getReligion());
 		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
-		tbraucher.setValue(profil.getRaucher());
-		tbgeschlecht.setValue(String.valueOf(profil.getGeschlecht()));
+//		lbraucher.setValue(spacing, profil.getRaucher());
+//		lbgeschlecht.setValue(profil.getGeschlecht());
 	
 	    infoEigenschaftenAnzeigen.addClickHandler(new ClickHandler() {
 			
@@ -151,7 +173,7 @@ public class Profilseite extends VerticalPanel{
 				// TODO Auto-generated method stub
 				
 				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(new Suchen(profil));
+				RootPanel.get("Details").add(new Info(profil));
 			}
 		});
 	    

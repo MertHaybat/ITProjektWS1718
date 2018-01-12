@@ -18,7 +18,7 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Geschlecht im Profil; Gibt an, ob die Person weiblich oder mÃ¤nnlich ist
 	 */
-	private boolean geschlecht = false;
+	private String geschlecht = "";
 	
 	
 	/**
@@ -67,7 +67,7 @@ public class Profil extends BusinessObject {
 	 */
 
 	
-//	public Profil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String haarfarbe, String religion, boolean raucher){
+//	public Profil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String haarfarbe, String religion, String raucher){
 //		this.vorname = vorname;
 //		this.nachname = nachname;
 //		this.geburtsdatum = geburtsdatum;
@@ -92,7 +92,7 @@ public class Profil extends BusinessObject {
 	 * @return geschlecht
 	 */
 	
-	public boolean getGeschlecht(){
+	public String getGeschlecht(){
 		return this.geschlecht;
 	}
 
@@ -166,7 +166,7 @@ public class Profil extends BusinessObject {
 	 * Setzen der Variable Geschlecht
 	 * @param geschlecht
 	 */
-	public void setGeschlecht(boolean geschlecht){
+	public void setGeschlecht(String geschlecht){
 		this.geschlecht = geschlecht;
 	}
 
@@ -241,7 +241,7 @@ public class Profil extends BusinessObject {
 					" Nachname: #" + this.getNachname() + 
 					" Geburtsdatum: #" + this.getGeburtsdatum() + 
 					" Haarfarbe: #" + this.getHaarfarbe() + 
-					" KÃ¶rpergrÃ¶ÃŸe: #" + this.getKoerpergroesse() + 
+					" Körpergröße: #" + this.getKoerpergroesse() + 
 					" Religion: #" + this.getReligion() + 
 					" Raucher: #" + this.getRaucher() +
 					" Geschlecht: #" + this.getGeschlecht();

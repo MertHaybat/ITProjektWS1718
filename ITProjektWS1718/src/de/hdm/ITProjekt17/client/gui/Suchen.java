@@ -30,7 +30,7 @@ public class Suchen extends VerticalPanel {
 	 *	Deklarieren und Instanziieren der Widgets 
 	 */
 	
-	
+	private TextBox tbemail = new TextBox();
 	private TextBox tbvorname = new TextBox();
 	private TextBox tbnachname = new TextBox();
 	private DateBox geburtsdatum = new DateBox();
@@ -40,7 +40,7 @@ public class Suchen extends VerticalPanel {
 	private TextBox tbminalter = new TextBox();
 	private TextBox tbmaxalter = new TextBox();
 
-
+	private Label lb10 = new Label("Email: ");
 	private Label lb1 = new Label("Vorname: ");
 	private Label lb2 = new Label("Nachname: ");
 	private Label lb3 = new Label("Geburtsdatum: ");
@@ -52,11 +52,9 @@ public class Suchen extends VerticalPanel {
 	private Label lb9 = new Label("Alter");
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY"); 
 
-	private RadioButton rbraucher = new RadioButton("Raucher","Ja");
-	private RadioButton rbnichtraucher = new RadioButton("Nichtraucher","Nein");
-	private RadioButton rbraucheregal = new RadioButton("Nichtraucher","Egal");
-	private RadioButton rbgeschlechtMännlich = new RadioButton("männlich","männlich");
-	private RadioButton rbgeschlechtWeiblich = new RadioButton("weiblich","weiblich");
+	private ListBox lbraucher = new ListBox();
+	private ListBox lbgeschlecht = new ListBox();
+
 
 	private Button suchen = new Button("Suchen");
 	private Button suchprofilSpeichern = new Button("Suchprofil speichern");
@@ -70,45 +68,56 @@ public class Suchen extends VerticalPanel {
 
 	
 	public Suchen(final Profil profil){
-	tbvorname.setValue(profil.getVorname());
-	tbnachname.setValue(profil.getNachname());
-	geburtsdatum.setValue(profil.getGeburtsdatum());
-	tbhaarfarbe.setValue(profil.getHaarfarbe());
-	tbreligion.setValue(profil.getReligion());
-	rbgeschlechtMännlich.setValue(profil.getGeschlecht());
-	rbgeschlechtWeiblich.setValue(profil.getGeschlecht());
-//	rbraucher.setValue(profil.getRaucher());
-//	rbraucheregal.setValue(profil.getRaucher());
-//	rbnichtraucher.setValue(profil.getRaucher());
+
+		tbemail.setValue(profil.getEmail());
+		tbvorname.setValue(profil.getVorname());
+		tbnachname.setValue(profil.getNachname());
+		geburtsdatum.setValue(profil.getGeburtsdatum());
+		tbhaarfarbe.setValue(profil.getHaarfarbe());
+		tbreligion.setValue(profil.getReligion());
+		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
+//		lbraucher.setValue(profil.getRaucher());
+//		lbgeschlecht.setValue(profil.getGeschlecht());
 
 	
-	      
-		ft1.setWidget(0, 0, lb1);
-		ft1.setWidget(0, 1, tbvorname);
-		ft1.setWidget(1, 0, lb2);
-		ft1.setWidget(1, 1, tbnachname);
-		ft1.setWidget(2, 0, lb8);
-		ft1.setWidget(2, 1, rbgeschlechtMännlich);
-		ft1.setWidget(2, 2, rbgeschlechtWeiblich);
-		ft1.setWidget(3, 0, lb9);
-		ft1.setWidget(3, 1, tbminalter);
-		ft1.setWidget(3, 2, tbmaxalter);
-		ft1.setWidget(4, 0, lb3);
-		ft1.setWidget(4, 1, geburtsdatum);
-		ft1.setWidget(5, 0, lb4);
-		ft1.setWidget(5, 1, tbhaarfarbe);
-		ft1.setWidget(6, 0, lb5);
-		ft1.setWidget(6, 1, tbreligion);
-		ft1.setWidget(7, 0, lb6);
-		ft1.setWidget(7, 1, tbkörpergröße);
-		ft1.setWidget(8, 0, lb7);
-		ft1.setWidget(8, 1, rbraucher);
-		ft1.setWidget(8, 2, rbnichtraucher);
-		ft1.setWidget(8, 3, rbraucheregal);
-		ft1.setWidget(9, 1, suchen);
-		ft1.setWidget(9, 2, suchprofilSpeichern);
-		ft1.setWidget(9, 3, suchprofilLoeschen);
+	    ft1.setWidget(0, 0, lb10);  
+	    ft1.setWidget(0, 1, tbemail);
+		ft1.setWidget(1, 0, lb1);
+		ft1.setWidget(1, 1, tbvorname);
+		ft1.setWidget(2, 0, lb2);
+		ft1.setWidget(2, 1, tbnachname);
+		ft1.setWidget(3, 0, lb8);
+		ft1.setWidget(3, 1, lbgeschlecht);
+		ft1.setWidget(4, 0, lb9);
+		ft1.setWidget(4, 1, tbminalter);
+		ft1.setWidget(4, 2, tbmaxalter);
+		ft1.setWidget(5, 0, lb3);
+		ft1.setWidget(5, 1, geburtsdatum);
+		ft1.setWidget(6, 0, lb4);
+		ft1.setWidget(6, 1, tbhaarfarbe);
+		ft1.setWidget(7, 0, lb5);
+		ft1.setWidget(7, 1, tbreligion);
+		ft1.setWidget(8, 0, lb6);
+		ft1.setWidget(8, 1, tbkörpergröße);
+		ft1.setWidget(9, 0, lb7);
+		ft1.setWidget(9, 1, lbraucher);
+		ft1.setWidget(10, 1, suchen);
+		ft1.setWidget(10, 2, suchprofilSpeichern);
+		ft1.setWidget(10, 3, suchprofilLoeschen);
 
+		//ListBox Raucher befüllen.
+		
+	      lbraucher.addItem("Ja");
+	      lbraucher.addItem("Nein");
+	      lbraucher.addItem("Gelegentlich");
+	      lbraucher.addItem("Partyraucher");
+	      lbraucher.addItem("Nur nach dem Sex");		
+	      
+		//ListBox Geschlecht befüllen.
+			
+	      lbgeschlecht.addItem("Männlich");
+	      lbgeschlecht.addItem("Weiblich");
+			
 
 		vpanel.add(ft1);
 		this.add(vpanel);

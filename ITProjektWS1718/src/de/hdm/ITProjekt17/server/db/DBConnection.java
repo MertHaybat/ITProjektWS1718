@@ -3,13 +3,20 @@ package de.hdm.ITProjekt17.server.db;
 import java.sql.*;
 
 import com.google.appengine.api.utils.SystemProperty;
-
+/**
+ * 
+ * @author Mert und Giuse
+ *
+ */
 public class DBConnection{
 
 	private static Connection con = null;
 	//private static String googleUrl = "jdbc:google:mysql://itprojektneu:europe-west1:itprojektneu/itprojekt2?user=root&password=1234";
 	private static String localUrl = "jdbc:mysql://localhost:3306/itprojektws1718?user=root&password=";
-     
+     /**
+      * Diese Methode gibt die aufgebaute DB-Verbindung zurück
+      * @return con
+      */
     public static Connection connection(){
 
     	// Wenn es bisher keine Connection zur DB gab, ...

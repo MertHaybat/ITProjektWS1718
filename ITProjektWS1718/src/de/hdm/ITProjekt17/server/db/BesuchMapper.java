@@ -32,7 +32,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 public class BesuchMapper {
 
 	private static BesuchMapper BesuchMapper = null;
-
+	
 	protected BesuchMapper() {
 
 	}
@@ -74,7 +74,7 @@ public class BesuchMapper {
 				return null;
 			}
 		}
-
+		
 		try {
 			Statement stmt = con.createStatement();
 
@@ -182,7 +182,11 @@ public class BesuchMapper {
 
 	  
 	  
-	  
+	  /**
+	   * Diese Methode liest alle besuchten Profile aus, die der Nutzer besucht hat
+	   * @param pro
+	   * @return result
+	   */
 	  public Vector<Besuch> getAllBesucheDesBesuchenden(Profil pro) {
 			 
 		 	/**
@@ -225,7 +229,12 @@ public class BesuchMapper {
 		      return result;
 	 }
 	  
-	  
+	  /**
+	   * Diese Methode updatet alle Besuche
+	   * @param besuche
+	   * @return besuche
+	   */
+	 
 	  public Besuch update(Besuch besuche) {
 		 	String sql = "UPDATE besuch SET  besuchenderNutzerID=?, besuchterNutzerID=? WHERE id =?";
 		 	/**

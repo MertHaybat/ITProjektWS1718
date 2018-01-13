@@ -11,7 +11,6 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class Topbar extends VerticalPanel{
 	
-	private Profilseite profil = new Profilseite();
 	private VerticalPanel vpanel = new VerticalPanel();
 	private Button btn1 = new Button("Startseite");
 	private Button btn2 = new Button("Platzhalterbutton");
@@ -19,10 +18,6 @@ public class Topbar extends VerticalPanel{
 	private Button btn4 = new Button("Impressum");
 	
 	private FlexTable ft1 = new FlexTable();
-	
-	private Startseite startseite = new Startseite();
-//	private Platzhalter platzhalter = new Platzhalter();
-	private Impressum impressum = new Impressum();
 	
 	public Topbar(final Profil profil){
 		btn1.setStylePrimaryName("topbarbutton");
@@ -39,7 +34,7 @@ public class Topbar extends VerticalPanel{
 			@Override
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(startseite);
+			RootPanel.get("Details").add(new Startseite(profil));
 			}
 			
 		});
@@ -69,7 +64,7 @@ public class Topbar extends VerticalPanel{
 			@Override
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(impressum);
+			RootPanel.get("Details").add(new Impressum(profil));
 			}
 			
 		});

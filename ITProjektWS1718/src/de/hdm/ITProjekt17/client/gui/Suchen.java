@@ -49,7 +49,8 @@ public class Suchen extends VerticalPanel {
 	private Label lb6 = new Label("Körpergröße: ");
 	private Label lb7 = new Label("Raucher: ");
 	private Label lb8 = new Label("Geschlecht: ");
-	private Label lb9 = new Label("Alter");
+	private Label lb9 = new Label("Alter von bis:");
+	
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY"); 
 
 	private ListBox lbraucher = new ListBox();

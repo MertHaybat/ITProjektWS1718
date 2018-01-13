@@ -10,7 +10,11 @@ import java.util.Vector;
 
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
-
+/**
+ * 
+ * @author dennis
+ *
+ */
 public class MerkzettelMapper {
 
 		/**

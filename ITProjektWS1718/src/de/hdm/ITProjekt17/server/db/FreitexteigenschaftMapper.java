@@ -12,7 +12,11 @@ import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
-
+/**
+ * 
+ * @author samina
+ *
+ */
 public class FreitexteigenschaftMapper {
 
 	/**
@@ -134,7 +138,11 @@ return null;
       return result;
 	
 	}
-
+	/**
+	 * Diese Methode fügt eine Freitexteigenschaft ein
+	 * @param frei
+	 * @return frei
+	 */
 	public Freitexteigenschaft insertFreitexteigenschaft(Freitexteigenschaft frei) {
 		/**
 		 * Aufbau der DB Connection
@@ -239,7 +247,11 @@ return null;
 		 */
 		return frei;
 	}
-
+	/**
+	 * liest alle Freitexteigenschaften aus der Info aus
+	 * @param info
+	 * @return result
+	 */
 	public Vector<Freitexteigenschaft> getAllFreitexteigenschaftOf(Info info){
 		 
 	 	/**

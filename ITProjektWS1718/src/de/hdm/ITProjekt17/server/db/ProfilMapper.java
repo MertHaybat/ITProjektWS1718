@@ -5,7 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
-
+/**
+ * 
+ * @author dennis
+ *
+ */
 public class ProfilMapper {
 
 	
@@ -91,7 +95,7 @@ public class ProfilMapper {
 		    	  				stmt1.setString(7, pro.getReligion());
 		    	  				stmt1.setString(8, pro.getHaarfarbe());
 		    	  				stmt1.setString(9, pro.getRaucher());
-		    	  				stmt1.setBoolean(10, pro.getGeschlecht());
+		    	  				stmt1.setString(10, pro.getGeschlecht());
 		    	  				
 		    	  				
 		    	  				stmt1.executeUpdate();
@@ -160,7 +164,7 @@ public class ProfilMapper {
 		    	stmt.setString(6, pro.getReligion());
 		    	stmt.setString(7, pro.getHaarfarbe());
 		    	stmt.setString(8, pro.getRaucher());
-		    	stmt.setBoolean(9, pro.getGeschlecht());
+		    	stmt.setString(9, pro.getGeschlecht());
 
 		    	stmt.setInt(10, pro.getId());
 		    	stmt.executeUpdate();
@@ -180,7 +184,7 @@ public class ProfilMapper {
 	 
 	 	/**
 		 * Mit der Methode GetAll werden alle Profil in einem Ergebnis-Vektor namens Profil gespeichert und zurückgegeben
-		 * @return
+		 * @return result
 		 */
 		 public Vector<Profil> getAllProfil() {
 			 
@@ -210,7 +214,7 @@ public class ProfilMapper {
 			          pro.setReligion(rs.getString("religion"));
 			          pro.setHaarfarbe(rs.getString("haarfarbe"));
 			          pro.setRaucher(rs.getString("raucher"));
-			          pro.setGeschlecht(rs.getBoolean("geschlecht"));
+			          pro.setGeschlecht(rs.getString("geschlecht"));
 			          
 			          /**
 			           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
@@ -265,7 +269,7 @@ public class ProfilMapper {
 		 				pro.setReligion(rs.getString("religion"));
 		 				pro.setHaarfarbe(rs.getString("haarfarbe"));
 		 				pro.setRaucher(rs.getString("raucher"));
-		 				pro.setGeschlecht(rs.getBoolean("geschlecht"));
+		 				pro.setGeschlecht(rs.getString("geschlecht"));
 	          
 		 				return pro;
 		 			}
@@ -276,7 +280,11 @@ public class ProfilMapper {
 		 		}
 		return null;
 	}
-		 	
+		 	/**
+		 	 * Profil wird anhand der Email ausgelesen
+		 	 * @param email
+		 	 * @return Profil
+		 	 */
 		 	public Profil findByEmail(String email) {
 				/**
 				 * Aufbau der Db Connection
@@ -306,7 +314,7 @@ public class ProfilMapper {
 		 				pro.setReligion(rs.getString("religion"));
 		 				pro.setHaarfarbe(rs.getString("haarfarbe"));
 		 				pro.setRaucher(rs.getString("raucher"));
-		 				pro.setGeschlecht(rs.getBoolean("geschlecht"));
+		 				pro.setGeschlecht(rs.getString("geschlecht"));
 	          			profil = pro;
 					}
 				} catch (SQLException e2) {

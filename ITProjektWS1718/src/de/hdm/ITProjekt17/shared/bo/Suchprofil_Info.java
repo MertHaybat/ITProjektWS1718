@@ -22,14 +22,14 @@ public class Suchprofil_Info extends BusinessObject {
 	//------------------------Get-Methoden--------------------------------
 	/**
 	 * Methode zum auslesen der Suchprofil Id
-	 * @return
+	 * @return suchprofilid
 	 */
 	public int getSuchprofilId(){
 		return this.suchprofilid;
 	}
 	/**
 	 * Methode zum auslesen der Info Id
-	 * @return
+	 * @return infoid
 	 */
 	public int getInfoId(){
 		return this.infoid;

@@ -15,7 +15,11 @@ import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
-
+/**
+ * 
+ * @author samina
+ *
+ */
 public class InfoMapper {
 
 	/**
@@ -140,7 +144,11 @@ return null;
       return result;
 	
 	}
-	
+	/**
+	 * fügt eine Info ein
+	 * @param in
+	 * @return
+	 */
 	public Info insertInfo(Info in) {
 		/**
 		 * Aufbau der DB Connection
@@ -364,9 +372,11 @@ return null;
 	}
 	
 	
-	
-	
-	
+	/**
+	 * InfoId wird aus Profil ausgelesen
+	 * @param pro
+	 * @return result
+	 */
 	
 	public Vector<Info> getInfoIdByProfilId(Profil pro) {
 		 
@@ -409,7 +419,11 @@ return null;
 	       */
 	      return result;
  }
-
+	/**
+	 * Alle Infos aus der Tabelle Auswahleigenschaften werden ausgelesen
+	 * @param aus
+	 * @return result
+	 */
 	public Vector<Info> getAllInfosAsAuswahleigenschaft(Auswahleigenschaft aus){
 		 
 	 	/**
@@ -450,7 +464,12 @@ return null;
 	       */
 		return result;
 	}
-	
+	/**
+	 * Alle Infos werden aus der Auswahleigenschaft ausgelesen anhand der ProfilId
+	 * @param aus
+	 * @param pro
+	 * @return result
+	 */
 	public Vector<Info> getAllInfosAsAuswahleigenschaftByProfilId(Auswahleigenschaft aus, Profil pro){
 		 
 	 	/**
@@ -494,7 +513,11 @@ return null;
 	       */
 		return result;
 	}
-	
+	/**
+	 * Alle Infos aus der Freitexteigenschaft werden ausgelesen
+	 * @param frei
+	 * @return result
+	 */
 	public Vector<Info> getAllInfosAsFreitexteigenschaft(Freitexteigenschaft frei){
 		 
 	 	/**
@@ -536,7 +559,12 @@ return null;
 	       */
 		return result;
 	}
-	
+	/**
+	 * Alle Infos aus der Freitexteigenschaft werden ausgelesen, anhand der ProfilId
+	 * @param frei
+	 * @param pro
+	 * @return result
+	 */
 	public Vector<Info> getAllInfosAsFreitexteigenschaftById(Freitexteigenschaft frei, Profil pro){
 		 
 	 	/**

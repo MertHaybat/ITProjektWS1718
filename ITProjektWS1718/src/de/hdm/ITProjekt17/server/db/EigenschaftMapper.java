@@ -12,7 +12,11 @@ import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Profil;
-
+/**
+ * 
+ * @author samina
+ *
+ */
 public class EigenschaftMapper {
 	/**
 	 * Die Klasse EigenschaftMapper wird nur einmal instantiiert. Man spricht
@@ -21,7 +25,7 @@ public class EigenschaftMapper {
 	 * 
 	 * @see eigenschaftMapper()
 	 */
-
+	
 	private static EigenschaftMapper eigenschaftMapper = null;
 
 	/**
@@ -52,87 +56,91 @@ public class EigenschaftMapper {
  	 * @param id
  	 * @return eig
  	 */
- 	public Eigenschaft findByKey(int id){
- 		/**
- 		 * Aufbau der Db Connection
- 		 */
- 		Connection con = DBConnection.connection();
- 		/**
- 		 * Try und Catch gehören zum Exception Handling 
- 		 * Try = Versuch erst dies 
- 		 * Catch = Wenn Try nicht geht versuch es so ..
- 		 */
-
- 		try{	
- 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM eigenschaft WHERE id=?");
- 			stmt.setInt(1, id);
-
- 			/**
- 			 * Statement ausfüllen und an die DB senden
- 			 */
- 			ResultSet rs = stmt.executeQuery();
-	
- 			if (rs.next()){
- 				Eigenschaft eig = new Eigenschaft();
- 				eig.setId(rs.getInt("id"));
- 				
- 			
-   
- 				return eig;
- 			}
- 		}
- 		catch (SQLException e2){
- 			e2.printStackTrace();
- 			return null;
- 		}
-return null;
- 	}
+// 	public Eigenschaft findByKey(int id){
+// 		/**
+// 		 * Aufbau der Db Connection
+// 		 */
+// 		Connection con = DBConnection.connection();
+// 		/**
+// 		 * Try und Catch gehören zum Exception Handling 
+// 		 * Try = Versuch erst dies 
+// 		 * Catch = Wenn Try nicht geht versuch es so ..
+// 		 */
+//
+// 		try{	
+// 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM eigenschaft WHERE id=?");
+// 			stmt.setInt(1, id);
+//
+// 			/**
+// 			 * Statement ausfüllen und an die DB senden
+// 			 */
+// 			ResultSet rs = stmt.executeQuery();
+//	
+// 			if (rs.next()){
+// 				Eigenschaft eig = new Eigenschaft();
+// 				eig.setId(rs.getInt("id"));
+// 				
+// 			
+//   
+// 				return eig;
+// 			}
+// 		}
+// 		catch (SQLException e2){
+// 			e2.printStackTrace();
+// 			return null;
+// 		}
+//return null;
+// 	}
 
  	/**
 	 * Die Mehtode getAll erlaubt alles von Eigenschaft anzeigen zu lassen (id)
 	 * @return
 	 * @throws Exception
 	 */
-	public Vector<Eigenschaft> getAll() {
-		/**
-		 * Aufbau einer DB Connection
-		 */
-		Connection con = DBConnection.connection();
-		/**
-		 * Erstellen eines Eigenschaft-Vektors namens Vector
-		 */
-		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
-		
-	try {
-    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM eigenschaft ");
-    	
-      
-    	ResultSet rs = stmt.executeQuery();
-        
-        /**
-         * Für jeden Eintrag im Suchergebnis wird nun ein Eigenschaft-Objekt erstellt.
-         */
-        while (rs.next()) {
-          Eigenschaft eig = new Eigenschaft();
-          eig.setId(rs.getInt("id"));
-         
-          /**
-           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
-           */
-          result.addElement(eig);
-        }
-      }
-      catch (SQLException e) {
-        e.printStackTrace();
-      }
-
-      /**
-       *  Ergebnisvektor zurückgeben
-       */
-      return result;
-	
-	}
-
+//	public Vector<Eigenschaft> getAll() {
+//		/**
+//		 * Aufbau einer DB Connection
+//		 */
+//		Connection con = DBConnection.connection();
+//		/**
+//		 * Erstellen eines Eigenschaft-Vektors namens Vector
+//		 */
+//		Vector<Eigenschaft> result = new Vector<Eigenschaft>();
+//		
+//	try {
+//    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM eigenschaft ");
+//    	
+//      
+//    	ResultSet rs = stmt.executeQuery();
+//        
+//        /**
+//         * Für jeden Eintrag im Suchergebnis wird nun ein Eigenschaft-Objekt erstellt.
+//         */
+//        while (rs.next()) {
+//          Eigenschaft eig = new Eigenschaft();
+//          eig.setId(rs.getInt("id"));
+//         
+//          /**
+//           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+//           */
+//          result.addElement(eig);
+//        }
+//      }
+//      catch (SQLException e) {
+//        e.printStackTrace();
+//      }
+//
+//      /**
+//       *  Ergebnisvektor zurückgeben
+//       */
+//      return result;
+//	
+//	}
+	/**
+	 * 
+	 * @param eig
+	 * @return eig 
+	 */
 	public Eigenschaft insertEigenschaft(Eigenschaft eig) {
 		/**
 		 * Aufbau der DB Connection

@@ -164,7 +164,7 @@ public class Suchprofil extends BusinessObject {
 	/**
 	 * Abfragen des mindest Alters eines Teilnehmers.
 	 *Komplementär zum max. Alter
-	 * @return
+	 * @return minAlter
 	 */
 	public int getMinAlter(){
 		return minAlter;
@@ -173,7 +173,7 @@ public class Suchprofil extends BusinessObject {
 	/**
 	 * Abfragen des maximalen Alters eines Teilnehmers.
 	 * Komplementär zum min. Alter
-	 * @return
+	 * @return maxAlter
 	 */
 	public int getMaxAlter(){
 		return maxAlter;
@@ -181,7 +181,7 @@ public class Suchprofil extends BusinessObject {
 	
 	/**
 	 * Abfragen des Geburtsdatums eines Teilnehmers.
-	 * @return
+	 * @return geburtsdatum
 	 */
 	public Date getGeburtsdatum(){
 		return geburtsdatum;
@@ -189,7 +189,7 @@ public class Suchprofil extends BusinessObject {
 	
 	/**
 	 * Abfragen der Körpergrösse eines Teilnehmers.
-	 * @return
+	 * @return koerpergroesse
 	 */
 	public int getKoerpergroesse(){
 		return koerpergroesse;
@@ -197,7 +197,7 @@ public class Suchprofil extends BusinessObject {
 	
 	/**
 	 * Abfragen der Religion eines Teilnehmers.
-	 * @return
+	 * @return religion
 	 */
 	public String getReligion(){
 		return religion;
@@ -205,7 +205,7 @@ public class Suchprofil extends BusinessObject {
 	
 	/**
 	 * Abfragen der Haarfarbe eines Teilnehmers.
-	 * @return
+	 * @return haarfarbe
 	 */
 	public String getHaarfarbe(){
 		return haarfarbe;
@@ -213,7 +213,7 @@ public class Suchprofil extends BusinessObject {
 	
 	/**
 	 * Abfragen ob zu suchendes Profil Raucher ist oder nicht.
-	 * @return
+	 * @return raucher
 	 */
 	public String getRaucher(){
 		return raucher;
@@ -221,7 +221,7 @@ public class Suchprofil extends BusinessObject {
 	
 	/**
 	 * Abfragen ob zu suchendes Profil Raucher ist oder nicht.
-	 * @return
+	 * @return geschlecht
 	 */
 	public boolean getGeschlecht(){
 		return geschlecht;

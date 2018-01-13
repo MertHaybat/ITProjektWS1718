@@ -5,6 +5,8 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.ITProjekt17.shared.bo.Profil;
+
 public class Impressum extends VerticalPanel{
 
 	private VerticalPanel vpanel = new VerticalPanel();
@@ -24,7 +26,7 @@ public class Impressum extends VerticalPanel{
 				+ "impressum\"TARGET=\"_blank\">Impressum der Hochschule</A>"
 				+ "</div>");
 
-	public Impressum(){
+	public Impressum(final Profil profil){
 		ft1.setWidget(0,0,an1);
 		ft1.setWidget(0, 1, html1);
 		

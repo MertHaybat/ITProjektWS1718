@@ -23,7 +23,6 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Profil;
-import javafx.scene.control.Alert;
 
 public class Profilseite extends VerticalPanel{
 
@@ -39,7 +38,7 @@ public class Profilseite extends VerticalPanel{
 	private ListBox lbraucher = new ListBox();
 	private ListBox lbgeschlecht = new ListBox();
 	
-	private Label lb9 = new Label("Email");
+	private Label lb9 = new Label("Email: ");
 	private Label lb1 = new Label("Vorname: ");
 	private Label lb2 = new Label("Nachname: ");
 	private Label lb3 = new Label("Geburtsdatum: ");
@@ -82,7 +81,7 @@ public class Profilseite extends VerticalPanel{
 		ft1.setWidget(8, 1, lbraucher);
 		ft1.setWidget(9, 0, ok);
 		ft1.setWidget(9, 1, abbrechen);
-		ft1.setWidget(9, 2, infoEigenschaftenAnzeigen);
+		
 		vpanel.add(ft1);
 		this.add(vpanel);
 		
@@ -92,7 +91,9 @@ public class Profilseite extends VerticalPanel{
 	      lbraucher.addItem("Nein");
 	      lbraucher.addItem("Gelegentlich");
 	      lbraucher.addItem("Partyraucher");
-	      lbraucher.addItem("Nur nach dem Sex");		
+	      lbraucher.addItem("Nur nach dem Sex");	
+	  	
+	      
 		  
 		//ListBox Geschlecht befüllen.
 			
@@ -118,7 +119,7 @@ public class Profilseite extends VerticalPanel{
 			});
 			
 		    datepicker_geburtsdatum.setValue(new Date(), true);
-		    
+		   
 		    
 		    ok.addClickHandler(new ClickHandler(){
 
@@ -156,6 +157,41 @@ public class Profilseite extends VerticalPanel{
 	}
 	
 	public Profilseite(final Profil profil){
+		ft1.setWidget(0,0,lb9);
+		ft1.setWidget(0, 1, tbemail);
+		ft1.setWidget(1, 0, lb1);
+		ft1.setWidget(1, 1, tbvorname);
+		ft1.setWidget(2, 0, lb2);
+		ft1.setWidget(2, 1, tbnachname);
+		ft1.setWidget(3, 0, lb8);
+		ft1.setWidget(3, 1, lbgeschlecht);
+		ft1.setWidget(4, 0, lb3);
+		ft1.setWidget(4, 1, geburtsdatum);
+		ft1.setWidget(5, 0, lb4);
+		ft1.setWidget(5, 1, tbhaarfarbe);
+		ft1.setWidget(6, 0, lb5);
+		ft1.setWidget(6, 1, tbreligion);
+		ft1.setWidget(7, 0, lb6);
+		ft1.setWidget(7, 1, tbkörpergröße);
+		ft1.setWidget(8, 0, lb7);
+		ft1.setWidget(8, 1, lbraucher);
+		ft1.setWidget(9, 0, ok);
+		ft1.setWidget(9, 1, abbrechen);
+		ft1.setWidget(9, 2, infoEigenschaftenAnzeigen);
+		
+		//ListBox Raucher befüllen.
+		
+	      lbraucher.addItem("Ja");
+	      lbraucher.addItem("Nein");
+	      lbraucher.addItem("Gelegentlich");
+	      lbraucher.addItem("Partyraucher");
+	      lbraucher.addItem("Nur nach dem Sex");		
+		  
+		//ListBox Geschlecht befüllen.
+			
+	      lbgeschlecht.addItem("Männlich");
+	      lbgeschlecht.addItem("Weiblich");
+		
 		tbemail.setValue(profil.getEmail());
 		tbvorname.setValue(profil.getVorname());
 		tbnachname.setValue(profil.getNachname());
@@ -163,6 +199,7 @@ public class Profilseite extends VerticalPanel{
 		tbhaarfarbe.setValue(profil.getHaarfarbe());
 		tbreligion.setValue(profil.getReligion());
 		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
+		lbraucher.setValue(0, profil.getRaucher());
 //		lbraucher.setValue(spacing, profil.getRaucher());
 //		lbgeschlecht.setValue(profil.getGeschlecht());
 	
@@ -176,6 +213,9 @@ public class Profilseite extends VerticalPanel{
 				RootPanel.get("Details").add(new Info(profil));
 			}
 		});
+
+		vpanel.add(ft1);
+		this.add(vpanel);
 	    
 	}
 }

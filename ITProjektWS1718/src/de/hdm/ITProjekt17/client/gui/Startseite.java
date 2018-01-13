@@ -4,9 +4,10 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.hdm.ITProjekt17.shared.bo.Profil;
+
 public class Startseite extends VerticalPanel{
 	
-	private Impressum impressum = new Impressum();
 	private VerticalPanel vpanel = new VerticalPanel();
 	private FlexTable ft1 = new FlexTable();
 	private HTML html1 = new HTML("<article> <h2>Die kostenlose Partnerbörse</h2> "
@@ -26,7 +27,7 @@ public class Startseite extends VerticalPanel{
 				+ "</article>");
 
 	
-	public Startseite(){
+	public Startseite(final Profil profil){
 		
 		ft1.setWidget(0, 1, html1);
 

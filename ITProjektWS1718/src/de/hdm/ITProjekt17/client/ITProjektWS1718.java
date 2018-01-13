@@ -15,9 +15,12 @@ import de.hdm.ITProjekt17.client.gui.Menubar;
 import de.hdm.ITProjekt17.client.gui.Profilseite;
 import de.hdm.ITProjekt17.client.gui.Startseite;
 import de.hdm.ITProjekt17.client.gui.Topbar;
+import de.hdm.ITProjekt17.server.db.BesuchMapper;
 import de.hdm.ITProjekt17.shared.LoginService;
 import de.hdm.ITProjekt17.shared.LoginServiceAsync;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
+import de.hdm.ITProjekt17.shared.bo.Besuch;
+import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
 
@@ -38,6 +41,8 @@ public class ITProjektWS1718 implements EntryPoint{
 	private Anchor signOutLink = new Anchor("Sign Out");
 	private Profil profil = new Profil();
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
+			
+		
 	
 	@Override
 	public void onModuleLoad() {
@@ -103,8 +108,16 @@ public class ITProjektWS1718 implements EntryPoint{
 		
 			}
 			
-		});			
+		});		
+//		
+//		Besuch b = new Besuch();
+//		b.setBesuchenderNutzerID(3);
+//		b.setBesuchterNutzerID(1);
+//		BesuchMapper.besuchMapper().insert(b);
+//		
+
 	}
+	
 	
 	
 	//Zusammenstellung des Anmeldeabschnitts
@@ -121,4 +134,8 @@ public class ITProjektWS1718 implements EntryPoint{
 		RootPanel.get("Navigator").add(new Menubar(profil));
 		RootPanel.get("Topbar").add(new Topbar(profil));
 	}
+	
+	
+	
+	
 }

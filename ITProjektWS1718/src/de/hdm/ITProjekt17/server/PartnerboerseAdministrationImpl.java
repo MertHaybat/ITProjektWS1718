@@ -104,6 +104,9 @@ implements PartnerboerseAdministration {
 		this.besuchMapper = BesuchMapper.besuchMapper();
 	}
 
+	
+	
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException {
@@ -790,7 +793,7 @@ implements PartnerboerseAdministration {
 	 * Hier wird ein Profil angelegt.
 	 */
 	public Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, boolean geschlecht) throws IllegalArgumentException {
+			String haarfarbe, String raucher, String geschlecht) throws IllegalArgumentException {
 		
 		   Profil pro = new Profil();
 		   	pro.setEmail(email);
@@ -814,7 +817,7 @@ implements PartnerboerseAdministration {
 	/**
 	 * Mit dieser Methode wird ein Profil aktualisiert.
 	 */
-	public Profil saveProfil(String email, boolean geschlecht, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
+	public Profil saveProfil(String email, String geschlecht, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, String raucher) {
 		
 		Profil pro = new Profil();

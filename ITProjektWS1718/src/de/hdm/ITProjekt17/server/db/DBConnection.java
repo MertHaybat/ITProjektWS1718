@@ -9,6 +9,8 @@ public class DBConnection{
 	private static Connection con = null;
 	//private static String googleUrl = "jdbc:google:mysql://itprojektneu:europe-west1:itprojektneu/itprojekt2?user=root&password=1234";
 	private static String localUrl = "jdbc:mysql://localhost:3306/itprojektws1718?user=root&password=";
+//	private static String localUrl = "jdbc:mysql://localhost:3306/itproj?user=root&password=";
+
      
     public static Connection connection(){
 

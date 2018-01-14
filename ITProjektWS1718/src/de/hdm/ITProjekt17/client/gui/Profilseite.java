@@ -38,7 +38,6 @@ public class Profilseite extends VerticalPanel{
 	private ListBox lbraucher = new ListBox();
 	private ListBox lbgeschlecht = new ListBox();
 	
-	private Label lb9 = new Label("Email: ");
 	private Label lb1 = new Label("Vorname: ");
 	private Label lb2 = new Label("Nachname: ");
 	private Label lb3 = new Label("Geburtsdatum: ");
@@ -51,7 +50,7 @@ public class Profilseite extends VerticalPanel{
 	
 	private Button ok = new Button("Bestätigen");
 	private Button abbrechen = new Button("Abbrechen");
-	private Button infoEigenschaftenAnzeigen = new Button ("weitere Profilinformationen anzeigen");
+	private Button infoEigenschaftenAnzeigen = new Button ("Weitere Profilinformationen anzeigen");
 	
 	private FlexTable ft1 = new FlexTable();
 
@@ -61,8 +60,6 @@ public class Profilseite extends VerticalPanel{
 	public Profilseite(){
 		Window.alert("Willkommen auf MOFOS. Tragen Sie bitte nachfolgend die Daten zu Ihrer Person ein.");
 		
-		ft1.setWidget(0,0,lb9);
-		ft1.setWidget(0, 1, tbemail);
 		ft1.setWidget(1, 0, lb1);
 		ft1.setWidget(1, 1, tbvorname);
 		ft1.setWidget(2, 0, lb2);
@@ -157,8 +154,6 @@ public class Profilseite extends VerticalPanel{
 	}
 	
 	public Profilseite(final Profil profil){
-		ft1.setWidget(0,0,lb9);
-		ft1.setWidget(0, 1, tbemail);
 		ft1.setWidget(1, 0, lb1);
 		ft1.setWidget(1, 1, tbvorname);
 		ft1.setWidget(2, 0, lb2);
@@ -210,7 +205,7 @@ public class Profilseite extends VerticalPanel{
 				// TODO Auto-generated method stub
 				
 				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(new Info(profil));
+				RootPanel.get("Details").add(new Infoseite(profil));
 			}
 		});
 

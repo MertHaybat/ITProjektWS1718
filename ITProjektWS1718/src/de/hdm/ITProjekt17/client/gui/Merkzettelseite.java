@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.view.client.NoSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
@@ -37,8 +38,8 @@ public class Merkzettelseite extends VerticalPanel{
 	private CellTable<Profil> ct_eigener_merkzettelprofile = new CellTable<Profil>();
 	private CellTable<Profil> ct_andere_merkzettelprofile = new CellTable<Profil>();
 	
-	final NoSelectionModel<Profil> ssm_eigener_merkzettelprofile = new NoSelectionModel<Profil>();
-	final NoSelectionModel<Profil> ssm_andere_merkzettelprofile = new NoSelectionModel<Profil>();
+	final SingleSelectionModel<Profil> ssm_eigener_merkzettelprofile = new SingleSelectionModel<Profil>();
+	final SingleSelectionModel<Profil> ssm_andere_merkzettelprofile = new SingleSelectionModel<Profil>();
 		
 	private HTML htmleigener_merkzettel = new HTML("<h2>Eigener Merkzettel:</<h2>");
 	private HTML htmlandere_merkzettel = new HTML("<h2>Sie sind beliebt bei:</<h2>");
@@ -128,7 +129,7 @@ public class Merkzettelseite extends VerticalPanel{
 			
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
-				DialogBoxMerkzettelProfil dialogboxmerkzettelprofil = new DialogBoxMerkzettelProfil(profil, ssm_eigener_merkzettelprofile.getLastSelectedObject());
+				DialogBoxMerkzettelProfil dialogboxmerkzettelprofil = new DialogBoxMerkzettelProfil(profil, ssm_eigener_merkzettelprofile.getSelectedObject());
 				dialogboxmerkzettelprofil.center();
 			}
 		});
@@ -136,7 +137,7 @@ public class Merkzettelseite extends VerticalPanel{
 				
 				@Override
 				public void onSelectionChange(SelectionChangeEvent event) {
-					DialogBoxMerkzettelProfil dialogboxmerkzettelprofil = new DialogBoxMerkzettelProfil(profil, ssm_andere_merkzettelprofile.getLastSelectedObject());
+					DialogBoxMerkzettelProfil dialogboxmerkzettelprofil = new DialogBoxMerkzettelProfil(profil, ssm_andere_merkzettelprofile.getSelectedObject());
 					dialogboxmerkzettelprofil.center();
 				}
 			});

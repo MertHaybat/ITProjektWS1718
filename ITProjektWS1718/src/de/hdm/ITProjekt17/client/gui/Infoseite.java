@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
@@ -15,12 +16,14 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
+import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
-public class Info extends VerticalPanel{
+public class Infoseite extends VerticalPanel{
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 
@@ -33,6 +36,10 @@ public class Info extends VerticalPanel{
 	private TextBox tbraucher = new TextBox();
 	private TextBox tbgeschlecht = new TextBox();
 	
+	
+	private Button ok = new Button("Bestätigen");
+	private Button abbrechen = new Button("Abbrechen");
+	
 	private Label lb1 = new Label("Vorname: ");
 	private Label lb2 = new Label("Nachname: ");
 	private Label lb3 = new Label("Geburtsdatum: ");
@@ -43,13 +50,12 @@ public class Info extends VerticalPanel{
 	private Label lb8 = new Label("Geschlecht: ");
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");
 	
-	private Button bearbeiten = new Button("bearbeiten");
 	
 	private FlexTable ft1 = new FlexTable();
 
 	private VerticalPanel vpanel = new VerticalPanel();
 	
-	public Info(final Profil profil) {
+	public Infoseite(final Profil profil) {
 		tbvorname.setValue(profil.getVorname());
 		tbnachname.setValue(profil.getNachname());
 		geburtsdatum.setValue(profil.getGeburtsdatum());
@@ -76,7 +82,8 @@ public class Info extends VerticalPanel{
 		ft1.setWidget(6, 1, tbraucher);
 		ft1.setWidget(7, 0, lb8);
 		ft1.setWidget(7, 1, tbgeschlecht);	
-		ft1.setWidget(8, 1, bearbeiten);
+		ft1.setWidget(8, 0, ok);
+		ft1.setWidget(8, 1, abbrechen);
 		vpanel.add(ft1);
 		this.add(vpanel);
 		
@@ -99,7 +106,7 @@ public class Info extends VerticalPanel{
 			
 		    datepicker_geburtsdatum.setValue(new Date(), true);
 		    
-		    bearbeiten.addClickHandler(new ClickHandler(){
+		    abbrechen.addClickHandler(new ClickHandler(){
 
 				@Override
 				public void onClick(ClickEvent event) {

@@ -19,7 +19,13 @@ import java.util.Vector;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
-
+/**
+ * PartnerboerseAdministrationImpl ist die Implementierungsklasse des Interface
+ * <code>PartnerboerseAdministration</code>. In dieser Klasse wird die Applikationslogik 
+ * dargestellt. 
+ * @author Mustafi
+ *
+ */
 
 @SuppressWarnings("serial")
 public class PartnerboerseAdministrationImpl extends RemoteServiceServlet 
@@ -90,8 +96,18 @@ implements PartnerboerseAdministration {
 		
 	}
 	
+	/**
+	 * Hierbei handelt es sich um die Initialisierungsmethode.
+	 * Diese Methode ist relevant, damit sie für jede Instanz von 
+	 * <code>PartnerboerseAdministrationImpl</code> aufgerufen werden kann.
+	 */
+	
+	
 	public void init() throws IllegalArgumentException{
-		
+		/*
+		 * Die PartnerboerseAdministrationImpl benötigt diese Mapper, um mit deren Hilfe
+		 * die Datenbank ansprechen zu können.
+		 */
 		this.auswahleigenschaftMapper = AuswahleigenschaftMapper.auswahleigenschaftMapper();
 		this.eigenschaftMapper = EigenschaftMapper.eigenschaftMapper();
 		this.freitexteigenschaftMapper = FreitexteigenschaftMapper.freitexteigenschaftMapper();
@@ -108,16 +124,29 @@ implements PartnerboerseAdministration {
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * <p>
+	 * Anlegen einer Auswahleigenschaft. Dabei wird dies in der Datenbank gespeichert, 
+	 * in dem die insertAuswahleigenschaft des Auswahleigenschaft-Mapper aufgerufen wird. 
+	 * </p>
+	 */
 	@Override
 	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException {
 		
 		Auswahleigenschaft aus = new Auswahleigenschaft();
 		aus.setWert(wert);
-		
+		/*
+		 * Setzen einer vorläufigen ID.
+		 */
 		aus.setId(1);
+		
+		// Objekt in der DB speichern.
 		return this.auswahleigenschaftMapper.insertAuswahleigenschaft(aus);
 	}
-
+	
+	/**
+	 * Speichern der Auswahleigenschaft.
+	 */
 	@Override
 	public void save(Auswahleigenschaft aus) throws IllegalArgumentException {
 		
@@ -127,7 +156,11 @@ implements PartnerboerseAdministration {
 			
 		}
 	}
-
+	
+	/**
+	 * Löschen der Auswahleigenschaft. Dabei wird die Referenz
+	 * zu Info auch gelöscht.
+	 */
 	@Override
 	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException {
 		
@@ -144,7 +177,9 @@ implements PartnerboerseAdministration {
 		}
 	}
 
-	
+	/** 
+	 * Auslesen aller Infos, die als Auswahleigenschaft hinterlegt sind.
+	 */
 	public Vector<Info> getAllInfosAsAuswahleigenschaft(Auswahleigenschaft aus){
 		try {
 			return this.infoMapper.getAllInfosAsAuswahleigenschaft(aus);
@@ -154,12 +189,18 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
+	/** 
+	 * Auslesen der Auswahleigenschaft, in dem die ID aufgerufen wird.
+	 */
 	@Override
 	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException {
 		
 		return this.auswahleigenschaftMapper.findByKey(id);
 	}
 
+	/**
+	 * Auslesen aller Auswahleigenschaften.
+	 */
 	@Override
 	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException {
 		try {
@@ -169,7 +210,10 @@ implements PartnerboerseAdministration {
 		}
 		return null;
 	}
-
+	
+	/** 
+	 * Auslesen aller Auswahleigenschaften eines bestimmten Info-Objekts.
+	 */
 	public Vector<Auswahleigenschaft> getAllAuswahleigenschaftOf(Info in) throws IllegalArgumentException {
 		return this.auswahleigenschaftMapper.getAllAuswahleigenschaftOf(in);
 	}
@@ -221,6 +265,12 @@ implements PartnerboerseAdministration {
 //	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * <p>
+	 * Anlegen einer Freitextauswahleigenschaft. Dabei wird dies in der Datenbank gespeichert, 
+	 * in dem die insertFreitexteigenschaft des Freitexteigenschaft-Mapper aufgerufen wird. 
+	 * </p>
+	 */
 	@Override
 	public Freitexteigenschaft createFreitexteigenschaft(String wert) throws IllegalArgumentException {
 		
@@ -231,6 +281,9 @@ implements PartnerboerseAdministration {
 		return this.freitexteigenschaftMapper.insertFreitexteigenschaft(frei);
 	}
 
+	/**
+	 * Speichern der Freitexteigenschaft.
+	 */
 	@Override
 	public void save(Freitexteigenschaft frei) throws IllegalArgumentException {
 		
@@ -241,6 +294,10 @@ implements PartnerboerseAdministration {
 		}
 	}
 
+	/**
+	 * Löschen der Freitexteigenschaft. Dabei wird die Referenz
+	 * zu Info auch gelöscht.
+	 */
 	@Override
 	public void delete(Freitexteigenschaft frei) throws IllegalArgumentException {
 		
@@ -257,7 +314,9 @@ implements PartnerboerseAdministration {
 		}
 	}
 
-	
+	/** 
+	 * Auslesen aller Infos, die als Freitexteigenschaft hinterlegt sind.
+	 */
 	public Vector<Info> getAllInfosAsFreitexteigenschaft(Freitexteigenschaft frei){
 		try {
 			return this.infoMapper.getAllInfosAsFreitexteigenschaft(frei);
@@ -267,16 +326,25 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 	
+	/** 
+	 * Auslesen aller Freitexteigenschaften eines bestimmten Info-Objekts.
+	 */
 	public Vector<Freitexteigenschaft> getAllFreitexteigenschaftOf(Info in) throws IllegalArgumentException {
 		return this.freitexteigenschaftMapper.getAllFreitexteigenschaftOf(in);
 	}
 
+	/** 
+	 * Auslesen der Freitexteigenschaft, in dem die ID aufgerufen wird.
+	 */
 	@Override
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException {
 		
 		return this.freitexteigenschaftMapper.findByKey(id);
 	}
 
+	/**
+	 * Auslesen aller Freitexteigenschaften.
+	 */
 	@Override
 	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException {
 		
@@ -285,11 +353,20 @@ implements PartnerboerseAdministration {
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	/** 
+	 * Auslesen aller Infos des Profils Profils.
+	 */
 	public Vector<Info> getAllInfobyProfil(Profil pro) throws IllegalArgumentException {
 		
 		return infoMapper.getInfoIdByProfilId(pro);
 	}
 	
+	/**
+	 * <p>
+	 * Anlegen einer Info. Dabei wird dies in der Datenbank gespeichert, 
+	 * in dem die insertInfo des Info-Mapper aufgerufen wird. 
+	 * </p>
+	 */
 	@Override
 	public Info createInfo(Profil pro, String text, Auswahleigenschaft aus, Freitexteigenschaft frei) throws IllegalArgumentException {
 		
@@ -302,7 +379,10 @@ implements PartnerboerseAdministration {
 		in.setId(1);
 		return this.infoMapper.insertInfo(in);
 	}
-
+	
+	/**
+	 * Speichern der Info.
+	 */
 	@Override
 	public void save(Info in) throws IllegalArgumentException {
 		
@@ -313,6 +393,11 @@ implements PartnerboerseAdministration {
 		}
 	}
 
+	/**
+	 * Löschen der Info. Dabei wird die Referenz
+	 * zu Auswahleigenschaft, Freitexteigenschaft 
+	 * und Suchprofil_Info auch gelöscht.
+	 */
 	@Override
 	public void delete(Info in) throws IllegalArgumentException {
 		
@@ -351,6 +436,9 @@ implements PartnerboerseAdministration {
 		}
 	}
 	
+	/** 
+	 * Löschen der Info eines Profils.
+	 */
 	public void deleteInfoOf(Profil pro) throws IllegalArgumentException {
 		try {
 			this.infoMapper.deleteInfoOf(pro);
@@ -359,6 +447,9 @@ implements PartnerboerseAdministration {
 		}
 	}
 	
+	/** 
+	 * Löschen der Info des Suchprofil_Info.
+	 */
 	public void deleteInfoOf(Suchprofil_Info suchinfo) throws IllegalArgumentException {
 		try {
 			this.infoMapper.deleteInfoOf(suchinfo);
@@ -367,6 +458,9 @@ implements PartnerboerseAdministration {
 		}
 	}
 
+	/** 
+	 * Löschen der Info, welche eine Auswahleigenschaft ist.
+	 */
 	public void deleteInfoAs(Auswahleigenschaft aus) throws IllegalArgumentException {
 		try {
 			this.infoMapper.deleteInfoOf(aus);
@@ -375,6 +469,9 @@ implements PartnerboerseAdministration {
 		}
 	}	
 	
+	/** 
+	 * Löschen der Info, welche eine Freitexteigenschaft ist.
+	 */
 	public void deleteInfoAs(Freitexteigenschaft frei) throws IllegalArgumentException {
 		try {
 			this.infoMapper.deleteInfoOf(frei);
@@ -382,6 +479,10 @@ implements PartnerboerseAdministration {
 			
 		}
 	}
+	
+	/** 
+	 * Auslesen aller Infos eines Profils.
+	 */
 	public Vector<Profil> getAllInfosOf(Profil pro) throws IllegalArgumentException {
 		try {
 			this.infoMapper.getInfoIdByProfilId(pro);
@@ -391,6 +492,9 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 	
+	/**
+	 * Auslesen der Info, in dem die ID aufgerufen wird.
+	 */
 	@Override
 	public Info findByKeyInfo(int id) throws IllegalArgumentException {
 		try {
@@ -401,6 +505,9 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 
+	/**
+	 * Auslesen aller Infos.
+	 */
 	@Override
 	public Vector<Info> getAllInfo() throws IllegalArgumentException {
 		try {
@@ -750,13 +857,6 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 	
-	
-	
-	
-	
-	
-	
-
 	////////////////////////////////////////////Profil/////////////////////////////////////////////////////////////////////////////
 	/**
 	 * Auslesen aller Profil-Objekte der PartnerbÃƒÂ¶rse in der Datenbank.

@@ -32,8 +32,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 //	public Eigenschaft createEigenschaft(int eigenschaftid) throws IllegalArgumentException;
 	public void save(Eigenschaft eig) throws IllegalArgumentException;
 	public void delete(Eigenschaft eig) throws IllegalArgumentException;
-	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException;
-	public Vector <Eigenschaft> getAllEigenschaft() throws IllegalArgumentException;
+//	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException;
+//	public Vector <Eigenschaft> getAllEigenschaft() throws IllegalArgumentException;
 	
 	public Freitexteigenschaft createFreitexteigenschaft(String wert) throws IllegalArgumentException;
 	public void save(Freitexteigenschaft frei) throws IllegalArgumentException;

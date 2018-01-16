@@ -204,21 +204,21 @@ implements PartnerboerseAdministration {
 		}
 	}
 
-	@Override
-	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
-		
-		return this.eigenschaftMapper.findByKey(id);
-	}
-
-	@Override
-	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
-		try {
-			return this.eigenschaftMapper.getAll();
-		} catch(Exception e){
-			
-		}
-		return null;
-	}
+//	@Override
+//	public Eigenschaft findbyKeyEigenschaft(int id) throws IllegalArgumentException {
+//		
+//		return this.eigenschaftMapper.findByKey(id);
+//	}
+//
+//	@Override
+//	public Vector<Eigenschaft> getAllEigenschaft() throws IllegalArgumentException {
+//		try {
+//			return this.eigenschaftMapper.getAll();
+//		} catch(Exception e){
+//			
+//		}
+//		return null;
+//	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override

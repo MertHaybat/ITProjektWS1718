@@ -43,9 +43,9 @@ public interface PartnerboerseAdministrationAsync {
 
 	void delete(Eigenschaft eig, AsyncCallback<Void> callback);
 	
-	void findbyKeyEigenschaft(int id, AsyncCallback<Eigenschaft> callback);
-
-	void getAllEigenschaft(AsyncCallback<Vector<Eigenschaft>> callback);
+//	void findbyKeyEigenschaft(int id, AsyncCallback<Eigenschaft> callback);
+//
+//	void getAllEigenschaft(AsyncCallback<Vector<Eigenschaft>> callback);
 //_________________________________________________________________________________________________________________________	
 
 	void createFreitexteigenschaft(String wert, AsyncCallback<Freitexteigenschaft> callback);

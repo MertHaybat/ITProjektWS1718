@@ -43,9 +43,9 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	     * Ein ReportGeneratorImpl-Objekt instantiiert fÃ¼r seinen Eigenbedarf eine
 	     * PartnerboerseAdministrationImpl-Instanz.
 	     */
-	    PartnerboerseAdministrationImpl a = new PartnerboerseAdministrationImpl();
-	    a.init();
-	    this.partnerboerseadministration = a;
+	    PartnerboerseAdministrationImpl p = new PartnerboerseAdministrationImpl();
+	    p.init();
+	    this.partnerboerseadministration = p;
 	  }
 	
 	/**
@@ -111,7 +111,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		 * 
 		 */
 		
-		Vector <Info> allInfos = partnerboerseadministration.getAllInfobyProfilid(pro);
+//		Vector <Info> allInfos = partnerboerseadministration.getAllInfobyProfil(pro);
 		
 //		Vector<Info> infos = partnerboerseadministration.;
 	}

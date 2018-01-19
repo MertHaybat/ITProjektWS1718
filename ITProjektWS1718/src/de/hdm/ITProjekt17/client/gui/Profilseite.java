@@ -102,7 +102,40 @@ public class Profilseite extends VerticalPanel{
 			
 	      lbgeschlecht.addItem("Männlich");
 	      lbgeschlecht.addItem("Weiblich");
+	      
+		  
+		//ListBox Interesse befüllen.
+			
+	      lbinteresse.addItem("Frauen");
+	      lbgeschlecht.addItem("Männer");
+	      lbgeschlecht.addItem("Beides");	  
+	      
+			//ListBox Wohnsituation befüllen.
+			
+	      lbwohnsituation.addItem("Bei den Eltern");
+	      lbwohnsituation.addItem("alleine");
+	      lbwohnsituation.addItem("In einer WG");
+	      lbwohnsituation.addItem("Im Wohnheim");
 
+			//ListBox Ausbildung befüllen.
+			
+	      lbausbildung.addItem("Kein Abschluss");
+	      lbausbildung.addItem("Schüler");
+	      lbausbildung.addItem("Student");
+	      lbausbildung.addItem("Absolvent");
+
+			//ListBox Sportart befüllen.
+			
+	      lbsportart.addItem("Fussball");
+	      lbsportart.addItem("Handball");
+	      lbsportart.addItem("Tanzsport");
+	      lbsportart.addItem("Wassersport");
+	      lbsportart.addItem("Motorsport");
+	      lbsportart.addItem("Kampfsport");
+	      lbsportart.addItem("Denksport");
+	      lbsportart.addItem("Leichtathletik");
+	      lbsportart.addItem("Kraftsport");
+	      lbsportart.addItem("Reitsport");
 		
 		// Create a date picker
 		final DatePicker datepicker_geburtsdatum = new DatePicker();
@@ -192,6 +225,39 @@ public class Profilseite extends VerticalPanel{
 			
 	      lbgeschlecht.addItem("Männlich");
 	      lbgeschlecht.addItem("Weiblich");
+	      
+			//ListBox Interesse befüllen.
+			
+	      lbinteresse.addItem("Frauen");
+	      lbgeschlecht.addItem("Männer");
+	      lbgeschlecht.addItem("Beides");	  
+	      
+			//ListBox Wohnsituation befüllen.
+			
+	      lbwohnsituation.addItem("Bei den Eltern");
+	      lbwohnsituation.addItem("alleine");
+	      lbwohnsituation.addItem("In einer WG");
+	      lbwohnsituation.addItem("Im Wohnheim");
+
+			//ListBox Ausbildung befüllen.
+			
+	      lbausbildung.addItem("Kein Abschluss");
+	      lbausbildung.addItem("Schüler");
+	      lbausbildung.addItem("Student");
+	      lbausbildung.addItem("Absolvent");
+
+			//ListBox Sportart befüllen.
+			
+	      lbsportart.addItem("Fussball");
+	      lbsportart.addItem("Handball");
+	      lbsportart.addItem("Tanzsport");
+	      lbsportart.addItem("Wassersport");
+	      lbsportart.addItem("Motorsport");
+	      lbsportart.addItem("Kampfsport");
+	      lbsportart.addItem("Denksport");
+	      lbsportart.addItem("Leichtathletik");
+	      lbsportart.addItem("Kraftsport");
+	      lbsportart.addItem("Reitsport");
 		
 		tbemail.setValue(profil.getEmail());
 		tbvorname.setValue(profil.getVorname());
@@ -214,7 +280,7 @@ public class Profilseite extends VerticalPanel{
 				RootPanel.get("Details").add(new Infoseite(profil));
 			}
 		});
-
+	    
 		vpanel.add(ft1);
 		this.add(vpanel);
 	    

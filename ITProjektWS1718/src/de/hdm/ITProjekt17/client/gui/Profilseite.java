@@ -38,6 +38,12 @@ public class Profilseite extends VerticalPanel{
 	private ListBox lbraucher = new ListBox();
 	private ListBox lbgeschlecht = new ListBox();
 	
+	private ListBox lbinteresse = new ListBox();
+	private ListBox lbwohnsituation = new ListBox();	
+	private ListBox lbausbildung = new ListBox();
+	private ListBox lbsportart = new ListBox();
+	private ListBox lbkörperbau = new ListBox();
+	
 	private Label lb1 = new Label("Vorname: ");
 	private Label lb2 = new Label("Nachname: ");
 	private Label lb3 = new Label("Geburtsdatum: ");
@@ -191,7 +197,7 @@ public class Profilseite extends VerticalPanel{
 		tbvorname.setValue(profil.getVorname());
 		tbnachname.setValue(profil.getNachname());
 		geburtsdatum.setValue(profil.getGeburtsdatum());
-		tbhaarfarbe.setValue(profil.getHaarfarbe());
+		tbhaarfarbe.setValue(Profil.Haarfarbe.values());
 		tbreligion.setValue(profil.getReligion());
 		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
 		lbraucher.setValue(0, profil.getRaucher());

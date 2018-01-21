@@ -61,12 +61,12 @@ public class ITProjektWS1718 implements EntryPoint{
 //			if (loginInfo.isLoggedIn()) {
 //				
 //				profil.setEmail("blabla@web.de");
-				profil.setGeschlecht("Männlich");
-				profil.setHaarfarbe("schwarz");
+//				profil.setGeschlecht("Männlich");
+//				profil.setHaarfarbe("schwarz");
 				profil.setId(1);
 				profil.setKoerpergroesse(196);
 				profil.setNachname("nachname");
-				profil.setRaucher("Partyraucher");
+//				profil.setRaucher("Partyraucher");
 				profil.setReligion("katholisch");
 				profil.setVorname("vorname");
 				loadPartnerboerse(profil);

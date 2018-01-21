@@ -68,7 +68,7 @@ public class Infoseite extends VerticalPanel{
 		tbvorname.setValue(profil.getVorname());
 		tbnachname.setValue(profil.getNachname());
 		geburtsdatum.setValue(profil.getGeburtsdatum());
-		tbhaarfarbe.setValue(profil.getHaarfarbe());
+//		tbhaarfarbe.setValue(profil.getHaarfarbe());
 		tbreligion.setValue(profil.getReligion());
 		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
 //		tbraucher.setValue(profil.getRaucher());

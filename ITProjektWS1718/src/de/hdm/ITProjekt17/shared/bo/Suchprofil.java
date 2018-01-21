@@ -2,6 +2,10 @@ package de.hdm.ITProjekt17.shared.bo;
 
 import java.util.Date;
 
+import de.hdm.ITProjekt17.shared.bo.Profil.Geschlecht;
+import de.hdm.ITProjekt17.shared.bo.Profil.Haarfarbe;
+import de.hdm.ITProjekt17.shared.bo.Profil.Raucher;
+
 /**
  * Realisieren eines exemplarischen Suchprofils der Partnerbörse 
  * zur suche von anderen Teilnehmern der Partnerbörse.
@@ -57,17 +61,81 @@ public class Suchprofil extends BusinessObject {
 	/**
 	 * Variable haarfarbe gibt die Haarfarbe des zusuchenden Teilnehmers an.
 	 */
-	private String haarfarbe = "";
+	public enum HaarfarbeSuchprofil {
+	    A, B, C, D, E, F
+	  }
+	  
+	  public static String wordSuchprofil(HaarfarbeSuchprofil h) {
+	    String str ="";
+	    switch (h) {
+	      case A: str = "schwarz";
+	            break;
+	      case B: str = "braun";
+	            break;
+	      case C: str = "blond";
+	            break;
+	      case D: str = "rot";
+	      		break;
+	      case E: str = "hell";
+    			break;	  
+	      case F: str = "dunkel";
+    			break;	   		
+
+	    }
+	    return str;
+	  }
+	
+	private String haarfarbe ="";
 	
 	/**
 	 * Variable raucher gibt an ob der zusuchende Teilnehmer raucher ist oder nicht.
 	 */
-	private String raucher = ""; 
+	public enum RaucherSuchprofil {
+	    A, B, C, D, E
+	  }
+	  
+	  public static String wordSuchprofil(RaucherSuchprofil b) {
+	    String str ="";
+	    switch (b) {
+	      case A: str = "Ja";
+	            break;
+	      case B: str = "Nein";
+	            break;
+	      case C: str = "Gelegentlich";
+	            break;
+	      case D: str = "Partyraucher";
+	      		break;
+	      case E: str = "Nur nach dem Sex";
+    			break;	      		
+
+	    }
+	    return str;
+	  }
+
+	private String raucher ="";
 	
 	/**
 	 * Variable geschlecht gibt an welches Geschlecht der zusuchende Teilnehmer ist.
 	 */
-	private boolean geschlecht = false; 
+	public enum GeschlechtSuchprofil {
+	    m, w, s
+	  }
+	  
+	  public static String wordSuchprofil(GeschlechtSuchprofil c) {
+	    String str ="";
+	    switch (c) {
+	      case m: str = "Männlich";
+	              break;
+	      case w: str = "Weiblich";
+	              break;
+	      case s: str = "Sonstiges";
+	              break;
+	     
+	    }
+	    return str;
+	  }
+	
+	  private String geschlecht ="";
 	
 	public Suchprofil(){
 		
@@ -145,7 +213,7 @@ public class Suchprofil extends BusinessObject {
 	 * Setzen welches Geschlecht der Teilnehmer hat
 	 * @param raucher
 	 */
-	public void setGeschlecht(boolean geschlecht){
+	public void setGeschlecht(String geschlecht){
 		this.geschlecht = geschlecht;
 	}
 	
@@ -223,7 +291,7 @@ public class Suchprofil extends BusinessObject {
 	 * Abfragen ob zu suchendes Profil Raucher ist oder nicht.
 	 * @return geschlecht
 	 */
-	public boolean getGeschlecht(){
+	public String getGeschlecht(){
 		return geschlecht;
 	}
 	

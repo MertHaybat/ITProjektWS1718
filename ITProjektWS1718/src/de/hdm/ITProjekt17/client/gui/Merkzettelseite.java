@@ -1,8 +1,8 @@
 package de.hdm.ITProjekt17.client.gui;
 
-import java.util.Vector;
-
+import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.ClickableTextCell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -19,10 +19,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.view.client.NoSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
-
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
@@ -41,6 +39,9 @@ public class Merkzettelseite extends VerticalPanel{
 	final SingleSelectionModel<Profil> ssm_eigener_merkzettelprofile = new SingleSelectionModel<Profil>();
 	final SingleSelectionModel<Profil> ssm_andere_merkzettelprofile = new SingleSelectionModel<Profil>();
 		
+	private ButtonCell bcloeschen = new ButtonCell();
+	private ButtonCell bcanzeigen = new ButtonCell();
+	
 	private HTML htmleigener_merkzettel = new HTML("<h2>Eigener Merkzettel:</<h2>");
 	private HTML htmlandere_merkzettel = new HTML("<h2>Sie sind beliebt bei:</<h2>");
 	
@@ -64,8 +65,38 @@ public class Merkzettelseite extends VerticalPanel{
 		
 		ct_eigener_merkzettelprofile.setSelectionModel(ssm_eigener_merkzettelprofile);
 		ct_andere_merkzettelprofile.setSelectionModel(ssm_andere_merkzettelprofile);	
-
 		
+			
+		Column <Profil, String> eigener_merkzettelloeschen = new Column<Profil, String>(bcloeschen) {
+		  @Override
+		  public String getValue(Profil object) {
+		    return "Löschen";
+		  		}
+		  };
+		  eigener_merkzettelloeschen.setFieldUpdater(new FieldUpdater<Profil, String>(){
+
+			@Override
+			public void update(int index, Profil object, String value) {
+				// TODO Auto-generated method stub
+				
+			}
+			  
+		  });
+		  Column <Profil, String> eigener_merkzettelanzeigen = new Column<Profil, String>(bcanzeigen) {
+			  @Override
+			  public String getValue(Profil object) {
+			    return "Anzeigen";
+			  		}
+			  };
+			  eigener_merkzettelanzeigen.setFieldUpdater(new FieldUpdater<Profil, String>(){
+
+				@Override
+				public void update(int index, Profil object, String value) {
+					// TODO Auto-generated method stub
+					
+				}
+				  
+			  });
 
 		 Column<Profil, String> eigener_merkzettelvorname = 
 				    new Column<Profil, String>(new ClickableTextCell())  {
@@ -95,6 +126,8 @@ public class Merkzettelseite extends VerticalPanel{
 		ct_eigener_merkzettelprofile.addColumn(eigener_merkzettelvorname, "Vorname");
 		ct_eigener_merkzettelprofile.addColumn(eigener_merkzettelnachname, "Nachname");
 		ct_eigener_merkzettelprofile.addColumn(eigener_merkzettelgeburtsdatum, "Geburtsdatum");
+		ct_eigener_merkzettelprofile.addColumn(eigener_merkzettelloeschen, "");
+		ct_eigener_merkzettelprofile.addColumn(eigener_merkzettelanzeigen, "");
 		
 		 Column<Profil, String> andere_merkzettelvorname = 
 				    new Column<Profil, String>(new ClickableTextCell())  {
@@ -206,37 +239,34 @@ private class DialogBoxMerkzettelProfil extends DialogBox{
 
 				@Override
 				public void onClick(ClickEvent event) {
-//					Merkzettel mz = new Merkzettel();
-//					mz.setProfilId_merkender(profil_eigenes.getId());
-//					mz.setProfilId_gemerkter(profil_besucher.getId());
-//					pbverwaltung.deleteMerkzettel(mz, new AsyncCallback<Void>(){
-//
-//						@Override
-//						public void onFailure(Throwable caught) {
-//							
-//						}
-//
-//						@Override
-//						public void onSuccess(Void result) {
-//						
-//						}
-//						
-//					});
-//					Kontaktsperre ks = new Kontaktsperre();
-//					ks.setProfilId_sperrender(profil_eigenes.getId());
-//					ks.setProfilId_gesperrter(profil_besucher.getId());
-//					pbverwaltung.createKontaktsperre(ks, new AsyncCallback<Kontaktsperre>(){
-//
-//						@Override
-//						public void onFailure(Throwable caught) {							
-//						}
-//
-//						@Override
-//						public void onSuccess(Kontaktsperre result) {
-//							Window.alert("Sie haben die Person erfolgreich gesperrt");
-//						}
-//						
-//					});
+					pbverwaltung.deleteProfilVonMerkliste(profil_eigenes, profil_besucher.getId(), new AsyncCallback<Void>(){
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+					});
+
+					pbverwaltung.createKontaktsperre(profil_eigenes, profil_besucher.getId(), new AsyncCallback<Kontaktsperre>(){
+
+						@Override
+						public void onFailure(Throwable caught) {							
+						}
+
+						@Override
+						public void onSuccess(Kontaktsperre result) {
+							Window.alert("Sie haben die Person erfolgreich gesperrt");
+						}
+						
+					});
 				}
 			});
 			
@@ -244,69 +274,69 @@ private class DialogBoxMerkzettelProfil extends DialogBox{
 
 				@Override
 				public void onClick(ClickEvent event) {
-					Merkzettel mz = new Merkzettel();
-					mz.setProfilId_merkender(profil_eigenes.getId());
-					mz.setProfilId_gemerkter(profil_besucher.getId());
-//					pbverwaltung.deleteMerkzettel(mz, new AsyncCallback<Void>(){
-//
-//						@Override
-//						public void onFailure(Throwable caught) {
-//							
-//						}
-//
-//						@Override
-//						public void onSuccess(Void result) {
-//						
-//						}
-//						
-//					});
+					pbverwaltung.deleteProfilVonMerkliste(profil_eigenes, profil_besucher.getId(), new AsyncCallback<Void>(){
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+
+						@Override
+						public void onSuccess(Void result) {
+							Window.alert("Profil wurde aus Ihrem Merkzettel gelöscht.");
+						}
+						
+					});
+					
+
 				}
 				
 			});
 			
-//			pbverwaltung.getProfilById(profil_besucher.getId(), new AsyncCallback<Profil>(){
-//
-//				@Override
-//				public void onFailure(Throwable caught) {
-//					Window.alert("Profil wurde nicht gefunden");
-//				}
-//
-//				@Override
-//				public void onSuccess(Profil result) {
-//					tbvorname.setValue(result.getVorname());
-//					tbnachname.setValue(result.getNachname());
-//					geburtsdatum.setValue(result.getGeburtsdatum());
-//					tbhaarfarbe.setValue(result.getHaarfarbe());
-//					tbreligion.setValue(result.getReligion());
-//					tbkörpergröße.setValue(String.valueOf(result.getKoerpergroesse()));
-//					tbraucher.setValue(String.valueOf(result.getRaucher()));
-//					tbgeschlecht.setValue(String.valueOf(result.getGeschlecht()));
-//					
-//				}
-//				
-//			});
-//			merkzettel.addClickHandler(new ClickHandler(){
-//
-//				@Override
-//				public void onClick(ClickEvent event) {
-//				pbverwaltung.createMerkzettel(profil_besucher.getId(), profil_eigenes.getId(), new AsyncCallback<Merkzettel>(){
-//
-//					@Override
-//					public void onFailure(Throwable caught) {
-//						// TODO Auto-generated method stub
-//						
-//					}
-//
-//					@Override
-//					public void onSuccess(Merkzettel result) {
-//						hide();
-//						Window.alert("Profil wurde ihrem Merkzettel hinzugefügt");
-//					}
-//					
-//				});
-//				}
-//				
-//			});
+			pbverwaltung.getProfilById(profil_besucher.getId(), new AsyncCallback<Profil>(){
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Profil wurde nicht gefunden");
+				}
+
+				@Override
+				public void onSuccess(Profil result) {
+					tbvorname.setValue(result.getVorname());
+					tbnachname.setValue(result.getNachname());
+					geburtsdatum.setValue(result.getGeburtsdatum());
+					tbhaarfarbe.setValue(result.getHaarfarbe());
+					tbreligion.setValue(result.getReligion());
+					tbkörpergröße.setValue(String.valueOf(result.getKoerpergroesse()));
+					tbraucher.setValue(String.valueOf(result.getRaucher()));
+					tbgeschlecht.setValue(String.valueOf(result.getGeschlecht()));
+					
+				}
+				
+			});
+			merkzettel.addClickHandler(new ClickHandler(){
+
+				@Override
+				public void onClick(ClickEvent event) {
+				pbverwaltung.createMerkzettel(profil_eigenes, profil_besucher.getId(), new AsyncCallback<Merkzettel>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Merkzettel result) {
+						hide();
+						Window.alert("Profil wurde ihrem Merkzettel hinzugefügt");
+					}
+					
+				});
+				}
+				
+			});
 			abbrechen.addClickHandler(new ClickHandler(){
 
 				@Override

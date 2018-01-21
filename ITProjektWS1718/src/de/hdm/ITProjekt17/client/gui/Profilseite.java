@@ -72,7 +72,7 @@ public class Profilseite extends VerticalPanel{
 	
 	private Button ok = new Button("Bestätigen");
 	private Button abbrechen = new Button("Abbrechen");
-	private Button infoEigenschaftenAnzeigen = new Button ("Weitere Profilinformationen anzeigen");
+	private Button löschen = new Button ("löschen");
 	
 	private FlexTable ft1 = new FlexTable();
 	private FlexTable ft2 = new FlexTable();
@@ -167,8 +167,8 @@ public class Profilseite extends VerticalPanel{
 		//ListBox Interesse befüllen.
 			
 	      lbinteresse.addItem("Frauen");
-	      lbgeschlecht.addItem("Männer");
-	      lbgeschlecht.addItem("Beides");	  
+	      lbinteresse.addItem("Männer");
+	      lbinteresse.addItem("Beides");	  
 	      
 			//ListBox Wohnsituation befüllen.
 			
@@ -287,7 +287,7 @@ public class Profilseite extends VerticalPanel{
 		ft1.setWidget(8, 1, lbraucher);
 		ft1.setWidget(9, 0, ok);
 		ft1.setWidget(9, 1, abbrechen);
-		ft1.setWidget(9, 2, infoEigenschaftenAnzeigen);
+		ft1.setWidget(9, 2, löschen);
 
 		ft2.setWidget(0, 0, lb10);
 		ft2.setWidget(0, 1, lbinteresse);
@@ -556,21 +556,6 @@ public class Profilseite extends VerticalPanel{
 			f.setWert("dick");
 		}
 	
-		
-		
-		
-		
-		
-	    infoEigenschaftenAnzeigen.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				
-				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(new Infoseite(profil));
-			}
-		});
 	    
 		vpanel.add(ft1);
 		vpanel2.add(ft2);

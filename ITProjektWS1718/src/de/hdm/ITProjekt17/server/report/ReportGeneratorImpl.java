@@ -111,7 +111,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		 * 
 		 */
 		
-		Vector <Info> allInfos = partnerboerseadministration.getAllInfobyProfilid(pro);
+//		Vector <Info> allInfos = partnerboerseadministration.getAllInfobyProfilid(pro);
 		
 //		Vector<Info> infos = partnerboerseadministration.;
 	}

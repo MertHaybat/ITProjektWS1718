@@ -28,7 +28,7 @@ public class ProfilMapper {
 	 * neue Instanzen dieser Klasse zu erzeugen.
 	 */
 	protected ProfilMapper(){	
-	}
+	};
 	
 	/**
 	 * Kann aufgerufen werden durch ProfilMapper.profilMapper. Sie stellt die
@@ -84,7 +84,8 @@ public class ProfilMapper {
 		    	  	 */
 		    	  		PreparedStatement stmt1 = con.prepareStatement(
 		    	  				"INSERT INTO profil(id, email, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht) "
-		    	  				+ "VALUES (?,?,?,?,?,?,?,?,?,?) ",
+		    	  				+ "VALUES (?,?,?,?,?,?,?,?,?,?) ",			
+		    	  				
 		    	  				Statement.RETURN_GENERATED_KEYS);
 		    	  				stmt1.setInt(1, pro.getId());
 		    	  				stmt1.setString(2, pro.getEmail());
@@ -97,7 +98,7 @@ public class ProfilMapper {
 		    	  				stmt1.setString(9, pro.getRaucher());
 		    	  				stmt1.setString(10, pro.getGeschlecht());
 		    	  				
-		    	  				
+		    	  				System.out.println(stmt);
 		    	  				stmt1.executeUpdate();
 		      }
 		}

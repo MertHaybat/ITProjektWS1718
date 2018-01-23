@@ -37,125 +37,154 @@ public class Aktivitaeten extends VerticalPanel {
 	private HorizontalPanel hpanel = new HorizontalPanel();
 	private VerticalPanel vpanelbesucher = new VerticalPanel();
 	private VerticalPanel vpanelbesuchte = new VerticalPanel();
-	
-	private CellTable<Profil> ct_besucherprofile = new CellTable<Profil>();
-	private CellTable<Profil> ct_besuchteprofile = new CellTable<Profil>();
-	
-	final NoSelectionModel<Profil> ssm_besucherprofile = new NoSelectionModel<Profil>();
-	final NoSelectionModel<Profil> ssm_besuchteprofile = new NoSelectionModel<Profil>();
-		
+//	
+//	private CellTable<Profil> ct_besucherprofile = new CellTable<Profil>();
+//	private CellTable<Profil> ct_besuchteprofile = new CellTable<Profil>();
+//	
+//	final NoSelectionModel<Profil> ssm_besucherprofile = new NoSelectionModel<Profil>();
+//	final NoSelectionModel<Profil> ssm_besuchteprofile = new NoSelectionModel<Profil>();
+//		
 	private HTML htmlbesucher = new HTML("<h2>Besucher</<h2>");
 	private HTML htmlbesuchte = new HTML("<h2>Besuchte</<h2>");
 	
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 	
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");
+	
+	public Aktivitaeten(final Profil profil){
+		final Profil_Tabelle pt1 = new Profil_Tabelle();
+		final Profil_Tabelle pt2 = new Profil_Tabelle();
 		
-	/**
-	 * Kontruktor für die Aktivitäten
-	 * @param profil
-	 */
-	public Aktivitaeten(final Profil profil) {
-	
-	RootPanel.get("Details").setWidth("100%");
-	ct_besucherprofile.setWidth("100%", true);	
-	ct_besuchteprofile.setWidth("100%", true);
-	
-	vpanelbesucher.add(htmlbesucher);
-	vpanelbesucher.add(ct_besucherprofile);
-	vpanelbesuchte.add(htmlbesuchte);
-	vpanelbesuchte.add(ct_besuchteprofile);
-	
-	hpanel.add(vpanelbesucher);
-	hpanel.add(vpanelbesuchte);
-	
-	this.add(hpanel);
-	
-	ct_besucherprofile.setSelectionModel(ssm_besucherprofile);
-	ct_besuchteprofile.setSelectionModel(ssm_besuchteprofile);	
-
-	 Column<Profil, String> besucherprofilvorname = 
-			    new Column<Profil, String>(new ClickableTextCell())  {
-			    	@Override
-					public String getValue(Profil object) {
-						return object.getVorname();
-					}
-					    
-	 };
-	 Column<Profil, String> besucherprofilnachname = 
-			    new Column<Profil, String>(new ClickableTextCell())  {
-			    	@Override
-					public String getValue(Profil object) {
-						return object.getNachname();
-					}
-					    
-	 };
-	 Column<Profil, String> besucherprofilgeburtsdatum = 
-			    new Column<Profil, String>(new ClickableTextCell())  {
-			    	@Override
-					public String getValue(Profil object) {
-						return df.format(object.getGeburtsdatum());
-					}
-					    
-	 };
-	 
-	ct_besucherprofile.addColumn(besucherprofilvorname, "Vorname");
-	ct_besucherprofile.addColumn(besucherprofilnachname, "Nachname");
-	ct_besucherprofile.addColumn(besucherprofilgeburtsdatum, "Geburtsdatum");
-	
-	 Column<Profil, String> besuchteprofilvorname = 
-			    new Column<Profil, String>(new ClickableTextCell())  {
-			    	@Override
-					public String getValue(Profil object) {
-						return object.getVorname();
-					}
-					    
-	 };
-	 Column<Profil, String> besuchteprofilnachname = 
-			    new Column<Profil, String>(new ClickableTextCell())  {
-			    	@Override
-					public String getValue(Profil object) {
-						return object.getNachname();
-					}
-					    
-	 };
-	 Column<Profil, String> besuchteprofilgeburtsdatum = 
-			    new Column<Profil, String>(new ClickableTextCell())  {
-			    	@Override
-					public String getValue(Profil object) {
-						return df.format(object.getGeburtsdatum());
-					}
-					    
-	 };
-	 
-	ct_besuchteprofile.addColumn(besuchteprofilvorname, "Vorname");
-	ct_besuchteprofile.addColumn(besuchteprofilnachname, "Nachname");
-	ct_besuchteprofile.addColumn(besuchteprofilgeburtsdatum, "Geburtsdatum");
-	
-	ssm_besucherprofile.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+		vpanelbesucher.add(htmlbesucher);
+		vpanelbesucher.add(pt1);
+		hpanel.add(vpanelbesucher);
+		vpanelbesuchte.add(htmlbesuchte);
+		vpanelbesuchte.add(pt2);
+		hpanel.add(vpanelbesuchte);
+		this.add(hpanel);
+		pt1.ssm_profil_anzeige.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 		
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
-			DialogBoxBesuchProfil dialogboxbesuchprofil = new DialogBoxBesuchProfil(profil, ssm_besucherprofile.getLastSelectedObject());
+			DialogBoxBesuchProfil dialogboxbesuchprofil = new DialogBoxBesuchProfil(profil, pt1.ssm_profil_anzeige.getSelectedObject());
 			dialogboxbesuchprofil.center();
 		}
 	});
-	ssm_besuchteprofile.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+		pt2.ssm_profil_anzeige.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
-				DialogBoxBesuchProfil dialogboxbesuchprofil = new DialogBoxBesuchProfil(profil, ssm_besuchteprofile.getLastSelectedObject());
+				DialogBoxBesuchProfil dialogboxbesuchprofil = new DialogBoxBesuchProfil(profil,  pt2.ssm_profil_anzeige.getSelectedObject());
 				dialogboxbesuchprofil.center();
 			}
 		});
-	
-	/**
-	 * HIER MUSS EIN ASYNCCALLBACK NOCH MIT BESUCH!!! WELCHES DIE DATEN DANN IN DIE TABELLE LÄDT!!!
-	 */
-	
-	
 	}
 	
+	/**
+	 * Kontruktor für die Aktivitäten
+	 * @param profil
+//	 */
+//	public Aktivitaeten(final Profil profil) {
+//	
+//	RootPanel.get("Details").setWidth("100%");
+//	ct_besucherprofile.setWidth("100%", true);	
+//	ct_besuchteprofile.setWidth("100%", true);
+//	
+//	vpanelbesucher.add(htmlbesucher);
+//	vpanelbesucher.add(ct_besucherprofile);
+//	vpanelbesuchte.add(htmlbesuchte);
+//	vpanelbesuchte.add(ct_besuchteprofile);
+//	
+//	hpanel.add(vpanelbesucher);
+//	hpanel.add(vpanelbesuchte);
+//	
+//	this.add(hpanel);
+//	
+//	ct_besucherprofile.setSelectionModel(ssm_besucherprofile);
+//	ct_besuchteprofile.setSelectionModel(ssm_besuchteprofile);	
+//
+//	 Column<Profil, String> besucherprofilvorname = 
+//			    new Column<Profil, String>(new ClickableTextCell())  {
+//			    	@Override
+//					public String getValue(Profil object) {
+//						return object.getVorname();
+//					}
+//					    
+//	 };
+//	 Column<Profil, String> besucherprofilnachname = 
+//			    new Column<Profil, String>(new ClickableTextCell())  {
+//			    	@Override
+//					public String getValue(Profil object) {
+//						return object.getNachname();
+//					}
+//					    
+//	 };
+//	 Column<Profil, String> besucherprofilgeburtsdatum = 
+//			    new Column<Profil, String>(new ClickableTextCell())  {
+//			    	@Override
+//					public String getValue(Profil object) {
+//						return df.format(object.getGeburtsdatum());
+//					}
+//					    
+//	 };
+//	 
+//	ct_besucherprofile.addColumn(besucherprofilvorname, "Vorname");
+//	ct_besucherprofile.addColumn(besucherprofilnachname, "Nachname");
+//	ct_besucherprofile.addColumn(besucherprofilgeburtsdatum, "Geburtsdatum");
+//	
+//	 Column<Profil, String> besuchteprofilvorname = 
+//			    new Column<Profil, String>(new ClickableTextCell())  {
+//			    	@Override
+//					public String getValue(Profil object) {
+//						return object.getVorname();
+//					}
+//					    
+//	 };
+//	 Column<Profil, String> besuchteprofilnachname = 
+//			    new Column<Profil, String>(new ClickableTextCell())  {
+//			    	@Override
+//					public String getValue(Profil object) {
+//						return object.getNachname();
+//					}
+//					    
+//	 };
+//	 Column<Profil, String> besuchteprofilgeburtsdatum = 
+//			    new Column<Profil, String>(new ClickableTextCell())  {
+//			    	@Override
+//					public String getValue(Profil object) {
+//						return df.format(object.getGeburtsdatum());
+//					}
+//					    
+//	 };
+//	 
+//	ct_besuchteprofile.addColumn(besuchteprofilvorname, "Vorname");
+//	ct_besuchteprofile.addColumn(besuchteprofilnachname, "Nachname");
+//	ct_besuchteprofile.addColumn(besuchteprofilgeburtsdatum, "Geburtsdatum");
+//	
+//	ssm_besucherprofile.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+//		
+//		@Override
+//		public void onSelectionChange(SelectionChangeEvent event) {
+//			DialogBoxBesuchProfil dialogboxbesuchprofil = new DialogBoxBesuchProfil(profil, ssm_besucherprofile.getLastSelectedObject());
+//			dialogboxbesuchprofil.center();
+//		}
+//	});
+//	ssm_besuchteprofile.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+//			
+//			@Override
+//			public void onSelectionChange(SelectionChangeEvent event) {
+//				DialogBoxBesuchProfil dialogboxbesuchprofil = new DialogBoxBesuchProfil(profil, ssm_besuchteprofile.getLastSelectedObject());
+//				dialogboxbesuchprofil.center();
+//			}
+//		});
+//	
+//	/**
+//	 * HIER MUSS EIN ASYNCCALLBACK NOCH MIT BESUCH!!! WELCHES DIE DATEN DANN IN DIE TABELLE LÄDT!!!
+//	 */
+//	
+//	
+//	}
+//	
 	/**
 	 * DialogBox welches geöffnet wird, wenn man auf ein Besucher klickt.
 	 * @author Mert

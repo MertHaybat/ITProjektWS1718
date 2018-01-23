@@ -10,74 +10,69 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class Topbar extends VerticalPanel{
-	
-	private Profilseite profil = new Profilseite();
-	private VerticalPanel vpanel = new VerticalPanel();
-	private Button btn1 = new Button("Startseite");
-	private Button btn2 = new Button("Platzhalterbutton");
-	private Button btn3 = new Button("Suchen");
-	private Button btn4 = new Button("Impressum");
-	
-	private FlexTable ft1 = new FlexTable();
-	
-	private Startseite startseite = new Startseite();
-//	private Platzhalter platzhalter = new Platzhalter();
-	private Impressum impressum = new Impressum();
-	
-	public Topbar(final Profil profil){
-		btn1.setStylePrimaryName("topbarbutton");
-		btn2.setStylePrimaryName("topbarbutton");
-		btn3.setStylePrimaryName("topbarbutton");
-		btn4.setStylePrimaryName("topbarbutton");
-		ft1.setWidget(0, 0, btn1);
-		ft1.setWidget(0, 1, btn2);
-		ft1.setWidget(0, 2, btn3);
-		ft1.setWidget(0, 3, btn4);
-		
-		btn1.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(startseite);
-			}
-			
-		});
-		
-//		btn2.addClickHandler(new ClickHandler(){
+//	
+//	private VerticalPanel vpanel = new VerticalPanel();
+//	private Button btn1 = new Button("Startseite");
+//	private Button btn2 = new Button("Platzhalterbutton");
+//	private Button btn3 = new Button("Suchen");
+//	private Button btn4 = new Button("Impressum");
+//	
+//	private FlexTable ft1 = new FlexTable();
+//	
+//	public Topbar(final Profil profil){
+//		btn1.setStylePrimaryName("topbarbutton");
+//		btn2.setStylePrimaryName("topbarbutton");
+//		btn3.setStylePrimaryName("topbarbutton");
+//		btn4.setStylePrimaryName("topbarbutton");
+//		ft1.setWidget(0, 0, btn1);
+//		ft1.setWidget(0, 1, btn2);
+//		ft1.setWidget(0, 2, btn3);
+//		ft1.setWidget(0, 3, btn4);
+//		
+//		btn1.addClickHandler(new ClickHandler(){
 //
 //			@Override
 //			public void onClick(ClickEvent event) {
 //			RootPanel.get("Details").clear();
-//			RootPanel.get("Details").add(platzhalter);
+//			RootPanel.get("Details").add(new Startseite(profil));
 //			}
 //			
-//		});	
-		
-		btn3.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(new Suchen(profil));
-			}
-			
-		});
-		
-		btn4.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(impressum);
-			}
-			
-		});
-		
-		
-		vpanel.add(ft1);
-		this.add(vpanel);
-	}
-	
+//		});
+//		
+////		btn2.addClickHandler(new ClickHandler(){
+////
+////			@Override
+////			public void onClick(ClickEvent event) {
+////			RootPanel.get("Details").clear();
+////			RootPanel.get("Details").add(platzhalter);
+////			}
+////			
+////		});	
+//		
+//		btn3.addClickHandler(new ClickHandler(){
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//			RootPanel.get("Details").clear();
+//			RootPanel.get("Details").add(new Suchen(profil));
+//			}
+//			
+//		});
+//		
+//		btn4.addClickHandler(new ClickHandler(){
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//			RootPanel.get("Details").clear();
+//			RootPanel.get("Details").add(new Impressum(profil));
+//			}
+//			
+//		});
+//		
+//		
+//		vpanel.add(ft1);
+//		this.add(vpanel);
+//	}
+//	
 
 }

@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import de.hdm.ITProjekt17.shared.bo.Aehnlichkeitsmass;
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Besuch;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
@@ -43,9 +44,9 @@ public interface PartnerboerseAdministrationAsync {
 
 	void delete(Eigenschaft eig, AsyncCallback<Void> callback);
 	
-	void findbyKeyEigenschaft(int id, AsyncCallback<Eigenschaft> callback);
-
-	void getAllEigenschaft(AsyncCallback<Vector<Eigenschaft>> callback);
+//	void findbyKeyEigenschaft(int id, AsyncCallback<Eigenschaft> callback);
+//
+//	void getAllEigenschaft(AsyncCallback<Vector<Eigenschaft>> callback);
 //_________________________________________________________________________________________________________________________	
 
 	void createFreitexteigenschaft(String wert, AsyncCallback<Freitexteigenschaft> callback);
@@ -137,7 +138,7 @@ public interface PartnerboerseAdministrationAsync {
 	//_________________________________________________________________________________________________________________________
 	
 	void createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId,
+			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId,
 			AsyncCallback<Suchprofil> callback);
 
 	void save(Suchprofil such, AsyncCallback<Suchprofil> callback);
@@ -173,5 +174,13 @@ public interface PartnerboerseAdministrationAsync {
 	//_________________________________________________________________________________________________________________________
 	
 	void berechneAhnlichkeitProfilProfil(Profil p1, Profil p2, AsyncCallback<Double> callback);
+
+	void createAehnlichkeit(int eigenes_profil, int fremdes_profil, AsyncCallback<Aehnlichkeitsmass> callback);
+
+	void findAehnlichkeitByProfilid(Aehnlichkeitsmass a, AsyncCallback<Aehnlichkeitsmass> callback);
+
+	void showAllAehnlichkeitByProfil(Aehnlichkeitsmass a, AsyncCallback<Aehnlichkeitsmass> callback);
+
+	void deleteAehnlichkeit(Aehnlichkeitsmass a, AsyncCallback<Aehnlichkeitsmass> callback);
 
 }

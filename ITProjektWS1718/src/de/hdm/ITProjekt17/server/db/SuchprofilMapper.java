@@ -87,7 +87,7 @@ public class SuchprofilMapper {
 				    	  				stmt1.setString(6, such.getReligion());
 				    	  				stmt1.setString(7, such.getHaarfarbe());
 				    	  				stmt1.setString(8, such.getRaucher());
-				    	  				stmt1.setBoolean(9, such.getGeschlecht());
+				    	  				stmt1.setString(9, such.getGeschlecht());
 				    	  				
 				    	  				
 				    	  				stmt1.executeUpdate();
@@ -157,7 +157,7 @@ public class SuchprofilMapper {
 				    	stmt.setString(5, such.getReligion());
 				    	stmt.setString(6, such.getHaarfarbe());
 				    	stmt.setString(7, such.getRaucher());
-				    	stmt.setBoolean(8, such.getGeschlecht());
+				    	stmt.setString(8, such.getGeschlecht());
 
 				    	stmt.setInt(8, such.getId());
 				    	stmt.executeUpdate();
@@ -206,7 +206,7 @@ public class SuchprofilMapper {
 					          suchp.setReligion(rs.getString("religion"));
 					          suchp.setHaarfarbe(rs.getString("haarfarbe"));
 					          suchp.setRaucher(rs.getString("raucher"));
-					          suchp.setGeschlecht(rs.getBoolean("geschlecht"));
+					          suchp.setGeschlecht(rs.getString("geschlecht"));
 					          
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
@@ -260,7 +260,7 @@ public class SuchprofilMapper {
 					          such.setReligion(rs.getString("religion"));
 					          such.setHaarfarbe(rs.getString("haarfarbe"));
 					          such.setRaucher(rs.getString("raucher"));
-					          such.setGeschlecht(rs.getBoolean("geschlecht"));
+					          such.setGeschlecht(rs.getString("geschlecht"));
 					          
 					         return such;
 						}
@@ -302,7 +302,7 @@ public class SuchprofilMapper {
 						          such.setReligion(rs.getString("religion"));
 						          such.setHaarfarbe(rs.getString("haarfarbe"));
 						          such.setRaucher(rs.getString("raucher"));
-						          such.setGeschlecht(rs.getBoolean("geschlecht"));
+						          such.setGeschlecht(rs.getString("geschlecht"));
 						          
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor

@@ -23,8 +23,6 @@ import com.google.gwt.user.datepicker.client.DatePicker;
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Profil;
-import javafx.scene.control.Alert;
-
 public class Profilseite extends VerticalPanel{
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();

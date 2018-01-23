@@ -107,10 +107,8 @@ public class Suchprofil_InfoMapper {
 			    	/**
 				      * Durchführung der Löschoperation
 				      */
-			     PreparedStatement stmt = con.prepareStatement("DELETE FROM suchprofil_info " + "WHERE infoid= ?, suchprofilid=?");
+			     PreparedStatement stmt = con.prepareStatement("DELETE * FROM suchprofil_info " + "WHERE id= ?");
 			     stmt.setInt(1, suchinfo.getId());
-			     stmt.setInt(2, suchinfo.getInfoId());
-			     stmt.setInt(3, suchinfo.getSuchprofilId());
 			     
 			     stmt.executeUpdate();
 

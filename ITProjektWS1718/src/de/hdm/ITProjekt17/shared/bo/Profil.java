@@ -18,8 +18,25 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Geschlecht im Profil; Gibt an, ob die Person weiblich oder mÃ¤nnlich ist
 	 */
-	private String geschlecht = "";
+	public enum Geschlecht {
+	    m, w, s
+	  }
+	  
+	  public static String word(Geschlecht c) {
+	    String str ="";
+	    switch (c) {
+	      case m: str = "Männlich";
+	              break;
+	      case w: str = "Weiblich";
+	              break;
+	      case s: str = "Sonstiges";
+	              break;
+	     
+	    }
+	    return str;
+	  }
 	
+	  private String geschlecht ="";
 	
 	/**
 	 * Variable Email im Profil; Gibt die Email der Person an.
@@ -51,8 +68,31 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Haarfarbe im Profil; Gibt die Haaarfarbe der Person an.
 	 */
-	private String haarfarbe = "";
+	public enum Haarfarbe {
+	    A, B, C, D, E, F
+	  }
+	  
+	  public static String word(Haarfarbe h) {
+	    String str ="";
+	    switch (h) {
+	      case A: str = "schwarz";
+	            break;
+	      case B: str = "braun";
+	            break;
+	      case C: str = "blond";
+	            break;
+	      case D: str = "rot";
+	      		break;
+	      case E: str = "hell";
+    			break;	  
+	      case F: str = "dunkel";
+    			break;	   		
+
+	    }
+	    return str;
+	  }
 	
+	private String haarfarbe ="";
 	/**
 	 * Variable Nachname im Profil; Gibt den Nachnamen der Person an.
 	 */
@@ -60,7 +100,29 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Raucher im Profil; Gibt an, ob die Person raucht oder nicht.
 	 */
-	private String raucher = "";
+	public enum Raucher {
+	    A, B, C, D, E
+	  }
+	  
+	  public static String word(Raucher b) {
+	    String str ="";
+	    switch (b) {
+	      case A: str = "Ja";
+	            break;
+	      case B: str = "Nein";
+	            break;
+	      case C: str = "Gelegentlich";
+	            break;
+	      case D: str = "Partyraucher";
+	      		break;
+	      case E: str = "Nur nach dem Sex";
+    			break;	      		
+
+	    }
+	    return str;
+	  }
+
+	private String raucher ="";
 	/**
 	 * Auslesen der Variable nachname
 	 * @return
@@ -87,16 +149,7 @@ public class Profil extends BusinessObject {
 	public String getEmail(){
 		return this.email;
 	}
-/**
-	 * Auslesen der Variable Geschlecht
-	 * @return geschlecht
-	 */
-	
-	public String getGeschlecht(){
-		return this.geschlecht;
-	}
-
-	
+		
 	/**
 	 * Auslesen der Variable Vorname.
 	 * @return
@@ -129,13 +182,6 @@ public class Profil extends BusinessObject {
 		return this.koerpergroesse;
 	}
 	
-	/**
-	 * Auslesen der Variable Haarfarbe.
-	 * @return
-	 */
-	public String getHaarfarbe(){
-		return this.haarfarbe;
-	}
 	
 	/**
 	 * Auslesen der Variable Religion.
@@ -144,13 +190,8 @@ public class Profil extends BusinessObject {
 	public String getReligion(){
 		return this.religion;
 	}
-	/**
-	 * Auslesen der Variable Raucher.
-	 * @return
-	 */
-	public String getRaucher() {
-		return this.raucher;
-	}
+
+
 	
 	
 	//-------------Set-Methoden--------------------
@@ -162,14 +203,6 @@ public class Profil extends BusinessObject {
 	public void setEmail(String email){
 		this.email = email;
 	}
-/**
-	 * Setzen der Variable Geschlecht
-	 * @param geschlecht
-	 */
-	public void setGeschlecht(String geschlecht){
-		this.geschlecht = geschlecht;
-	}
-
 	
 	/**
 	 * Setzen der Variable Vorname.
@@ -195,13 +228,6 @@ public class Profil extends BusinessObject {
 		this.geburtsdatum = geburtsdatum;
 	}
 	
-	/**
-	 * Setzen der Variable Haarfarbe.
-	 * @param haarfarbe
-	 */
-	public void setHaarfarbe(String haarfarbe){
-		this.haarfarbe = haarfarbe;
-	}
 	
 	/**
 	 * Setzen der Variable KÃ¶rpergrÃ¶sse.
@@ -218,15 +244,7 @@ public class Profil extends BusinessObject {
 	public void setReligion(String religion){
 		this.religion = religion;
 	}
-	/**
-	 * Setzen der Variable Raucher
-	 * @param raucher
-	 */
-	public void setRaucher(String raucher) {
-		this.raucher = raucher;
-	}
-	
-	
+
 	
 	
 	
@@ -240,10 +258,34 @@ public class Profil extends BusinessObject {
 					" Vorname: #" + this.getVorname() + 
 					" Nachname: #" + this.getNachname() + 
 					" Geburtsdatum: #" + this.getGeburtsdatum() + 
-					" Haarfarbe: #" + this.getHaarfarbe() + 
+					" Haarfarbe: #" + Profil.Haarfarbe.values() + 
 					" Körpergröße: #" + this.getKoerpergroesse() + 
 					" Religion: #" + this.getReligion() + 
-					" Raucher: #" + this.getRaucher() +
-					" Geschlecht: #" + this.getGeschlecht();
+//					" Raucher: #" + Profil.getRaucher().values() +
+					" Geschlecht: #" + Profil.Geschlecht.values();
+	}
+
+	public String getGeschlecht() {
+		return geschlecht;
+	}
+
+	public void setGeschlecht(String geschlecht) {
+		this.geschlecht = geschlecht;
+	}
+
+	public String getRaucher() {
+		return raucher;
+	}
+
+	public void setRaucher(String raucher) {
+		raucher = raucher;
+	}
+
+	public String getHaarfarbe() {
+		return haarfarbe;
+	}
+
+	public void setHaarfarbe(String haarfarbe) {
+		this.haarfarbe = haarfarbe;
 	}
 }

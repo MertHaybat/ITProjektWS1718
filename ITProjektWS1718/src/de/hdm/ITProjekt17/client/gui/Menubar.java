@@ -49,6 +49,7 @@ public class Menubar extends VerticalPanel { //StackPanel für auskommentierten 
 		btn2.addClickHandler(new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
+
 				Profilseite p = new Profilseite(profil);
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(p);

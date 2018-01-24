@@ -303,7 +303,8 @@ public class Suchen extends VerticalPanel {
 			
 			ct.setSelectionModel(ssm);
 			
-			Column<Suchprofil, String> suchprofile = 
+			
+			Column<Suchprofil, String> suchprofileGeschlecht = 
 				    new Column<Suchprofil, String>(new ClickableTextCell())  {
 
 						@Override
@@ -311,11 +312,77 @@ public class Suchen extends VerticalPanel {
 							// TODO Auto-generated method stub
 							return object.getGeschlecht();
 						}
-						    
-		 };
-		}
-	
+					    
+			 };
+			Column<Suchprofil, String> suchprofileHaarfarbe =
+					new Column <Suchprofil,String> (new ClickableTextCell()){
 
+						@Override
+						public String getValue(Suchprofil object) {
+							// TODO Auto-generated method stub
+							return object.getHaarfarbe();
+						}
+					    
+			 };
+			 Column<Suchprofil, String> suchprofileRaucher =
+					 new Column<Suchprofil, String> (new ClickableTextCell()){
+
+						@Override
+						public String getValue(Suchprofil object) {
+							// TODO Auto-generated method stub
+							return object.getRaucher();
+						}
+				 
+			 };
+			 Column<Suchprofil, String> suchprofileReligion =
+					 new Column<Suchprofil, String> (new ClickableTextCell()){
+
+						@Override
+						public String getValue(Suchprofil object) {
+							// TODO Auto-generated method stub
+							return object.getReligion();
+						}
+			};
+			Column<Suchprofil, String> suchprofileGeburtsdatum =
+					 new Column<Suchprofil, String> (new ClickableTextCell()){
+
+						@Override
+						public String getValue(Suchprofil object) {
+							// TODO Auto-generated method stub
+							return object.getGeburtsdatum().toString();
+						}
+			};
+//			Column<Suchprofil, String> suchprofileMinAlter =
+//					 new Column<Suchprofil, String> (new ClickableTextCell()){
+//
+//						@Override
+//						public String getValue(Suchprofil object) {
+//							// TODO Auto-generated method stub
+//							
+//							return object.getMinAlter();
+//						}
+//			};
+//			Column<Suchprofil, String> suchprofileMaxAlter =
+//					 new Column<Suchprofil, String> (new ClickableTextCell()){
+//
+//						@Override
+//						public String getValue(Suchprofil object) {
+//							// TODO Auto-generated method stub
+//							return object.getMaxAlter();
+//						}
+//			};
+//			Column<Suchprofil, String> suchprofileKörpergröße =
+//					 new Column<Suchprofil, String> (new ClickableTextCell()){
+//
+//						@Override
+//						public String getValue(Suchprofil object) {
+//							// TODO Auto-generated method stub
+//							return object.getKoerpergroesse();
+//						}
+//			};
+
+	
+	}
 
 }
 

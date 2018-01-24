@@ -3,13 +3,14 @@ package de.hdm.ITProjekt17.client.gui;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
-public class Menubar extends VerticalPanel { //StackPanel für auskommentierten Code
+public class Menubar extends VerticalPanel { 
 	
 	private VerticalPanel vpanel = new VerticalPanel();
 	private Button btn1 = new Button("Startseite");

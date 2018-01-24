@@ -1,11 +1,10 @@
 package de.hdm.ITProjekt17.shared.report;
 
-public class PartnervorschlaegeAnhandSuchprofilReport {
+import java.io.Serializable;
 
-	
-	
-	
-	
-	
+public class PartnervorschlaegeAnhandSuchprofilReport 
+	extends CompositeReport
+	implements Serializable {
+
 	 private static final long serialVersionUID = 1L;
 }

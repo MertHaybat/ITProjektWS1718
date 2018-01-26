@@ -59,7 +59,9 @@ public class Suchen extends VerticalPanel {
 	private Label lb8 = new Label("Geschlecht: ");
 	private Label lb9 = new Label("Alter von bis:");
 	
+
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY"); 
+	
 
 	private Button suchen = new Button("Suchen");
 	private Button suchprofilSpeichern = new Button("Suchprofil speichern");
@@ -96,6 +98,8 @@ public class Suchen extends VerticalPanel {
 		ft1.setWidget(10, 2, suchprofilSpeichern);
 		ft1.setWidget(10, 3, suchprofilLoeschen);
 
+		geburtsdatum.setValue(new Date(),true);
+		
 		//ListBox Raucher befüllen.
 		
 		Raucher b1 = Raucher.A;
@@ -183,14 +187,18 @@ public class Suchen extends VerticalPanel {
 
 				@Override
 				public void onValueChange(ValueChangeEvent<Date> event) {
-//					Date date = event.getValue();
-//		            String dateString = df.format(date);
-////		                    DateTimeFormat.getFormat("MM/dd/yyyy").format(date);
-//		                    text.setText(dateString);
+					Date date = event.getValue();
+		            String dateString = df.format(date);
+		                    DateTimeFormat.getFormat("MM/dd/yyyy").format(date);
+		                    text.setText(dateString);
 				}
 			});
 			
 		    datepicker_geburtsdatum.setValue(new Date(), true);
+		    
+		    DateTimeFormat dateFormat = DateTimeFormat.getFormat("MM/dd/yyyy");
+		    final DateBox geburtsdatum = new DateBox();
+		    geburtsdatum.setFormat(new DateBox.DefaultFormat(dateFormat));
 		    
 		    
 		    suchen.addClickHandler(new ClickHandler(){

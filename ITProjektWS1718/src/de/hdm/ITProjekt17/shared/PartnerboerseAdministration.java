@@ -21,6 +21,11 @@ public interface PartnerboerseAdministration extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	
+	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil) throws IllegalArgumentException;
+	public Aehnlichkeitsmass deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException;
+	public Aehnlichkeitsmass findAehnlichkeitByProfilid(Aehnlichkeitsmass a) throws IllegalArgumentException;
+	public Aehnlichkeitsmass showAllAehnlichkeitByProfil(Aehnlichkeitsmass a) throws IllegalArgumentException;
+	
 	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException;
 	public void save(Auswahleigenschaft aus) throws IllegalArgumentException;
 	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException;
@@ -82,7 +87,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) throws IllegalArgumentException;
 	
 	public Suchprofil createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException;
+			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException;
 	public Suchprofil save(Suchprofil such) throws IllegalArgumentException;
 	public void deleteSuchprofil(Profil pro) throws IllegalArgumentException;
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException;

@@ -7,24 +7,20 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
-import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
-import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
-public class Infoseite extends VerticalPanel{
+public class Info extends VerticalPanel{
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 
@@ -34,20 +30,8 @@ public class Infoseite extends VerticalPanel{
 	private TextBox tbhaarfarbe = new TextBox();
 	private TextBox tbreligion = new TextBox();
 	private TextBox tbkörpergröße = new TextBox();
-	private ListBox lbraucher = new ListBox();
-	private ListBox lbgeschlecht = new ListBox();
-	
-	private ListBox lbinteresse = new ListBox();
-	private ListBox lbwohnsituation = new ListBox();	
-	private ListBox lbausbildung = new ListBox();
-	private ListBox lbsportart = new ListBox();
-	private ListBox lbkörperbau = new ListBox();
-
-
-	
-	
-	private Button ok = new Button("Bestätigen");
-	private Button abbrechen = new Button("Abbrechen");
+	private TextBox tbraucher = new TextBox();
+	private TextBox tbgeschlecht = new TextBox();
 	
 	private Label lb1 = new Label("Vorname: ");
 	private Label lb2 = new Label("Nachname: ");
@@ -59,20 +43,21 @@ public class Infoseite extends VerticalPanel{
 	private Label lb8 = new Label("Geschlecht: ");
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");
 	
+	private Button bearbeiten = new Button("bearbeiten");
 	
 	private FlexTable ft1 = new FlexTable();
 
 	private VerticalPanel vpanel = new VerticalPanel();
 	
-	public Infoseite(final Profil profil) {
+	public Info(final Profil profil) {
 		tbvorname.setValue(profil.getVorname());
 		tbnachname.setValue(profil.getNachname());
 		geburtsdatum.setValue(profil.getGeburtsdatum());
-//		tbhaarfarbe.setValue(profil.getHaarfarbe());
+		tbhaarfarbe.setValue(profil.getHaarfarbe());
 		tbreligion.setValue(profil.getReligion());
 		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
-//		tbraucher.setValue(profil.getRaucher());
-//		tbgeschlecht.setValue(String.valueOf(profil.getGeschlecht()));
+		tbraucher.setValue(profil.getRaucher());
+		tbgeschlecht.setValue(String.valueOf(profil.getGeschlecht()));
 		
 		
 		ft1.setWidget(0, 0, lb1);
@@ -88,24 +73,12 @@ public class Infoseite extends VerticalPanel{
 		ft1.setWidget(5, 0, lb6);
 		ft1.setWidget(5, 1, tbkörpergröße);
 		ft1.setWidget(6, 0, lb7);
-		ft1.setWidget(6, 1, lbraucher);
+		ft1.setWidget(6, 1, tbraucher);
 		ft1.setWidget(7, 0, lb8);
-		ft1.setWidget(7, 1, lbgeschlecht);	
-		ft1.setWidget(8, 0, ok);
-		ft1.setWidget(8, 1, abbrechen);
+		ft1.setWidget(7, 1, tbgeschlecht);	
+		ft1.setWidget(8, 1, bearbeiten);
 		vpanel.add(ft1);
 		this.add(vpanel);
-		
-	      lbraucher.addItem("Ja");
-	      lbraucher.addItem("Nein");
-	      lbraucher.addItem("Gelegentlich");
-	      lbraucher.addItem("Partyraucher");
-	      lbraucher.addItem("Nur nach dem Sex");		
-		  
-		//ListBox Geschlecht befüllen.
-			
-	      lbgeschlecht.addItem("Männlich");
-	      lbgeschlecht.addItem("Weiblich");
 		
 		// Create a date picker
 		final DatePicker datepicker_geburtsdatum = new DatePicker();
@@ -126,7 +99,7 @@ public class Infoseite extends VerticalPanel{
 			
 		    datepicker_geburtsdatum.setValue(new Date(), true);
 		    
-		    abbrechen.addClickHandler(new ClickHandler(){
+		    bearbeiten.addClickHandler(new ClickHandler(){
 
 				@Override
 				public void onClick(ClickEvent event) {

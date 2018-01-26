@@ -35,7 +35,7 @@ public class BesuchMapper {
 	
 	protected BesuchMapper() {
 
-	}
+	};
 
 	/**
 	 * Diese statische Methode zum Erzeugen eines <code>BesuchMapper</code> kann

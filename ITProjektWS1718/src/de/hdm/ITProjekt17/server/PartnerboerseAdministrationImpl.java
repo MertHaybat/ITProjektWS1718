@@ -103,7 +103,6 @@ implements PartnerboerseAdministration {
 	 * <code>PartnerboerseAdministrationImpl</code> aufgerufen werden kann.
 	 */
 	
-	
 	public void init() throws IllegalArgumentException{
 		/*
 		 * Die PartnerboerseAdministrationImpl ben�tigt diese Mapper, um mit deren Hilfe
@@ -1284,36 +1283,57 @@ implements PartnerboerseAdministration {
 			
 	}
 	
-	public Vector<Profil> abfrageNichtAngesehenerPartnervorschlaegeNachAehnlichkeit(Profil pro, Profil bpro){
+	@Override
+	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil)
+			throws IllegalArgumentException {
 		
-		Vector<Besuch> unvisitedProfiles = this.getUnvisitedProfiles(bpro);
-		Profil p = profilMapper.findByKey(pro.getId());
-		for (int i = 0; i < unvisitedProfiles.size(); i++){
-			
-			if (berechneAhnlichkeitProfilProfil(p, bpro) >= 70){
-				Vector<Profil> aehnlicheUnvisitedProfile = unvisitedProfiles.elementAt(i);
-				return aehnlicheUnvisitedProfile;
+		Aehnlichkeitsmass a1 = new Aehnlichkeitsmass();
+		a1.setEigenes_profilid(eigenes_profil);
+		a1.setFremdes_profilid(fremdes_profil);
+		int aehnlichkeitstreffer = 0;
+				
+		Profil profil1 = profilMapper.findByKey(eigenes_profil);
+		Profil profil2 = profilMapper.findByKey(fremdes_profil);
+		
+		if (profil1 != null && profil2 != null){
+			if (profil1.getHaarfarbe() == profil2.getHaarfarbe()){
+				aehnlichkeitstreffer++;	
 			}
-			
+			if (profil1.getKoerpergroesse() == profil2.getKoerpergroesse()){
+				aehnlichkeitstreffer++;	
+			}
+			if (profil1.getRaucher() == profil2.getRaucher()){
+				aehnlichkeitstreffer++;	
+			}
+			if (profil1.getReligion() == profil2.getReligion()){
+				aehnlichkeitstreffer++;	
+			}
+			if (profil1.getGeschlecht() == profil2.getGeschlecht()){
+				aehnlichkeitstreffer++;
+			}
+			a1.setAehnlichkeitsindex(aehnlichkeitstreffer*20);
 		}
-		return null;
+		// Hier ein Create-Mapper Aufruf
 		
+		return null;
 	}
-	
-	public Vector<Profil> abfrageSuchprofileNachAehnlichkeit(Profil pro, Profil bpro){
-		
-		Vector<Besuch> visitedProfiles = this.getAllBesucheOf(pro);
-		Profil p = profilMapper.findByKey(pro.getId());
-		for (int i = 0; i < visitedProfiles.size(); i++){
-			
-			if (berechneAhnlichkeitProfilProfil(p, bpro) >= 70){
-				Vector<Profil> aehnlicheSuchprofilProfile = visitedProfiles.elementAt(i);
-				return aehnlicheSuchprofilProfile;
-			}
-		}
-		
+
+	@Override
+	public Aehnlichkeitsmass deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
 		return null;
-		
+	}
+
+	@Override
+	public Aehnlichkeitsmass findAehnlichkeitByProfilid(Aehnlichkeitsmass a) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Aehnlichkeitsmass showAllAehnlichkeitByProfil(Aehnlichkeitsmass a) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -23,6 +23,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * PartnerboerseAdministrationImpl ist die Implementierungsklasse des Interface
  * <code>PartnerboerseAdministration</code>. In dieser Klasse wird die Applikationslogik 
  * dargestellt. 
+ * @auhtor Barut
  * @author Mustafi
  *
  */
@@ -98,15 +99,15 @@ implements PartnerboerseAdministration {
 	
 	/**
 	 * Hierbei handelt es sich um die Initialisierungsmethode.
-	 * Diese Methode ist relevant, damit sie für jede Instanz von 
+	 * Diese Methode ist relevant, damit sie fï¿½r jede Instanz von 
 	 * <code>PartnerboerseAdministrationImpl</code> aufgerufen werden kann.
 	 */
 	
 	
 	public void init() throws IllegalArgumentException{
 		/*
-		 * Die PartnerboerseAdministrationImpl benötigt diese Mapper, um mit deren Hilfe
-		 * die Datenbank ansprechen zu können.
+		 * Die PartnerboerseAdministrationImpl benï¿½tigt diese Mapper, um mit deren Hilfe
+		 * die Datenbank ansprechen zu kï¿½nnen.
 		 */
 		this.auswahleigenschaftMapper = AuswahleigenschaftMapper.auswahleigenschaftMapper();
 		this.eigenschaftMapper = EigenschaftMapper.eigenschaftMapper();
@@ -136,7 +137,7 @@ implements PartnerboerseAdministration {
 		Auswahleigenschaft aus = new Auswahleigenschaft();
 		aus.setWert(wert);
 		/*
-		 * Setzen einer vorläufigen ID.
+		 * Setzen einer vorlï¿½ufigen ID.
 		 */
 		aus.setId(1);
 		
@@ -158,8 +159,8 @@ implements PartnerboerseAdministration {
 	}
 	
 	/**
-	 * Löschen der Auswahleigenschaft. Dabei wird die Referenz
-	 * zu Info auch gelöscht.
+	 * Lï¿½schen der Auswahleigenschaft. Dabei wird die Referenz
+	 * zu Info auch gelï¿½scht.
 	 */
 	@Override
 	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException {
@@ -295,8 +296,8 @@ implements PartnerboerseAdministration {
 	}
 
 	/**
-	 * Löschen der Freitexteigenschaft. Dabei wird die Referenz
-	 * zu Info auch gelöscht.
+	 * Lï¿½schen der Freitexteigenschaft. Dabei wird die Referenz
+	 * zu Info auch gelï¿½scht.
 	 */
 	@Override
 	public void delete(Freitexteigenschaft frei) throws IllegalArgumentException {
@@ -394,9 +395,9 @@ implements PartnerboerseAdministration {
 	}
 
 	/**
-	 * Löschen der Info. Dabei wird die Referenz
+	 * Lï¿½schen der Info. Dabei wird die Referenz
 	 * zu Auswahleigenschaft, Freitexteigenschaft 
-	 * und Suchprofil_Info auch gelöscht.
+	 * und Suchprofil_Info auch gelï¿½scht.
 	 */
 	@Override
 	public void delete(Info in) throws IllegalArgumentException {
@@ -437,7 +438,7 @@ implements PartnerboerseAdministration {
 	}
 	
 	/** 
-	 * Löschen der Info eines Profils.
+	 * Lï¿½schen der Info eines Profils.
 	 */
 	public void deleteInfoOf(Profil pro) throws IllegalArgumentException {
 		try {
@@ -448,7 +449,7 @@ implements PartnerboerseAdministration {
 	}
 	
 	/** 
-	 * Löschen der Info des Suchprofil_Info.
+	 * Lï¿½schen der Info des Suchprofil_Info.
 	 */
 	public void deleteInfoOf(Suchprofil_Info suchinfo) throws IllegalArgumentException {
 		try {
@@ -459,7 +460,7 @@ implements PartnerboerseAdministration {
 	}
 
 	/** 
-	 * Löschen der Info, welche eine Auswahleigenschaft ist.
+	 * Lï¿½schen der Info, welche eine Auswahleigenschaft ist.
 	 */
 	public void deleteInfoAs(Auswahleigenschaft aus) throws IllegalArgumentException {
 		try {
@@ -470,7 +471,7 @@ implements PartnerboerseAdministration {
 	}	
 	
 	/** 
-	 * Löschen der Info, welche eine Freitexteigenschaft ist.
+	 * Lï¿½schen der Info, welche eine Freitexteigenschaft ist.
 	 */
 	public void deleteInfoAs(Freitexteigenschaft frei) throws IllegalArgumentException {
 		try {
@@ -1281,6 +1282,38 @@ implements PartnerboerseAdministration {
 			return prozent;
 		
 			
+	}
+	
+	public Vector<Profil> abfrageNichtAngesehenerPartnervorschlaegeNachAehnlichkeit(Profil pro, Profil bpro){
+		
+		Vector<Besuch> unvisitedProfiles = this.getUnvisitedProfiles(bpro);
+		Profil p = profilMapper.findByKey(pro.getId());
+		for (int i = 0; i < unvisitedProfiles.size(); i++){
+			
+			if (berechneAhnlichkeitProfilProfil(p, bpro) >= 70){
+				Vector<Profil> aehnlicheUnvisitedProfile = unvisitedProfiles.elementAt(i);
+				return aehnlicheUnvisitedProfile;
+			}
+			
+		}
+		return null;
+		
+	}
+	
+	public Vector<Profil> abfrageSuchprofileNachAehnlichkeit(Profil pro, Profil bpro){
+		
+		Vector<Besuch> visitedProfiles = this.getAllBesucheOf(pro);
+		Profil p = profilMapper.findByKey(pro.getId());
+		for (int i = 0; i < visitedProfiles.size(); i++){
+			
+			if (berechneAhnlichkeitProfilProfil(p, bpro) >= 70){
+				Vector<Profil> aehnlicheSuchprofilProfile = visitedProfiles.elementAt(i);
+				return aehnlicheSuchprofilProfile;
+			}
+		}
+		
+		return null;
+		
 	}
 
 }

@@ -44,6 +44,7 @@ public class Profilseite extends VerticalPanel{
 	private ListBox lbraucher = new ListBox();
 	private ListBox lbgeschlecht = new ListBox();
 	private TextBox tbfreitext = new TextBox();
+
 	
 	private ListBox lbinteresse = new ListBox();
 	private ListBox lbwohnsituation = new ListBox();	
@@ -65,6 +66,7 @@ public class Profilseite extends VerticalPanel{
 	private Label lb12 = new Label("Ausbildung: ");
 	private Label lb13 = new Label("Sportart: ");
 	private Label lb14 = new Label("Körperbau: ");
+	
 
 
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");

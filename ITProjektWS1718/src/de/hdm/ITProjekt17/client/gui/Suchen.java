@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
+import com.google.gwt.user.datepicker.client.DateBox.Format;
 import com.google.gwt.view.client.NoSelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
 
@@ -73,21 +74,19 @@ public class Suchen extends VerticalPanel {
 	
 
 	private Button suchen = new Button("Suchen");
-	private Button suchprofilSpeichern = new Button("Suchprofil speichern");
+	private Button suchprofilErstellen = new Button("Suchprofil speichern");
 	private Button suchprofilLoeschen = new Button("Suchprofil löschen");
 	
 	private FlexTable ft1 = new FlexTable();
 	private CellTable<Suchprofil> ct = new CellTable<Suchprofil>();	
 	private final SingleSelectionModel<Suchprofil> ssm = new SingleSelectionModel<Suchprofil>();
-	public SingleSelectionModel<Suchprofil> ssm() {
-		return ssm;
-	}
+	
 	private VerticalPanel vpanelSuchprofile = new VerticalPanel();
 	private HorizontalPanel hpanel = new HorizontalPanel();
 	
 	
 	
-	public Suchen(final Profil suchprofil){
+	public Suchen(final Profil profil){
 
 		ft1.setWidget(3, 0, lb8);
 		ft1.setWidget(3, 1, lbgeschlecht);
@@ -105,11 +104,11 @@ public class Suchen extends VerticalPanel {
 		ft1.setWidget(9, 0, lb7);
 		ft1.setWidget(9, 1, lbraucher);
 		ft1.setWidget(10, 1, suchen);
-		ft1.setWidget(10, 2, suchprofilSpeichern);
+		ft1.setWidget(10, 2, suchprofilErstellen);
 		ft1.setWidget(10, 3, suchprofilLoeschen);
 
-		geburtsdatum.setValue(new Date(),true);
-		
+//		geburtsdatum.setValue(new Date(),true);
+		geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
 		//ListBox Raucher befüllen.
 		
 		RaucherSuchprofil b1 = RaucherSuchprofil.A;
@@ -144,49 +143,7 @@ public class Suchen extends VerticalPanel {
 			lbhaarfarbe.addItem(Suchprofil.wordSuchprofil(h4));
 			lbhaarfarbe.addItem(Suchprofil.wordSuchprofil(h5));
 		      
-		      
-				//Raucher
-				if(suchprofil.getRaucher()==Suchprofil.wordSuchprofil(c1)){
-					lbraucher.setSelectedIndex(0);
-				}
-				else if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c2)){
-					lbgeschlecht.setSelectedIndex(1);
-				}
-				else if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c3)){
-					lbgeschlecht.setSelectedIndex(2);
-				}
-				
-				
-				//Geschlecht
-				if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c1)){
-					lbgeschlecht.setSelectedIndex(0);
-				}
-				else if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c2)){
-					lbgeschlecht.setSelectedIndex(1);
-				}
-				else if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c3)){
-					lbgeschlecht.setSelectedIndex(2);
-				}
-				
-				//Haarfarbe
-				if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h1)){
-					lbhaarfarbe.setSelectedIndex(0);
-				}
-				else if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h2)){
-					lbhaarfarbe.setSelectedIndex(1);
-				}
-				else if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h3)){
-					lbhaarfarbe.setSelectedIndex(2);
-				}
-				else if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h4)){
-					lbhaarfarbe.setSelectedIndex(3);
-				}
-				else if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h5)){
-					lbhaarfarbe.setSelectedIndex(4);
-				}
-				
-
-		
+		      		
 		// Create a date picker
 		final DatePicker datepicker_geburtsdatum = new DatePicker();
 		final Label text = new Label();
@@ -219,85 +176,28 @@ public class Suchen extends VerticalPanel {
 		    	
 		    });
 		    
-		    suchprofilSpeichern.addClickHandler(new ClickHandler(){
+		    suchprofilErstellen.addClickHandler(new ClickHandler(){
 
 				@Override
 				public void onClick(ClickEvent event) { 
 					
-					Suchprofil such = new Suchprofil();
-					
-					// Geschlecht
-					if(lbgeschlecht.getSelectedIndex()==0){
-						such.setGeschlecht(Suchprofil.GeschlechtSuchprofil.m.toString());
-					}
-					else if(lbgeschlecht.getSelectedIndex()==1){
-						such.setGeschlecht(Suchprofil.GeschlechtSuchprofil.w.toString());
-					}
-					else if(lbgeschlecht.getSelectedIndex()==2){
-						such.setGeschlecht(Suchprofil.GeschlechtSuchprofil.s.toString());
-					}
-					
-					//Haarfarbe
-					if(lbhaarfarbe.getSelectedIndex()==0){
-						such.setHaarfarbe(Suchprofil.HaarfarbeSuchprofil.A.toString());	
-					}
-					else if(lbhaarfarbe.getSelectedIndex()==1){
-						such.setHaarfarbe(Suchprofil.HaarfarbeSuchprofil.B.toString());
-					}
-					else if(lbhaarfarbe.getSelectedIndex()==2){
-						such.setHaarfarbe(Suchprofil.HaarfarbeSuchprofil.C.toString());
-		    		}
-					else if(lbhaarfarbe.getSelectedIndex()==3){
-						such.setHaarfarbe(Suchprofil.HaarfarbeSuchprofil.D.toString());
-		    		}		
-					else if(lbhaarfarbe.getSelectedIndex()==4){
-						such.setHaarfarbe(Suchprofil.HaarfarbeSuchprofil.E.toString());
-					}
-					else if(lbhaarfarbe.getSelectedIndex()==5){
-						such.setHaarfarbe(Suchprofil.HaarfarbeSuchprofil.F.toString());
-					}
+										
+					pbverwaltung.createSuchprofil
+					(geburtsdatum.getValue(),lbhaarfarbe.getSelectedValue(), tbreligion.getValue(), Integer.parseInt(tbkörpergröße.getValue()), lbraucher.getSelectedValue(), lbgeschlecht.getSelectedValue(), Integer.parseInt(tbminalter.getValue()), Integer.parseInt(tbmaxalter.getValue()), profil.getId(), new AsyncCallback<Suchprofil>(){
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							Window.alert("Da ist etwas schief gelaufen" + caught.getMessage());
+						}
+
+						@Override
+						public void onSuccess(Suchprofil result) {
+							// TODO Auto-generated method stub
+							
+						}
 						
-					
-					//Raucher
-					if(lbraucher.getSelectedIndex()==0){
-						such.setRaucher(Suchprofil.RaucherSuchprofil.A.toString());
-					}
-					else if(lbraucher.getSelectedIndex()==1){
-						such.setRaucher(Suchprofil.RaucherSuchprofil.B.toString());
-					}
-					else if(lbraucher.getSelectedIndex()==2){
-						such.setRaucher(Suchprofil.RaucherSuchprofil.C.toString());
-					}
-					else if(lbraucher.getSelectedIndex()==3){
-						such.setRaucher(Suchprofil.RaucherSuchprofil.D.toString());
-					}
-					else if(lbraucher.getSelectedIndex()==4){
-						such.setRaucher(Suchprofil.RaucherSuchprofil.E.toString());
-					}
-					
-					//Restliche Attribute 
-					such.setMinAlter(Integer.parseInt(tbminalter.getValue()));
-					such.setMaxAlter(Integer.parseInt(tbmaxalter.getValue()));
-					such.setGeburtsdatum(geburtsdatum.getValue());
-					such.setKoerpergroesse(Integer.parseInt(tbkörpergröße.getValue()));
-					such.setReligion(tbreligion.getValue());
-					
-//					pbverwaltung.createSuchprofil
-//					(such.getGeburtsdatum(), lbhaarfarbe.getValue(get), tbreligion.getValue(), tbkörpergröße.getValue(), lbraucher, lbgeschlecht, tbminalter, tbmaxalter, profilId new AsyncCallback<Suchprofil>(){
-//
-//						@Override
-//						public void onFailure(Throwable caught) {
-//							// TODO Auto-generated method stub
-//							Window.alert("Da ist etwas schief gelaufen");
-//						}
-//
-//						@Override
-//						public void onSuccess(Suchprofil result) {
-//							// TODO Auto-generated method stub
-//							
-//						}
-//						
-//					});
+					});
 //					pbverwaltung.save(such, new AsyncCallback<Suchprofil>() {
 //						
 //						@Override

@@ -138,12 +138,7 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void pruefenAufExistenz(String email, AsyncCallback<Profil> callback);
 	
-	//_________________________________________________________________________________________________________________________
-	
-//	void createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-//			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId,
-//			AsyncCallback<Suchprofil> callback);
-	
+		
 	void createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße, String raucher, String Geschlecht, 
 			int minalter, int maxalter, int profilId, AsyncCallback<Suchprofil> callback);
 

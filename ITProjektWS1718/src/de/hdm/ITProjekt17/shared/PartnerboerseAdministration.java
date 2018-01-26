@@ -86,8 +86,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 	
 	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) throws IllegalArgumentException;
 	
-	public Suchprofil createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException;
+	Suchprofil createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße,
+			String raucher, String geschlecht, int minalter, int maxalter, int profilId);
 	public Suchprofil save(Suchprofil such) throws IllegalArgumentException;
 	public void deleteSuchprofil(Profil pro) throws IllegalArgumentException;
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException;

@@ -2,6 +2,7 @@ package de.hdm.ITProjekt17.server;
 
 import de.hdm.ITProjekt17.server.db.*;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministration;
+import de.hdm.ITProjekt17.shared.bo.Aehnlichkeitsmass;
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Eigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
@@ -23,7 +24,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * PartnerboerseAdministrationImpl ist die Implementierungsklasse des Interface
  * <code>PartnerboerseAdministration</code>. In dieser Klasse wird die Applikationslogik 
  * dargestellt. 
- * @auhtor Barut
  * @author Mustafi
  *
  */
@@ -102,6 +102,7 @@ implements PartnerboerseAdministration {
 	 * Diese Methode ist relevant, damit sie f�r jede Instanz von 
 	 * <code>PartnerboerseAdministrationImpl</code> aufgerufen werden kann.
 	 */
+	
 	
 	public void init() throws IllegalArgumentException{
 		/*
@@ -707,7 +708,7 @@ implements PartnerboerseAdministration {
 	 * Diese Methode erzeugt ein neues Suchprofil.
 	 */
 	public Suchprofil createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, boolean geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException {
+			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException {
 
 			Suchprofil suchpro = new Suchprofil();
 			suchpro.setGeburtsdatum(geburtsdatum);
@@ -1282,7 +1283,7 @@ implements PartnerboerseAdministration {
 		
 			
 	}
-	
+
 	@Override
 	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil)
 			throws IllegalArgumentException {

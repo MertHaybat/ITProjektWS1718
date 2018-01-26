@@ -3,13 +3,18 @@ package de.hdm.ITProjekt17.client.gui;
 import java.util.Date;
 
 import com.google.gwt.cell.client.ClickableTextCell;
+import com.google.gwt.cell.client.NumberCell;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -23,6 +28,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 import com.google.gwt.view.client.NoSelectionModel;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
@@ -32,6 +38,9 @@ import de.hdm.ITProjekt17.shared.bo.Profil.Geschlecht;
 import de.hdm.ITProjekt17.shared.bo.Profil.Haarfarbe;
 import de.hdm.ITProjekt17.shared.bo.Profil.Raucher;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
+import de.hdm.ITProjekt17.shared.bo.Suchprofil.GeschlechtSuchprofil;
+import de.hdm.ITProjekt17.shared.bo.Suchprofil.HaarfarbeSuchprofil;
+import de.hdm.ITProjekt17.shared.bo.Suchprofil.RaucherSuchprofil;
 
 public class Suchen extends VerticalPanel {
 	
@@ -68,16 +77,17 @@ public class Suchen extends VerticalPanel {
 	private Button suchprofilLoeschen = new Button("Suchprofil löschen");
 	
 	private FlexTable ft1 = new FlexTable();
-	private CellTable<Suchen> ct = new CellTable<Suchen>();	
-	final NoSelectionModel<Suchen> ssm = new NoSelectionModel<Suchen>();
-
+	private CellTable<Suchprofil> ct = new CellTable<Suchprofil>();	
+	private final SingleSelectionModel<Suchprofil> ssm = new SingleSelectionModel<Suchprofil>();
+	public SingleSelectionModel<Suchprofil> ssm() {
+		return ssm;
+	}
 	private VerticalPanel vpanelSuchprofile = new VerticalPanel();
-	private VerticalPanel vpanelEigenschaften = new VerticalPanel();
 	private HorizontalPanel hpanel = new HorizontalPanel();
 	
 	
 	
-	public Suchen(final Profil profil){
+	public Suchen(final Profil suchprofil){
 
 		ft1.setWidget(3, 0, lb8);
 		ft1.setWidget(3, 1, lbgeschlecht);
@@ -102,76 +112,76 @@ public class Suchen extends VerticalPanel {
 		
 		//ListBox Raucher befüllen.
 		
-		Raucher b1 = Raucher.A;
-		Raucher b2 = Raucher.B;
-		Raucher b3 = Raucher.C;
-		Raucher b4 = Raucher.D;
-		Raucher b5 = Raucher.E;
-	      lbraucher.addItem(Profil.word(b1));
-	      lbraucher.addItem(Profil.word(b2));
-	      lbraucher.addItem(Profil.word(b3));
-	      lbraucher.addItem(Profil.word(b4));
-	      lbraucher.addItem(Profil.word(b5));		
+		RaucherSuchprofil b1 = RaucherSuchprofil.A;
+		RaucherSuchprofil b2 = RaucherSuchprofil.B;
+		RaucherSuchprofil b3 = RaucherSuchprofil.C;
+		RaucherSuchprofil b4 = RaucherSuchprofil.D;
+		RaucherSuchprofil b5 = RaucherSuchprofil.E;
+	      lbraucher.addItem(Suchprofil.wordSuchprofil(b1));
+	      lbraucher.addItem(Suchprofil.wordSuchprofil(b2));
+	      lbraucher.addItem(Suchprofil.wordSuchprofil(b3));
+	      lbraucher.addItem(Suchprofil.wordSuchprofil(b4));
+	      lbraucher.addItem(Suchprofil.wordSuchprofil(b5));		
 	      
 		//ListBox Geschlecht befüllen.
-		Geschlecht c1 = Geschlecht.m;
-		Geschlecht c2 = Geschlecht.w;
-		Geschlecht c3 = Geschlecht.s;
-		   lbgeschlecht.addItem(Profil.word(c1));
-		   lbgeschlecht.addItem(Profil.word(c2));
-		   lbgeschlecht.addItem(Profil.word(c3));
+		GeschlechtSuchprofil c1 = GeschlechtSuchprofil.m;
+		GeschlechtSuchprofil c2 = GeschlechtSuchprofil.w;
+		GeschlechtSuchprofil c3 = GeschlechtSuchprofil.s;
+		   lbgeschlecht.addItem(Suchprofil.wordSuchprofil(c1));
+		   lbgeschlecht.addItem(Suchprofil.wordSuchprofil(c2));
+		   lbgeschlecht.addItem(Suchprofil.wordSuchprofil(c3));
 		 
 		//ListBox Haarfarbe befüllen.
 
-		Haarfarbe h1 = Haarfarbe.A;
-		Haarfarbe h2 = Haarfarbe.B;
-		Haarfarbe h3 = Haarfarbe.C;
-		Haarfarbe h4 = Haarfarbe.D;
-		Haarfarbe h5 = Haarfarbe.E;
-			lbhaarfarbe.addItem(Profil.word(h1));
-			lbhaarfarbe.addItem(Profil.word(h2));
-			lbhaarfarbe.addItem(Profil.word(h3));
-			lbhaarfarbe.addItem(Profil.word(h4));
-			lbhaarfarbe.addItem(Profil.word(h5));
+		HaarfarbeSuchprofil h1 = HaarfarbeSuchprofil.A;
+		HaarfarbeSuchprofil h2 = HaarfarbeSuchprofil.B;
+		HaarfarbeSuchprofil h3 = HaarfarbeSuchprofil.C;
+		HaarfarbeSuchprofil h4 = HaarfarbeSuchprofil.D;
+		HaarfarbeSuchprofil h5 = HaarfarbeSuchprofil.E;
+			lbhaarfarbe.addItem(Suchprofil.wordSuchprofil(h1));
+			lbhaarfarbe.addItem(Suchprofil.wordSuchprofil(h2));
+			lbhaarfarbe.addItem(Suchprofil.wordSuchprofil(h3));
+			lbhaarfarbe.addItem(Suchprofil.wordSuchprofil(h4));
+			lbhaarfarbe.addItem(Suchprofil.wordSuchprofil(h5));
 		      
 		      
 				//Raucher
-				if(profil.getRaucher()==Profil.word(c1)){
+				if(suchprofil.getRaucher()==Suchprofil.wordSuchprofil(c1)){
 					lbraucher.setSelectedIndex(0);
 				}
-				else if(profil.getGeschlecht()==Profil.word(c2)){
+				else if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c2)){
 					lbgeschlecht.setSelectedIndex(1);
 				}
-				else if(profil.getGeschlecht()==Profil.word(c3)){
+				else if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c3)){
 					lbgeschlecht.setSelectedIndex(2);
 				}
 				
 				
 				//Geschlecht
-				if(profil.getGeschlecht()==Profil.word(c1)){
+				if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c1)){
 					lbgeschlecht.setSelectedIndex(0);
 				}
-				else if(profil.getGeschlecht()==Profil.word(c2)){
+				else if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c2)){
 					lbgeschlecht.setSelectedIndex(1);
 				}
-				else if(profil.getGeschlecht()==Profil.word(c3)){
+				else if(suchprofil.getGeschlecht()==Suchprofil.wordSuchprofil(c3)){
 					lbgeschlecht.setSelectedIndex(2);
 				}
 				
 				//Haarfarbe
-				if(profil.getHaarfarbe()==Profil.word(h1)){
+				if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h1)){
 					lbhaarfarbe.setSelectedIndex(0);
 				}
-				else if(profil.getHaarfarbe()==Profil.word(h2)){
+				else if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h2)){
 					lbhaarfarbe.setSelectedIndex(1);
 				}
-				else if(profil.getHaarfarbe()==Profil.word(h3)){
+				else if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h3)){
 					lbhaarfarbe.setSelectedIndex(2);
 				}
-				else if(profil.getHaarfarbe()==Profil.word(h4)){
+				else if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h4)){
 					lbhaarfarbe.setSelectedIndex(3);
 				}
-				else if(profil.getHaarfarbe()==Profil.word(h5)){
+				else if(suchprofil.getHaarfarbe()==Suchprofil.wordSuchprofil(h5)){
 					lbhaarfarbe.setSelectedIndex(4);
 				}
 				
@@ -272,21 +282,38 @@ public class Suchen extends VerticalPanel {
 					such.setKoerpergroesse(Integer.parseInt(tbkörpergröße.getValue()));
 					such.setReligion(tbreligion.getValue());
 					
+//					pbverwaltung.createSuchprofil
+//					(such.getGeburtsdatum(), lbhaarfarbe.getValue(get), tbreligion.getValue(), tbkörpergröße.getValue(), lbraucher, lbgeschlecht, tbminalter, tbmaxalter, profilId new AsyncCallback<Suchprofil>(){
+//
+//						@Override
+//						public void onFailure(Throwable caught) {
+//							// TODO Auto-generated method stub
+//							Window.alert("Da ist etwas schief gelaufen");
+//						}
+//
+//						@Override
+//						public void onSuccess(Suchprofil result) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//						
+//					});
+//					pbverwaltung.save(such, new AsyncCallback<Suchprofil>() {
+//						
+//						@Override
+//						public void onSuccess(Suchprofil result) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//						
+//						@Override
+//						public void onFailure(Throwable caught) {
+//							// TODO Auto-generated method stub
+//							
+//						}
+//					});
 					
-					pbverwaltung.save(such, new AsyncCallback<Suchprofil>() {
-						
-						@Override
-						public void onSuccess(Suchprofil result) {
-							// TODO Auto-generated method stub
-							
-						}
-						
-						@Override
-						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
-							
-						}
-					});
+					RootPanel.get("Details").setWidth("100%");
 			}
 		    	
 		    });
@@ -302,14 +329,16 @@ public class Suchen extends VerticalPanel {
 			RootPanel.get("Details").setWidth("100%");
 		    
 			ct.setWidth("100%", true);
+			vpanelSuchprofile.add(ft1);
 			vpanelSuchprofile.add(ct);
-			vpanelEigenschaften.add(ft1);
+			
 			hpanel.add(vpanelSuchprofile);
-			hpanel.add(vpanelEigenschaften);
 
 			this.add(hpanel);
 			
 			ct.setSelectionModel(ssm);
+			ct.setWidth("100%");
+
 			
 			
 			Column<Suchprofil, String> suchprofileGeschlecht = 
@@ -360,35 +389,57 @@ public class Suchen extends VerticalPanel {
 							return object.getGeburtsdatum().toString();
 						}
 			};
-//			Column<Suchprofil, String> suchprofileMinAlter =
-//					 new Column<Suchprofil, String> (new ClickableTextCell()){
-//
-//						@Override
-//						public String getValue(Suchprofil object) {
-//							// TODO Auto-generated method stub
-//							
-//							return object.getMinAlter();
-//						}
-//			};
-//			Column<Suchprofil, String> suchprofileMaxAlter =
-//					 new Column<Suchprofil, String> (new ClickableTextCell()){
-//
-//						@Override
-//						public String getValue(Suchprofil object) {
-//							// TODO Auto-generated method stub
-//							return object.getMaxAlter();
-//						}
-//			};
-//			Column<Suchprofil, String> suchprofileKörpergröße =
-//					 new Column<Suchprofil, String> (new ClickableTextCell()){
-//
-//						@Override
-//						public String getValue(Suchprofil object) {
-//							// TODO Auto-generated method stub
-//							return object.getKoerpergroesse();
-//						}
-//			};
+			Column<Suchprofil, Number> suchprofileMinAlter =
+					 new Column<Suchprofil, Number> (new NumberCell(NumberFormat.getFormat("##"))){
 
+						@Override
+						public Integer getValue(Suchprofil object) {
+							// TODO Auto-generated method stub
+							return object.getMinAlter();
+						}
+				
+			};
+			
+			Column<Suchprofil, Number> suchprofileMaxAlter =
+					 new Column<Suchprofil, Number> (new NumberCell(NumberFormat.getFormat("##"))){
+
+						@Override
+						public Integer getValue(Suchprofil object) {
+							// TODO Auto-generated method stub
+							return object.getMaxAlter();
+						}
+				
+			};
+			
+			Column<Suchprofil, Number> suchprofileKörpergröße =
+					 new Column<Suchprofil, Number> (new NumberCell(NumberFormat.getFormat("##"))){
+
+						@Override
+						public Integer getValue(Suchprofil object) {
+							// TODO Auto-generated method stub
+							return object.getKoerpergroesse();
+						}
+				
+			};
+	
+	ct.addColumn(suchprofileGeschlecht, "Geschlecht");
+	ct.addColumn(suchprofileHaarfarbe, "Haarfarbe");
+	ct.addColumn(suchprofileRaucher,"Raucher");
+	ct.addColumn(suchprofileReligion, "Religion");
+	ct.addColumn(suchprofileGeburtsdatum, "Geburtsdatum");
+	ct.addColumn(suchprofileMinAlter, "Mindestalter");
+	ct.addColumn(suchprofileMaxAlter, "Höchstalter");
+	ct.addColumn(suchprofileKörpergröße, "Körpergröße");
+
+	   ct.addDomHandler(new DoubleClickHandler() {
+
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+	            Window.alert("That's it!");
+				
+			}
+	    }, 
+			   DoubleClickEvent.getType());
 	
 	}
 

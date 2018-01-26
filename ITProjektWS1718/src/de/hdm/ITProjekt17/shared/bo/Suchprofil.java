@@ -310,4 +310,6 @@ public class Suchprofil extends BusinessObject {
 					" Raucher: #" + this.getRaucher() +
 					" Geschlecht: #" + this.getGeschlecht();
 	}
+
+
 }

@@ -24,7 +24,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * PartnerboerseAdministrationImpl ist die Implementierungsklasse des Interface
  * <code>PartnerboerseAdministration</code>. In dieser Klasse wird die Applikationslogik 
  * dargestellt. 
- * @author Barut
  * @author Mustafi
  *
  */
@@ -93,6 +92,12 @@ implements PartnerboerseAdministration {
 	   */
 	private BesuchMapper besuchMapper = null;
 	
+	/**
+	   * Referenz auf den AehnlichkeitsmassMapper, der ähnliche Objekte mit der Datenbank
+	   * abgleicht.
+	   */
+	private AehnlichkeitsmassMapper aehnlichkeitsmassMapper = null;
+	
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
 		
@@ -103,6 +108,7 @@ implements PartnerboerseAdministration {
 	 * Diese Methode ist relevant, damit sie f�r jede Instanz von 
 	 * <code>PartnerboerseAdministrationImpl</code> aufgerufen werden kann.
 	 */
+	
 	
 	public void init() throws IllegalArgumentException{
 		/*
@@ -119,6 +125,7 @@ implements PartnerboerseAdministration {
 		this.suchprofilMapper = SuchprofilMapper.suchprofilMapper();
 		this.suchprofil_infoMapper = Suchprofil_InfoMapper.suchprofil_InfoMapper();
 		this.besuchMapper = BesuchMapper.besuchMapper();
+		this.aehnlichkeitsmassMapper = AehnlichkeitsmassMapper.aehnlichkeitsmassMapper();
 	}
 
 	
@@ -707,19 +714,21 @@ implements PartnerboerseAdministration {
 	/**
 	 * Diese Methode erzeugt ein neues Suchprofil.
 	 */
-	public Suchprofil createSuchprofil(Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException {
-
+	@Override
+		public Suchprofil createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße,
+				String raucher, String geschlecht, int minalter, int maxalter, int profilId) throws IllegalArgumentException{
+			
 			Suchprofil suchpro = new Suchprofil();
 			suchpro.setGeburtsdatum(geburtsdatum);
 			suchpro.setHaarfarbe(haarfarbe);
-			suchpro.setKoerpergroesse(koerpergroesse);
-			suchpro.setMaxAlter(maxAlter);
-			suchpro.setMinAlter(minAlter);
+			suchpro.setKoerpergroesse(körpergröße);
+			suchpro.setMaxAlter(maxalter);
+			suchpro.setMinAlter(minalter);
 			suchpro.setProfilId(profilId);
 			suchpro.setRaucher(raucher);
 			suchpro.setReligion(religion);
 			suchpro.setGeschlecht(geschlecht);
+			suchpro.setProfilId(profilId);
 			
 
 			return suchprofilMapper.insertSuchprofil(suchpro);
@@ -1147,8 +1156,12 @@ implements PartnerboerseAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Vector<Besuch> getAllBesucheOf(Profil pro) throws IllegalArgumentException {
+		try {
 			return besuchMapper.getAllBesucheDesBesuchenden(pro);
-		
+		} catch(Exception e){
+			
+		}
+		return null;
 	}
 
 	/**
@@ -1231,7 +1244,7 @@ implements PartnerboerseAdministration {
 	}
 	
 	public Profil checkProfil(String email) throws IllegalArgumentException {
-				
+		
 		if(profilMapper.findByEmail(email) == null)
 		{
 			return null;
@@ -1279,7 +1292,7 @@ implements PartnerboerseAdministration {
 		
 			
 	}
-	
+
 	@Override
 	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil)
 			throws IllegalArgumentException {
@@ -1312,25 +1325,26 @@ implements PartnerboerseAdministration {
 		}
 		// Hier ein Create-Mapper Aufruf
 		
-		return null;
+		return this.aehnlichkeitsmassMapper.insertAehnlichkeitsmass(a1);
 	}
 
 	@Override
-	public Aehnlichkeitsmass deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException {
+	public void deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		aehnlichkeitsmassMapper.deleteAehnlichkeitsmass(a);
 	}
 
 	@Override
-	public Aehnlichkeitsmass findAehnlichkeitByProfilid(Aehnlichkeitsmass a) throws IllegalArgumentException {
+	public Aehnlichkeitsmass findAehnlichkeitByProfilid(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.aehnlichkeitsmassMapper.findByKey(id);
 	}
 
 	@Override
-	public Aehnlichkeitsmass showAllAehnlichkeitByProfil(Aehnlichkeitsmass a) throws IllegalArgumentException {
+	public Vector<Aehnlichkeitsmass> showAllAehnlichkeitByProfil() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+
+		return this.aehnlichkeitsmassMapper.getAll();
 	}
 	
 	@Override
@@ -1347,7 +1361,6 @@ implements PartnerboerseAdministration {
 		
 		return null;
 	}
-
 }
 
 

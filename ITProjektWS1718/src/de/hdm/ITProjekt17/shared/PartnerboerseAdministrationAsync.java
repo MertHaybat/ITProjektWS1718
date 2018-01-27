@@ -139,8 +139,8 @@ public interface PartnerboerseAdministrationAsync {
 	void pruefenAufExistenz(String email, AsyncCallback<Profil> callback);
 	
 		
-	void createSuchprofil(Date geburtsdatum, int körpergröße, String religion, String haarfarbe, 
-			String raucher, String geschlecht, int maxAlter, int minAlter, int profilId, AsyncCallback<Suchprofil> callback);
+	void createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße,
+			String raucher, String geschlecht, int minalter, int maxalter, int profilId, AsyncCallback<Suchprofil> callback);
 
 	void save(Suchprofil such, AsyncCallback<Suchprofil> callback);
 
@@ -178,11 +178,11 @@ public interface PartnerboerseAdministrationAsync {
 
 	void createAehnlichkeit(int eigenes_profil, int fremdes_profil, AsyncCallback<Aehnlichkeitsmass> callback);
 
-	void findAehnlichkeitByProfilid(Aehnlichkeitsmass a, AsyncCallback<Aehnlichkeitsmass> callback);
+	void findAehnlichkeitByProfilid(int id, AsyncCallback<Aehnlichkeitsmass> callback);
 
-	void showAllAehnlichkeitByProfil(Aehnlichkeitsmass a, AsyncCallback<Aehnlichkeitsmass> callback);
+	void showAllAehnlichkeitByProfil(AsyncCallback<Vector<Aehnlichkeitsmass>> callback);
 
-	void deleteAehnlichkeit(Aehnlichkeitsmass a, AsyncCallback<Aehnlichkeitsmass> callback);
+	void deleteAehnlichkeit(Aehnlichkeitsmass a, AsyncCallback<Void> callback);
 	
 	void getAehnlicheUnbesuchteProfileVon(Profil pro, AsyncCallback<Aehnlichkeitsmass> callback);
 

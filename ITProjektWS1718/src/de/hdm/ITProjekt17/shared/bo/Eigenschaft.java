@@ -13,11 +13,16 @@ public abstract class Eigenschaft extends BusinessObject {
 
 	private static final long serialVersionUID = 1L;
 
-	
+	/**
+	 * Konstruktor
+	 */
 	public Eigenschaft(){
 		
 	}
-
+	/**
+	 * 
+	 * @return wert
+	 */
 	public abstract String getWert();
 	public abstract void setWert(String wert);
 			

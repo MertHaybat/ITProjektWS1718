@@ -22,9 +22,9 @@ public interface PartnerboerseAdministration extends RemoteService {
 	 */
 	
 	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil) throws IllegalArgumentException;
-	public Aehnlichkeitsmass deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException;
-	public Aehnlichkeitsmass findAehnlichkeitByProfilid(Aehnlichkeitsmass a) throws IllegalArgumentException;
-	public Aehnlichkeitsmass showAllAehnlichkeitByProfil(Aehnlichkeitsmass a) throws IllegalArgumentException;
+	public void deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException;
+	public Aehnlichkeitsmass findAehnlichkeitByProfilid(int id) throws IllegalArgumentException;
+	public Vector<Aehnlichkeitsmass> showAllAehnlichkeitByProfil() throws IllegalArgumentException;
 	public Aehnlichkeitsmass getAehnlicheUnbesuchteProfileVon(Profil pro) throws IllegalArgumentException;
 	public Aehnlichkeitsmass getAehnlicheProfileVonSuchprofilen(Profil pro) throws IllegalArgumentException;
 	
@@ -88,8 +88,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 	
 	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) throws IllegalArgumentException;
 	
-	public Suchprofil createSuchprofil(Date geburtsdatum, int körpergröße, String religion, String haarfarbe, 
-			String raucher, String geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException;
+	public Suchprofil createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße,
+			String raucher, String geschlecht, int minalter, int maxalter, int profilId) throws IllegalArgumentException;
 	public Suchprofil save(Suchprofil such) throws IllegalArgumentException;
 	public void deleteSuchprofil(Profil pro) throws IllegalArgumentException;
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException;

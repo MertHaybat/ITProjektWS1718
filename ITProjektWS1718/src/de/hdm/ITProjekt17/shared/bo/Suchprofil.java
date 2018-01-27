@@ -64,7 +64,11 @@ public class Suchprofil extends BusinessObject {
 	public enum HaarfarbeSuchprofil {
 	    A, B, C, D, E, F
 	  }
-	  
+	  /**
+	   * Zuweisung von String-Werten für das Enum HaarfarbeSuchprofil.
+	   * @param h
+	   * @return str
+	   */
 	  public static String wordSuchprofil(HaarfarbeSuchprofil h) {
 	    String str ="";
 	    switch (h) {
@@ -93,7 +97,11 @@ public class Suchprofil extends BusinessObject {
 	public enum RaucherSuchprofil {
 	    A, B, C, D, E
 	  }
-	  
+	  /**
+	   * Zuweisung von String-Werten für das Enum RaucherSuchprofil.
+	   * @param b
+	   * @return str
+	   */
 	  public static String wordSuchprofil(RaucherSuchprofil b) {
 	    String str ="";
 	    switch (b) {
@@ -120,7 +128,11 @@ public class Suchprofil extends BusinessObject {
 	public enum GeschlechtSuchprofil {
 	    m, w, s
 	  }
-	  
+	  /**
+	   * Zuweisung von String-Werten für das Enum GeschlechtSuchprofil.
+	   * @param c
+	   * @return str
+	   */
 	  public static String wordSuchprofil(GeschlechtSuchprofil c) {
 	    String str ="";
 	    switch (c) {
@@ -136,7 +148,9 @@ public class Suchprofil extends BusinessObject {
 	  }
 	
 	  private String geschlecht ="";
-	
+	/**
+	 * no-argument-Konstruktor
+	 */
 	public Suchprofil(){
 		
 	}
@@ -145,7 +159,7 @@ public class Suchprofil extends BusinessObject {
 	//----------------------Set-Methoden--------------------------------
 	
 	/**
-	 * Setzen des Fremdschl�ssels
+	 * Setzen der Profil id
 	 * @param profilId
 	 */
 	public void setProfilId(int profilId) {

@@ -294,7 +294,6 @@ public class MerkzettelMapper {
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */
 					          
-					          System.out.println("Degga funkt");
 					          
 					          result.addElement(merke);
 					        }

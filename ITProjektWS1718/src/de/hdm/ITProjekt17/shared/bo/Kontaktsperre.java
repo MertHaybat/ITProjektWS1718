@@ -22,27 +22,41 @@ public class Kontaktsperre extends BusinessObject {
 	 */
 	private int profilId_sperrender = 0;
 	private int profilId_gesperrter = 0;
-	
+	/**
+	 * Konstruktor
+	 */
 	public Kontaktsperre(){
 		
 	}
 	
 	//--------------Get-Methoden-----------------------------
-	
+	/**
+	 * Auslesen der id vom Profil des sperrenden
+	 * @return profilId_sperrender
+	 */
 	public int getProfilId_sperrender() {
 		return profilId_sperrender;
 	}
-	
+	/**
+	 * Auslesen der id vom Profil des gesperrten
+	 * @return profilId_gesperrter
+	 */
 	public int getProfilId_gesperrter() {
 		return profilId_gesperrter;
 	}
 	
 	//----------------Set-Methoden---------------------------
-	
+	/**
+	 * Setzen der id vom Profil des gesperrten
+	 * @param profilId_gesperrter
+	 */
 	public void setProfilId_gesperrter(int profilId_gesperrter) {
 		this.profilId_gesperrter = profilId_gesperrter;
 	}
-	
+	/**
+	 * Setzen der id vom Profil des sperrenden
+	 * @param profilId_sperrender
+	 */
 	public void setProfilId_sperrender(int profilId_sperrender) {
 		this.profilId_sperrender = profilId_sperrender;
 	}

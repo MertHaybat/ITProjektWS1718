@@ -23,27 +23,41 @@ public class Merkzettel extends BusinessObject{
 	 */
 	private int profilId_merkender= 0;
 	private int profilId_gemerkter = 0;
-	
+	/**
+	 * Konstruktor
+	 */
 	public Merkzettel(){
 		
 	}
 	
 	//---------------Get-Methoden--------------------------
-	
+	/**
+	 * Auslesen der id vom Profil des merkenden
+	 * @return profilId_merkender
+	 */
 	public int getProfilId_merkender() {
 		return profilId_merkender;
 	}
-
+	/**
+	 * Auslesen der id vom Profil des gemerkten
+	 * @return profilId_gemerkter
+	 */
 	public int getProfilId_gemerkter() {
 		return profilId_gemerkter;
 	}
 	
 	//--------------Set-Methoden---------------------------
-	
+	/**
+	 * Setzen der id vom Profil des merkenden
+	 * @param profilId_merkender
+	 */
 	public void setProfilId_merkender(int profilId_merkender) {
 		this.profilId_merkender = profilId_merkender;
 	}
-
+	/**
+	 * Setzen der id vom Profil des gemerkten
+	 * @param profilId_gemerkter
+	 */
 	public void setProfilId_gemerkter(int profilId_gemerkter) {
 		this.profilId_gemerkter = profilId_gemerkter;
 	}

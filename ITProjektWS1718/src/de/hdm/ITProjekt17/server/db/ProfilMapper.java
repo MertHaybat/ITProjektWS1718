@@ -61,6 +61,7 @@ public class ProfilMapper {
 		 * Aufbau der DB Connection
 		 */
 		Connection con = DBConnection.connection();
+	    java.sql.Date sqlDate = new java.sql.Date(pro.getGeburtsdatum().getTime());
 		/**
 		 * Try und Catch gehören zum Exception Handling 
 		 * Try = Versuch erst dies 
@@ -83,20 +84,20 @@ public class ProfilMapper {
 		    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 		    	  	 */
 		    	  		PreparedStatement stmt1 = con.prepareStatement(
-		    	  				"INSERT INTO profil(id, email, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht) "
+		    	  				"INSERT INTO profil(id, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht, email) "
 		    	  				+ "VALUES (?,?,?,?,?,?,?,?,?,?) ",			
 		    	  				
 		    	  				Statement.RETURN_GENERATED_KEYS);
 		    	  				stmt1.setInt(1, pro.getId());
-		    	  				stmt1.setString(2, pro.getEmail());
-		    	  				stmt1.setString(3, pro.getVorname());
-		    	  				stmt1.setString(4, pro.getNachname());
-		    	  				stmt1.setDate(5, (Date) pro.getGeburtsdatum());
-		    	  				stmt1.setInt(6, pro.getKoerpergroesse());
-		    	  				stmt1.setString(7, pro.getReligion());
-		    	  				stmt1.setString(8, pro.getHaarfarbe());
-		    	  				stmt1.setString(9, pro.getRaucher());
-		    	  				stmt1.setString(10, pro.getGeschlecht());
+		    	  				stmt1.setString(2, pro.getVorname());
+		    	  				stmt1.setString(3, pro.getNachname());
+		    	  				stmt1.setDate(4, sqlDate);
+		    	  				stmt1.setInt(5, pro.getKoerpergroesse());
+		    	  				stmt1.setString(6, pro.getReligion());
+		    	  				stmt1.setString(7, pro.getHaarfarbe());
+		    	  				stmt1.setString(8, pro.getRaucher());
+		    	  				stmt1.setString(9, pro.getGeschlecht());
+		    	  				stmt1.setString(10, pro.getEmail());
 		    	  				
 		    	  				System.out.println(stmt);
 		    	  				stmt1.executeUpdate();
@@ -290,23 +291,28 @@ public class ProfilMapper {
 				/**
 				 * Aufbau der Db Connection
 				 */
-				Connection con = DBConnection.connection();
-				Profil profil = new Profil();
-				/**
-				 * Try und Catch geh�ren zum Exception Handling Try = Versuch erst dies
-				 * Catch = Wenn Try nicht geht versuch es so ..
-				 */
+		 		/**
+		 		 * Aufbau der Db Connection
+		 		 */
+		 		Connection con = DBConnection.connection();
+		 		/**
+		 		 * Try und Catch gehören zum Exception Handling 
+		 		 * Try = Versuch erst dies 
+		 		 * Catch = Wenn Try nicht geht versuch es so ..
+		 		 */
 
-				try {
-					Statement stmt = con.createStatement();
-					ResultSet rs = stmt.executeQuery("SELECT * FROM profil " + "WHERE email='" + email + "*;");
-					
-					/**
-					 * Statement ausf�llen und an die DB senden
-					 */
-					if (rs.next()) {
-						Profil pro = new Profil();
-						pro.setId(rs.getInt("id"));
+		 		try{	
+		 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM profil WHERE email=?");
+		 			stmt.setString(1, email);
+		
+		 			/**
+		 			 * Statement ausfüllen und an die DB senden
+		 			 */
+		 			ResultSet rs = stmt.executeQuery();
+			
+		 			if (rs.next()){
+		 				Profil pro = new Profil();
+		 				pro.setId(rs.getInt("id"));
 		 				pro.setEmail(rs.getString("email"));
 		 				pro.setVorname(rs.getString("vorname"));
 		 				pro.setNachname(rs.getString("nachname"));
@@ -316,14 +322,15 @@ public class ProfilMapper {
 		 				pro.setHaarfarbe(rs.getString("haarfarbe"));
 		 				pro.setRaucher(rs.getString("raucher"));
 		 				pro.setGeschlecht(rs.getString("geschlecht"));
-	          			profil = pro;
-					}
-				} catch (SQLException e2) {
-					e2.printStackTrace();
-					return null;
-				}
-
-				return profil;
+	          
+		 				return pro;
+		 			}
+		 		}
+		 		catch (SQLException e2){
+		 			e2.printStackTrace();
+		 			return null;
+		 		}
+		return null;
 			}
 
 }

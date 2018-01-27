@@ -22,6 +22,26 @@ public class Menubar extends VerticalPanel {
 	
 	
 	private FlexTable ft1 = new FlexTable();
+	public Menubar(){
+		btn1.setStylePrimaryName("menubarbutton");
+		btn2.setStylePrimaryName("menubarbutton");
+		btn3.setStylePrimaryName("menubarbutton");
+		btn4.setStylePrimaryName("menubarbutton");
+		btn5.setStylePrimaryName("menubarbutton");
+		btn6.setStylePrimaryName("menubarbutton");
+		
+		ft1.setWidget(0, 0, btn1);
+		ft1.setWidget(1, 0, btn2);
+		ft1.setWidget(2, 0, btn3);
+		ft1.setWidget(3, 0, btn4);
+		ft1.setWidget(4, 0, btn5);
+		ft1.setWidget(5, 0, btn6);
+		
+
+		vpanel.add(ft1);
+		this.add(vpanel);
+		
+	}
 	
 	public Menubar(final Profil profil){
 		btn1.setStylePrimaryName("menubarbutton");
@@ -29,6 +49,7 @@ public class Menubar extends VerticalPanel {
 		btn3.setStylePrimaryName("menubarbutton");
 		btn4.setStylePrimaryName("menubarbutton");
 		btn5.setStylePrimaryName("menubarbutton");
+		btn6.setStylePrimaryName("menubarbutton");
 		
 		ft1.setWidget(0, 0, btn1);
 		ft1.setWidget(1, 0, btn2);

@@ -76,8 +76,8 @@ public class SuchprofilMapper {
 				    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 				    	  	 */
 				    	  		PreparedStatement stmt1 = con.prepareStatement(
-				    	  				"INSERT INTO suchprofil (id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht) "
-				    	  				+ "VALUES (?,?,?,?,?,?,?,?,?) ",
+				    	  				"INSERT INTO suchprofil (id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht, profilid) "
+				    	  				+ "VALUES (?,?,?,?,?,?,?,?,?,?) ",
 				    	  				Statement.RETURN_GENERATED_KEYS);
 				    	  				stmt1.setInt(1, such.getId());
 				    	  				stmt1.setInt(2, such.getMinAlter());
@@ -88,7 +88,7 @@ public class SuchprofilMapper {
 				    	  				stmt1.setString(7, such.getHaarfarbe());
 				    	  				stmt1.setString(8, such.getRaucher());
 				    	  				stmt1.setString(9, such.getGeschlecht());
-				    	  				
+				    	  				stmt1.setInt(10, such.getProfilId());
 				    	  				
 				    	  				stmt1.executeUpdate();
 				      }

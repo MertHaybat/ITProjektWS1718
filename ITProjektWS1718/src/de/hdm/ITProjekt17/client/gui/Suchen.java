@@ -51,8 +51,6 @@ public class Suchen extends VerticalPanel {
 	 *	Deklarieren und Instanziieren der Widgets 
 	 */
 	
-
-	private DateBox geburtsdatum = new DateBox();
 	private ListBox lbhaarfarbe = new ListBox();
 	private TextBox tbreligion = new TextBox();
 	private TextBox tbkörpergröße = new TextBox();
@@ -61,7 +59,6 @@ public class Suchen extends VerticalPanel {
 	private TextBox tbminalter = new TextBox();
 	private TextBox tbmaxalter = new TextBox();
 
-	private Label lb3 = new Label("Geburtsdatum: ");
 	private Label lb4 = new Label("Haarfarbe: ");
 	private Label lb5 = new Label("Religion: ");
 	private Label lb6 = new Label("Körpergröße: ");
@@ -92,23 +89,21 @@ public class Suchen extends VerticalPanel {
 		ft1.setWidget(3, 1, lbgeschlecht);
 		ft1.setWidget(4, 0, lb9);
 		ft1.setWidget(4, 1, tbminalter);
-		ft1.setWidget(4, 2, tbmaxalter);
-		ft1.setWidget(5, 0, lb3);
-		ft1.setWidget(5, 1, geburtsdatum);
-		ft1.setWidget(6, 0, lb4);
-		ft1.setWidget(6, 1, lbhaarfarbe);
-		ft1.setWidget(7, 0, lb5);
-		ft1.setWidget(7, 1, tbreligion);
-		ft1.setWidget(8, 0, lb6);
-		ft1.setWidget(8, 1, tbkörpergröße);
-		ft1.setWidget(9, 0, lb7);
-		ft1.setWidget(9, 1, lbraucher);
-		ft1.setWidget(10, 1, suchen);
-		ft1.setWidget(10, 2, suchprofilErstellen);
-		ft1.setWidget(10, 3, suchprofilLoeschen);
+		ft1.setWidget(4, 2, tbmaxalter);;
+		ft1.setWidget(5, 0, lb4);
+		ft1.setWidget(5, 1, lbhaarfarbe);
+		ft1.setWidget(6, 0, lb5);
+		ft1.setWidget(6, 1, tbreligion);
+		ft1.setWidget(7, 0, lb6);
+		ft1.setWidget(7, 1, tbkörpergröße);
+		ft1.setWidget(8, 0, lb7);
+		ft1.setWidget(8, 1, lbraucher);
+		ft1.setWidget(9, 1, suchen);
+		ft1.setWidget(9, 2, suchprofilErstellen);
+		ft1.setWidget(9, 3, suchprofilLoeschen);
 
 //		geburtsdatum.setValue(new Date(),true);
-		geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
+//		geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
 		//ListBox Raucher befüllen.
 		
 		RaucherSuchprofil b1 = RaucherSuchprofil.A;
@@ -182,8 +177,9 @@ public class Suchen extends VerticalPanel {
 				public void onClick(ClickEvent event) { 
 					
 										
-					pbverwaltung.createSuchprofil
-					(geburtsdatum.getValue(),lbhaarfarbe.getSelectedValue(), tbreligion.getValue(), Integer.parseInt(tbkörpergröße.getValue()), lbraucher.getSelectedValue(), lbgeschlecht.getSelectedValue(), Integer.parseInt(tbminalter.getValue()), Integer.parseInt(tbmaxalter.getValue()), profil.getId(), new AsyncCallback<Suchprofil>(){
+					pbverwaltung.createSuchprofil(geburtsdatum.getValue(), lbhaarfarbe.getSelectedValue(), tbreligion.getValue(), 
+							Integer.parseInt(tbkörpergröße.getValue()), lbraucher.getSelectedValue(), lbgeschlecht.getSelectedValue(), 
+							Integer.parseInt(tbminalter.getValue()), Integer.parseInt(tbmaxalter.getValue()), profil.getId(), new AsyncCallback<Suchprofil>(){
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -193,26 +189,12 @@ public class Suchen extends VerticalPanel {
 
 						@Override
 						public void onSuccess(Suchprofil result) {
-							// TODO Auto-generated method stub
-							
+							RootPanel.get("Details").clear();
+							RootPanel.get("Details").add(new Suchen(profil));;
 						}
 						
 					});
-//					pbverwaltung.save(such, new AsyncCallback<Suchprofil>() {
-//						
-//						@Override
-//						public void onSuccess(Suchprofil result) {
-//							// TODO Auto-generated method stub
-//							
-//						}
-//						
-//						@Override
-//						public void onFailure(Throwable caught) {
-//							// TODO Auto-generated method stub
-//							
-//						}
-//					});
-					
+
 					RootPanel.get("Details").setWidth("100%");
 			}
 		    	
@@ -330,16 +312,8 @@ public class Suchen extends VerticalPanel {
 	ct.addColumn(suchprofileMinAlter, "Mindestalter");
 	ct.addColumn(suchprofileMaxAlter, "Höchstalter");
 	ct.addColumn(suchprofileKörpergröße, "Körpergröße");
-
-	   ct.addDomHandler(new DoubleClickHandler() {
-
-			@Override
-			public void onDoubleClick(DoubleClickEvent event) {
-	            Window.alert("That's it!");
-				
-			}
-	    }, 
-			   DoubleClickEvent.getType());
+	
+	   
 	
 	}
 

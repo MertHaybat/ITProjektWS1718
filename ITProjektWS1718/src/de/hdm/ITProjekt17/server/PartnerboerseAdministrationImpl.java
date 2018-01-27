@@ -376,13 +376,13 @@ implements PartnerboerseAdministration {
 	 * </p>
 	 */
 	@Override
-	public Info createInfo(Profil pro, String text, Auswahleigenschaft aus, Freitexteigenschaft frei) throws IllegalArgumentException {
+	public Info createInfo(Profil pro, String eigenschaft, String auswahlwert, String freitextwert) throws IllegalArgumentException {
 		
 		Info in = new Info();
 		in.setProfilId(pro.getId());
-		in.setText(text);
-		in.setAuswahleigenschaftid(aus.getId());
-		in.setFreitexteigenschaftid(frei.getId());
+		in.setText(eigenschaft);
+		in.setAuswahleigenschaftWert(auswahlwert);
+		in.setFreitexteigenschaftWert(freitextwert);
 		
 		in.setId(1);
 		return this.infoMapper.insertInfo(in);
@@ -569,16 +569,13 @@ implements PartnerboerseAdministration {
 			Vector<Kontaktsperre> allBlockedProfils = new Vector<Kontaktsperre>();
 			
 			allBlockedProfils = this.getAllKontaktsperreOf(pro);
-			
-			for(int i = 0; i < allBlockedProfils.size(); i++)
-			{
-				 if (allBlockedProfils != null) {
+				 
+			if (allBlockedProfils != null) {
 					 
-					 return allBlockedProfils;
-				 }
-	 
-			}
+				return allBlockedProfils;
+			} 
 			return null;
+			
 		}
 	
 
@@ -619,6 +616,15 @@ implements PartnerboerseAdministration {
 			
 		}
 		return null;
+	}
+	
+	@Override
+	public void delete(Kontaktsperre sperre) throws IllegalArgumentException {
+		Kontaktsperre k = new Kontaktsperre();
+		k.setProfilId_gesperrter(0);
+		k.setProfilId_sperrender(0);
+		this.kontaktsperreMapper.updateKontaktsperre(k);
+		this.kontaktsperreMapper.deleteKontaktsperre(sperre);
 	}
 
 
@@ -677,13 +683,10 @@ implements PartnerboerseAdministration {
 	
 		allGemerkteProfile = this.getAllMerkzettelOf(pro);
 		
-		for(int i = 0; i < allGemerkteProfile.size(); i++)
-		{
-			 if (allGemerkteProfile != null) {
+		
+		if (allGemerkteProfile != null) {
 				 
-				 return allGemerkteProfile;
-			 }
- 
+			return allGemerkteProfile;
 		}
 		return null;
 	}
@@ -691,7 +694,8 @@ implements PartnerboerseAdministration {
 	@Override
 	public void save(Merkzettel merk) throws IllegalArgumentException {
 		
-		try{ merkzettelMapper.updateMerkzettel(merk);
+		try{ 
+			merkzettelMapper.updateMerkzettel(merk);
 		} catch (Exception e){
 			
 		}
@@ -707,6 +711,14 @@ implements PartnerboerseAdministration {
 		return null;
 	}
 	
+	@Override
+	public void delete(Merkzettel merk) throws IllegalArgumentException {
+		Merkzettel m = new Merkzettel();
+		merk.setProfilId_gemerkter(0);
+		merk.setProfilId_merkender(0);
+		this.merkzettelMapper.updateMerkzettel(m);
+		this.merkzettelMapper.deleteMerkzettel(merk);
+	}
 	
 	///////////////////////////////////////////Suchprofil//////////////////////////////////////////////////////////////////////////////
 
@@ -1171,7 +1183,7 @@ implements PartnerboerseAdministration {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public Vector<Besuch> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException
+	public Vector<Profil> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException
 	{
 		/**
 		 * Besuche des Besuchenden werden hier abgerufen und in 
@@ -1191,8 +1203,10 @@ implements PartnerboerseAdministration {
 				unvisitedProfiles.remove(unVisited);
 			}
 		}
-		
-		return unvisitedProfiles;
+		for(int i = 0; i < unvisitedProfiles.size(); i++){
+			return profilMapper.getAllProfilbyKey(unvisitedProfiles.elementAt(i).getBesuchterNutzerID());
+		}
+		return null;
 	}
 	
 	/**
@@ -1348,19 +1362,34 @@ implements PartnerboerseAdministration {
 	}
 	
 	@Override
-	public Aehnlichkeitsmass getAehnlicheUnbesuchteProfileVon(Profil pro){
-		Vector<Besuch> allUnvisitedProfils = this.getUnvisitedProfiles(pro);
-		for (Besuch b : allUnvisitedProfils){
-			
+	public Vector<Aehnlichkeitsmass> getAehnlicheUnbesuchteProfileVon(Profil pro){
+		Vector<Aehnlichkeitsmass> allAehnlichkeitsmassVonProfilen = new Vector<Aehnlichkeitsmass>();
+		Vector<Profil> allUnvisitedProfils = this.getUnvisitedProfiles(pro);
+		for (int i = 0; i < allUnvisitedProfils.size(); i++){
+			Aehnlichkeitsmass aehnlichkeitsindex = createAehnlichkeit(pro.getId(), allUnvisitedProfils.elementAt(i).getId());
+			allAehnlichkeitsmassVonProfilen.addElement(aehnlichkeitsindex);
 		}
-		return null;
+		return allAehnlichkeitsmassVonProfilen;
 	}
 
 	@Override
-	public Aehnlichkeitsmass getAehnlicheProfileVonSuchprofilen(Profil pro){
-		
-		return null;
+	public Vector<Aehnlichkeitsmass> getAehnlicheProfileVonSuchprofilen(Profil pro){
+		Vector<Aehnlichkeitsmass> allAehnlichkeitsmassVonProfilenAnhandSuchprofilen = new Vector<Aehnlichkeitsmass>();
+		Vector<Suchprofil> allSuchprofileVonProfil = this.getSuchprofilbyProfilId(pro);
+		Vector<Profil> allProfiles = this.getAllProfils();
+		for(int i = 0; i < allSuchprofileVonProfil.size(); i++){
+			for(int j = 0; j < allProfiles.size(); j++) {
+				Profil profil = allProfiles.get(j);
+				if(profil != pro){
+					Aehnlichkeitsmass aehnlichkeitsindex = createAehnlichkeit(allSuchprofileVonProfil.elementAt(i).getId(), allProfiles.elementAt(j).getId());
+					allAehnlichkeitsmassVonProfilenAnhandSuchprofilen.addElement(aehnlichkeitsindex);
+				}
+			}
+		}
+		return allAehnlichkeitsmassVonProfilenAnhandSuchprofilen;
 	}
+		
 }
+	
 
 

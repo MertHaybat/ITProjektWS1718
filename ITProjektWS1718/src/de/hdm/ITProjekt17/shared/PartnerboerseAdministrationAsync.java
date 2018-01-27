@@ -67,7 +67,7 @@ public interface PartnerboerseAdministrationAsync {
 	void getAllFreitexteigenschaft(AsyncCallback<Vector<Freitexteigenschaft>> callback);
 	
 //_________________________________________________________________________________________________________________________
-	void createInfo(Profil pro, String text, Auswahleigenschaft aus, Freitexteigenschaft frei, AsyncCallback<Info> callback);
+	void createInfo(Profil pro, String eigenschaft, String auswahlwert, String freitextwert, AsyncCallback<Info> callback);
 
 	void save(Info in, AsyncCallback<Void> callback);
 
@@ -106,6 +106,8 @@ public interface PartnerboerseAdministrationAsync {
 	void getAllKontaktsperreOf(Profil pro, AsyncCallback<Vector<Kontaktsperre>> callback);
 
 	void getAllKontaktsperre(AsyncCallback<Vector<Kontaktsperre>> callback);
+	
+	void delete(Kontaktsperre sperre, AsyncCallback<Void> callback);
 
 	//_________________________________________________________________________________________________________________________
 	
@@ -120,6 +122,8 @@ public interface PartnerboerseAdministrationAsync {
 	void getAllMerkzettelOf(Profil pro, AsyncCallback<Vector<Merkzettel>> callback);
 	
 	void showMerklisteOf(Profil pro, AsyncCallback<Vector<Merkzettel>> callback);
+	
+	void delete(Merkzettel merk, AsyncCallback<Void> callback);
 	
 	//_________________________________________________________________________________________________________________________
 	
@@ -166,7 +170,7 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void getAllBesucheOf(Profil pro, AsyncCallback<Vector<Besuch>> callback);
 	
-	void getUnvisitedProfiles(Profil pro, AsyncCallback<Vector<Besuch>> callback);
+	void getUnvisitedProfiles(Profil pro, AsyncCallback<Vector<Profil>> callback);
 	
 	void sperrPruefung(Profil pro, AsyncCallback<Boolean> callback);
 	
@@ -184,8 +188,8 @@ public interface PartnerboerseAdministrationAsync {
 
 	void deleteAehnlichkeit(Aehnlichkeitsmass a, AsyncCallback<Void> callback);
 	
-	void getAehnlicheUnbesuchteProfileVon(Profil pro, AsyncCallback<Aehnlichkeitsmass> callback);
+	void getAehnlicheUnbesuchteProfileVon(Profil pro, AsyncCallback<Vector<Aehnlichkeitsmass>> callback);
 
-	void getAehnlicheProfileVonSuchprofilen(Profil pro, AsyncCallback<Aehnlichkeitsmass> callback);
+	void getAehnlicheProfileVonSuchprofilen(Profil pro, AsyncCallback<Vector<Aehnlichkeitsmass>> callback);
 
 }

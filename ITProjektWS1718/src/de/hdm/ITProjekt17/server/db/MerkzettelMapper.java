@@ -365,7 +365,15 @@ public class MerkzettelMapper {
 				 * @return merk
 				 */
 				 public Merkzettel updateMerkzettel(Merkzettel merk) {
-					 	String sql = "UPDATE merkzettel SET  profilId_merkender=?, profilId_gemerkter=? WHERE id =?";
+					 	int i = merk.getProfilId_gemerkter();
+						int o = merk.getProfilId_merkender();
+						String sql = null;
+						
+						if(i == 0){
+							sql = "UPDATE merkzettel SET  profilId_merkender=?, profilId_gemerkter=NULL WHERE id =?";
+						} else if(o == 0){
+							sql = "UPDATE merkzettel SET  profilId_merkender=NULL, profilId_gemerkter=? WHERE id =?";
+						}
 					 	/**
 					 	 * Aufbau der Db Connection
 					 	 */

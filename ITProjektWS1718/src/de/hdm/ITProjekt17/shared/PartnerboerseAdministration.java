@@ -25,8 +25,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public void deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException;
 	public Aehnlichkeitsmass findAehnlichkeitByProfilid(int id) throws IllegalArgumentException;
 	public Vector<Aehnlichkeitsmass> showAllAehnlichkeitByProfil() throws IllegalArgumentException;
-	public Aehnlichkeitsmass getAehnlicheUnbesuchteProfileVon(Profil pro) throws IllegalArgumentException;
-	public Aehnlichkeitsmass getAehnlicheProfileVonSuchprofilen(Profil pro) throws IllegalArgumentException;
+	public Vector<Aehnlichkeitsmass> getAehnlicheUnbesuchteProfileVon(Profil pro) throws IllegalArgumentException;
+	public Vector<Aehnlichkeitsmass> getAehnlicheProfileVonSuchprofilen(Profil pro) throws IllegalArgumentException;
 	
 	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException;
 	public void save(Auswahleigenschaft aus) throws IllegalArgumentException;
@@ -50,7 +50,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException;
 	public Vector <Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException;
 	
-	public Info createInfo(Profil pro, String text, Auswahleigenschaft aus, Freitexteigenschaft frei) throws IllegalArgumentException;
+	public Info createInfo(Profil pro, String eigenschaft, String auswahlwert, String freitextwert) throws IllegalArgumentException;
 	public void save(Info in) throws IllegalArgumentException;
 	public void delete(Info in) throws IllegalArgumentException;
 	public void deleteInfoOf(Profil pro) throws IllegalArgumentException;
@@ -69,6 +69,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
 	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
 	public Vector<Kontaktsperre> getAllKontaktsperreOf(Profil pro) throws IllegalArgumentException;
+	public void delete(Kontaktsperre sperre) throws IllegalArgumentException;
 
 	public Merkzettel createMerkzettel(Profil pro, int profilId_gemerkter) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;
@@ -76,6 +77,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector<Merkzettel> getAllMerkzettelOf(Profil pro) throws IllegalArgumentException;
 	public void deleteProfilVonMerkliste(Profil pro, int profilId_gemerkter) throws IllegalArgumentException;
 	public Vector<Merkzettel> showMerklisteOf(Profil pro) throws IllegalArgumentException;
+	public void delete(Merkzettel merk) throws IllegalArgumentException;
 	
 	Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
 			String haarfarbe, String raucher, String geschlecht) throws IllegalArgumentException;
@@ -103,7 +105,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector<Besuch> showVisitedProfiles(Profil pro) throws IllegalArgumentException;
 	public void deleteBesuche(Profil pro, int besuchterNutzerID) throws IllegalArgumentException;
 	public Vector<Besuch> getAllBesucheOf(Profil pro) throws IllegalArgumentException;
-	public Vector<Besuch> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException;
+	public Vector<Profil> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException;
 	public boolean sperrPruefung(Profil pro) throws IllegalArgumentException;
 	public void visit(Profil pro) throws IllegalArgumentException;
 	

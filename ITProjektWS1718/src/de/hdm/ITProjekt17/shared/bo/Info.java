@@ -23,13 +23,25 @@ public class Info extends BusinessObject{
 	private int profilId = 0;
 	
 	/**
-	 * Variable text enthält informationen des Profils
+	 * Variable text steht für die Eigenschaft, die für das Profil eingegeben werden kann.
 	 */
 	private String text ="";
+	
+	/**
+	 * Variable auswahltextwert enthält den Wert der Eigenschaft.
+	 */
+	private String auswahlwert ="";
+	
+	/**
+	 * Variable freitextwert enthält den Wert der Eigenschaft.
+	 */
+	private String freitextwert ="";
+	
 	/**
 	 * Variable freitexteigenschaftid ist die ID von Freitexteigenschaft als FS
 	 */
 	private int freitexteigenschaftid = 0;
+	
 	/**
 	 * Variable auswahleigenschaftid ist die ID von Auswahleigenschaft als FS
 	 */
@@ -81,6 +93,21 @@ public class Info extends BusinessObject{
 		return auswahleigenschaftid;
 	}
 	
+	/**
+	 * Auslesen des Auswahleigenschaftwertes
+	 * @return auswahlwert
+	 */
+	public String getAuswahleigenschaftWert(){
+		return auswahlwert;
+	}	
+	
+	/**
+	 * Auslesen des Freitextwertes
+	 * @return freitextwert
+	 */
+	public String getFreitexteigenschaftWert(){
+		return freitextwert;
+	}	
 	
 	
 	//------------------------Set-Methoden---------------------------
@@ -115,6 +142,22 @@ public class Info extends BusinessObject{
 		this.auswahleigenschaftid = auswahleigenschaftid;
 	}
 	
+	/**
+	 * Setzen eines Auswahlwertes
+	 * @param auswahlwert
+	 */
+	public void setAuswahleigenschaftWert(String auswahlwert){
+		this.auswahlwert = auswahlwert;
+	}
+	
+	/**
+	 * Setzen eines Freitextwertes
+	 * @param freitextwert
+	 */
+	public void setFreitexteigenschaftWert(String freitextwert){
+		this.freitextwert = freitextwert;
+	}
+	
 	/*
 	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
 	 */
@@ -123,6 +166,8 @@ public class Info extends BusinessObject{
 					"Info-ID: #" + this.getId() +
 					" Profil-Id: #" + this.getProfilId() + 
 					" Text: #" + this.getText() +
+					" Auswahlwert: #" + this.getAuswahleigenschaftWert() +
+					" Freitextwert: #" + this.getFreitexteigenschaftWert() +
 					" Freitexteigenschaft-Id: #" + this.getFreitexteigenschaftid() +
 					" Auswahleigenschaft-Id: #" + this.getAuswahleigenschaftid();
 	}

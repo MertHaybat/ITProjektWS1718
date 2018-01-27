@@ -175,13 +175,13 @@ return null;
 				 * Durchführen der Einfügeoperation via Prepared Statement
 				 */
 				PreparedStatement stmt1 = con.prepareStatement(
-						"INSERT INTO info (id, text, profilid, auswahleigenschaftid, freitexteigenschaftid) " + "VALUES (?,?,?,?,?) ",
+						"INSERT INTO info (id, text, profilid, auswahlwert, freitextwert) " + "VALUES (?,?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);
 						stmt1.setInt(1, in.getId());
 						stmt1.setString(2, in.getText());
 						stmt1.setInt(3, in.getProfilId());
-						stmt1.setInt(4, in.getAuswahleigenschaftid());
-						stmt1.setInt(5, in.getFreitexteigenschaftid());
+						stmt1.setString(4, in.getAuswahleigenschaftWert());
+						stmt1.setString(5, in.getFreitexteigenschaftWert());
 						
 						stmt1.executeUpdate();
 			}

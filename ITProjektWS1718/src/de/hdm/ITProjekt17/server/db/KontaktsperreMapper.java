@@ -284,7 +284,17 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 				 * @return sperre
 				 */
 				 public Kontaktsperre updateKontaktsperre(Kontaktsperre sperre){
-					 	String sql = "UPDATE kontaktsperre SET  profilId_sperrender=?, profilId_gesperrter=? WHERE id=?";
+					int i = sperre.getProfilId_gesperrter();
+					int o = sperre.getProfilId_sperrender();
+					
+					String sql = null;
+					
+					 if(i == 0){
+						 sql = "UPDATE kontaktsperre SET  profilId_sperrender=?, profilId_gesperrter=NULL WHERE id=?";
+						 
+					 } else if(o == 0){
+						 sql = "UPDATE kontaktsperre SET  profilId_sperrender=NULL, profilId_gesperrter=? WHERE id=?";
+					 }
 					 /**
 					 	 * Aufbau der Db Connection
 					 	 */
@@ -302,7 +312,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 					    	stmt.setInt(1, sperre.getProfilId_sperrender());
 					    	stmt.setInt(2, sperre.getProfilId_gesperrter());
 
-					    	stmt.setInt(2, sperre.getId());
+					    	stmt.setInt(3, sperre.getId());
 					    	stmt.executeUpdate();
 					    	
 					    

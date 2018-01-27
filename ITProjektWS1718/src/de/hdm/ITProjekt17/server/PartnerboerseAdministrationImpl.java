@@ -92,6 +92,12 @@ implements PartnerboerseAdministration {
 	   */
 	private BesuchMapper besuchMapper = null;
 	
+	/**
+	   * Referenz auf den AehnlichkeitsmassMapper, der ähnliche Objekte mit der Datenbank
+	   * abgleicht.
+	   */
+	private AehnlichkeitsmassMapper aehnlichkeitsmassMapper = null;
+	
 	
 	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
 		
@@ -119,6 +125,7 @@ implements PartnerboerseAdministration {
 		this.suchprofilMapper = SuchprofilMapper.suchprofilMapper();
 		this.suchprofil_infoMapper = Suchprofil_InfoMapper.suchprofil_InfoMapper();
 		this.besuchMapper = BesuchMapper.besuchMapper();
+		this.aehnlichkeitsmassMapper = AehnlichkeitsmassMapper.aehnlichkeitsmassMapper();
 	}
 
 	
@@ -1316,25 +1323,25 @@ implements PartnerboerseAdministration {
 		}
 		// Hier ein Create-Mapper Aufruf
 		
-		return null;
+		return this.aehnlichkeitsmassMapper.insertAehnlichkeitsmass(a1);
 	}
 
 	@Override
 	public Aehnlichkeitsmass deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.aehnlichkeitsmassMapper.deleteAehnlichkeit(a);
 	}
 
 	@Override
-	public Aehnlichkeitsmass findAehnlichkeitByProfilid(Aehnlichkeitsmass a) throws IllegalArgumentException {
+	public Aehnlichkeitsmass findAehnlichkeitByProfilid(int id) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.aehnlichkeitsmassMapper.findByKey(id);;
 	}
 
 	@Override
-	public Aehnlichkeitsmass showAllAehnlichkeitByProfil(Aehnlichkeitsmass a) throws IllegalArgumentException {
+	public Aehnlichkeitsmass showAllAehnlichkeitByProfil() throws IllegalArgumentException {
 		// TODO Auto-generated method stub
-		return null;
+		return this.aehnlichkeitsmassMapper.getAll();
 	}
 
 }

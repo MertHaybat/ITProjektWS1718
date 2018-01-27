@@ -1,7 +1,6 @@
 package de.hdm.ITProjekt17.client.gui;
 
 
-import java.util.Date;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -50,7 +49,6 @@ public class Profilseite extends VerticalPanel{
 	private ListBox lbinteresse = new ListBox();
 	private ListBox lbwohnsituation = new ListBox();	
 	private ListBox lbausbildung = new ListBox();
-	private ListBox lbsportart = new ListBox();
 	private ListBox lbkörperbau = new ListBox();
 	
 	private Label lb1 = new Label("Vorname: ");
@@ -65,13 +63,9 @@ public class Profilseite extends VerticalPanel{
 	private Label lb10 = new Label("Interessiert an: ");
 	private Label lb11 = new Label("Wohnsituation: ");
 	private Label lb12 = new Label("Ausbildung: ");
-	private Label lb13 = new Label("Sportart: ");
 	private Label lb14 = new Label("Körperbau: ");
 	
 
-
-	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");
-	
 	
 	private Button ok = new Button("Bestätigen");
 	private Button abbrechen = new Button("Abbrechen");
@@ -86,7 +80,7 @@ public class Profilseite extends VerticalPanel{
 	private HorizontalPanel hpanel = new HorizontalPanel();
 	
 	
-	public Profilseite(){
+	public Profilseite(final String email){
 		Window.alert("Willkommen auf MOFOS. Tragen Sie bitte nachfolgend die Daten zu Ihrer Person ein.");
 		
 		ft1.setWidget(1, 0, lb1);
@@ -107,22 +101,8 @@ public class Profilseite extends VerticalPanel{
 		ft1.setWidget(8, 1, lbraucher);
 		ft1.setWidget(9, 0, ok);
 		ft1.setWidget(9, 1, abbrechen);
-		
-		ft2.setWidget(0, 0, lb10);
-		ft2.setWidget(0, 1, lbinteresse);
-		ft2.setWidget(1, 0, lb11);
-		ft2.setWidget(1, 1, lbwohnsituation);
-		ft2.setWidget(2, 0, lb12);
-		ft2.setWidget(2, 1, lbausbildung);
-		ft2.setWidget(3, 0, lb13);
-		ft2.setWidget(3, 1, lbsportart);
-		ft2.setWidget(4, 0, lb14);
-		ft2.setWidget(4, 1, lbkörperbau);
-		ft2.setWidget(5, 0, lb9);
-		ft2.setWidget(6, 0, tbfreitext);
-	
+			
 		tbfreitext.setPixelSize(225, 150);
-		tbfreitext.setValue(new Freitexteigenschaft().getWert());
 
 		vpanel.add(ft1);
 		vpanel2.add(ft2);
@@ -186,19 +166,6 @@ public class Profilseite extends VerticalPanel{
 	      lbausbildung.addItem("Schüler");
 	      lbausbildung.addItem("Student");
 	      lbausbildung.addItem("Absolvent");
-
-			//ListBox Sportart befüllen.
-			
-	      lbsportart.addItem("Fussball");
-	      lbsportart.addItem("Handball");
-	      lbsportart.addItem("Tanzsport");
-	      lbsportart.addItem("Wassersport");
-	      lbsportart.addItem("Motorsport");
-	      lbsportart.addItem("Kampfsport");
-	      lbsportart.addItem("Denksport");
-	      lbsportart.addItem("Leichtathletik");
-	      lbsportart.addItem("Kraftsport");
-	      lbsportart.addItem("Reitsport");
 	      
 	      //ListBox Körperbau befüllen.
 	      
@@ -211,40 +178,35 @@ public class Profilseite extends VerticalPanel{
 		
 		// Create a date picker
 			final DatePicker datepicker_geburtsdatum = new DatePicker();
-			geburtsdatum.setFormat(new DateBox.DefaultFormat(df));
+			geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
 			geburtsdatum.getDatePicker().setYearArrowsVisible(true);
 			geburtsdatum.getDatePicker().setYearAndMonthDropdownVisible(true);
 			geburtsdatum.getDatePicker().setVisibleYearCount(10);
 
-		final Label text = new Label();
-		
-
-		
 		 // Set the value in the text box when the user selects a date
-			datepicker_geburtsdatum.addValueChangeHandler(new ValueChangeHandler<Date>(){
-
-				@Override
-				public void onValueChange(ValueChangeEvent<Date> event) {
-					Date date = event.getValue();
-		            String dateString = df.format(date);
-		                    DateTimeFormat.getFormat("MM/dd/yyyy").format(date);
-		                    text.setText(dateString);
-		                 
-				}
-			});
+//			datepicker_geburtsdatum.addValueChangeHandler(new ValueChangeHandler<Date>(){
+//
+//				@Override
+//				public void onValueChange(ValueChangeEvent<Date> event) {
+//					Date date = event.getValue();
+//		            String dateString = df.format(date);
+//		                    DateTimeFormat.getFormat("MM/dd/yyyy").format(date);
+//		                    text.setText(dateString);
+//		                 
+//				}
+//			});
 			
-		    datepicker_geburtsdatum.setValue(new Date(), true);
+//		    datepicker_geburtsdatum.setValue(new Date(), true);
 		   
 		    
 		    ok.addClickHandler(new ClickHandler(){
 
 				@Override
 				public void onClick(ClickEvent event) {
-					
-					pbverwaltung.createProfil(tbemail.getValue(), tbvorname.getValue(), tbnachname.getValue(), geburtsdatum.getValue(), 
+					pbverwaltung.createProfil(email, tbvorname.getValue(), tbnachname.getValue(), geburtsdatum.getValue(), 
 							Integer.parseInt(tbkörpergröße.getValue()),
 							tbreligion.getValue(), lbhaarfarbe.getSelectedValue(), lbraucher.getSelectedValue(), lbgeschlecht.getSelectedValue(), new AsyncCallback<Profil>(){
-
+					
 								@Override
 								public void onFailure(Throwable caught) {
 									// TODO Auto-generated method stub
@@ -260,13 +222,11 @@ public class Profilseite extends VerticalPanel{
 							
 						
 					});
-					
 				}
+				
 		    	
 		    });
-		    
-
-		
+				
 		RootPanel.get("Details").clear();
 		RootPanel.get("Details").add(this);
 	}
@@ -298,8 +258,6 @@ public class Profilseite extends VerticalPanel{
 		ft2.setWidget(1, 1, lbwohnsituation);
 		ft2.setWidget(2, 0, lb12);
 		ft2.setWidget(2, 1, lbausbildung);
-		ft2.setWidget(3, 0, lb13);
-		ft2.setWidget(3, 1, lbsportart);
 		ft2.setWidget(4, 0, lb14);
 		ft2.setWidget(4, 1, lbkörperbau);
 		ft2.setWidget(5, 0, lb9);
@@ -307,8 +265,8 @@ public class Profilseite extends VerticalPanel{
 		
 		tbfreitext.setPixelSize(250, 150);
 		
-		geburtsdatum.setFormat(new DateBox.DefaultFormat(df));
-		geburtsdatum.getDatePicker().setYearArrowsVisible(true);
+		geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
+        geburtsdatum.getDatePicker().setYearArrowsVisible(true);
 		geburtsdatum.getDatePicker().setYearAndMonthDropdownVisible(true);
 		geburtsdatum.getDatePicker().setVisibleYearCount(100);
 		
@@ -368,20 +326,7 @@ public class Profilseite extends VerticalPanel{
 	      lbausbildung.addItem("Schüler");
 	      lbausbildung.addItem("Student");
 	      lbausbildung.addItem("Absolvent");
-
-			//ListBox Sportart befüllen.
-			
-	      lbsportart.addItem("Fussball");
-	      lbsportart.addItem("Handball");
-	      lbsportart.addItem("Tanzsport");
-	      lbsportart.addItem("Wassersport");
-	      lbsportart.addItem("Motorsport");
-	      lbsportart.addItem("Kampfsport");
-	      lbsportart.addItem("Denksport");
-	      lbsportart.addItem("Leichtathletik");
-	      lbsportart.addItem("Kraftsport");
-	      lbsportart.addItem("Reitsport");
-	      
+				      
 	      //ListBox Körperbau befüllen.
 	      
 	      lbkörperbau.addItem("dünn");     
@@ -402,14 +347,18 @@ public class Profilseite extends VerticalPanel{
 
 		
 		//Raucher
-		if(profil.getRaucher()==Profil.word(c1)){
+		if(profil.getRaucher()==Profil.word(b1)){
 			lbraucher.setSelectedIndex(0);
 		}
-		else if(profil.getGeschlecht()==Profil.word(c2)){
+		else if(profil.getRaucher()==Profil.word(b2)){
 			lbgeschlecht.setSelectedIndex(1);
 		}
-		else if(profil.getGeschlecht()==Profil.word(c3)){
+		else if(profil.getRaucher()==Profil.word(b3)){
 			lbgeschlecht.setSelectedIndex(2);
+		}else if(profil.getRaucher()==Profil.word(b4)){
+			lbgeschlecht.setSelectedIndex(3);
+		}else if(profil.getRaucher()==Profil.word(b5)){
+			lbgeschlecht.setSelectedIndex(4);
 		}
 		
 		
@@ -490,49 +439,7 @@ public class Profilseite extends VerticalPanel{
 			Auswahleigenschaft d = new Auswahleigenschaft();
 			d.setWert("Absolvent");
 		}
-		
-		//Sportart
-		if(lbsportart.getSelectedIndex()==0){
-			Auswahleigenschaft a = new Auswahleigenschaft();
-			a.setWert("Fussball");
-		}
-		else if(lbsportart.getSelectedIndex()==1){
-			Auswahleigenschaft b = new Auswahleigenschaft();
-			b.setWert("Handball");
-		}
-		else if(lbsportart.getSelectedIndex()==2){
-			Auswahleigenschaft c = new Auswahleigenschaft();
-			c.setWert("Tanzsport");
-		}
-		else if(lbsportart.getSelectedIndex()==3){
-			Auswahleigenschaft d = new Auswahleigenschaft();
-			d.setWert("Wassersport");
-		}
-		else if(lbsportart.getSelectedIndex()==4){
-			Auswahleigenschaft e = new Auswahleigenschaft();
-			e.setWert("Motorsport");
-		}
-		else if(lbsportart.getSelectedIndex()==5){
-			Auswahleigenschaft f = new Auswahleigenschaft();
-			f.setWert("Kampfsport");
-		}
-		else if(lbsportart.getSelectedIndex()==6){
-			Auswahleigenschaft g = new Auswahleigenschaft();
-			g.setWert("Denksport");
-		}
-		else if(lbsportart.getSelectedIndex()==7){
-			Auswahleigenschaft h = new Auswahleigenschaft();
-			h.setWert("Leichtathletik");
-		}
-		else if(lbsportart.getSelectedIndex()==8){
-			Auswahleigenschaft i = new Auswahleigenschaft();
-			i.setWert("Kraftsport");
-		}
-		else if(lbsportart.getSelectedIndex()==9){
-			Auswahleigenschaft j = new Auswahleigenschaft();
-			j.setWert("Reitsport");
-		}
-		
+				
 		//Körperbau
 		if(lbkörperbau.getSelectedIndex()==0){
 			Auswahleigenschaft a = new Auswahleigenschaft();
@@ -558,6 +465,14 @@ public class Profilseite extends VerticalPanel{
 			Auswahleigenschaft f = new Auswahleigenschaft();
 			f.setWert("dick");
 		}
+		ok.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				
+			}
+			
+		});
 	
 	    
 		vpanel.add(ft1);

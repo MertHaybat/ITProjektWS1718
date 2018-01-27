@@ -14,7 +14,9 @@ public class Suchprofil_Info extends BusinessObject {
 	 * Varaible aus der Tabelle Info als Fremdschlüssel deklaration
 	 */
 	private int infoid;
-	
+	/**
+	 * no-argument-Konstrktor
+	 */
 	public Suchprofil_Info(){
 		
 	}
@@ -45,7 +47,7 @@ public class Suchprofil_Info extends BusinessObject {
 		this.suchprofilid = suchprofilid;
 	}
 	/**
-	 * Methode zum setzen der Inf Id
+	 * Methode zum setzen der Info Id
 	 * @param infoid
 	 */
 	public void setInfoId(int infoid){

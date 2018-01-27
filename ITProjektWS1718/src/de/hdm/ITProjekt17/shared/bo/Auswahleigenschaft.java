@@ -32,13 +32,16 @@ public class Auswahleigenschaft extends Eigenschaft {
 	//---------------Get-Methoden----------------------------
 
 	/**
-	 * Abfragen der Auswahleigenschaft
-	 * @return
+	 * Auslesen vom Wert
+	 * @return wert
 	 */
 	public String getWert(){
 		return this.wert;
 	}
-	
+	/**
+	 * Auslesen der Info id
+	 * @return infoid
+	 */
 	public int getInfoid(){
 		return this.infoid;
 	}
@@ -47,13 +50,16 @@ public class Auswahleigenschaft extends Eigenschaft {
 	
 	
 	/**
-	 * Setzen einer Auswahleigneschaft
-	 * @param auswahlEigenschaft
+	 * Setzen eines Werts
+	 * @param wert
 	 */
 	public void setWert(String wert){
 		this.wert = wert;
 	}
-	
+	/**
+	 * Setzen der Info id
+	 * @param infoid
+	 */
 	public void setInfoid(int infoid){
 		this.infoid = infoid;
 	}

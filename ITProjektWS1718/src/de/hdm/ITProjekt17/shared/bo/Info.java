@@ -35,11 +35,16 @@ public class Info extends BusinessObject{
 	 */
 	private int auswahleigenschaftid = 0;
 	
-	
+	/**
+	 * Konstruktor
+	 */
 	public Info(){
 		
 	}
-	
+	/**
+	 * Info als String 
+	 * @param text
+	 */
 	public Info(String text){
 		this.text = text;
 	}
@@ -47,30 +52,30 @@ public class Info extends BusinessObject{
 	//-----------------------Get-Methoden-----------------------------
 	
 	/**
-	 * Auslesen der PrfilId
-	 * @return
+	 * Auslesen der ProfilId
+	 * @return profilId
 	 */
 	public int getProfilId(){
 		return profilId;
 	}
 	
 	/**
-	 * Auslesen der Information eines Profils
-	 * @return
+	 * Auslesen des Textes
+	 * @return text
 	 */
 	public String getText(){
 		return text;
 	}
 	/**
 	 * Auslesen der Freitexteigenschaft id
-	 * @return
+	 * @return freitexteigenschaftid
 	 */
 	public int getFreitexteigenschaftid(){
 		return freitexteigenschaftid;
 	}
 	/**
 	 * Auslesen der Auswahleigenschaft id
-	 * @return
+	 * @return auswahleigenschaftid
 	 */
 	public int getAuswahleigenschaftid(){
 		return auswahleigenschaftid;

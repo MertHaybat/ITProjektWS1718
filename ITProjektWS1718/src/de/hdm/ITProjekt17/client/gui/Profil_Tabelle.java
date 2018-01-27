@@ -13,11 +13,15 @@ public class Profil_Tabelle extends CellTable<Profil>{
 
 	private VerticalPanel vpanelprofil_anzeige = new VerticalPanel();
 	
-	final SingleSelectionModel<Profil> ssm_profil_anzeige = new SingleSelectionModel<Profil>();
+	private final SingleSelectionModel<Profil> ssm_profil_anzeige = new SingleSelectionModel<Profil>();
 	
 	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");
-	
+	public SingleSelectionModel<Profil> getSsm_profil_anzeige() {
+		return ssm_profil_anzeige;
+	}
 	public Profil_Tabelle(){
+		
+		
 		this.setSelectionModel(ssm_profil_anzeige);
 		this.setWidth("100%");
 		this.setSelectionModel(ssm_profil_anzeige);
@@ -52,4 +56,6 @@ public class Profil_Tabelle extends CellTable<Profil>{
 	this.addColumn(profil_geburtsdatum, "Geburtsdatum");
 	
 	}
+
+	
 }

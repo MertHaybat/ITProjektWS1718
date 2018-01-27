@@ -14,32 +14,50 @@ public class Freitexteigenschaft extends Eigenschaft{
 	
 	
 	/**
-	 * Variablen wert, welche den Wert später speichert der als freitext geschreiben wird
+	 * Variablen wert, welche den Wert später speichert der als freitext geschrieben wird
 	 */
 	private String wert = "";
 	
 	private int infoid = 0;
-
+	/**
+	 * Konstruktor
+	 */
 	public Freitexteigenschaft(){
 		
 	}
 	
 	//---------------Get-Methoden---------------------------
 	
+	/**
+	 * Auslesen des Werts
+	 * @return wert
+	 */
 	public String getWert() {
 		return this.wert;
 	}
+	/**
+	 * Auslesen der Infoid
+	 * @return infoid
+	 */
 	
 	public int getInfoid(){
 		return this.infoid;
 	}
+	
 
 	//---------------Set-Methoden-----------------------------
 	
+	/**
+	 * Setzen eines Werts
+	 * @param wert
+	 */
 	public void setWert(String wert) {
 		this.wert = wert;
 	}
-	
+	/**
+	 * Setzen der Info id
+	 * @param infoid
+	 */
 	public void setInfoid(int infoid){
 		this.infoid = infoid;
 	}

@@ -29,14 +29,16 @@ public class Besuch extends BusinessObject {
 	// --------------Set-Methoden-----------------------------
 
 	/**
-	 * Setzen der ID des besuchten User.
+	 * Setzen der id des besuchten Nutzers
+	 * @param besuchterNutzerID
 	 */
 	public void setBesuchterNutzerID(int besuchterNutzerID) {
 		this.besuchterNutzerID = besuchterNutzerID;
 	}
 
 	/**
-	 * Setzen der ID des besuchenden User.
+	 * Setzen der id des besuchenden Nutzers
+	 * @param besuchenderNutzerID
 	 */
 	public void setBesuchenderNutzerID(int besuchenderNutzerID) {
 		this.besuchenderNutzerID = besuchenderNutzerID;
@@ -45,14 +47,16 @@ public class Besuch extends BusinessObject {
 	// -------------------Get-Methoden-----------------------------
 
 	/**
-	 * Auslesen der ID des besuchenden User.
+	 * Auslesen der id des besuchenden Nutzers
+	 * @return besuchenderNutzerID
 	 */
 	public int getBesuchenderNutzerID() {
 		return besuchenderNutzerID;
 	}
 
 	/**
-	 * Auslesen der ID des besuchten User.
+	 * Auslesen der id des besuchten Nutzers
+	 * @return besuchterNutzerID
 	 */
 	public int getBesuchterNutzerID() {
 		return besuchterNutzerID;

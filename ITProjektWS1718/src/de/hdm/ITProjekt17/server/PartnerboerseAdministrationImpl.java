@@ -714,19 +714,21 @@ implements PartnerboerseAdministration {
 	/**
 	 * Diese Methode erzeugt ein neues Suchprofil.
 	 */
-	public Suchprofil createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException {
-
+	@Override
+		public Suchprofil createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße,
+				String raucher, String geschlecht, int minalter, int maxalter, int profilId) throws IllegalArgumentException{
+			
 			Suchprofil suchpro = new Suchprofil();
 			suchpro.setGeburtsdatum(geburtsdatum);
 			suchpro.setHaarfarbe(haarfarbe);
-			suchpro.setKoerpergroesse(koerpergroesse);
-			suchpro.setMaxAlter(maxAlter);
-			suchpro.setMinAlter(minAlter);
+			suchpro.setKoerpergroesse(körpergröße);
+			suchpro.setMaxAlter(maxalter);
+			suchpro.setMinAlter(minalter);
 			suchpro.setProfilId(profilId);
 			suchpro.setRaucher(raucher);
 			suchpro.setReligion(religion);
 			suchpro.setGeschlecht(geschlecht);
+			suchpro.setProfilId(profilId);
 			
 
 			return suchprofilMapper.insertSuchprofil(suchpro);
@@ -1343,5 +1345,7 @@ implements PartnerboerseAdministration {
 		// TODO Auto-generated method stub
 		return this.aehnlichkeitsmassMapper.getAll();
 	}
+
+
 
 }

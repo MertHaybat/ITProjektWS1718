@@ -61,19 +61,19 @@ public class Merkzettelseite extends VerticalPanel{
 		hpanel.add(vpanelandere_merkzettel);
 		this.add(hpanel);
 		
-		pt1.ssm_profil_anzeige.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+		pt1.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 		
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
-			DialogBoxMerkzettelProfil dialogboxmerkzettelprofil = new DialogBoxMerkzettelProfil(profil, pt1.ssm_profil_anzeige.getSelectedObject());
+			DialogBoxMerkzettelProfil dialogboxmerkzettelprofil = new DialogBoxMerkzettelProfil(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
 			dialogboxmerkzettelprofil.center();
 		}
 	});
-	pt2.ssm_profil_anzeige.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+	pt2.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
-				DialogBoxMerkzettelProfil dialogboxmerkzettelprofil = new DialogBoxMerkzettelProfil(profil, pt2.ssm_profil_anzeige.getSelectedObject());
+				DialogBoxMerkzettelProfil dialogboxmerkzettelprofil = new DialogBoxMerkzettelProfil(profil, pt2.getSsm_profil_anzeige().getSelectedObject());
 				dialogboxmerkzettelprofil.center();
 			}
 		});
@@ -215,24 +215,24 @@ public class Merkzettelseite extends VerticalPanel{
 
 private class DialogBoxMerkzettelProfil extends DialogBox{
 		
-		VerticalPanel vpanel = new VerticalPanel();
-		private TextBox tbvorname = new TextBox();
-		private TextBox tbnachname = new TextBox();
-		private DateBox geburtsdatum = new DateBox();
-		private TextBox tbhaarfarbe = new TextBox();
-		private TextBox tbreligion = new TextBox();
-		private TextBox tbkörpergröße = new TextBox();
-		private TextBox tbraucher = new TextBox();
-		private TextBox tbgeschlecht = new TextBox();
-		
-		private Label lb1 = new Label("Vorname: ");
-		private Label lb2 = new Label("Nachname: ");
-		private Label lb3 = new Label("Geburtsdatum: ");
-		private Label lb4 = new Label("Haarfarbe: ");
-		private Label lb5 = new Label("Religion: ");
-		private Label lb6 = new Label("Körpergröße: ");
-		private Label lb7 = new Label("Raucher: ");
-		private Label lb8 = new Label("Geschlecht: ");
+//		VerticalPanel vpanel = new VerticalPanel();
+//		private TextBox tbvorname = new TextBox();
+//		private TextBox tbnachname = new TextBox();
+//		private DateBox geburtsdatum = new DateBox();
+//		private TextBox tbhaarfarbe = new TextBox();
+//		private TextBox tbreligion = new TextBox();
+//		private TextBox tbkörpergröße = new TextBox();
+//		private TextBox tbraucher = new TextBox();
+//		private TextBox tbgeschlecht = new TextBox();
+//		
+//		private Label lb1 = new Label("Vorname: ");
+//		private Label lb2 = new Label("Nachname: ");
+//		private Label lb3 = new Label("Geburtsdatum: ");
+//		private Label lb4 = new Label("Haarfarbe: ");
+//		private Label lb5 = new Label("Religion: ");
+//		private Label lb6 = new Label("Körpergröße: ");
+//		private Label lb7 = new Label("Raucher: ");
+//		private Label lb8 = new Label("Geschlecht: ");
 
 		private Button sperren = new Button("Besuch Sperren");
 		private Button loeschen = new Button("Besuch Löschen");
@@ -241,34 +241,35 @@ private class DialogBoxMerkzettelProfil extends DialogBox{
 		private Button entsperren = new Button("Besuch Entsperren");
 
 		
-		private FlexTable ft1 = new FlexTable();
+//		private FlexTable ft1 = new FlexTable();
 		
 		
 		public DialogBoxMerkzettelProfil(final Profil profil_eigenes, final Profil profil_besucher){
 
-			ft1.setWidget(0, 0, lb1);
-			ft1.setWidget(0, 1, tbvorname);
-			ft1.setWidget(1, 0, lb2);
-			ft1.setWidget(1, 1, tbnachname);
-			ft1.setWidget(2, 0, lb3);
-			ft1.setWidget(2, 1, geburtsdatum);
-			ft1.setWidget(3, 0, lb4);
-			ft1.setWidget(3, 1, tbhaarfarbe);
-			ft1.setWidget(4, 0, lb5);
-			ft1.setWidget(4, 1, tbreligion);
-			ft1.setWidget(5, 0, lb6);
-			ft1.setWidget(5, 1, tbkörpergröße);
-			ft1.setWidget(6, 0, lb7);
-			ft1.setWidget(6, 1, tbraucher);
-			ft1.setWidget(7, 0, lb8);
-			ft1.setWidget(7, 1, tbgeschlecht);
-			ft1.setWidget(8, 0, merkzettel);
-			ft1.setWidget(8, 1, abbrechen);
-			ft1.setWidget(8, 2, loeschen);			
-			ft1.setWidget(8, 3, sperren);
-			
-			vpanel.add(ft1);
-			this.add(vpanel);
+//			ft1.setWidget(0, 0, lb1);
+//			ft1.setWidget(0, 1, tbvorname);
+//			ft1.setWidget(1, 0, lb2);
+//			ft1.setWidget(1, 1, tbnachname);
+//			ft1.setWidget(2, 0, lb3);
+//			ft1.setWidget(2, 1, geburtsdatum);
+//			ft1.setWidget(3, 0, lb4);
+//			ft1.setWidget(3, 1, tbhaarfarbe);
+//			ft1.setWidget(4, 0, lb5);
+//			ft1.setWidget(4, 1, tbreligion);
+//			ft1.setWidget(5, 0, lb6);
+//			ft1.setWidget(5, 1, tbkörpergröße);
+//			ft1.setWidget(6, 0, lb7);
+//			ft1.setWidget(6, 1, tbraucher);
+//			ft1.setWidget(7, 0, lb8);
+//			ft1.setWidget(7, 1, tbgeschlecht);
+			final Profil_Dialogbox pdb1 = new Profil_Dialogbox(profil_eigenes, profil_besucher);
+			pdb1.setWidget(8, 0, merkzettel);
+			pdb1.setWidget(8, 1, abbrechen);
+			pdb1.setWidget(8, 2, loeschen);			
+			pdb1.setWidget(8, 3, sperren);
+			this.add(pdb1);
+//			vpanel.add(ft1);
+//			this.add(vpanel);
 				
 			sperren.addClickHandler(new ClickHandler(){
 
@@ -338,14 +339,14 @@ private class DialogBoxMerkzettelProfil extends DialogBox{
 
 				@Override
 				public void onSuccess(Profil result) {
-					tbvorname.setValue(result.getVorname());
-					tbnachname.setValue(result.getNachname());
-					geburtsdatum.setValue(result.getGeburtsdatum());
-					tbhaarfarbe.setValue(result.getHaarfarbe());
-					tbreligion.setValue(result.getReligion());
-					tbkörpergröße.setValue(String.valueOf(result.getKoerpergroesse()));
-					tbraucher.setValue(String.valueOf(result.getRaucher()));
-					tbgeschlecht.setValue(String.valueOf(result.getGeschlecht()));
+					pdb1.getTbvorname().setValue(result.getVorname());
+					pdb1.getTbnachname().setValue(result.getNachname());
+					pdb1.getGeburtsdatum().setValue(result.getGeburtsdatum());
+					pdb1.getTbhaarfarbe().setValue(result.getHaarfarbe());
+					pdb1.getTbreligion().setValue(result.getReligion());
+					pdb1.getTbkörpergröße().setValue(String.valueOf(result.getKoerpergroesse()));
+					pdb1.getTbraucher().setValue(String.valueOf(result.getRaucher()));
+					pdb1.getTbgeschlecht().setValue(String.valueOf(result.getGeschlecht()));
 					
 				}
 				

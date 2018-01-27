@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 import de.hdm.ITProjekt17.shared.bo.Aehnlichkeitsmass;
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
@@ -135,11 +138,9 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void pruefenAufExistenz(String email, AsyncCallback<Profil> callback);
 	
-	//_________________________________________________________________________________________________________________________
-	
-	void createSuchprofil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
-			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId,
-			AsyncCallback<Suchprofil> callback);
+		
+	void createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße, String raucher, String Geschlecht, 
+			int minalter, int maxalter, int profilId, AsyncCallback<Suchprofil> callback);
 
 	void save(Suchprofil such, AsyncCallback<Suchprofil> callback);
 
@@ -182,5 +183,7 @@ public interface PartnerboerseAdministrationAsync {
 	void showAllAehnlichkeitByProfil(Aehnlichkeitsmass a, AsyncCallback<Aehnlichkeitsmass> callback);
 
 	void deleteAehnlichkeit(Aehnlichkeitsmass a, AsyncCallback<Aehnlichkeitsmass> callback);
+
+
 
 }

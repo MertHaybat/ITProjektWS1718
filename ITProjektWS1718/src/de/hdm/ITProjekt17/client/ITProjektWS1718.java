@@ -141,7 +141,6 @@ public class ITProjektWS1718 implements EntryPoint{
 //		signOutLink.setHref(loginInfo.getLogoutUrl());
 		RootPanel.get("Details").add(new Startseite(profil));
 		RootPanel.get("Navigator").add(new Menubar(profil));
-//		RootPanel.get("Topbar").add(new Topbar(profil));
 	}
 	
 	

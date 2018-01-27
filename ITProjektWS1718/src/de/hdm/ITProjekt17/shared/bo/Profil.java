@@ -17,11 +17,17 @@ public class Profil extends BusinessObject {
 	
 	/**
 	 * Variable Geschlecht im Profil; Gibt an, ob die Person weiblich oder mÃ¤nnlich ist
+	 * @author samina und dennis
+	 *
 	 */
 	public enum Geschlecht {
 	    m, w, s
 	  }
-	  
+	  /**
+	   * Zuweisung von String-Werten für das Enum Geschlecht.
+	   * @param c
+	   * @return str
+	   */
 	  public static String word(Geschlecht c) {
 	    String str ="";
 	    switch (c) {
@@ -71,7 +77,11 @@ public class Profil extends BusinessObject {
 	public enum Haarfarbe {
 	    A, B, C, D, E, F
 	  }
-	  
+	  /**
+	   * Zuweisung von String-Werten für das Enum Haarfarbe.
+	   * @param h
+	   * @return str
+	   */
 	  public static String word(Haarfarbe h) {
 	    String str ="";
 	    switch (h) {
@@ -103,7 +113,11 @@ public class Profil extends BusinessObject {
 	public enum Raucher {
 	    A, B, C, D, E
 	  }
-	  
+	  /**
+	   * Zuweisung von String-Werten für das Enum Raucher.
+	   * @param b
+	   * @return str
+	   */
 	  public static String word(Raucher b) {
 	    String str ="";
 	    switch (b) {
@@ -152,7 +166,7 @@ public class Profil extends BusinessObject {
 		
 	/**
 	 * Auslesen der Variable Vorname.
-	 * @return
+	 * @return vorname
 	 */
 	public String getVorname(){
 		return this.vorname;
@@ -160,7 +174,7 @@ public class Profil extends BusinessObject {
 	
 	/**
 	 * Auslesen der Variable Nachname.
-	 * @return
+	 * @return nachname
 	 */
 	public String getNachname(){
 		return this.nachname;
@@ -168,15 +182,15 @@ public class Profil extends BusinessObject {
 	
 	/**
 	 * Auslesen der Variable Geburtsdatum.
-	 * @return
+	 * @return geburtsdatum
 	 */
 	public Date getGeburtsdatum(){
 		return this.geburtsdatum;
 	}
 	
 	/**
-	 * Auslesen der Variable KÃ¶rpergrÃ¶sse.
-	 * @return
+	 * Auslesen der Variable Körpergröße
+	 * @return koerpergroesse
 	 */
 	public int getKoerpergroesse(){
 		return this.koerpergroesse;
@@ -185,7 +199,7 @@ public class Profil extends BusinessObject {
 	
 	/**
 	 * Auslesen der Variable Religion.
-	 * @return
+	 * @return religion
 	 */
 	public String getReligion(){
 		return this.religion;
@@ -230,7 +244,7 @@ public class Profil extends BusinessObject {
 	
 	
 	/**
-	 * Setzen der Variable KÃ¶rpergrÃ¶sse.
+	 * Setzen der Variable Körpergröße
 	 * @param koerpergroesse
 	 */
 	public void setKoerpergroesse(int koerpergroesse){
@@ -264,27 +278,45 @@ public class Profil extends BusinessObject {
 //					" Raucher: #" + Profil.getRaucher().values() +
 					" Geschlecht: #" + Profil.Geschlecht.values();
 	}
-
+	/**
+	 * Auslesen der Variable Geschlecht
+	 * @return geschlecht
+	 */
 	public String getGeschlecht() {
 		return geschlecht;
 	}
-
+	/**
+	 * Setzen der Variable Geschlecht
+	 * @param geschlecht
+	 */
 	public void setGeschlecht(String geschlecht) {
 		this.geschlecht = geschlecht;
 	}
-
+	/**
+	 * Auslesen der Variable Raucher
+	 * @return raucher
+	 */
 	public String getRaucher() {
 		return raucher;
 	}
-
+	/**
+	 * Setzen der Variable Raucher
+	 * @param raucher
+	 */
 	public void setRaucher(String raucher) {
-		raucher = raucher;
+		this.raucher = raucher;
 	}
-
+	/**
+	 * Auslesen der Variable Haarfarbe
+	 * @return haarfarbe
+	 */
 	public String getHaarfarbe() {
 		return haarfarbe;
 	}
-
+	/**
+	 * Setzen der Variable Haarfarbe
+	 * @param haarfarbe
+	 */
 	public void setHaarfarbe(String haarfarbe) {
 		this.haarfarbe = haarfarbe;
 	}

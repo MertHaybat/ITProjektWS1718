@@ -79,6 +79,7 @@ public class Aktivitaeten extends VerticalPanel {
 			}
 		});
 	}
+
 	
 	/**
 	 * Kontruktor für die Aktivitäten

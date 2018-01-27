@@ -97,6 +97,8 @@ public class Profil extends BusinessObject {
 	 * Variable Nachname im Profil; Gibt den Nachnamen der Person an.
 	 */
 	private String nachname = "";
+
+	private String raucher ="";
 	/**
 	 * Variable Raucher im Profil; Gibt an, ob die Person raucht oder nicht.
 	 */
@@ -122,7 +124,6 @@ public class Profil extends BusinessObject {
 	    return str;
 	  }
 
-	private String raucher ="";
 	/**
 	 * Auslesen der Variable nachname
 	 * @return
@@ -278,7 +279,7 @@ public class Profil extends BusinessObject {
 	}
 
 	public void setRaucher(String raucher) {
-		raucher = raucher;
+		this.raucher = raucher;
 	}
 
 	public String getHaarfarbe() {

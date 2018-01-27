@@ -24,6 +24,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * PartnerboerseAdministrationImpl ist die Implementierungsklasse des Interface
  * <code>PartnerboerseAdministration</code>. In dieser Klasse wird die Applikationslogik 
  * dargestellt. 
+ * @author Barut
  * @author Mustafi
  *
  */
@@ -102,7 +103,6 @@ implements PartnerboerseAdministration {
 	 * Diese Methode ist relevant, damit sie f�r jede Instanz von 
 	 * <code>PartnerboerseAdministrationImpl</code> aufgerufen werden kann.
 	 */
-	
 	
 	public void init() throws IllegalArgumentException{
 		/*
@@ -707,21 +707,19 @@ implements PartnerboerseAdministration {
 	/**
 	 * Diese Methode erzeugt ein neues Suchprofil.
 	 */
-	@Override
-		public Suchprofil createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße,
-				String raucher, String geschlecht, int minalter, int maxalter, int profilId) throws IllegalArgumentException{
-			
+	public Suchprofil createSuchprofil(Date geburtsdatum, int koerpergroesse, String religion,
+			String haarfarbe, String raucher, String geschlecht, int maxAlter, int minAlter, int profilId) throws IllegalArgumentException {
+
 			Suchprofil suchpro = new Suchprofil();
 			suchpro.setGeburtsdatum(geburtsdatum);
 			suchpro.setHaarfarbe(haarfarbe);
-			suchpro.setKoerpergroesse(körpergröße);
-			suchpro.setMaxAlter(maxalter);
-			suchpro.setMinAlter(minalter);
+			suchpro.setKoerpergroesse(koerpergroesse);
+			suchpro.setMaxAlter(maxAlter);
+			suchpro.setMinAlter(minAlter);
 			suchpro.setProfilId(profilId);
 			suchpro.setRaucher(raucher);
 			suchpro.setReligion(religion);
 			suchpro.setGeschlecht(geschlecht);
-			suchpro.setProfilId(profilId);
 			
 
 			return suchprofilMapper.insertSuchprofil(suchpro);
@@ -1149,12 +1147,8 @@ implements PartnerboerseAdministration {
 	 * @throws IllegalArgumentException
 	 */
 	public Vector<Besuch> getAllBesucheOf(Profil pro) throws IllegalArgumentException {
-		try {
 			return besuchMapper.getAllBesucheDesBesuchenden(pro);
-		} catch(Exception e){
-			
-		}
-		return null;
+		
 	}
 
 	/**
@@ -1285,7 +1279,7 @@ implements PartnerboerseAdministration {
 		
 			
 	}
-
+	
 	@Override
 	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil)
 			throws IllegalArgumentException {
@@ -1338,7 +1332,22 @@ implements PartnerboerseAdministration {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Aehnlichkeitsmass getAehnlicheUnbesuchteProfileVon(Profil pro){
+		Vector<Besuch> allUnvisitedProfils = this.getUnvisitedProfiles(pro);
+		for (Besuch b : allUnvisitedProfils){
+			
+		}
+		return null;
+	}
 
-
+	@Override
+	public Aehnlichkeitsmass getAehnlicheProfileVonSuchprofilen(Profil pro){
+		
+		return null;
+	}
 
 }
+
+

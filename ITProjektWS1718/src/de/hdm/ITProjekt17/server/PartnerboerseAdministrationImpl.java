@@ -786,7 +786,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		suchprofilMapper.deleteProfil(suchpro);
 	}
 	
-	public Profil getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException {
+	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException {
 		Vector<Profil> profiles = this.getAllProfils();
 		Vector<Info> suchprofilInfos = this.getAllInfoOf(suchpro);
 		
@@ -796,13 +796,13 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 			for(int j = 0; j < infosOfProfiles.size(); j++) {
 				for(int i = 0; i < suchprofilInfos.size(); i++) {
 					if(suchprofilInfos.elementAt(i) == infosOfProfiles.elementAt(j)) {
-						return profiles.elementAt(k);
+						profiles.add(profiles.elementAt(k)) ;
 					}
 				}
 			}
 		}
 		
-		return null;
+		return profiles;
 	}
 	
 	public Vector<Info> getAllInfoOf(Suchprofil suchpro) throws IllegalArgumentException {

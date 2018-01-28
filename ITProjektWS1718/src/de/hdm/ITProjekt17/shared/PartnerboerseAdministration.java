@@ -110,9 +110,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public void visit(Profil pro) throws IllegalArgumentException;
 	
 	public Vector<Info> getInfoIdByProfilId(Profil pro) throws IllegalArgumentException;
-
-
-
+	
+	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException;
 	
 	
 	

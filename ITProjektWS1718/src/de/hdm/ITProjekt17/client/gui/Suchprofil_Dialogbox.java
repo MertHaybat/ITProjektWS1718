@@ -1,5 +1,7 @@
 package de.hdm.ITProjekt17.client.gui;
 
+import java.util.Vector;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -35,7 +37,32 @@ public class Suchprofil_Dialogbox extends DialogBox{
 		
 		Button profileAnzeigen = new Button("Profile anzeigen");
 		Button suchprofilLöschen = new Button("Suchprofil löschen");
-	
+
+		profileAnzeigen.addClickHandler(new ClickHandler(){
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				hide();
+				final Profil_Tabelle p1 = new Profil_Tabelle();
+				
+				pbverwaltung.getAllProfilsOf(suchprofil, new AsyncCallback<Vector<Profil>>() {
+					
+					@Override
+					public void onSuccess(Vector<Profil> result) {
+						p1.setRowData(0, result);
+						p1.setRowCount(result.size(), true);
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+			}
+			
+		});
 //		profileAnzeigen.addClickHandler(new ClickHandler(){
 //
 //			@Override

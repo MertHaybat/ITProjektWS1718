@@ -191,4 +191,6 @@ public interface PartnerboerseAdministrationAsync {
 
 	void getAehnlicheProfileVonSuchprofilen(Profil pro, AsyncCallback<Vector<Aehnlichkeitsmass>> callback);
 
+	void getAllProfilsOf(Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
+
 }

@@ -83,7 +83,6 @@ public class InfoMapper {
  			if (rs.next()){
  				Info in = new Info();
  				in.setId(rs.getInt("id"));
- 				in.setText(rs.getString("text"));
  		        in.setProfilId(rs.getInt("profilid"));
  		        in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
  		        in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
@@ -126,7 +125,6 @@ return null;
         while (rs.next()) {
           Info in = new Info();
           in.setId(rs.getInt("id"));
-          in.setText(rs.getString("text"));
           in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
           in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
           in.setSuchprofilId(rs.getInt("suchprofilid"));
@@ -174,18 +172,20 @@ return null;
 				 * inkrementiert um 1
 				 */
 				in.setId(rs.getInt("maxid") + 1);
+				System.out.println("--------------------------" + in.getAuswahleigenschaftWert());
 				/**
 				 * Durchführen der Einfügeoperation via Prepared Statement
 				 */
 				PreparedStatement stmt1 = con.prepareStatement(
-						"INSERT INTO info (id, text, profilid, auswahlwert, freitextwert, suchprofilid) " + "VALUES (?,?,?,?,?,?) ",
+
+						"INSERT INTO info (id, profilid, auswahleigenschaftwert, freitexteigenschaftwert, auswahleigenschaftid, freitexteigenschaftid) " + "VALUES (?,?,?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);
 						stmt1.setInt(1, in.getId());
 						stmt1.setString(2, in.getText());
 						stmt1.setInt(3, in.getProfilId());
 						stmt1.setString(4, in.getAuswahleigenschaftWert());
 						stmt1.setString(5, in.getFreitexteigenschaftWert());
-						stmt1.setInt(6, in.getSuchprofilId());
+					
 						
 						stmt1.executeUpdate();
 			}
@@ -367,7 +367,9 @@ return null;
 	 * @return in
 	 */
 	public Info updateInfo(Info in) {
-		String sql = "UPDATE Info SET text=?, profilid=?, auswahleigenschaftid=?, freitexteigenschaftid=?, suchprofilid=? WHERE id=?";
+
+		String sql = "UPDATE Info SET profilid=?, auswahleigenschaftwert=?, freitexteigenschaftwert=?  WHERE id=?";
+
 		/**
 		 * Aufbau der Db Connection
 		 */
@@ -380,13 +382,10 @@ return null;
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setString(1, in.getText());
-			stmt.setInt(2, in.getProfilId());
-
-			stmt.setInt(3, in.getAuswahleigenschaftid());
-			stmt.setInt(4, in.getFreitexteigenschaftid());
-			stmt.setInt(5, in.getSuchprofilId());
-			stmt.setInt(6, in.getId());
+			stmt.setInt(1, in.getProfilId());
+			stmt.setString(2, in.getAuswahleigenschaftWert());
+			stmt.setString(3, in.getFreitexteigenschaftWert());
+			stmt.setInt(4, in.getId());
 
 			stmt.executeUpdate();
 
@@ -432,7 +431,6 @@ return null;
 	        
 
 	          info.setId(rs.getInt("id"));
-	          info.setText(rs.getString("text"));
 	          info.setProfilId(rs.getInt("profilid"));
 	          info.setAuswahleigenschaftWert(rs.getString("auswahleigenschaftwert"));
 	          info.setFreitexteigenschaftWert(rs.getString("freitexteigenschaftwert"));

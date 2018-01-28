@@ -20,7 +20,7 @@ import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
-public class Info extends VerticalPanel{
+public class Infoersatz extends VerticalPanel{
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 
@@ -49,7 +49,7 @@ public class Info extends VerticalPanel{
 
 	private VerticalPanel vpanel = new VerticalPanel();
 	
-	public Info(final Profil profil) {
+	public Infoersatz(final Profil profil) {
 		tbvorname.setValue(profil.getVorname());
 		tbnachname.setValue(profil.getNachname());
 		geburtsdatum.setValue(profil.getGeburtsdatum());

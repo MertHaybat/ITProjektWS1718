@@ -43,10 +43,7 @@ public class Suchprofil extends BusinessObject {
 	 */
 	private int maxAlter = 0;
 	
-	/**
-	 * Variable geburtsdatum gibt das Geburtsdatum des zusuchenden Teilnehmers.
-	 */
-	private Date geburtsdatum  ;
+
 	
 	/**
 	 * Variable koerpergroesse gibt die Körpergrösse des zusuchenden Teilneherms an.
@@ -183,13 +180,6 @@ public class Suchprofil extends BusinessObject {
 		maxAlter = maxA;
 	}
 	
-	/**
-	 * Setzen des Geburtsdatums eines Teilenhmers.
-	 * @param geburtsd
-	 */
-	public void setGeburtsdatum(Date geburtsd){
-		geburtsdatum = geburtsd;
-	}
 	
 	/**
 	 * Setzen der Körpergrösse eines zusuchenden Teilenhmers.
@@ -260,15 +250,7 @@ public class Suchprofil extends BusinessObject {
 	public int getMaxAlter(){
 		return maxAlter;
 	}
-	
-	/**
-	 * Abfragen des Geburtsdatums eines Teilnehmers.
-	 * @return geburtsdatum
-	 */
-	public Date getGeburtsdatum(){
-		return geburtsdatum;
-	}
-	
+
 	/**
 	 * Abfragen der Körpergrösse eines Teilnehmers.
 	 * @return koerpergroesse
@@ -317,7 +299,6 @@ public class Suchprofil extends BusinessObject {
 					"Profil-ID: #" + this.getId() +
 					" Min Alter: #" + this.getMinAlter() + 
 					" Max Alter: #" + this.getMaxAlter() + 
-					" Geburtsdatum: #" + this.getGeburtsdatum() + 
 					" Haarfarbe: #" + this.getHaarfarbe() + 
 					" Körpergröße: #" + this.getKoerpergroesse() + 
 					" Religion: #" + this.getReligion() + 

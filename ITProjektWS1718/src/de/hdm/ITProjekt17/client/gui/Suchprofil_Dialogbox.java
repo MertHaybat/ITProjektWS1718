@@ -64,11 +64,11 @@ public class Suchprofil_Dialogbox extends DialogBox{
 //			
 //		});  <---- Methode bearbeiten + Auf Profil_Tabelle Konstruktor mit Profil als Übergabeparameter anlegen
 		
-		suchprofilLöschen.addClickHandler(new ClickHandler(){
-
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
+//		suchprofilLöschen.addClickHandler(new ClickHandler(){
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
 //			pbverwaltung.deleteSuchprofil(suchprofil, new AsyncCallback<Suchprofil>(){
 //
 //				@Override
@@ -85,9 +85,9 @@ public class Suchprofil_Dialogbox extends DialogBox{
 //				}
 //				
 //			});
-			}
-			
-		});
+//			}
+//			
+//		});
 		
 		Label label = new Label("Möchten Sie die Suche starten oder das Suchprofil löschen?");
 

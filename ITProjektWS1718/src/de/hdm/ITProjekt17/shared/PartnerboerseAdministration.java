@@ -50,7 +50,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException;
 	public Vector <Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException;
 	
-	public Info createInfo(Profil pro, String eigenschaft, Auswahleigenschaft auswahleigenschaftwert, Freitexteigenschaft freitextwert) throws IllegalArgumentException;
+	public Info createInfo(String email, Integer auswahleigenschaftid, String freitexteigenschaftwert, String auswahleigenschaftwert) throws IllegalArgumentException;
 	public void save(Info in) throws IllegalArgumentException;
 	public void delete(Info in) throws IllegalArgumentException;
 	public void deleteInfoOf(Profil pro) throws IllegalArgumentException;
@@ -90,7 +90,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	
 	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) throws IllegalArgumentException;
 	
-	public Suchprofil createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße,
+	public Suchprofil createSuchprofil(String haarfarbe, String religion, int körpergröße,
 			String raucher, String geschlecht, int minalter, int maxalter, int profilId) throws IllegalArgumentException;
 	public Suchprofil save(Suchprofil such) throws IllegalArgumentException;
 	public void deleteSuchprofil(Profil pro) throws IllegalArgumentException;

@@ -81,13 +81,7 @@ public class Info extends BusinessObject{
 		return profilId;
 	}
 	
-	/**
-	 * Auslesen der SuchprofilId
-	 * @return suchprofilId
-	 */
-	public int getSuchprofilId(){
-		return suchprofilId;
-	}
+	
 	
 	/**
 	 * Auslesen des Textes
@@ -144,13 +138,6 @@ public class Info extends BusinessObject{
 		this.profilId = profilId;
 	}
 	
-	/**
-	 * Setzen einer SuchprofilId
-	 * @param suchprofilId
-	 */
-	public void setSuchprofilId(int suchprofilId){
-		this.suchprofilId = suchprofilId;
-	}
 	
 	/**
 	 * Setzen eines Texte's

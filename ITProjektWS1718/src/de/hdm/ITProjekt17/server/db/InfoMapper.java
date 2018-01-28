@@ -432,6 +432,12 @@ return null;
 	        
 
 	          info.setId(rs.getInt("id"));
+	          info.setText(rs.getString("text"));
+	          info.setProfilId(rs.getInt("profilid"));
+	          info.setAuswahleigenschaftWert(rs.getString("auswahleigenschaftwert"));
+	          info.setFreitexteigenschaftWert(rs.getString("freitexteigenschaftwert"));
+	          info.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+	          info.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
 	          /**
 	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 	           */

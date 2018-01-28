@@ -10,6 +10,10 @@
     <servlet-name>PartnerboerseServlet</servlet-name>
     <servlet-class>de.hdm.ITProjekt17.server.PartnerboerseAdministrationImpl</servlet-class>
   </servlet>
+   <servlet-mapping>
+    <servlet-name>PartnerboerseServlet</servlet-name>
+    <url-pattern>/itprojektws1718/partnerboerseadministration</url-pattern>
+  </servlet-mapping>
   
   <servlet>
   	<servlet-name>loginService</servlet-name>
@@ -20,26 +24,24 @@
   	<servlet-name>loginService</servlet-name>
   	<url-pattern>/itprojektws1718/login</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
+   <servlet-mapping>
+      <servlet-name>loginService</servlet-name>
+      <url-pattern>/reportgenerator/login</url-pattern>
+  </servlet-mapping>
+
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>ITProjektWS1718.html</welcome-file>
+    <welcome-file>ITProjektWS1718Report.html</welcome-file>
+  </welcome-file-list>
+    <servlet>
     <servlet-name>reportGeneratorServlet</servlet-name>
-    <servlet-class>de.hdm.ITProjekt17.server.ReportGeneratorImpl</servlet-class>
+    <servlet-class>de.hdm.ITProjekt17.server.report.ReportGeneratorImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
     <servlet-name>reportGeneratorServlet</servlet-name>
     <url-pattern>/itprojektws1718/reportgenerator</url-pattern>
-  </servlet-mapping>
-    
-  <servlet-mapping>
-    <servlet-name>PartnerboerseServlet</servlet-name>
-    <url-pattern>/itprojektws1718/partnerboerseadministration</url-pattern>
-  </servlet-mapping>
-  
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>ITProjektWS1718.html</welcome-file>
-  </welcome-file-list>
+  </servlet-mapping>	
 
 </web-app>

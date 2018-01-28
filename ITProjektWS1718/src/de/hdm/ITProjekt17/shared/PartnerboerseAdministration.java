@@ -93,7 +93,6 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Suchprofil createSuchprofil(String haarfarbe, String religion, int körpergröße,
 			String raucher, String geschlecht, int minalter, int maxalter, int profilId) throws IllegalArgumentException;
 	public Suchprofil save(Suchprofil such) throws IllegalArgumentException;
-	public void deleteSuchprofil(Profil pro) throws IllegalArgumentException;
 	public Suchprofil findByKey1(int id) throws IllegalArgumentException;
 	public Vector <Suchprofil> getAllSuchprofil () throws IllegalArgumentException;
 	public Vector <Suchprofil> findSuchprofilByProfilId(Profil pro);
@@ -112,7 +111,9 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector<Info> getInfoIdByProfilId(Profil pro) throws IllegalArgumentException;
 	
 	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException;
-	
+	public void delete(Suchprofil suchpro) throws IllegalArgumentException;
+
+	void deleteSuchprofil(Suchprofil pro) throws IllegalArgumentException;
 	
 	
 }

@@ -147,7 +147,7 @@ public interface PartnerboerseAdministrationAsync {
 
 	void save(Suchprofil such, AsyncCallback<Suchprofil> callback);
 
-	void deleteSuchprofil(Profil pro, AsyncCallback<Void> callback);
+	void deleteSuchprofil(Suchprofil pro, AsyncCallback<Void> callback);
 	
 	void findByKey1(int id, AsyncCallback<Suchprofil> callback);
 
@@ -192,5 +192,7 @@ public interface PartnerboerseAdministrationAsync {
 	void getAehnlicheProfileVonSuchprofilen(Profil pro, AsyncCallback<Vector<Aehnlichkeitsmass>> callback);
 
 	void getAllProfilsOf(Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
+
+	void delete(Suchprofil suchpro, AsyncCallback<Void> callback);
 
 }

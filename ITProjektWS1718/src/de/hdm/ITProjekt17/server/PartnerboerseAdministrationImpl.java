@@ -159,6 +159,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 	}
 
+	
 	/**
 	 * L�schen der Auswahleigenschaft. Dabei wird die Referenz zu Info auch
 	 * gel�scht.
@@ -749,32 +750,15 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	// Vergleiche deleteProfil(AP-Schicht)!!!!!!!!!!!!!!!!!
-	@Override
+	
 	/**
 	 * Hier wird das Suchprofil gelÃ¶scht Um das Suchprofil zu lÃ¶schen, mÃ¼ssen
 	 * erst die Daten aus der Tabelle Suchprofil_Info gelÃ¶scht werden um das
 	 * Suchprofil lÃ¶schen zu kÃ¶nnen
 	 */
-	public void deleteSuchprofil(Profil pro) throws IllegalArgumentException {
-		Vector<Suchprofil> suchprofil = getSuchprofilbyProfilId(pro);
-		Vector<Info> info = getInfoIdByProfilId(pro);
-		Suchprofil_Info suchinfo = new Suchprofil_Info();
-
-		for (int s = 0; s < suchprofil.size(); s++) {
-			for (int i = 0; i < info.size(); i++) {
-				suchinfo = getAllSuchprofilInfos(info.elementAt(i), suchprofil.elementAt(i));
-
-			}
-
-			suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
-		}
-
-		Vector<Suchprofil> suchpro = getSuchprofilbyProfilId(pro);
-
-		for (int i = 0; i < suchpro.size(); i++) {
-			suchprofilMapper.deleteProfil(suchpro.elementAt(i));
-
-		}
+	@Override
+	public void deleteSuchprofil(Suchprofil pro) throws IllegalArgumentException {
+			suchprofilMapper.deleteProfil(pro);
 
 	}
 	

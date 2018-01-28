@@ -66,8 +66,7 @@ public interface PartnerboerseAdministrationAsync {
 
 	void getAllFreitexteigenschaft(AsyncCallback<Vector<Freitexteigenschaft>> callback);
 	
-//_________________________________________________________________________________________________________________________
-	void createInfo(Profil pro, String eigenschaft, Auswahleigenschaft auswahleigenschaftwert, Freitexteigenschaft freitextwert, AsyncCallback<Info> callback);
+	void createInfo(String email, Integer auswahleigenschaftid, String freitexteigenschaftwert, String auswahleigenschaftwert, AsyncCallback<Info> asyncCallback);
 
 	void save(Info in, AsyncCallback<Void> callback);
 
@@ -143,7 +142,7 @@ public interface PartnerboerseAdministrationAsync {
 	void pruefenAufExistenz(String email, AsyncCallback<Profil> callback);
 	
 		
-	void createSuchprofil(Date geburtsdatum, String haarfarbe, String religion, int körpergröße,
+	void createSuchprofil(String haarfarbe, String religion, int körpergröße,
 			String raucher, String geschlecht, int minalter, int maxalter, int profilId, AsyncCallback<Suchprofil> callback);
 
 	void save(Suchprofil such, AsyncCallback<Suchprofil> callback);

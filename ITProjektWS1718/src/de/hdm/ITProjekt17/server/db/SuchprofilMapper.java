@@ -76,19 +76,18 @@ public class SuchprofilMapper {
 				    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 				    	  	 */
 				    	  		PreparedStatement stmt1 = con.prepareStatement(
-				    	  				"INSERT INTO suchprofil (id, minalter, maxalter, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht, profilid) "
-				    	  				+ "VALUES (?,?,?,?,?,?,?,?,?,?) ",
+				    	  				"INSERT INTO suchprofil (id, minalter, maxalter, koerpergroesse, religion, haarfarbe, raucher, geschlecht, profilid) "
+				    	  				+ "VALUES (?,?,?,?,?,?,?,?,?) ",
 				    	  				Statement.RETURN_GENERATED_KEYS);
 				    	  				stmt1.setInt(1, such.getId());
 				    	  				stmt1.setInt(2, such.getMinAlter());
 				    	  				stmt1.setInt(3, such.getMaxAlter());
-				    	  				stmt1.setDate(4, (Date) such.getGeburtsdatum());
-				    	  				stmt1.setInt(5, such.getKoerpergroesse());
-				    	  				stmt1.setString(6, such.getReligion());
-				    	  				stmt1.setString(7, such.getHaarfarbe());
-				    	  				stmt1.setString(8, such.getRaucher());
-				    	  				stmt1.setString(9, such.getGeschlecht());
-				    	  				stmt1.setInt(10, such.getProfilId());
+				    	  				stmt1.setInt(4, such.getKoerpergroesse());
+				    	  				stmt1.setString(5, such.getReligion());
+				    	  				stmt1.setString(6, such.getHaarfarbe());
+				    	  				stmt1.setString(7, such.getRaucher());
+				    	  				stmt1.setString(8, such.getGeschlecht());
+				    	  				stmt1.setInt(9, such.getProfilId());
 				    	  				
 				    	  				stmt1.executeUpdate();
 				      }
@@ -135,7 +134,7 @@ public class SuchprofilMapper {
 			 * @return such
 			 */
 			 public Suchprofil updateProfil(Suchprofil such) {
-				 	String sql = "UPDATE suchprofil SET  minalter=?, maxalter=?, geburtsdatum=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=? WHERE id=?";
+				 	String sql = "UPDATE suchprofil SET  minalter=?, maxalter=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=? WHERE id=?";
 				 /**
 				 	 * Aufbau der Db Connection
 				 	 */
@@ -152,7 +151,6 @@ public class SuchprofilMapper {
 				    	
 				    	stmt.setInt(1, such.getMinAlter());
 				    	stmt.setInt(2, such.getMaxAlter());
-				    	stmt.setDate(3, (Date) such.getGeburtsdatum());
 				    	stmt.setInt(4, such.getKoerpergroesse());
 				    	stmt.setString(5, such.getReligion());
 				    	stmt.setString(6, such.getHaarfarbe());
@@ -201,7 +199,6 @@ public class SuchprofilMapper {
 					          suchp.setId(rs.getInt("id"));
 					          suchp.setMinAlter(rs.getInt("minalter"));
 					          suchp.setMaxAlter(rs.getInt("maxalter"));
-					          suchp.setGeburtsdatum(rs.getDate("geburtsdatum"));
 					          suchp.setKoerpergroesse(rs.getInt("koerpergroesse"));
 					          suchp.setReligion(rs.getString("religion"));
 					          suchp.setHaarfarbe(rs.getString("haarfarbe"));
@@ -255,7 +252,6 @@ public class SuchprofilMapper {
 					          such.setId(rs.getInt("id"));
 					          such.setMinAlter(rs.getInt("minalter"));
 					          such.setMaxAlter(rs.getInt("maxalter"));
-					          such.setGeburtsdatum(rs.getDate("geburtsdatum"));
 					          such.setKoerpergroesse(rs.getInt("koerpergroesse"));
 					          such.setReligion(rs.getString("religion"));
 					          such.setHaarfarbe(rs.getString("haarfarbe"));
@@ -292,12 +288,11 @@ public class SuchprofilMapper {
 					        /**
 					         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
 					         */
-					       if (rs.next()) {
+					       while (rs.next()) {
 					        	Suchprofil such = new Suchprofil();
 						          such.setId(rs.getInt("id"));
 						          such.setMinAlter(rs.getInt("minalter"));
 						          such.setMaxAlter(rs.getInt("maxalter"));
-						          such.setGeburtsdatum(rs.getDate("geburtsdatum"));
 						          such.setKoerpergroesse(rs.getInt("koerpergroesse"));
 						          such.setReligion(rs.getString("religion"));
 						          such.setHaarfarbe(rs.getString("haarfarbe"));

@@ -218,7 +218,7 @@ return null;
 	 * @return frei
 	 */
 	public Freitexteigenschaft updateFreitexteigenschaft(Freitexteigenschaft frei) {
-		String sql = "UPDATE freitexteigenschaft SET  wert=?, eigenschaftid=? WHERE id=?";
+		String sql = "UPDATE freitexteigenschaft SET wert=? WHERE id=?";
 		/**
 		 * Aufbau der Db Connection
 		 */
@@ -233,7 +233,7 @@ return null;
 
 			stmt.setString(1, frei.getWert());
 
-			stmt.setInt(3, frei.getId());
+			stmt.setInt(2, frei.getId());
 			stmt.executeUpdate();
 
 			System.out.println("Updated");

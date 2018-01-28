@@ -2,6 +2,7 @@ package de.hdm.ITProjekt17.client.gui;
 
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -218,9 +219,6 @@ public class Profilseite extends VerticalPanel{
 									RootPanel.get("Details").clear();
 									RootPanel.get("Details").add(new Profilseite(result));
 								}
-
-							
-						
 					});
 				}
 				
@@ -230,6 +228,11 @@ public class Profilseite extends VerticalPanel{
 		RootPanel.get("Details").clear();
 		RootPanel.get("Details").add(this);
 	}
+	private Auswahleigenschaft a = new Auswahleigenschaft();
+	private Auswahleigenschaft b = new Auswahleigenschaft();
+	private Auswahleigenschaft c = new Auswahleigenschaft();
+	private Auswahleigenschaft d = new Auswahleigenschaft();
+	private Freitexteigenschaft e = new Freitexteigenschaft();
 	
 	public Profilseite(final Profil profil){
 		ft1.setWidget(1, 0, lb1);
@@ -351,14 +354,14 @@ public class Profilseite extends VerticalPanel{
 			lbraucher.setSelectedIndex(0);
 		}
 		else if(profil.getRaucher()==Profil.word(b2)){
-			lbgeschlecht.setSelectedIndex(1);
+			lbraucher.setSelectedIndex(1);
 		}
 		else if(profil.getRaucher()==Profil.word(b3)){
-			lbgeschlecht.setSelectedIndex(2);
+			lbraucher.setSelectedIndex(2);
 		}else if(profil.getRaucher()==Profil.word(b4)){
-			lbgeschlecht.setSelectedIndex(3);
+			lbraucher.setSelectedIndex(3);
 		}else if(profil.getRaucher()==Profil.word(b5)){
-			lbgeschlecht.setSelectedIndex(4);
+			lbraucher.setSelectedIndex(4);
 		}
 		
 		
@@ -392,84 +395,126 @@ public class Profilseite extends VerticalPanel{
 		
 		//Interesse
 		if(lbinteresse.getSelectedIndex()==0){
-			Auswahleigenschaft a = new Auswahleigenschaft();
 			a.setWert("Frauen");
 		}
 		else if(lbinteresse.getSelectedIndex()==1){
-			Auswahleigenschaft b = new Auswahleigenschaft();
-			b.setWert("Männer");
+			a.setWert("Männer");
 		}
 		else if(lbinteresse.getSelectedIndex()==2){
-			Auswahleigenschaft c = new Auswahleigenschaft();
-			c.setWert("Beides");
+			a.setWert("Beides");
 		}
 		
 		//Wohnsituation
 		if(lbwohnsituation.getSelectedIndex()==0){
-			Auswahleigenschaft a = new Auswahleigenschaft();
-			a.setWert("Bei den Eltern");
+			b.setWert("Bei den Eltern");
 		}
 		else if(lbwohnsituation.getSelectedIndex()==1){
-			Auswahleigenschaft b = new Auswahleigenschaft();
 			b.setWert("Alleine");
 		}
 		else if(lbwohnsituation.getSelectedIndex()==2){
-			Auswahleigenschaft c = new Auswahleigenschaft();
-			c.setWert("In einer WG");
+			b.setWert("In einer WG");
 		}
 		else if(lbwohnsituation.getSelectedIndex()==3){
-			Auswahleigenschaft d = new Auswahleigenschaft();
-			d.setWert("Im Wohnheim");
+			b.setWert("Im Wohnheim");
 		}
 		
 		//Ausbildung
 		if(lbausbildung.getSelectedIndex()==0){
-			Auswahleigenschaft a = new Auswahleigenschaft();
-			a.setWert("Kein Abschluss");
+			c.setWert("Kein Abschluss");
 		}
 		else if(lbausbildung.getSelectedIndex()==1){
-			Auswahleigenschaft b = new Auswahleigenschaft();
-			b.setWert("Schüler");
+			c.setWert("Schüler");
 		}
 		else if(lbausbildung.getSelectedIndex()==2){
-			Auswahleigenschaft c = new Auswahleigenschaft();
 			c.setWert("Student");
 		}
 		else if(lbausbildung.getSelectedIndex()==3){
-			Auswahleigenschaft d = new Auswahleigenschaft();
-			d.setWert("Absolvent");
+			c.setWert("Absolvent");
 		}
 				
 		//Körperbau
 		if(lbkörperbau.getSelectedIndex()==0){
-			Auswahleigenschaft a = new Auswahleigenschaft();
-			a.setWert("dünn");
+			d.setWert("dünn");
 		}
 		else if(lbkörperbau.getSelectedIndex()==1){
-			Auswahleigenschaft b = new Auswahleigenschaft();
-			b.setWert("durchschnittlich");
+			d.setWert("durchschnittlich");
 		}
 		else if(lbkörperbau.getSelectedIndex()==2){
-			Auswahleigenschaft c = new Auswahleigenschaft();
-			c.setWert("sportlich");
+			d.setWert("sportlich");
 		}
 		else if(lbkörperbau.getSelectedIndex()==3){
-			Auswahleigenschaft d = new Auswahleigenschaft();
 			d.setWert("muskulös");
 		}
 		else if(lbkörperbau.getSelectedIndex()==4){
-			Auswahleigenschaft e = new Auswahleigenschaft();
-			e.setWert("mollig");
+			d.setWert("mollig");
 		}
 		else if(lbkörperbau.getSelectedIndex()==5){
-			Auswahleigenschaft f = new Auswahleigenschaft();
-			f.setWert("dick");
+			d.setWert("dick");
 		}
+		
+		löschen.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+				pbverwaltung.delete(profil, new AsyncCallback<Void>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						Window.alert("Profil wurde erfolgreich gelöscht. Starten Sie die Seite neu.");
+						RootPanel.get("Navigator").clear();
+						RootPanel.get("Details").clear();
+					}
+					
+				});
+				
+			}
+			
+		});
+		abbrechen.addClickHandler(new ClickHandler(){
+
+			@Override
+			public void onClick(ClickEvent event) {
+			RootPanel.get("Details").clear();
+			RootPanel.get("Details").add(new Profilseite(profil));
+				
+			}
+			
+		});
 		ok.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {
-				
+				profil.setGeburtsdatum(geburtsdatum.getValue());
+				profil.setGeschlecht(lbgeschlecht.getSelectedValue());
+				profil.setHaarfarbe(lbhaarfarbe.getSelectedValue());
+				profil.setKoerpergroesse(Integer.parseInt(tbkörpergröße.getValue()));
+				profil.setNachname(tbnachname.getValue());
+				profil.setRaucher(lbraucher.getSelectedValue());
+				profil.setReligion(tbreligion.getValue());
+				profil.setVorname(tbvorname.getValue());
+				pbverwaltung.save(profil, new AsyncCallback<Void>(){
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						RootPanel.get("Details").clear();
+						RootPanel.get("Details").add(new Profilseite(profil));
+						
+						}
+					
+				});		
+//				pbverwaltung.createInfo(profil, "Freitexteigenschaft", auswahleigenschaftwert, freitextwert, callback);
 			}
 			
 		});

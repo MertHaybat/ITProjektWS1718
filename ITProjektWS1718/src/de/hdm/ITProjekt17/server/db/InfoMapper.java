@@ -14,6 +14,7 @@ import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
+import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
 /**
  * 
@@ -41,8 +42,8 @@ public class InfoMapper {
 	/**
 	 * Kann aufgerufen werden durch InfoMapper.infoMapper. Sie stellt die
 	 * Singleton-Eigenschaft sicher.
-	 * 
-	 * @return Das "InfoMapper-Objekt".
+	 *  Methode soll nur über diese statische Methode aufgerufen werden
+	 * @return infoMapper
 	 * @see InfoMapper
 	 */
 	public static InfoMapper infoMapper() {
@@ -86,6 +87,7 @@ public class InfoMapper {
  		        in.setProfilId(rs.getInt("profilid"));
  		        in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
  		        in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
+ 		        in.setSuchprofilId(rs.getInt("suchprofilid"));
  		        
  				return in;
  			}
@@ -127,6 +129,7 @@ return null;
           in.setText(rs.getString("text"));
           in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
           in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
+          in.setSuchprofilId(rs.getInt("suchprofilid"));
           in.setProfilId(rs.getInt("profilid"));
           /**
            *  Hinzufügen des neuen Objekts zum Ergebnisvektor
@@ -175,13 +178,14 @@ return null;
 				 * Durchführen der Einfügeoperation via Prepared Statement
 				 */
 				PreparedStatement stmt1 = con.prepareStatement(
-						"INSERT INTO info (id, text, profilid, auswahlwert, freitextwert) " + "VALUES (?,?,?,?,?) ",
+						"INSERT INTO info (id, text, profilid, auswahlwert, freitextwert, suchprofilid) " + "VALUES (?,?,?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);
 						stmt1.setInt(1, in.getId());
 						stmt1.setString(2, in.getText());
 						stmt1.setInt(3, in.getProfilId());
 						stmt1.setString(4, in.getAuswahleigenschaftWert());
 						stmt1.setString(5, in.getFreitexteigenschaftWert());
+						stmt1.setInt(6, in.getSuchprofilId());
 						
 						stmt1.executeUpdate();
 			}
@@ -328,6 +332,32 @@ return null;
 			e2.printStackTrace();
 		}
 	}
+	/**
+	 * Löschen der Referenz zwischen den Objekten Info und Suchprofil in der Datenbank
+	 * 
+	 * @param frei
+	 */
+	public void deleteInfoOf(Suchprofil such) {
+		/**
+		 * Aufbau der DB Connection
+		 */
+		Connection con = DBConnection.connection();
+		/**
+		 * Try und Catch gehören zum Exception Handling Try = Versuch erst dies
+		 * Catch = Wenn Try nicht geht versuch es so ..
+		 */
+		try {
+			/**
+			 * Durchführung der Löschoperation
+			 */
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE suchprofilid= ? ");
+			stmt.setInt(1, such.getId());
+			stmt.executeUpdate();
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Erneutes schreiben in die Datenbank um das Info Objekt zu
@@ -337,7 +367,7 @@ return null;
 	 * @return in
 	 */
 	public Info updateInfo(Info in) {
-		String sql = "UPDATE Info SET text=?, profilid=?, auswahleigenschaftid=?, freitexteigenschaftid=? WHERE id=?";
+		String sql = "UPDATE Info SET text=?, profilid=?, auswahleigenschaftid=?, freitexteigenschaftid=?, suchprofilid=? WHERE id=?";
 		/**
 		 * Aufbau der Db Connection
 		 */
@@ -355,7 +385,8 @@ return null;
 
 			stmt.setInt(3, in.getAuswahleigenschaftid());
 			stmt.setInt(4, in.getFreitexteigenschaftid());
-			stmt.setInt(5, in.getId());
+			stmt.setInt(5, in.getSuchprofilId());
+			stmt.setInt(6, in.getId());
 
 			stmt.executeUpdate();
 
@@ -401,6 +432,12 @@ return null;
 	        
 
 	          info.setId(rs.getInt("id"));
+	          info.setText(rs.getString("text"));
+	          info.setProfilId(rs.getInt("profilid"));
+	          info.setAuswahleigenschaftWert(rs.getString("auswahleigenschaftwert"));
+	          info.setFreitexteigenschaftWert(rs.getString("freitexteigenschaftwert"));
+	          info.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+	          info.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
 	          /**
 	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 	           */

@@ -31,7 +31,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 
 public class BesuchMapper {
 
-	private static BesuchMapper BesuchMapper = null;
+	private static BesuchMapper besuchMapper = null;
 	
 	protected BesuchMapper() {
 
@@ -44,16 +44,16 @@ public class BesuchMapper {
 	 * eine einzige Instanz von <code>BesuchMapper</code> existiert.
 	 * <p>
 	 * 
-	 * @return Das einzige <code>BesuchMapper</code>-Objekt.
+	 * @return BesuchMapper
 	 * @see BesuchMapper
 	 */
 
 	public static BesuchMapper besuchMapper() {
-		if (BesuchMapper == null) {
-			BesuchMapper = new BesuchMapper();
+		if (besuchMapper == null) {
+			besuchMapper = new BesuchMapper();
 		}
 
-		return BesuchMapper;
+		return besuchMapper;
 	}
 
 	/**

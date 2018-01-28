@@ -53,6 +53,11 @@ public class Info extends BusinessObject{
 	private int auswahleigenschaftid = 0;
 	
 	/**
+	 * Variable suchprofilid ist die ID von suchprofil als FS
+	 */
+	private int suchprofilid = 0;
+	
+	/**
 	 * Konstruktor
 	 */
 	public Info(){
@@ -122,7 +127,13 @@ public class Info extends BusinessObject{
 		return freitextwert;
 	}	
 	
-	
+	/**
+	 * Auslesen der Suchprofil Id
+	 * @return profilId
+	 */
+	public int getSuchprofilId(){
+		return suchprofilid;
+	}
 	//------------------------Set-Methoden---------------------------
 	
 	/**
@@ -179,6 +190,14 @@ public class Info extends BusinessObject{
 		this.freitextwert = freitextwert;
 	}
 	
+	/**
+	 * Setzen einer Suchprofil Id
+	 * @param suchprofilid
+	 */
+	public void setSuchprofilId(int suchprofilid){
+		this.suchprofilid = suchprofilid;
+	}
+	
 	/*
 	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
 	 */
@@ -190,7 +209,8 @@ public class Info extends BusinessObject{
 					" Auswahlwert: #" + this.getAuswahleigenschaftWert() +
 					" Freitextwert: #" + this.getFreitexteigenschaftWert() +
 					" Freitexteigenschaft-Id: #" + this.getFreitexteigenschaftid() +
-					" Auswahleigenschaft-Id: #" + this.getAuswahleigenschaftid();
+					" Auswahleigenschaft-Id: #" + this.getAuswahleigenschaftid() +
+					" Suchprofil-Id: #" + this.getSuchprofilId();
 	}
 	
 	

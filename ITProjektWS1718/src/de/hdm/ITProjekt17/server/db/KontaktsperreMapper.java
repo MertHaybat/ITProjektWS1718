@@ -34,7 +34,8 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 			/**
 			 * Kann aufgerufen werden durch KontaktsperreMapper.kontaktsperreMapper. Sie stellt die
 			 * Singleton-Eigenschaft sicher.
-			 * @return Das "KontaktsperreMapper-Objekt".
+			 *  Methode soll nur über diese statische Methode aufgerufen werden
+			 * @return kontaktsperreMapper
 			 * @see KontaktsperreMapper
 			 */
 			public static KontaktsperreMapper kontaktsperreMapper(){

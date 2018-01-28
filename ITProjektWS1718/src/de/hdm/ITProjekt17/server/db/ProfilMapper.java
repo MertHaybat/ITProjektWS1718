@@ -33,7 +33,8 @@ public class ProfilMapper {
 	/**
 	 * Kann aufgerufen werden durch ProfilMapper.profilMapper. Sie stellt die
 	 * Singleton-Eigenschaft sicher.
-	 * @return Das "ProfilMapper-Objekt".
+	 * Methode soll nur über diese statische Methode aufgerufen werden
+	 * @return profilMapper
 	 * @see profilMapper
 	 */
 	public static ProfilMapper profilMapper(){
@@ -145,7 +146,8 @@ public class ProfilMapper {
 	 */
 	 public Profil updateProfil(Profil pro) {
 		 	String sql = "UPDATE profil SET  email=?, vorname=?, nachname=?, geburtsdatum=?, koerpergroesse=?, religion=?, haarfarbe=?, raucher=?, geschlecht=? WHERE id=?";
-		 /**
+		 	java.sql.Date sqlDate = new java.sql.Date(pro.getGeburtsdatum().getTime());
+		 	/**
 		 	 * Aufbau der Db Connection
 		 	 */
 		    Connection con = DBConnection.connection();
@@ -161,7 +163,7 @@ public class ProfilMapper {
 		    	stmt.setString(1, pro.getEmail());
 		    	stmt.setString(2, pro.getVorname());
 		    	stmt.setString(3, pro.getNachname());
-		    	stmt.setDate(4, (Date) pro.getGeburtsdatum());
+		    	stmt.setDate(4, sqlDate);
 		    	stmt.setInt(5, pro.getKoerpergroesse());
 		    	stmt.setString(6, pro.getReligion());
 		    	stmt.setString(7, pro.getHaarfarbe());

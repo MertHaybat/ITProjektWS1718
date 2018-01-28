@@ -44,16 +44,11 @@ public class AuswahleigenschaftMapper {
 	 * Kann aufgerufen werden durch
 	 * AuswahleigenschaftMapper.auswahleigenschaftMapper. Sie stellt die
 	 * Singleton-Eigenschaft sicher.
-	 * 
-	 * @return Das "AuswahleigenschaftMapper-Objekt".
+	 * Methode soll nur über diese statische Methode aufgerufen werden
+	 * @return auswahleigenschaftMapper
 	 * @see AuswahleigenschaftMapper
 	 */
 
-	/**
-	 * Diese Methode gibt den auswahleigenschaftMapper zurück
-	 * 
-	 * @return auswahleigenschaftMapper
-	 */
 	public static AuswahleigenschaftMapper auswahleigenschaftMapper() {
 		if (auswahleigenschaftMapper == null) {
 			auswahleigenschaftMapper = new AuswahleigenschaftMapper();

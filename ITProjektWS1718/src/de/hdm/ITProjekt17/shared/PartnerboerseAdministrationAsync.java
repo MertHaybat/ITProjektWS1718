@@ -67,7 +67,7 @@ public interface PartnerboerseAdministrationAsync {
 	void getAllFreitexteigenschaft(AsyncCallback<Vector<Freitexteigenschaft>> callback);
 	
 //_________________________________________________________________________________________________________________________
-	void createInfo(Profil pro, String eigenschaft, String auswahlwert, String freitextwert, AsyncCallback<Info> callback);
+	void createInfo(Profil pro, String eigenschaft, Auswahleigenschaft auswahleigenschaftwert, Freitexteigenschaft freitextwert, AsyncCallback<Info> callback);
 
 	void save(Info in, AsyncCallback<Void> callback);
 

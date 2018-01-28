@@ -35,7 +35,8 @@ public class MerkzettelMapper {
 		/**
 		 * Kann aufgerufen werden durch MerkzettelMapper.merkzettelMapper. Sie stellt die
 		 * Singleton-Eigenschaft sicher.
-		 * @return Das "MerkzettelMapper-Objekt".
+		 *  Methode soll nur über diese statische Methode aufgerufen werden
+		 * @return merkzettelMapper-Objekt
 		 * @see MerkzettelMapper
 		 */
 		public static MerkzettelMapper merkzettelMapper(){

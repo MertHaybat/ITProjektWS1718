@@ -284,7 +284,6 @@ implements PartnerboerseAdministration {
 		
 		Freitexteigenschaft frei = new Freitexteigenschaft();
 		frei.setWert(wert);
-		
 		frei.setId(1);
 		return this.freitexteigenschaftMapper.insertFreitexteigenschaft(frei);
 	}
@@ -376,14 +375,13 @@ implements PartnerboerseAdministration {
 	 * </p>
 	 */
 	@Override
-	public Info createInfo(Profil pro, String eigenschaft, String auswahlwert, String freitextwert) throws IllegalArgumentException {
+	public Info createInfo(Profil pro, String eigenschaft, Auswahleigenschaft auswahleigenschaftwert, Freitexteigenschaft freitextwert) throws IllegalArgumentException {
 		
 		Info in = new Info();
 		in.setProfilId(pro.getId());
 		in.setText(eigenschaft);
-		in.setAuswahleigenschaftWert(auswahlwert);
-		in.setFreitexteigenschaftWert(freitextwert);
-		
+		in.setAuswahleigenschaftWert(auswahleigenschaftwert.getWert());
+		in.setFreitexteigenschaftWert(freitextwert.getWert());
 		in.setId(1);
 		return this.infoMapper.insertInfo(in);
 	}
@@ -963,8 +961,13 @@ implements PartnerboerseAdministration {
 		    pro.setHaarfarbe(haarfarbe);
 		    pro.setGeschlecht(geschlecht);
 		    pro.setRaucher(raucher);
-		  
 		    pro.setId(1);
+		    
+		    createFreitexteigenschaft("Freitexteigenschaft");
+		    createAuswahleigenschaft("Interessiert an");
+		    createAuswahleigenschaft("Wohnsituation");
+		    createAuswahleigenschaft("Ausbildung");
+		    createAuswahleigenschaft("Körperbau");
 		    
 		    return this.profilMapper.insertProfil(pro);
 		    

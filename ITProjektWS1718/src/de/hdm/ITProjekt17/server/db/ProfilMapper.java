@@ -33,7 +33,8 @@ public class ProfilMapper {
 	/**
 	 * Kann aufgerufen werden durch ProfilMapper.profilMapper. Sie stellt die
 	 * Singleton-Eigenschaft sicher.
-	 * @return Das "ProfilMapper-Objekt".
+	 * Methode soll nur über diese statische Methode aufgerufen werden
+	 * @return profilMapper
 	 * @see profilMapper
 	 */
 	public static ProfilMapper profilMapper(){

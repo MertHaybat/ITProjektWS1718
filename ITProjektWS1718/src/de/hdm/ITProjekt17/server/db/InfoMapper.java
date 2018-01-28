@@ -42,8 +42,8 @@ public class InfoMapper {
 	/**
 	 * Kann aufgerufen werden durch InfoMapper.infoMapper. Sie stellt die
 	 * Singleton-Eigenschaft sicher.
-	 * 
-	 * @return Das "InfoMapper-Objekt".
+	 *  Methode soll nur über diese statische Methode aufgerufen werden
+	 * @return infoMapper
 	 * @see InfoMapper
 	 */
 	public static InfoMapper infoMapper() {

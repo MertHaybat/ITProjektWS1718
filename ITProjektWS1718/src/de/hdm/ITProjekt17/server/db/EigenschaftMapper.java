@@ -38,8 +38,8 @@ public class EigenschaftMapper {
 	/**
 	 * Kann aufgerufen werden durch EigenschaftMapper.eigenschaftMapper. Sie
 	 * stellt die Singleton-Eigenschaft sicher.
-	 * 
-	 * @return Das "EigenschaftMapper-Objekt".
+	 * Methode soll nur über diese statische Methode aufgerufen werden
+	 * @return eigenschaftMapper
 	 * @see EigenschaftMapper
 	 */
 	public static EigenschaftMapper eigenschaftMapper() {

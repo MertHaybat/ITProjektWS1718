@@ -40,8 +40,8 @@ public class FreitexteigenschaftMapper {
 	 * Kann aufgerufen werden durch
 	 * FreitexteigenschaftMapper.freitexteigenschaftMapper. Sie stellt die
 	 * Singleton-Eigenschaft sicher.
-	 * 
-	 * @return Das "FreitexteigenschaftMapper-Objekt".
+	 * Methode soll nur über diese statische Methode aufgerufen werden
+	 * @return freitexteigenschaftMapper
 	 * @see FreitexteigenschaftMapper
 	 */
 	public static FreitexteigenschaftMapper freitexteigenschaftMapper() {

@@ -33,8 +33,9 @@ public class Suchprofil_InfoMapper {
 		/**
 		 * Kann aufgerufen werden durch SuchprofilMapper.suchprofilMapper. Sie stellt die
 		 * Singleton-Eigenschaft sicher.
-		 * @return Das "SuchprofilMapper-Objekt".
-		 * @see SuchprofilMapper
+		 * Methode soll nur über diese statische Methode aufgerufen werden
+		 * @return suchprofil_InfoMapper
+		 * @see Suchprofil_InfoMapper
 		 */
 		public static Suchprofil_InfoMapper suchprofil_InfoMapper(){
 			if (suchprofil_InfoMapper == null){

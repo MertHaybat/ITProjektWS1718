@@ -23,6 +23,11 @@ public class Info extends BusinessObject{
 	private int profilId = 0;
 	
 	/**
+	 * Variable suchprofilId ist dei Id des Suchprofil's (Fremdschl�ssel!!!)
+	 */
+	private int suchprofilId = 0;
+	
+	/**
 	 * Variable text steht für die Eigenschaft, die für das Profil eingegeben werden kann.
 	 */
 	private String text ="";
@@ -72,6 +77,14 @@ public class Info extends BusinessObject{
 	}
 	
 	/**
+	 * Auslesen der SuchprofilId
+	 * @return suchprofilId
+	 */
+	public int getSuchprofilId(){
+		return suchprofilId;
+	}
+	
+	/**
 	 * Auslesen des Textes
 	 * @return text
 	 */
@@ -118,6 +131,14 @@ public class Info extends BusinessObject{
 	 */
 	public void setProfilId(int profilId){
 		this.profilId = profilId;
+	}
+	
+	/**
+	 * Setzen einer SuchprofilId
+	 * @param suchprofilId
+	 */
+	public void setSuchprofilId(int suchprofilId){
+		this.suchprofilId = suchprofilId;
 	}
 	
 	/**

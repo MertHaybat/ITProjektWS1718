@@ -1,5 +1,6 @@
 package de.hdm.ITProjekt17.server.report;
 
+import java.util.Date;
 import java.util.Vector;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -69,7 +70,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		
 		AllInfosOfProfilReport result = new AllInfosOfProfilReport();
 		
-		String scoreString = Integer.toString(score);
+		String scoreString = Double.toString(score);
 		
 		Row topRow = new Row();
 		topRow.addColumn(new Column(pro.getVorname() + " " + pro.getNachname()));
@@ -119,15 +120,65 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
 	@Override
 	public PartnervorschlaegeOfProfilNichtAngesehenReport createPartnervorschlaegeOfProfilNichtAngesehenReport(Profil pro) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.getPartnerboerse() == null){
+			return null;
+		}
+		
+		PartnervorschlaegeOfProfilNichtAngesehenReport result = new PartnervorschlaegeOfProfilNichtAngesehenReport();
+		
+		result.setTitle("Alle unbesuchten Profile geordnet nach Aehnlichkeitsmass");
+		
+		result.setCreated(new Date());
+		
+		Vector<Profil> allSimilarNotVisitedProfiles = this.partnerboerseadministration.getAehnlicheUnbesuchteProfileVon(pro);
+		
+		for(Profil asnvp : allSimilarNotVisitedProfiles) {
+			Aehnlichkeitsmass score = partnerboerseadministration.createAehnlichkeit(pro.getId(), pro.getId());
+			
+			result.addSubReport(this.createAllInfosOfProfilReport(asnvp, score.getAehnlichkeitsindex()));
+		}
+		
+		CompositeParagraph requestDetails = new CompositeParagraph();
+		
+		requestDetails.addSubParagraph(new SimpleParagraph("Anzahl aller Profile: " + (partnerboerseadministration.getAllProfil().size()-1)));
+		requestDetails.addSubParagraph(new SimpleParagraph("Anzahl unbesuchter Profile: " + allSimilarNotVisitedProfiles.size()));
+		requestDetails.addSubParagraph(new SimpleParagraph("Report angefordert von: " + pro.getVorname() + " " + pro.getNachname()));
+		
+		result.setImprint(requestDetails);
+		
+		return result;
 	}
 
 	@Override
 	public PartnervorschlaegeAnhandSuchprofilReport createPartnervorschlaegeAnhandSuchprofilReport(Profil pro,
 			Suchprofil such) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.getPartnerboerse() == null){
+			return null;
+		}
+		
+		PartnervorschlaegeAnhandSuchprofilReport result = new PartnervorschlaegeAnhandSuchprofilReport();
+		
+		result.setTitle("Alle unbesuchten Profile geordnet nach Aehnlichkeitsmass");
+		
+		result.setCreated(new Date());
+		
+		Vector<Profil> allSimilarProfilesFromSuchprofiles = this.partnerboerseadministration.getAehnlicheProfileVonSuchprofilen(pro);
+		
+		for(Profil aspfs : allSimilarProfilesFromSuchprofiles) {
+			Aehnlichkeitsmass score = partnerboerseadministration.createAehnlichkeit(pro.getId(), such.getId());
+			
+			result.addSubReport(this.createAllInfosOfProfilReport(aspfs, score.getAehnlichkeitsindex()));
+		}
+		
+		CompositeParagraph requestDetails = new CompositeParagraph();
+		
+		requestDetails.addSubParagraph(new SimpleParagraph("Anzahl aller Profile: " + (partnerboerseadministration.getAllProfil().size()-1)));
+		requestDetails.addSubParagraph(new SimpleParagraph("Anzahl aehnlicher Profile anhand Suchprofile: " + allSimilarProfilesFromSuchprofiles.size()));
+		requestDetails.addSubParagraph(new SimpleParagraph("Report angefordert von: " + pro.getVorname() + " " + pro.getNachname()));
+		
+		result.setImprint(requestDetails);
+		
+		return result;
 	}
 
 

@@ -781,6 +781,42 @@ implements PartnerboerseAdministration {
 		
 	}
 	
+	public void delete(Suchprofil suchpro) throws IllegalArgumentException {
+		Vector<Info> suchprofilInfo = getAllInfoOf(suchpro);
+		for(int i = 0; i < suchprofilInfo.size(); i++){
+			infoMapper.deleteInfo(suchprofilInfo.elementAt(i));
+		}
+		suchprofilMapper.deleteProfil(suchpro);
+	}
+	
+	public Profil getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException {
+		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Info> suchprofilInfos = this.getAllInfoOf(suchpro);
+		
+		for(int k = 0; k < profiles.size(); k++) {
+			profiles.elementAt(k);
+			Vector<Info> infosOfProfiles = this.getAllInfobyProfil(profiles.elementAt(k));
+			for(int j = 0; j < infosOfProfiles.size(); j++) {
+				for(int i = 0; i < suchprofilInfos.size(); i++) {
+					if(suchprofilInfos.elementAt(i) == infosOfProfiles.elementAt(j)) {
+						return profiles.elementAt(k);
+					}
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	public Vector<Info> getAllInfoOf(Suchprofil suchpro) throws IllegalArgumentException {
+//		return this.infoMapper.getAllForSuchprofil();
+		return null;
+	}
+	
+	public Vector<Info> getAllInfoOf(Profil pro) throws IllegalArgumentException {
+		return this.infoMapper.getAll();
+	}
+	
 	/**
 	 * Mit dieser Hilfsmethode kÃ¶nnen alle Suchprofile des einzelenen Teilnehmers herausgesucht und angezeigt werden.
 	 * Dies geschieht Ã¼ber die Profil Id des Users.

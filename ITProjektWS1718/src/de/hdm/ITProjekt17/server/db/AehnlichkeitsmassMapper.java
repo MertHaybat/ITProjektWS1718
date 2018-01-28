@@ -35,16 +35,11 @@ public class AehnlichkeitsmassMapper {
 	 * Kann aufgerufen werden durch
 	 * AehnlichkeitsmassMapper.aehnlichkeitsmassMapper. Sie stellt die
 	 * Singleton-Eigenschaft sicher.
-	 * 
-	 * @return Das "AehnlichkeitsmassMapper-Objekt".
-	 * @see aehnlichkeitsmassMapper
+	 * Methode soll nur über diese statische Methode aufgerufen werden
+	 * @return aehnlichkeitsmassMapper
+	 * @see AehnlichkeitsmassMapper
 	 */
 
-	/**
-	 * Diese Methode gibt den aehnlichkeitsmassMapper zurück
-	 * 
-	 * @return aehnlichkeitsmassMapper
-	 */
 	public static AehnlichkeitsmassMapper aehnlichkeitsmassMapper() {
 		if (aehnlichkeitsmassMapper == null) {
 			aehnlichkeitsmassMapper = new AehnlichkeitsmassMapper();

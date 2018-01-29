@@ -80,7 +80,7 @@ public class MerkzettelMapper {
 				    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 				    	  	 */
 				    	  		PreparedStatement stmt1 = con.prepareStatement(
-				    	  				"INSERT INTO merkzettel (id, profilId_merkender, profilId_gemerkter) "
+				    	  				"INSERT INTO merkzettel (id, profilid_merkender, profilid_gemerkter) "
 				    	  				+ "VALUES (?,?,?) ",
 				    	  				Statement.RETURN_GENERATED_KEYS);
 				    	  				stmt1.setInt(1, merk.getId());
@@ -159,16 +159,16 @@ public class MerkzettelMapper {
 			
 			/**
 			 * Löschen eines Merkzettels bei angabe von merkender und gemerkter Teilnehmer ID's.
-			 * @param profilId_merkender
-			 * @param profilId_gemerkter
+			 * @param profilid_merkender
+			 * @param profilid_gemerkter
 			 */
-			public void deleteByProfilIds(Profil pro, int profilId_gemerkter) {
+			public void deleteByProfilIds(Profil pro, int profilid_gemerkter) {
 			    Connection con = DBConnection.connection();
 
 			    try {
 			      Statement stmt = con.createStatement();
 			  
-			      stmt.executeUpdate("DELETE FROM merkzettel " + "WHERE profilId_merkender=" + pro.getId() +" AND profilId_gemerkter="+profilId_gemerkter);
+			      stmt.executeUpdate("DELETE FROM merkzettel " + "WHERE profilid_merkender=" + pro.getId() +" AND profilid_gemerkter="+profilid_gemerkter);
 
 			    }
 			    catch (SQLException e2) {
@@ -202,8 +202,8 @@ public class MerkzettelMapper {
 				        while (rs.next()) {
 				          Merkzettel merk = new Merkzettel();
 				          merk.setId(rs.getInt("id"));
-				          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
-				          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+				          merk.setProfilId_merkender(rs.getInt("profilid_merkender"));
+				          merk.setProfilId_gemerkter(rs.getInt("profilid_gemerkter"));
 				          /**
 				           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 				           */
@@ -248,8 +248,8 @@ public class MerkzettelMapper {
 			 			if (rs.next()){
 			 				Merkzettel merk = new Merkzettel();
 			 				merk.setId(rs.getInt("id"));
-			 				merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
-			 				merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+			 				merk.setProfilId_merkender(rs.getInt("profilid_merkender"));
+			 				merk.setProfilId_gemerkter(rs.getInt("profilid_gemerkter"));
 			 			
 		          
 			 				return merk;
@@ -277,7 +277,7 @@ public class MerkzettelMapper {
 					    Vector<Merkzettel> result = new Vector<Merkzettel>();
 					    
 					    try {
-					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilId_merkender=? ");
+					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilid_merkender=? ");
 					    	stmt.setInt(1, pro.getId());
 					      
 					    	ResultSet rs = stmt.executeQuery();
@@ -289,8 +289,8 @@ public class MerkzettelMapper {
 					          Merkzettel merke = new Merkzettel();
 					        
 					          merke.setId(rs.getInt("id"));
-					          merke.setProfilId_merkender(rs.getInt("profilId_merkender"));
-					          merke.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+					          merke.setProfilId_merkender(rs.getInt("profilid_merkender"));
+					          merke.setProfilId_gemerkter(rs.getInt("profilid_gemerkter"));
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */
@@ -315,7 +315,7 @@ public class MerkzettelMapper {
 					 * einem Ergebnis-Vektor namens Merkzettel gespeichert und zurückgegeben
 					 * @return
 					 */
-					 public Vector<Merkzettel> merkzettel_showGemerkteProfile(int profilId_gemerkter) {
+					 public Vector<Merkzettel> merkzettel_showGemerkteProfile(int profilid_gemerkter) {
 						 
 						 	/**
 						 	 * Aufbau der DB Connection
@@ -325,8 +325,8 @@ public class MerkzettelMapper {
 						    Vector<Merkzettel> result = new Vector<Merkzettel>();
 						    
 						    try {
-						    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilId_gemerkter=? ");
-						    	stmt.setInt(1, profilId_gemerkter);
+						    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM merkzettel WHERE profilid_gemerkter=? ");
+						    	stmt.setInt(1, profilid_gemerkter);
 						      
 						    	ResultSet rs = stmt.executeQuery();
 						        
@@ -337,13 +337,11 @@ public class MerkzettelMapper {
 						          Merkzettel merk = new Merkzettel();
 						        
 						          merk.setId(rs.getInt("id"));
-						          merk.setProfilId_merkender(rs.getInt("profilId_merkender"));
-						          merk.setProfilId_gemerkter(rs.getInt("profilId_gemerkter"));
+						          merk.setProfilId_merkender(rs.getInt("profilid_merkender"));
+						          merk.setProfilId_gemerkter(rs.getInt("profilid_gemerkter"));
 						          /**
 						           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 						           */
-						          
-						          System.out.println("Degga funkt");
 						          
 						          result.addElement(merk);
 						        }
@@ -371,9 +369,9 @@ public class MerkzettelMapper {
 						String sql = null;
 						
 						if(i == 0){
-							sql = "UPDATE merkzettel SET  profilId_merkender=?, profilId_gemerkter=NULL WHERE id =?";
+							sql = "UPDATE merkzettel SET  profilid_merkender=?, profilid_gemerkter=NULL WHERE id =?";
 						} else if(o == 0){
-							sql = "UPDATE merkzettel SET  profilId_merkender=NULL, profilId_gemerkter=? WHERE id =?";
+							sql = "UPDATE merkzettel SET  profilid_merkender=NULL, profilid_gemerkter=? WHERE id =?";
 						}
 					 	/**
 					 	 * Aufbau der Db Connection

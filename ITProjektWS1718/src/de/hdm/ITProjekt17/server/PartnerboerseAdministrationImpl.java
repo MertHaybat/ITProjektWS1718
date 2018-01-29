@@ -684,16 +684,14 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public Vector<Merkzettel> showMerklisteOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Profil> showMerklisteOf(Profil pro) throws IllegalArgumentException {
 		Vector<Merkzettel> allGemerkteProfile = new Vector<Merkzettel>();
-
 		allGemerkteProfile = this.getAllMerkzettelOf(pro);
-
-		if (allGemerkteProfile != null) {
-
-			return allGemerkteProfile;
+		Vector<Profil> alleprofileausgeben = new Vector<Profil>();
+		for(int i=0; i<allGemerkteProfile.size(); i++){
+			alleprofileausgeben.add(i, profilMapper.findByKey(i));;
 		}
-		return null;
+		return alleprofileausgeben;
 	}
 
 	@Override
@@ -1270,11 +1268,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * @param besuch.getBesuchterNutzerID
 	 * @throws IllegalArgumentException
 	 */
-	public void visit(Profil pro) throws IllegalArgumentException {
+	public Besuch visit(int eigene_id, int fremde_id) throws IllegalArgumentException {
 		Besuch besuch = new Besuch();
-		besuch.setBesuchenderNutzerID(pro.getId());
-		besuch.setBesuchterNutzerID(besuch.getBesuchterNutzerID());
-		besuchMapper.insert(besuch);
+		besuch.setBesuchenderNutzerID(eigene_id);
+		besuch.setBesuchterNutzerID(fremde_id);
+		return besuchMapper.insert(besuch);
 	}
 
 	public Profil checkProfil(String email) throws IllegalArgumentException {

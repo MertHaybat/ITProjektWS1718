@@ -15,7 +15,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 public class Profil_Dialogbox extends FlexTable{
 	private TextBox tbvorname = new TextBox();
 	private TextBox tbnachname = new TextBox();
-	private DateBox geburtsdatum = new DateBox();
+	private TextBox geburtsdatum = new TextBox();
 	private TextBox tbhaarfarbe = new TextBox();
 	private TextBox tbreligion = new TextBox();
 	private TextBox tbkörpergröße = new TextBox();
@@ -32,10 +32,6 @@ public class Profil_Dialogbox extends FlexTable{
 	private Label lb8 = new Label("Geschlecht: ");
 	
 		public Profil_Dialogbox(final Profil profil_eigenes, final Profil profil_fremd){
-			
-			
-			
-			this.setWidget(0, 2, new Button("Hierkommtähnlichkeit"));
 			this.setWidget(0, 0, lb1);
 			this.setWidget(0, 1, tbvorname);
 			this.setWidget(1, 0, lb2);
@@ -52,71 +48,23 @@ public class Profil_Dialogbox extends FlexTable{
 			this.setWidget(6, 1, tbraucher);
 			this.setWidget(7, 0, lb8);
 			this.setWidget(7, 1, tbgeschlecht);
-				
+			tbvorname.setValue(profil_fremd.getVorname());
+			tbnachname.setValue(profil_fremd.getNachname());
+			geburtsdatum.setValue(String.valueOf(profil_fremd.getGeburtsdatum()));
+			tbhaarfarbe.setValue(profil_fremd.getHaarfarbe());
+			tbreligion.setValue(profil_fremd.getReligion());
+			tbkörpergröße.setValue(String.valueOf(profil_fremd.getKoerpergroesse()));
+			tbraucher.setValue(profil_fremd.getRaucher());
+			tbgeschlecht.setValue(profil_fremd.getGeschlecht());
+			tbvorname.setEnabled(false);
+			tbnachname.setEnabled(false);
+			geburtsdatum.setEnabled(false);
+			tbhaarfarbe.setEnabled(false);
+			tbreligion.setEnabled(false);
+			tbkörpergröße.setEnabled(false);
+			tbraucher.setEnabled(false);
+			tbgeschlecht.setEnabled(false);
 		}
 
-		public TextBox getTbvorname() {
-			return tbvorname;
-		}
-
-		public void setTbvorname(TextBox tbvorname) {
-			this.tbvorname = tbvorname;
-		}
-
-		public TextBox getTbnachname() {
-			return tbnachname;
-		}
-
-		public void setTbnachname(TextBox tbnachname) {
-			this.tbnachname = tbnachname;
-		}
-
-		public DateBox getGeburtsdatum() {
-			return geburtsdatum;
-		}
-
-		public void setGeburtsdatum(DateBox geburtsdatum) {
-			this.geburtsdatum = geburtsdatum;
-		}
-
-		public TextBox getTbhaarfarbe() {
-			return tbhaarfarbe;
-		}
-
-		public void setTbhaarfarbe(TextBox tbhaarfarbe) {
-			this.tbhaarfarbe = tbhaarfarbe;
-		}
-
-		public TextBox getTbreligion() {
-			return tbreligion;
-		}
-
-		public void setTbreligion(TextBox tbreligion) {
-			this.tbreligion = tbreligion;
-		}
-
-		public TextBox getTbkörpergröße() {
-			return tbkörpergröße;
-		}
-
-		public void setTbkörpergröße(TextBox tbkörpergröße) {
-			this.tbkörpergröße = tbkörpergröße;
-		}
-
-		public TextBox getTbraucher() {
-			return tbraucher;
-		}
-
-		public void setTbraucher(TextBox tbraucher) {
-			this.tbraucher = tbraucher;
-		}
-
-		public TextBox getTbgeschlecht() {
-			return tbgeschlecht;
-		}
-
-		public void setTbgeschlecht(TextBox tbgeschlecht) {
-			this.tbgeschlecht = tbgeschlecht;
-		}
 }
 

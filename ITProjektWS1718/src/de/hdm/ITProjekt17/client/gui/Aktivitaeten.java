@@ -313,14 +313,14 @@ public class Aktivitaeten extends VerticalPanel {
 
 				@Override
 				public void onSuccess(Profil result) {
-			pdb1.getTbvorname().setValue(result.getVorname());
-			pdb1.getTbnachname().setValue(result.getNachname());
-			pdb1.getGeburtsdatum().setValue(result.getGeburtsdatum());
-			pdb1.getTbhaarfarbe().setValue(result.getHaarfarbe());
-			pdb1.getTbreligion().setValue(result.getReligion());
-			pdb1.getTbkörpergröße().setValue(String.valueOf(result.getKoerpergroesse()));
-			pdb1.getTbraucher().setValue(String.valueOf(result.getRaucher()));
-			pdb1.getTbgeschlecht().setValue(String.valueOf(result.getGeschlecht()));
+//			pdb1.getTbvorname().setValue(result.getVorname());
+//			pdb1.getTbnachname().setValue(result.getNachname());
+//			pdb1.getGeburtsdatum().setValue(result.getGeburtsdatum());
+//			pdb1.getTbhaarfarbe().setValue(result.getHaarfarbe());
+//			pdb1.getTbreligion().setValue(result.getReligion());
+//			pdb1.getTbkörpergröße().setValue(String.valueOf(result.getKoerpergroesse()));
+//			pdb1.getTbraucher().setValue(String.valueOf(result.getRaucher()));
+//			pdb1.getTbgeschlecht().setValue(String.valueOf(result.getGeschlecht()));
 			
 					
 				}

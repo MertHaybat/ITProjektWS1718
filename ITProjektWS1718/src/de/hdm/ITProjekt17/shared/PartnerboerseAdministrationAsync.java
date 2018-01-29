@@ -120,7 +120,7 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void getAllMerkzettelOf(Profil pro, AsyncCallback<Vector<Merkzettel>> callback);
 	
-	void showMerklisteOf(Profil pro, AsyncCallback<Vector<Merkzettel>> callback);
+	void showMerklisteOf(Profil pro, AsyncCallback<Vector<Profil>> callback);
 	
 	void delete(Merkzettel merk, AsyncCallback<Void> callback);
 	
@@ -173,7 +173,7 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void sperrPruefung(Profil pro, AsyncCallback<Boolean> callback);
 	
-	void visit(Profil pro, AsyncCallback<Void> callback);
+	void visit(int eigene_id, int fremde_id, AsyncCallback<Besuch> callback);
 
 	//_________________________________________________________________________________________________________________________
 	
@@ -198,5 +198,6 @@ public interface PartnerboerseAdministrationAsync {
 	void getAlterOf(Profil pro, AsyncCallback<Integer> callback);
 
 	void getAllProfilesByInfoOf(Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
+
 
 }

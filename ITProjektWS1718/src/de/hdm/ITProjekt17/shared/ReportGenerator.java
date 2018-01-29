@@ -1,6 +1,7 @@
 package de.hdm.ITProjekt17.shared;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
@@ -15,6 +16,7 @@ import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeOfProfilNichtAngesehen
  * @author Thies
  *
  */
+@RemoteServiceRelativePath("reportgenerator")
 public interface ReportGenerator extends RemoteService {
 	
 	/**
@@ -51,5 +53,12 @@ public interface ReportGenerator extends RemoteService {
 	  * @throws IllegalArgumentException
 	  */
 	 public abstract PartnervorschlaegeAnhandSuchprofilReport createPartnervorschlaegeAnhandSuchprofilReport(Profil pro, Suchprofil such) throws IllegalArgumentException;
-
+	
+	 /**
+	 * Diese Methode sucht nach dem Profil auf der Partnerbörse
+	 * @param email
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	 public Profil checkProfil(String email) throws IllegalArgumentException;
 }

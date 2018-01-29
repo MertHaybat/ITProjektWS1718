@@ -74,9 +74,9 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Merkzettel createMerkzettel(Profil pro, int profilId_gemerkter) throws IllegalArgumentException;
 	public void save(Merkzettel merk) throws IllegalArgumentException;
 	public Merkzettel findByKey (int id) throws IllegalArgumentException; 
-	public Vector<Merkzettel> getAllMerkzettelOf(Profil pro) throws IllegalArgumentException;
+	Vector<Merkzettel> getAllMerkzettelOf(Profil pro);
 	public void deleteProfilVonMerkliste(Profil pro, int profilId_gemerkter) throws IllegalArgumentException;
-	public Vector<Merkzettel> showMerklisteOf(Profil pro) throws IllegalArgumentException;
+	Vector<Profil> showMerklisteOf(Profil pro);
 	public void delete(Merkzettel merk) throws IllegalArgumentException;
 	
 	Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
@@ -106,7 +106,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector<Besuch> getAllBesucheOf(Profil pro) throws IllegalArgumentException;
 	public Vector<Profil> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException;
 	public boolean sperrPruefung(Profil pro) throws IllegalArgumentException;
-	public void visit(Profil pro) throws IllegalArgumentException;
+	public Besuch visit(int eigene_id, int fremde_id) throws IllegalArgumentException;
 	
 	public Vector<Info> getInfoIdByProfilId(Profil pro) throws IllegalArgumentException;
 	

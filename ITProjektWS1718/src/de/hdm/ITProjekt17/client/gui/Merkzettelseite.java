@@ -1,5 +1,7 @@
 package de.hdm.ITProjekt17.client.gui;
 
+import java.util.Vector;
+
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.ClickableTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -60,6 +62,20 @@ public class Merkzettelseite extends VerticalPanel{
 		vpanelandere_merkzettel.add(pt2);
 		hpanel.add(vpanelandere_merkzettel);
 		this.add(hpanel);
+		pbverwaltung.showMerklisteOf(profil, new AsyncCallback<Vector<Profil>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Vector<Profil> result) {
+				pt1.setRowData(0, result);
+				pt1.setRowCount(result.size(), true);
+			}
+		});
 		
 		pt1.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 		
@@ -339,14 +355,14 @@ private class DialogBoxMerkzettelProfil extends DialogBox{
 
 				@Override
 				public void onSuccess(Profil result) {
-					pdb1.getTbvorname().setValue(result.getVorname());
-					pdb1.getTbnachname().setValue(result.getNachname());
-					pdb1.getGeburtsdatum().setValue(result.getGeburtsdatum());
-					pdb1.getTbhaarfarbe().setValue(result.getHaarfarbe());
-					pdb1.getTbreligion().setValue(result.getReligion());
-					pdb1.getTbkörpergröße().setValue(String.valueOf(result.getKoerpergroesse()));
-					pdb1.getTbraucher().setValue(String.valueOf(result.getRaucher()));
-					pdb1.getTbgeschlecht().setValue(String.valueOf(result.getGeschlecht()));
+//					pdb1.getTbvorname().setValue(result.getVorname());
+//					pdb1.getTbnachname().setValue(result.getNachname());
+//					pdb1.getGeburtsdatum().setValue(result.getGeburtsdatum());
+//					pdb1.getTbhaarfarbe().setValue(result.getHaarfarbe());
+//					pdb1.getTbreligion().setValue(result.getReligion());
+//					pdb1.getTbkörpergröße().setValue(String.valueOf(result.getKoerpergroesse()));
+//					pdb1.getTbraucher().setValue(String.valueOf(result.getRaucher()));
+//					pdb1.getTbgeschlecht().setValue(String.valueOf(result.getGeschlecht()));
 					
 				}
 				

@@ -24,6 +24,7 @@
   	<servlet-name>loginService</servlet-name>
   	<url-pattern>/itprojektws1718/login</url-pattern>
   </servlet-mapping>
+  
    <servlet-mapping>
       <servlet-name>loginService</servlet-name>
       <url-pattern>/reportgenerator/login</url-pattern>
@@ -34,14 +35,16 @@
     <welcome-file>ITProjektWS1718.html</welcome-file>
     <welcome-file>ITProjektWS1718Report.html</welcome-file>
   </welcome-file-list>
-    <servlet>
-    <servlet-name>reportGeneratorServlet</servlet-name>
+  
+  <servlet>
+    <servlet-name>reportGenerator</servlet-name>
     <servlet-class>de.hdm.ITProjekt17.server.report.ReportGeneratorImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>reportGeneratorServlet</servlet-name>
-    <url-pattern>/itprojektws1718/reportgenerator</url-pattern>
+    <servlet-name>reportGenerator</servlet-name>
+    <url-pattern>/reportgenerator/reportgenerator</url-pattern>
   </servlet-mapping>	
-
+  
+    
 </web-app>

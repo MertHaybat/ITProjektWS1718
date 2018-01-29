@@ -50,10 +50,54 @@ public class Profil_Tabelle extends CellTable<Profil>{
 					}
 					    
 	 };
-	 
+	 Column<Profil, String> profil_koerpergroesse = 
+			    new Column<Profil, String>(new ClickableTextCell())  {
+			    	@Override
+					public String getValue(Profil object) {
+						return String.valueOf(object.getKoerpergroesse());
+					}
+					    
+	 };
+	 Column<Profil, String> profil_religion = 
+			    new Column<Profil, String>(new ClickableTextCell())  {
+			    	@Override
+					public String getValue(Profil object) {
+						return object.getReligion();
+					}
+					    
+	 };
+	 Column<Profil, String> profil_haarfarbe = 
+			    new Column<Profil, String>(new ClickableTextCell())  {
+			    	@Override
+					public String getValue(Profil object) {
+						return object.getHaarfarbe();
+					}
+					    
+	 };
+	 Column<Profil, String> profil_raucher = 
+			    new Column<Profil, String>(new ClickableTextCell())  {
+			    	@Override
+					public String getValue(Profil object) {
+						return object.getRaucher();
+					}
+					    
+	 };
+	 Column<Profil, String> profil_geschlecht = 
+			    new Column<Profil, String>(new ClickableTextCell())  {
+			    	@Override
+					public String getValue(Profil object) {
+						return object.getGeschlecht();
+					}
+					    
+	 };
 	this.addColumn(profil_vorname, "Vorname");
 	this.addColumn(profil_nachname, "Nachname");
 	this.addColumn(profil_geburtsdatum, "Geburtsdatum");
+	this.addColumn(profil_koerpergroesse, "Körpergröße");
+	this.addColumn(profil_religion, "Religion");
+	this.addColumn(profil_haarfarbe, "Haarfarbe");
+	this.addColumn(profil_raucher, "Raucher");
+	this.addColumn(profil_geschlecht, "Geschlecht");
 	
 	}
 

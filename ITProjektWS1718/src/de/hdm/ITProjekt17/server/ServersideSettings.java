@@ -7,7 +7,7 @@ import de.hdm.ITProjekt17.shared.CommonSettings;
 
 public class ServersideSettings extends CommonSettings{
 
-		  private static final String LOGGER_NAME = "BankProjekt Server";
+		  private static final String LOGGER_NAME = "Partnerbörse Server";
 		  private static final Logger log = Logger.getLogger(LOGGER_NAME);
 
 		  public static Logger getLogger() {

@@ -63,33 +63,14 @@ public class Suchprofil_Dialogbox extends DialogBox{
 			}
 			
 		});
-//		profileAnzeigen.addClickHandler(new ClickHandler(){
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				// TODO Auto-generated method stub
-//				Profil_Tabelle profil_Tabelle = new Profil_Tabelle();
-//				pbverwaltung.getAllProfil(new AsyncCallback<Profil>(){
-//
-//					@Override
-//					public void onFailure(Throwable caught) {
-//						// TODO Auto-generated method stub
-//						
-//					}
-//
-//					@Override
-//					public void onSuccess(Profil result) {
-//						// TODO Auto-generated method stub
-//						RootPanel.get("Details").clear();
-//						RootPanel.get("Details").add(new Profil_Tabelle(result));
-//					}
-//					
-//				});
-//				
-//			}
-//			
-//			
-//		});  <---- Methode bearbeiten + Auf Profil_Tabelle Konstruktor mit Profil als Übergabeparameter anlegen
+		profileAnzeigen.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(new Suchergebnis(profil, suchprofil));
+			}
+		});
 		
 		suchprofilLöschen.addClickHandler(new ClickHandler(){
 

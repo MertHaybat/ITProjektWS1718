@@ -27,4 +27,6 @@ public interface ReportGeneratorAsync {
 	void createPartnervorschlaegeAnhandSuchprofilReport(Profil pro, Suchprofil such,
 			AsyncCallback<PartnervorschlaegeAnhandSuchprofilReport> callback);
 
+	void checkProfil(String email, AsyncCallback<Profil> callback);
+
 }

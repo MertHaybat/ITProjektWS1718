@@ -78,19 +78,19 @@ public class BesuchMapper {
 		try {
 			Statement stmt = con.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT MAX(besuchid) AS maxid " + "FROM besuch ");
+			ResultSet rs = stmt.executeQuery("SELECT MAX(id) AS maxid " + "FROM besuch ");
 
 			if (rs.next()) {
 
 				besuch.setId(rs.getInt("maxid") + 1);
 
 				PreparedStatement stmt1 = con.prepareStatement(
-						"INSERT INTO besuch (besuchid, besuchendernutzer, besuchternutzer) " + "VALUES (?, ?, ?) ",
+						"INSERT INTO besuch (id, besuchendernutzerid, besuchternutzerid) " + "VALUES (?, ?, ?) ",
 						Statement.RETURN_GENERATED_KEYS);
 
 				stmt1.setInt(1, besuch.getId());
 				stmt1.setInt(2, besuch.getBesuchenderNutzerID());
-				stmt1.setInt(3, besuch.getBesuchenderNutzerID());
+				stmt1.setInt(3, besuch.getBesuchterNutzerID());
 
 				stmt1.executeUpdate();
 			}
@@ -124,16 +124,16 @@ public class BesuchMapper {
 	
 	/**
 	 * BEsuche werden gelöscht durch beide Profil Ids vom besuchter und besuchender Nutzer.
-	 * @param besuchenderNutzerID
-	 * @param besuchterNutzerID
+	 * @param besuchendernutzerid
+	 * @param besuchternutzerid
 	 */
-	public void deleteByProfilId(Profil pro, int besuchterNutzerID) {
+	public void deleteByProfilId(Profil pro, int besuchternutzerid) {
 	    Connection con = DBConnection.connection();
 
 	    try {
 	      Statement stmt = con.createStatement();
 	  
-	      stmt.executeUpdate("DELETE FROM besuch " + "WHERE besuchenderNutzerID=" + pro.getId()+" AND besuchterNutzerID="+besuchterNutzerID);
+	      stmt.executeUpdate("DELETE FROM besuch " + "WHERE besuchendernutzerid=" + pro.getId()+" AND besuchternutzerid="+besuchternutzerid);
 
 	    }
 	    catch (SQLException e2) {
@@ -150,7 +150,7 @@ public class BesuchMapper {
 		 * @return besuche
 		 */
 	  
-	  public Vector<Besuch> findByKey(int besuchenderNutzerID) {
+	  public Vector<Besuch> findByKey(int besuchendernutzerid) {
 
 		    Connection con = DBConnection.connection();
 
@@ -158,16 +158,16 @@ public class BesuchMapper {
 
 		    try {
 		    PreparedStatement stmt = con.prepareStatement ("SELECT * FROM besuch "
-		          + "WHERE besuchenderNutzerID=" + besuchenderNutzerID +" ORDER BY besuchid");
+		          + "WHERE besuchendernutzerid=" + besuchendernutzerid +" ORDER BY id");
 		     
 
 		      ResultSet rs = stmt.executeQuery();
 
 		      	while (rs.next()) {
 		        Besuch besuche = new Besuch();
-		        besuche.setId(rs.getInt("besuchid"));
-		        besuche.setBesuchenderNutzerID(rs.getInt("besuchenderNutzerID"));
-		        besuche.setBesuchterNutzerID(rs.getInt("besuchterNutzerID"));
+		        besuche.setId(rs.getInt("id"));
+		        besuche.setBesuchenderNutzerID(rs.getInt("besuchendernutzerid"));
+		        besuche.setBesuchterNutzerID(rs.getInt("besuchternutzerid"));
 
 		        
 		        besuch.addElement(besuche);
@@ -197,7 +197,7 @@ public class BesuchMapper {
 		    Vector<Besuch> result = new Vector<Besuch>();
 		    
 		    try {
-		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE  besuchenderNutzerID=? ");
+		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE  besuchendernutzerid=? ");
 		    	stmt.setInt(1, pro.getId());
 		      
 		    	ResultSet rs = stmt.executeQuery();
@@ -209,8 +209,8 @@ public class BesuchMapper {
 		          Besuch besuche = new Besuch();
 		        
 		          besuche.setId(rs.getInt("id"));
-		          besuche.setBesuchenderNutzerID(rs.getInt("besuchenderNutzerID"));
-		          besuche.setBesuchterNutzerID(rs.getInt("besuchterNutzerID"));
+		          besuche.setBesuchenderNutzerID(rs.getInt("besuchendernutzerid"));
+		          besuche.setBesuchterNutzerID(rs.getInt("besuchternutzerid"));
 		          /**
 		           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 		           */
@@ -236,7 +236,7 @@ public class BesuchMapper {
 	   */
 	 
 	  public Besuch update(Besuch besuche) {
-		 	String sql = "UPDATE besuch SET  besuchenderNutzerID=?, besuchterNutzerID=? WHERE id =?";
+		 	String sql = "UPDATE besuch SET  besuchendernutzerid=?, besuchternutzerid=? WHERE id =?";
 		 	/**
 		 	 * Aufbau der Db Connection
 		 	 */

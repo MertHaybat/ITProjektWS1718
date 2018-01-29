@@ -174,8 +174,6 @@ public interface PartnerboerseAdministrationAsync {
 	void getUnvisitedProfiles(Profil pro, AsyncCallback<Vector<Profil>> callback);
 	
 	void sperrPruefung(Profil pro, AsyncCallback<Boolean> callback);
-	
-	void visit(Profil pro, AsyncCallback<Void> callback);
 
 	//_________________________________________________________________________________________________________________________
 	
@@ -203,7 +201,10 @@ public interface PartnerboerseAdministrationAsync {
 
 	void showBesuchteOf(Profil pro, AsyncCallback<Vector<Profil>> callback);
 
+	void visit(int eigene_id, int fremde_id, AsyncCallback<Besuch> callback);
+
 	void showBesucherOf(Profil pro, AsyncCallback<Vector<Profil>> callback);
+
 
 
 }

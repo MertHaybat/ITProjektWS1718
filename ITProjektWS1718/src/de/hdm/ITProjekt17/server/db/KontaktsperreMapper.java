@@ -78,7 +78,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 				    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 				    	  	 */
 				    	  		PreparedStatement stmt1 = con.prepareStatement(
-				    	  				"INSERT INTO kontaktsperre (id, profilId_sperrender, profilId_gesperrter) "
+				    	  				"INSERT INTO kontaktsperre (id, profilid_sperrender, profilid_gesperrter) "
 				    	  				+ "VALUES (?,?,?) ",
 				    	  				Statement.RETURN_GENERATED_KEYS);
 				    	  				stmt1.setInt(1, sperre.getId());
@@ -131,16 +131,16 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 			/**
 			 * Es wird eine Löschung durchgeführt bei dem beide ID angegeben werden.
 			 * Somit löscht sich auch die Sperre heraus.
-			 * @param profilId_sperrender
-			 * @param profilId_gesperrter
+			 * @param profilid_sperrender
+			 * @param profilid_gesperrter
 			 */
-			public void deleteByProfilIds(Profil pro, int profilId_gesperrter) {
+			public void deleteByProfilIds(Profil pro, int profilid_gesperrter) {
 			    Connection con = DBConnection.connection();
 
 			    try {
 			      Statement stmt = con.createStatement();
 			  
-			      stmt.executeUpdate("DELETE FROM kontaktsperre " + "WHERE profilId_sperrender=" + pro.getId() +" AND profilId_gesperrter="+profilId_gesperrter);
+			      stmt.executeUpdate("DELETE FROM kontaktsperre " + "WHERE profilid_sperrender=" + pro.getId() +" AND profilid_gesperrter="+profilid_gesperrter);
 
 			    }
 			    catch (SQLException e2) {
@@ -173,8 +173,8 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 				        while (rs.next()) {
 				          Kontaktsperre sperre = new Kontaktsperre();
 				          sperre.setId(rs.getInt("id"));
-				          sperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-				          sperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+				          sperre.setProfilId_sperrender(rs.getInt("profilid_sperrender"));
+				          sperre.setProfilId_gesperrter(rs.getInt("profilid_gesperrter"));
 				          /**
 				           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 				           */
@@ -205,7 +205,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 					    Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
 					    
 					    try {
-					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre WHERE profilId_sperrender=? ");
+					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre WHERE profilid_sperrender=? ");
 					    	stmt.setInt(1, pro.getId());
 					      
 					    	ResultSet rs = stmt.executeQuery();
@@ -217,8 +217,8 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 					          Kontaktsperre spe = new Kontaktsperre();
 					        
 					          spe.setId(rs.getInt("id"));
-					          spe.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-					          spe.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+					          spe.setProfilId_sperrender(rs.getInt("profilid_sperrender"));
+					          spe.setProfilId_gesperrter(rs.getInt("profilid_gesperrter"));
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */
@@ -265,8 +265,8 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 			 			if (rs.next()){
 			 				Kontaktsperre sperre = new Kontaktsperre();
 			 				sperre.setId(rs.getInt("id"));
-			 				sperre.setProfilId_sperrender(rs.getInt("profilId_sperrender"));
-			 				sperre.setProfilId_gesperrter(rs.getInt("profilId_gesperrter"));
+			 				sperre.setProfilId_sperrender(rs.getInt("profilid_sperrender"));
+			 				sperre.setProfilId_gesperrter(rs.getInt("profilid_gesperrter"));
 			 			
 		          
 			 				return sperre;
@@ -291,10 +291,10 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 					String sql = null;
 					
 					 if(i == 0){
-						 sql = "UPDATE kontaktsperre SET  profilId_sperrender=?, profilId_gesperrter=NULL WHERE id=?";
+						 sql = "UPDATE kontaktsperre SET  profilid_sperrender=?, profilid_gesperrter=NULL WHERE id=?";
 						 
 					 } else if(o == 0){
-						 sql = "UPDATE kontaktsperre SET  profilId_sperrender=NULL, profilId_gesperrter=? WHERE id=?";
+						 sql = "UPDATE kontaktsperre SET  profilid_sperrender=NULL, profilid_gesperrter=? WHERE id=?";
 					 }
 					 /**
 					 	 * Aufbau der Db Connection

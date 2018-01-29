@@ -115,5 +115,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 
 	void deleteSuchprofil(Suchprofil pro) throws IllegalArgumentException;
 	
+	public int getAlterOf(Profil pro) throws IllegalArgumentException;
+	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) throws IllegalArgumentException;
+	
 	
 }

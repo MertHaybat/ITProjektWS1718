@@ -195,4 +195,8 @@ public interface PartnerboerseAdministrationAsync {
 
 	void delete(Suchprofil suchpro, AsyncCallback<Void> callback);
 
+	void getAlterOf(Profil pro, AsyncCallback<Integer> callback);
+
+	void getAllProfilesByInfoOf(Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
+
 }

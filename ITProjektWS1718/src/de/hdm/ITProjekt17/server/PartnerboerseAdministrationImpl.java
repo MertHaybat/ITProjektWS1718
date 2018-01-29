@@ -772,8 +772,34 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	
 	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException {
 		Vector<Profil> profiles = this.getAllProfils();
-		Vector<Info> suchprofilInfos = this.getAllInfoOf(suchpro);
 		
+		for(int k = 0; k < profiles.size(); k++){
+			profiles.elementAt(k);
+			if(suchpro.getHaarfarbe() == profiles.elementAt(k).getHaarfarbe()){
+				if(suchpro.getGeschlecht() == profiles.elementAt(k).getGeschlecht()){
+					if(suchpro.getKoerpergroesse() == profiles.elementAt(k).getKoerpergroesse()){
+						if(suchpro.getRaucher() == profiles.elementAt(k).getRaucher()){
+							if(suchpro.getReligion() == profiles.elementAt(k).getReligion()){
+								if(suchpro.getMinAlter() < getAlterOf(profiles.elementAt(k))){
+									if(suchpro.getMaxAlter() > getAlterOf(profiles.elementAt(k))){
+										profiles.add(profiles.elementAt(k));
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		
+		return profiles;
+	}
+	
+	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) throws IllegalArgumentException {
+		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Info> suchprofilInfos = this.getAllInfoOf(suchpro);
+	
 		for(int k = 0; k < profiles.size(); k++) {
 			profiles.elementAt(k);
 			Vector<Info> infosOfProfiles = this.getAllInfobyProfil(profiles.elementAt(k));
@@ -785,10 +811,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 				}
 			}
 		}
-		
 		return profiles;
 	}
-	
 	public Vector<Info> getAllInfoOf(Suchprofil suchpro) throws IllegalArgumentException {
 //		return this.infoMapper.getAllForSuchprofil();
 		return null;
@@ -1382,6 +1406,31 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 			}
 		}
 		return allAehnlichkeitsmassVonProfilenAnhandSuchprofilen;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public int getAlterOf(Profil pro) throws IllegalArgumentException {
+//		GregorianCalendar now = new GregorianCalendar();
+		int alter = 0;
+		Date today = new Date();
+//		int now = today.getDate();
+		Date geburtsdatum = pro.getGeburtsdatum();
+		if(geburtsdatum.getYear() < today.getYear()) {
+			alter = today.getYear() - geburtsdatum.getYear();
+			if(geburtsdatum.getMonth() > today.getMonth()){
+				if(geburtsdatum.getDay() > today.getDay()){
+					alter = alter - 1;
+				} else {
+					alter = alter + 0;
+				}
+				
+			}
+		}
+		
+		
+		
+		return alter;
 	}
 
 }

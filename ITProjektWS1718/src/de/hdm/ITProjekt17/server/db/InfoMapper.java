@@ -86,7 +86,8 @@ public class InfoMapper {
  		        in.setProfilId(rs.getInt("profilid"));
  		        in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
  		        in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
- 		        in.setSuchprofilId(rs.getInt("suchprofilid"));
+ 		        in.setAuswahleigenschaftWert(rs.getString("auswahleigenschaftwert"));
+ 		        in.setFreitexteigenschaftWert(rs.getString("auswahleigenschaftwert"));
  		        
  				return in;
  			}
@@ -125,10 +126,11 @@ return null;
         while (rs.next()) {
           Info in = new Info();
           in.setId(rs.getInt("id"));
-          in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
-          in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
-          in.setSuchprofilId(rs.getInt("suchprofilid"));
-          in.setProfilId(rs.getInt("profilid"));
+	      in.setProfilId(rs.getInt("profilid"));
+	      in.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+	      in.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
+	      in.setAuswahleigenschaftWert(rs.getString("auswahleigenschaftwert"));
+	      in.setFreitexteigenschaftWert(rs.getString("auswahleigenschaftwert"));
           /**
            *  Hinzufügen des neuen Objekts zum Ergebnisvektor
            */
@@ -181,10 +183,11 @@ return null;
 						"INSERT INTO info (id, profilid, auswahleigenschaftwert, freitexteigenschaftwert, auswahleigenschaftid, freitexteigenschaftid) " + "VALUES (?,?,?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);
 						stmt1.setInt(1, in.getId());
-						stmt1.setString(2, in.getText());
-						stmt1.setInt(3, in.getProfilId());
-						stmt1.setString(4, in.getAuswahleigenschaftWert());
-						stmt1.setString(5, in.getFreitexteigenschaftWert());
+						stmt1.setInt(2, in.getProfilId());
+						stmt1.setString(3, in.getAuswahleigenschaftWert());
+						stmt1.setString(4, in.getFreitexteigenschaftWert());
+						stmt1.setInt(5, in.getAuswahleigenschaftid());
+						stmt1.setInt(6, in.getFreitexteigenschaftid());
 					
 						
 						stmt1.executeUpdate();
@@ -431,11 +434,11 @@ return null;
 	        
 
 	          info.setId(rs.getInt("id"));
-	          info.setProfilId(rs.getInt("profilid"));
-	          info.setAuswahleigenschaftWert(rs.getString("auswahleigenschaftwert"));
-	          info.setFreitexteigenschaftWert(rs.getString("freitexteigenschaftwert"));
-	          info.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
-	          info.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
+		      info.setProfilId(rs.getInt("profilid"));
+		      info.setAuswahleigenschaftid(rs.getInt("auswahleigenschaftid"));
+		      info.setFreitexteigenschaftid(rs.getInt("freitexteigenschaftid"));
+		      info.setAuswahleigenschaftWert(rs.getString("auswahleigenschaftwert"));
+		      info.setFreitexteigenschaftWert(rs.getString("freitexteigenschaftwert"));
 	          /**
 	           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 	           */

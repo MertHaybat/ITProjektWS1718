@@ -63,8 +63,6 @@ public class ITProjektWS1718 implements EntryPoint{
 			loginInfo = result;
 			if (loginInfo.isLoggedIn()) {
 				
-//				loadPartnerboerse(profil);
-				
 				pbverwaltung.checkProfil(loginInfo.getEmailAddress(), new AsyncCallback<Profil>(){
 
 					@Override
@@ -116,6 +114,7 @@ public class ITProjektWS1718 implements EntryPoint{
 
 				signInLink.setHref(loginInfo.getLoginUrl());
 				Window.open(signInLink.getHref(), "_self", "");
+
 			}
 		});
 		zumreportgenerator.addClickHandler(new ClickHandler() {		
@@ -129,6 +128,7 @@ public class ITProjektWS1718 implements EntryPoint{
 		loginPanel.add(zumprojektmarktplatz);
 		loginPanel.add(zumreportgenerator);
 		RootPanel.get("Details").add(loginPanel);
+
 	}
 	
 	private void loadPartnerboerse(final Profil profil){
@@ -136,6 +136,7 @@ public class ITProjektWS1718 implements EntryPoint{
 		RootPanel.get("Topbar").add(signOutLink);
 		RootPanel.get("Details").add(new Startseite(profil));
 		RootPanel.get("Navigator").add(new Menubar(profil));
+
 	}
 	
 	

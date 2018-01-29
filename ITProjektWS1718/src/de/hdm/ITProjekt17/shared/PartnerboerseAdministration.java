@@ -65,7 +65,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Kontaktsperre createKontaktsperre(Profil pro, int profilId_gesperrter) throws IllegalArgumentException;
 	public Kontaktsperre save(Kontaktsperre k) throws IllegalArgumentException;
 	public void deleteKontaktsperreOf(Profil pro, int profilId_gesperrter) throws IllegalArgumentException;
-	public Vector<Kontaktsperre> showBlockedProfilsOf(Profil pro) throws IllegalArgumentException;
+	public Vector<Profil> showBlockedProfilsOf(Profil pro) throws IllegalArgumentException;
+	public Vector<Profil> showAllBlockerOf(Profil pro) throws IllegalArgumentException;
 	public Kontaktsperre findById (int id) throws IllegalArgumentException;
 	public Vector <Kontaktsperre> getAllKontaktsperre()throws IllegalArgumentException;
 	public Vector<Kontaktsperre> getAllKontaktsperreOf(Profil pro) throws IllegalArgumentException;
@@ -76,7 +77,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Merkzettel findByKey (int id) throws IllegalArgumentException; 
 	public Vector<Merkzettel> getAllMerkzettelOf(Profil pro) throws IllegalArgumentException;
 	public void deleteProfilVonMerkliste(Profil pro, int profilId_gemerkter) throws IllegalArgumentException;
-	public Vector<Merkzettel> showMerklisteOf(Profil pro) throws IllegalArgumentException;
+	public Vector<Profil> showMerklisteOf(Profil pro) throws IllegalArgumentException;
 	public void delete(Merkzettel merk) throws IllegalArgumentException;
 	
 	Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String religion,
@@ -107,6 +108,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector<Profil> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException;
 	public boolean sperrPruefung(Profil pro) throws IllegalArgumentException;
 	public void visit(Profil pro) throws IllegalArgumentException;
+	public Vector<Profil> showBesuchteOf(Profil pro) throws IllegalArgumentException;
+	public Vector<Profil> showBesucherOf(Profil pro) throws IllegalArgumentException;
 	
 	public Vector<Info> getInfoIdByProfilId(Profil pro) throws IllegalArgumentException;
 	

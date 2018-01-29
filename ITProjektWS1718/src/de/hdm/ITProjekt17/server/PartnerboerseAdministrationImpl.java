@@ -574,17 +574,30 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public Vector<Kontaktsperre> showBlockedProfilsOf(Profil pro) throws IllegalArgumentException {
-		Vector<Kontaktsperre> allBlockedProfils = new Vector<Kontaktsperre>();
-
-		allBlockedProfils = this.getAllKontaktsperreOf(pro);
-
-		if (allBlockedProfils != null) {
-
-			return allBlockedProfils;
+	public Vector<Profil> showBlockedProfilsOf(Profil pro) throws IllegalArgumentException {
+		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Kontaktsperre> allBlockedProfiles = this.getAllKontaktsperreOf(pro);
+		
+		for(int k = 0; k < profiles.size(); k++) {
+			if(pro != profiles.elementAt(k) && profiles.elementAt(k).equals(allBlockedProfiles.elementAt(k).getProfilId_gesperrter())) {
+				profiles.add(profiles.elementAt(k));
+			}
 		}
-		return null;
 
+		return profiles;
+
+	}
+	
+	public Vector<Profil> showAllBlockerOf(Profil pro) throws IllegalArgumentException {
+		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Kontaktsperre> allBlockers = this.getAllKontaktsperre();
+		
+		for(int k = 0; k < profiles.size(); k++) {
+			if(pro != profiles.elementAt(k) && profiles.elementAt(k).equals(allBlockers.elementAt(k).getProfilId_sperrender())) {
+				profiles.add(profiles.elementAt(k));
+			}
+		}
+		return profiles;
 	}
 
 	@Override
@@ -684,18 +697,60 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public Vector<Merkzettel> showMerklisteOf(Profil pro) throws IllegalArgumentException {
-		Vector<Merkzettel> allGemerkteProfile = new Vector<Merkzettel>();
-
-		allGemerkteProfile = this.getAllMerkzettelOf(pro);
-
-		if (allGemerkteProfile != null) {
-
-			return allGemerkteProfile;
+	public Vector<Profil> showMerklisteOf(Profil pro) throws IllegalArgumentException {
+		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Merkzettel> allGemerkteProfile = this.getAllMerkzettelOf(pro);
+		
+		for(int k = 0; k < profiles.size(); k++) {
+			if(pro != profiles.elementAt(k) && profiles.elementAt(k).equals(allGemerkteProfile.elementAt(k).getProfilId_gemerkter())) {
+				profiles.add(profiles.elementAt(k));
+			}
 		}
-		return null;
+		
+		return profiles;
+	}
+	
+	public Vector<Profil> showMerkendeOf(Profil pro) throws IllegalArgumentException {
+		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Merkzettel> merkendeProfiles = this.getAllMerkzettelOf(pro);
+		
+		for(int k = 0; k < profiles.size(); k++) {
+			if(pro != profiles.elementAt(k) && profiles.elementAt(k).equals(merkendeProfiles.elementAt(k).getProfilId_merkender())) {
+				profiles.add(profiles.elementAt(k));
+			}
+		}
+		
+		return profiles;
 	}
 
+	@Override
+	public Vector<Profil> showBesuchteOf(Profil pro) throws IllegalArgumentException {
+		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Besuch> besuchteProfiles = this.getAllBesucheOf(pro);
+		
+		for(int b = 0; b < profiles.size(); b++) {
+			if(pro != profiles.elementAt(b) && profiles.elementAt(b).equals(besuchteProfiles.elementAt(b).getBesuchterNutzerID())) {
+				profiles.add(profiles.elementAt(b));
+			}
+		}
+		
+		return profiles;
+	}
+	
+	@Override
+	public Vector<Profil> showBesucherOf(Profil pro) throws IllegalArgumentException {
+		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Besuch> besucher = this.getAllBesucheOf(pro);
+		
+		for(int b = 0; b < profiles.size(); b++) {
+			if(pro != profiles.elementAt(b) && profiles.elementAt(b).equals(besucher.elementAt(b).getBesuchenderNutzerID())) {
+				profiles.add(profiles.elementAt(b));
+			}
+		}
+		
+		return profiles;
+	}
+	
 	@Override
 	public void save(Merkzettel merk) throws IllegalArgumentException {
 
@@ -736,14 +791,48 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 			throws IllegalArgumentException {
 
 		Suchprofil suchpro = new Suchprofil();
-		suchpro.setHaarfarbe(haarfarbe);
-		suchpro.setKoerpergroesse(körpergröße);
-		suchpro.setMaxAlter(maxalter);
-		suchpro.setMinAlter(minalter);
-		suchpro.setProfilId(profilId);
-		suchpro.setRaucher(raucher);
-		suchpro.setReligion(religion);
-		suchpro.setGeschlecht(geschlecht);
+		if(haarfarbe != null) {
+			suchpro.setHaarfarbe(haarfarbe);
+		} else {
+			suchpro.setHaarfarbe(null);
+		}
+		
+		if(körpergröße != 0){
+			suchpro.setKoerpergroesse(körpergröße);
+		} else {
+			suchpro.setKoerpergroesse(0);
+		}
+		
+		if(maxalter != 0){
+			suchpro.setMaxAlter(maxalter);
+		} else {
+			suchpro.setMaxAlter(0);
+		}
+		
+		if(minalter != 0){
+			suchpro.setMinAlter(minalter);
+		} else {
+			suchpro.setMinAlter(0);
+		}
+		
+		if(raucher != null){
+			suchpro.setRaucher(raucher);
+		} else {
+			suchpro.setRaucher(null);
+		}
+		
+		if(religion != null){
+			suchpro.setReligion(religion);
+		} else {
+			suchpro.setReligion(null);
+		}
+		
+		if(geschlecht != null){
+			suchpro.setGeschlecht(geschlecht);
+		} else {
+			suchpro.setGeschlecht(null);
+		}
+		
 		suchpro.setProfilId(profilId);
 
 		return suchprofilMapper.insertSuchprofil(suchpro);
@@ -772,28 +861,78 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	
 	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException {
 		Vector<Profil> profiles = this.getAllProfils();
+		boolean treffer = false;
 		
-		for(int k = 0; k < profiles.size(); k++){
+		for(int k = 0; k < profiles.size(); k++) {
 			profiles.elementAt(k);
-			if(suchpro.getHaarfarbe() == profiles.elementAt(k).getHaarfarbe()){
-				if(suchpro.getGeschlecht() == profiles.elementAt(k).getGeschlecht()){
-					if(suchpro.getKoerpergroesse() == profiles.elementAt(k).getKoerpergroesse()){
-						if(suchpro.getRaucher() == profiles.elementAt(k).getRaucher()){
-							if(suchpro.getReligion() == profiles.elementAt(k).getReligion()){
-								if(suchpro.getMinAlter() < getAlterOf(profiles.elementAt(k))){
-									if(suchpro.getMaxAlter() > getAlterOf(profiles.elementAt(k))){
-										profiles.add(profiles.elementAt(k));
-									}
-								}
-							}
-						}
-					}
+			if(suchpro.getHaarfarbe() != null) {
+				if(suchpro.getHaarfarbe() == profiles.elementAt(k).getHaarfarbe()) {
+					treffer = true;
 				}
 			}
 			
+			if(suchpro.getGeschlecht() != null) {
+				if(suchpro.getGeschlecht() == profiles.elementAt(k).getGeschlecht()) {
+					treffer = true;
+				}
+			}
+			
+			if(suchpro.getKoerpergroesse() != 0) {
+				if(suchpro.getKoerpergroesse() == profiles.elementAt(k).getKoerpergroesse()) {
+					treffer = true;
+				}
+			}
+			
+			if(suchpro.getRaucher() != null) {
+				if(suchpro.getRaucher() == profiles.elementAt(k).getRaucher()){
+					treffer = true;
+				}
+			}
+			
+			if(suchpro.getReligion() != null) {
+				if(suchpro.getReligion() == profiles.elementAt(k).getReligion()) {
+					treffer = true;
+				}
+			}
+			
+			if(suchpro.getMinAlter() != 0 && suchpro.getMaxAlter() != 0) {
+				if(suchpro.getMinAlter() < getAlterOf(profiles.elementAt(k)) && suchpro.getMaxAlter() > getAlterOf(profiles.elementAt(k))) {
+					treffer = true;
+				}
+			}
+			
+			if(treffer == true){
+				profiles.add(profiles.elementAt(k));
+			}
+			
 		}
-		
 		return profiles;
+		
+//		for(int k = 0; k < profiles.size(); k++) {
+//		profiles.elementAt(k);
+//		if(suchpro.getHaarfarbe() != null) {
+//		} else if(suchpro.getHaarfarbe() == profiles.elementAt(k).getHaarfarbe()) {
+//			if(suchpro.getGeschlecht() != null) {
+//			} else if(suchpro.getGeschlecht() == profiles.elementAt(k).getGeschlecht()) {
+//				if(suchpro.getKoerpergroesse() != 0) {
+//				} else if(suchpro.getKoerpergroesse() == profiles.elementAt(k).getKoerpergroesse()) {
+//					if(suchpro.getRaucher() != null) {
+//					} else if(suchpro.getRaucher() == profiles.elementAt(k).getRaucher()){
+//						if(suchpro.getReligion() != null) {
+//						} else if(suchpro.getReligion() == profiles.elementAt(k).getReligion()) {
+//							if(suchpro.getMinAlter() != 0 && suchpro.getMaxAlter() != 0) {
+//							} else if(suchpro.getMinAlter() < getAlterOf(profiles.elementAt(k)) && suchpro.getMaxAlter() > getAlterOf(profiles.elementAt(k))){
+//									profiles.add(profiles.elementAt(k));
+//								
+//							} profiles.add(profiles.elementAt(k));
+//						} profiles.add(profiles.elementAt(k));
+//					} profiles.add(profiles.elementAt(k));
+//				} profiles.add(profiles.elementAt(k));
+//			} profiles.add(profiles.elementAt(k));
+//		} profiles.add(profiles.elementAt(k));
+//		
+//	}
+		
 	}
 	
 	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) throws IllegalArgumentException {

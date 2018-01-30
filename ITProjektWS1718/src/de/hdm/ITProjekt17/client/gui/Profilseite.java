@@ -25,6 +25,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
+import de.hdm.ITProjekt17.client.ITProjektWS1718;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
@@ -297,7 +298,21 @@ public class Profilseite extends VerticalPanel{
 								@Override
 								public void onSuccess(Profil result) {
 									p1 = result;
-									
+									pbverwaltung.checkProfil(email, new AsyncCallback<Profil>() {
+
+										@Override
+										public void onFailure(Throwable caught) {
+											// TODO Auto-generated method stub
+											
+										}
+
+										@Override
+										public void onSuccess(Profil result) {
+
+											RootPanel.get("Navigator").clear();
+											RootPanel.get("Navigator").add(new Menubar(result));
+										}
+									});
 									
 								}
 					});

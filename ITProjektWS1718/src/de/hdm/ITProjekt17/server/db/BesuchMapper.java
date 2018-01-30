@@ -112,9 +112,10 @@ public class BesuchMapper {
 		Connection con = DBConnection.connection();
 
 		try {
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM besuch " + "WHERE id= ?");
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM besuch " + "WHERE besuchendernutzerid= ? AND besuchternutzerid= ?");
 
-			stmt.setInt(1, besuch.getId());
+			stmt.setInt(1, besuch.getBesuchenderNutzerID());
+			stmt.setInt(2, besuch.getBesuchterNutzerID());
 			stmt.executeUpdate();
 
 		} catch (SQLException e2) {
@@ -122,6 +123,20 @@ public class BesuchMapper {
 		}
 	}
 	
+	public void deleteeinzeln(Besuch besuch) {
+		Connection con = DBConnection.connection();
+
+		try {
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM besuch " + "WHERE besuchendernutzerid= ? OR besuchternutzerid= ?");
+
+			stmt.setInt(1, besuch.getBesuchenderNutzerID());
+			stmt.setInt(2, besuch.getBesuchenderNutzerID());
+			stmt.executeUpdate();
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+	}
 	/**
 	 * BEsuche werden gelöscht durch beide Profil Ids vom besuchter und besuchender Nutzer.
 	 * @param besuchendernutzerid
@@ -272,5 +287,86 @@ public class BesuchMapper {
 		     */
 		    return besuche;
 		  }
+	  public Vector<Besuch> getAllBesucherOfProfil(Profil pro) {
+			 
+		 	/**
+		 	 * Aufbau der DB Connection
+		 	 */
+		    Connection con = DBConnection.connection();
+		  
+		    Vector<Besuch> result = new Vector<Besuch>();
+		    
+		    try {
+		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE  besuchternutzerid=? ");
+		    	stmt.setInt(1, pro.getId());
+		      
+		    	ResultSet rs = stmt.executeQuery();
+		        
+		        /**
+		         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+		         */
+		        while (rs.next()) {
+		          Besuch besuche = new Besuch();
+		        
+		          besuche.setId(rs.getInt("id"));
+		          besuche.setBesuchenderNutzerID(rs.getInt("besuchendernutzerid"));
+		          besuche.setBesuchterNutzerID(rs.getInt("besuchternutzerid"));
+		          /**
+		           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+		           */
+		          
+		      
+		          result.addElement(besuche);
+		        }
+		      }
+		      catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+
+		      /**
+		       *  Ergebnisvektor zurückgeben
+		       */
+		      return result;
+	 }
+	  public Vector<Besuch> getAllBesuche() {
+			 
+		 	/**
+		 	 * Aufbau der DB Connection
+		 	 */
+		    Connection con = DBConnection.connection();
+		  
+		    Vector<Besuch> result = new Vector<Besuch>();
+		    
+		    try {
+		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch ");
+		      
+		    	ResultSet rs = stmt.executeQuery();
+		        
+		        /**
+		         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
+		         */
+		        while (rs.next()) {
+		          Besuch besuche = new Besuch();
+		        
+		          besuche.setId(rs.getInt("id"));
+		          besuche.setBesuchenderNutzerID(rs.getInt("besuchendernutzerid"));
+		          besuche.setBesuchterNutzerID(rs.getInt("besuchternutzerid"));
+		          /**
+		           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+		           */
+		          
+		      
+		          result.addElement(besuche);
+		        }
+		      }
+		      catch (SQLException e) {
+		        e.printStackTrace();
+		      }
+
+		      /**
+		       *  Ergebnisvektor zurückgeben
+		       */
+		      return result;
+	 }
 	  
 }

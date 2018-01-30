@@ -1180,7 +1180,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		Vector<Kontaktsperre> sperre = this.getAllKontaktsperreOf(pro);
 
 		for (int i = 0; i < sperre.size(); i++) {
-			kontaktsperreMapper.deleteKontaktsperre(sperre.elementAt(i));
+			if(pro.getId() == sperre.elementAt(i).getProfilId_gesperrter() || pro.getId() == sperre.elementAt(i).getProfilId_sperrender())
+			kontaktsperreMapper.deleteKontaktsperreByProfil(sperre.elementAt(i));
 
 		}
 
@@ -1578,6 +1579,12 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		
 		
 		return alter;
+	}
+
+	@Override
+	public Vector<Kontaktsperre> getBlockedBy(Profil pro) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

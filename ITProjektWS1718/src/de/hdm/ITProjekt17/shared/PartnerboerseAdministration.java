@@ -123,6 +123,8 @@ public interface PartnerboerseAdministration extends RemoteService {
 	
 	public int getAlterOf(Profil pro) throws IllegalArgumentException;
 	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) throws IllegalArgumentException;
+	public Vector<Profil> showMerkendeOf(Profil pro) throws IllegalArgumentException;
 	
+	public Vector<Kontaktsperre> getBlockedBy(Profil pro) throws IllegalArgumentException;
 	
 }

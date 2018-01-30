@@ -262,8 +262,8 @@ return null;
 	    Vector<Freitexteigenschaft> result = new Vector<Freitexteigenschaft>();
 	    
 	    try {
-	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM freitexteigenschaft WHERE infoid=? ");
-	    	stmt.setInt(1, info.getId());
+	    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM freitexteigenschaft WHERE id=? ");
+	    	stmt.setInt(1, info.getFreitexteigenschaftid());
 	      
 	    	ResultSet rs = stmt.executeQuery();
 	        

@@ -116,8 +116,9 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 			    	/**
 				      * Durchführung der Löschoperation
 				      */
-			     PreparedStatement stmt = con.prepareStatement("DELETE FROM kontaktsperre WHERE id=? ");
-			     stmt.setInt(1, sperre.getId());
+			     PreparedStatement stmt = con.prepareStatement("DELETE FROM kontaktsperre WHERE profilid_sperrender=? AND profilid_gesperrter=? ");
+			     stmt.setInt(1, sperre.getProfilId_sperrender());
+			     stmt.setInt(2, sperre.getProfilId_gesperrter());
 			     stmt.executeUpdate();
 
 			  
@@ -327,5 +328,73 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 					     *  Das Profil wird zurückgegeben
 					     */
 					    return sperre;
-					  }		
+					  }	
+				 public Vector<Kontaktsperre> getAllKontaktsperrenDesGesperrten(Profil pro) {
+					 
+					 	/**
+					 	 * Aufbau der DB Connection
+					 	 */
+					    Connection con = DBConnection.connection();
+					  
+					    Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
+					    
+					    try {
+					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM kontaktsperre WHERE profilid_gesperrter=? ");
+					    	stmt.setInt(1, pro.getId());
+					      
+					    	ResultSet rs = stmt.executeQuery();
+					        
+					        /**
+					         * Für jeden Eintrag im Suchergebnis wird nun ein Kontaktsperre-Objekt erstellt.
+					         */
+					        while (rs.next()) {
+					          Kontaktsperre spe = new Kontaktsperre();
+					        
+					          spe.setId(rs.getInt("id"));
+					          spe.setProfilId_sperrender(rs.getInt("profilid_sperrender"));
+					          spe.setProfilId_gesperrter(rs.getInt("profilid_gesperrter"));
+					          /**
+					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+					           */
+					          
+					         
+					          
+					          result.addElement(spe);
+					        }
+					      }
+					      catch (SQLException e) {
+					        e.printStackTrace();
+					      }
+
+					      /**
+					       *  Ergebnisvektor zurückgeben
+					       */
+					      return result;
+				 }
+					public void deleteKontaktsperreByProfil (Kontaktsperre sperre) {
+						/**
+						 * Aufbau der DB Connection
+						 */
+					    Connection con = DBConnection.connection();
+					    /**
+						 * Try und Catch gehören zum Exception Handling 
+						 * Try = Versuch erst dies 
+						 * Catch = Wenn Try nicht geht versuch es so ..
+						 */
+					    try {
+					    	/**
+						      * Durchführung der Löschoperation
+						      */
+					     PreparedStatement stmt = con.prepareStatement("DELETE FROM kontaktsperre WHERE profilid_sperrender=? or profilid_gesperrter=? ");
+					     stmt.setInt(1, sperre.getProfilId_sperrender());
+					     stmt.setInt(2, sperre.getProfilId_sperrender());
+					     stmt.executeUpdate();
+
+					  
+					    }
+					    catch (SQLException e2) {
+					      e2.printStackTrace();
+					    }
+					  }
+				 
 	}

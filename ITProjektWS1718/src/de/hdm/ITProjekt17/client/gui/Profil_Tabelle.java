@@ -5,6 +5,8 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.MultiSelectionModel;
+import com.google.gwt.view.client.NoSelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
@@ -15,7 +17,7 @@ public class Profil_Tabelle extends CellTable<Profil>{
 	
 	private final SingleSelectionModel<Profil> ssm_profil_anzeige = new SingleSelectionModel<Profil>();
 	
-	DateTimeFormat df = DateTimeFormat.getFormat("DD/MM/YYYY");
+	DateTimeFormat df = DateTimeFormat.getFormat("dd/MM/yyyy");
 	public SingleSelectionModel<Profil> getSsm_profil_anzeige() {
 		return ssm_profil_anzeige;
 	}

@@ -29,6 +29,7 @@ public class Suchergebnis extends VerticalPanel{
 	
 	private Button kontaktsperren = new Button("Kontakt sperren");
 	private Button kontaktmerken = new Button("Kontakt merken");
+	private Button zursuche = new Button("Zurück");
 		
 	private Profil_Tabelle p1 = new Profil_Tabelle();
 	private VerticalPanel vpanel = new VerticalPanel();
@@ -44,25 +45,26 @@ public class Suchergebnis extends VerticalPanel{
 				RootPanel.get("Details").add(new Suchen(profil));
 			}
 		});
+		pbverwaltung.getAllProfilsOf(suchprofil, new AsyncCallback<Vector<Profil>>() {
+					
+					@Override
+					public void onSuccess(Vector<Profil> result) {
+						p1.setRowData(0, result);
+						p1.setRowCount(result.size(), true);
+					
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
 		vpanel.add(zurückzusuchen);
 		vpanel.add(suchergebnisse);
 		vpanel.add(p1);
 		this.add(vpanel);
-		pbverwaltung.getAllProfilsOf(suchprofil, new AsyncCallback<Vector<Profil>>() {
-			
-			@Override
-			public void onSuccess(Vector<Profil> result) {
-				p1.setRowData(0, result);
-				p1.setRowCount(result.size(), true);
-			
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		
 		p1.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			
 			@Override
@@ -85,8 +87,16 @@ public class Suchergebnis extends VerticalPanel{
 				Profil_Dialogbox profildialogbox = new Profil_Dialogbox(profil, p1.getSsm_profil_anzeige().getSelectedObject());
 				profildialogbox.setWidget(8, 0, kontaktmerken);
 				profildialogbox.setWidget(8, 1, kontaktsperren);
+				profildialogbox.setWidget(8, 2, zursuche);
 				b1.add(profildialogbox);
 				b1.center();
+				zursuche.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+					b1.hide();
+					}
+				});
 				kontaktmerken.addClickHandler(new ClickHandler() {
 					
 					@Override

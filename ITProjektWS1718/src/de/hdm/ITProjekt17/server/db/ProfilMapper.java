@@ -4,6 +4,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 import de.hdm.ITProjekt17.shared.bo.Profil;
+import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 
 /**
  * 
@@ -354,6 +355,56 @@ public class ProfilMapper {
 				         */
 				        while (rs.next()) {
 				        Profil pro = new Profil();
+				          pro.setId(rs.getInt("id"));
+				          pro.setEmail(rs.getString("email"));
+				          pro.setVorname(rs.getString("vorname"));
+				          pro.setNachname(rs.getString("nachname"));
+				          pro.setGeburtsdatum(rs.getDate("geburtsdatum"));
+				          pro.setKoerpergroesse(rs.getInt("koerpergroesse"));
+				          pro.setReligion(rs.getString("religion"));
+				          pro.setHaarfarbe(rs.getString("haarfarbe"));
+				          pro.setRaucher(rs.getString("raucher"));
+				          pro.setGeschlecht(rs.getString("geschlecht"));
+				          
+				          /**
+				           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
+				           */
+				          result.addElement(pro);
+				        }
+				      }
+				      catch (SQLException e) {
+				        e.printStackTrace();
+				      }
+
+				      /**
+				       *  Ergebnisvektor zurückgeben
+				       */
+				      return result;
+			 }
+		 	 public Vector<Profil> getAllProfilBySuchprofil(Suchprofil suchpro) {
+				 
+				 	/**
+				 	 * Aufbau der DB Connection
+				 	 */
+				    Connection con = DBConnection.connection();
+				  
+				    Vector<Profil> result = new Vector<Profil>();
+				    try {
+				    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM profil WHERE geschlecht= ? AND haarfarbe= ? AND raucher= ? AND religion= ? AND koerpergroesse= ?");
+				    	stmt.setString(1, suchpro.getGeschlecht());
+				    	stmt.setString(2, suchpro.getHaarfarbe());
+				    	stmt.setString(3, suchpro.getRaucher());
+				    	stmt.setString(4, suchpro.getReligion());
+				    	stmt.setInt(5, suchpro.getKoerpergroesse());	
+						
+				      
+				    	ResultSet rs = stmt.executeQuery();
+				        
+				        /**
+				         * Für jeden Eintrag im Suchergebnis wird nun ein Profil-Objekt erstellt.
+				         */
+				        while (rs.next()) {
+				          Profil pro = new Profil();
 				          pro.setId(rs.getInt("id"));
 				          pro.setEmail(rs.getString("email"));
 				          pro.setVorname(rs.getString("vorname"));

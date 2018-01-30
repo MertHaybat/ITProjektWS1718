@@ -217,8 +217,8 @@ return null;
 			/**
 			 * Durchführung der Löschoperation
 			 */
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE id=? ");
-			stmt.setInt(1, in.getId());
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM info " + "WHERE profilid=? ");
+			stmt.setInt(1, in.getProfilId());
 			stmt.executeUpdate();
 
 		} catch (SQLException e2) {

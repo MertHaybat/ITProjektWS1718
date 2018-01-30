@@ -205,6 +205,10 @@ public interface PartnerboerseAdministrationAsync {
 
 	void showBesucherOf(Profil pro, AsyncCallback<Vector<Profil>> callback);
 
+	void showMerkendeOf(Profil pro, AsyncCallback<Vector<Profil>> callback);
+
+	void getBlockedBy(Profil pro, AsyncCallback<Vector<Kontaktsperre>> callback);
+
 
 
 }

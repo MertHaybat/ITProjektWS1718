@@ -117,8 +117,9 @@ public class MerkzettelMapper {
 				      * Durchführung der Löschoperation
 				      *
 				      */
-			     PreparedStatement stmt = con.prepareStatement("DELETE FROM merkzettel " + "WHERE id= ? ");
-			     stmt.setInt(1, merk.getId());
+			     PreparedStatement stmt = con.prepareStatement("DELETE FROM merkzettel " + "WHERE profilid_merkender= ? AND profilid_gemerkter= ? ");
+			     stmt.setInt(1, merk.getProfilId_merkender());
+			     stmt.setInt(2, merk.getProfilId_gemerkter());
 			     stmt.executeUpdate();
 
 			  
@@ -408,5 +409,32 @@ public class MerkzettelMapper {
 					     */
 					    return merk;
 					  }
+				 public void deleteMerkzettelbyprofil(Merkzettel merk) {
+						/**
+						 * Aufbau der DB Connection
+						 */
+					    Connection con = DBConnection.connection();
+					    /**
+						 * Try und Catch gehören zum Exception Handling 
+						 * Try = Versuch erst dies 
+						 * Catch = Wenn Try nicht geht versuch es so ..
+						 */
+					    try {
+					    	/**
+						      * Durchführung der Löschoperation
+						      *
+						      */
+					     PreparedStatement stmt = con.prepareStatement("DELETE FROM merkzettel " + "WHERE profilid_merkender= ? or profilid_gemerkter= ? ");
+					     stmt.setInt(1, merk.getProfilId_gemerkter());
+					     stmt.setInt(2, merk.getProfilId_gemerkter());
+					     stmt.executeUpdate();
+
+					  
+					    }
+					    catch (SQLException e2) {
+					      e2.printStackTrace();
+					    }
+					  }
+					
 				 
 		 }

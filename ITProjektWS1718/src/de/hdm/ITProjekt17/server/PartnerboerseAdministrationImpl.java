@@ -25,7 +25,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * Applikationslogik dargestellt.
  * 
  * @author Mustafi
- *
+ * @author Barut
  */
 
 @SuppressWarnings("serial")
@@ -870,7 +870,12 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 			profiles.elementAt(k);
 			if(suchpro.getHaarfarbe() != null) {
 				if(suchpro.getHaarfarbe() == profiles.elementAt(k).getHaarfarbe()) {
-					treffer = true;
+					if(treffer != false){
+						treffer = true;
+					} else {
+						treffer = false;
+					}
+					
 				}
 			}
 			
@@ -1223,14 +1228,14 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 		// Info
 
-		Vector<Info> infos = this.getAllInfo();
-		Vector<Freitexteigenschaft> frei = this.getAllFreitexteigenschaft();
+		Vector<Info> infos = this.getAllInfoOf(pro);
+		
 		for (int i = 0; i < infos.size(); i++) {
-			infoMapper.deleteInfo(infos.elementAt(i));
-		}
-
-		for (int i = 0; i < frei.size(); i++) {
-			freitexteigenschaftMapper.deleteFreitexteigenschaft(frei.elementAt(i));
+			Vector<Freitexteigenschaft> frei = this.getAllFreitexteigenschaftOf(infos.elementAt(i));
+			for (int j = 0; j < frei.size(); j++) {
+				freitexteigenschaftMapper.deleteFreitexteigenschaft(frei.elementAt(j));
+				infoMapper.deleteInfo(infos.elementAt(i));
+			}
 		}
 
 		// AnschlieÃŸend das Profil entfernen

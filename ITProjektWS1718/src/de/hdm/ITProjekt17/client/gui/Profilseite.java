@@ -4,11 +4,8 @@ package de.hdm.ITProjekt17.client.gui;
 
 import java.util.Vector;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -19,16 +16,14 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.user.datepicker.client.DatePicker;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
-import de.hdm.ITProjekt17.client.ITProjektWS1718;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Auswahleigenschaft;
-import de.hdm.ITProjekt17.shared.bo.Freitexteigenschaft;
 import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
@@ -49,7 +44,8 @@ public class Profilseite extends VerticalPanel{
 	private TextBox tbkörpergröße = new TextBox();
 	private ListBox lbraucher = new ListBox();
 	private ListBox lbgeschlecht = new ListBox();
-	private TextBox tbfreitext = new TextBox();
+//	private TextBox tbfreitext = new TextBox();
+	private TextArea tbfreitext = new TextArea();
 
 	
 	private ListBox lbinteresse = new ListBox();
@@ -90,12 +86,11 @@ public class Profilseite extends VerticalPanel{
 	private Auswahleigenschaft b = new Auswahleigenschaft();
 	private Auswahleigenschaft c = new Auswahleigenschaft();
 	private Auswahleigenschaft d = new Auswahleigenschaft();
-	private Freitexteigenschaft e = new Freitexteigenschaft();
+
 	
-	
-	public Profilseite(final String email){
+	public Profilseite(final String email, final Anchor logout){
 		Window.alert("Willkommen auf MOFOS. Tragen Sie bitte nachfolgend die Daten zu Ihrer Person ein.");
-		
+
 		ft1.setWidget(1, 0, lb1);
 		ft1.setWidget(1, 1, tbvorname);
 		ft1.setWidget(2, 0, lb2);
@@ -126,7 +121,7 @@ public class Profilseite extends VerticalPanel{
 		ft2.setWidget(5, 0, lb9);
 		ft2.setWidget(6, 0, tbfreitext);
 			
-		tbfreitext.setPixelSize(225, 150);
+		tbfreitext.setPixelSize(250, 150);
 
 		vpanel.add(ft1);
 		vpanel2.add(ft2);
@@ -258,29 +253,21 @@ public class Profilseite extends VerticalPanel{
 	      lbkörperbau.addItem("mollig");
 	      lbkörperbau.addItem("dick");
 		
-		// Create a date picker
-			final DatePicker datepicker_geburtsdatum = new DatePicker();
+	
 			geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
 			geburtsdatum.getDatePicker().setYearArrowsVisible(true);
 			geburtsdatum.getDatePicker().setYearAndMonthDropdownVisible(true);
 			geburtsdatum.getDatePicker().setVisibleYearCount(10);
 
-		 // Set the value in the text box when the user selects a date
-//			datepicker_geburtsdatum.addValueChangeHandler(new ValueChangeHandler<Date>(){
-//
-//				@Override
-//				public void onValueChange(ValueChangeEvent<Date> event) {
-//					Date date = event.getValue();
-//		            String dateString = df.format(date);
-//		                    DateTimeFormat.getFormat("MM/dd/yyyy").format(date);
-//		                    text.setText(dateString);
-//		                 
-//				}
-//			});
-			
-//		    datepicker_geburtsdatum.setValue(new Date(), true);
+
 		   
-		    
+		    abbrechen.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					Window.open(logout.getHref(), "_self", "");
+				}
+			});
 		    ok.addClickHandler(new ClickHandler(){
 
 				@Override
@@ -308,10 +295,10 @@ public class Profilseite extends VerticalPanel{
 
 										@Override
 										public void onSuccess(Profil result) {
-
+											RootPanel.get("Topbar").add(logout);
 											RootPanel.get("Navigator").clear();
 											RootPanel.get("Navigator").add(new Menubar(result));
-										}
+																					}
 									});
 									
 								}
@@ -429,7 +416,7 @@ public class Profilseite extends VerticalPanel{
 		ft2.setWidget(4, 1, lbkörperbau);
 		ft2.setWidget(5, 0, lb9);
 		ft2.setWidget(6, 0, tbfreitext);
-		
+
 		tbfreitext.setPixelSize(250, 150);
 		
 		geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
@@ -671,8 +658,7 @@ public class Profilseite extends VerticalPanel{
 
 					@Override
 					public void onSuccess(Void result) {
-						
-						
+						Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
 						}
 					
 				});	
@@ -699,8 +685,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onSuccess(Void result) {
-									// TODO Auto-generated method stub
-									
+									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
 								}
 							});
 							break;
@@ -715,8 +700,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onSuccess(Void result) {
-									// TODO Auto-generated method stub
-									
+									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
 								}
 							});
 							break;
@@ -731,8 +715,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onSuccess(Void result) {
-									// TODO Auto-generated method stub
-									
+									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
 								}
 							});
 							break;
@@ -747,8 +730,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onSuccess(Void result) {
-									// TODO Auto-generated method stub
-									
+									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
 								}
 							});
 								break;
@@ -757,8 +739,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
+									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
 								}
 
 								@Override

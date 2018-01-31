@@ -25,7 +25,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * Applikationslogik dargestellt.
  * 
  * @author Mustafi
- * @author Barut
+ *
  */
 
 @SuppressWarnings("serial")
@@ -420,15 +420,6 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	public void delete(Info in) throws IllegalArgumentException {
 
 		try {
-			Vector<Auswahleigenschaft> auswahlinfo = new Vector<Auswahleigenschaft>();
-
-			auswahlinfo = this.getAllAuswahleigenschaftOf(in);
-			if (auswahlinfo != null) {
-				for (Auswahleigenschaft a : auswahlinfo) {
-					this.auswahleigenschaftMapper.deleteAuswahleigenschaft(a);
-				}
-			}
-
 			Vector<Freitexteigenschaft> freitextinfo = new Vector<Freitexteigenschaft>();
 
 			freitextinfo = this.getAllFreitexteigenschaftOf(in);
@@ -438,16 +429,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 				}
 			}
 
-			Vector<Suchprofil_Info> suchproInfo = new Vector<Suchprofil_Info>();
-
-			suchproInfo = this.getAllSuchprofilInfoOf(in);
-			if (suchproInfo != null) {
-				for (Suchprofil_Info spi : suchproInfo) {
-					this.suchprofil_infoMapper.deleteSuchprofil_Info(spi);
-				}
-			}
-
-			infoMapper.deleteInfo(in);
+		infoMapper.deleteInfo(in);
 
 		} catch (Exception e) {
 
@@ -575,29 +557,26 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * @throws IllegalArgumentException
 	 */
 	public Vector<Profil> showBlockedProfilsOf(Profil pro) throws IllegalArgumentException {
-		Vector<Profil> profiles = this.getAllProfils();
 		Vector<Kontaktsperre> allBlockedProfiles = this.getAllKontaktsperreOf(pro);
+		Vector<Profil> vectorprofil = new Vector<Profil>();
+		System.out.println(allBlockedProfiles);
+		for (int i = 0; i<allBlockedProfiles.size(); i++) {
+			vectorprofil.addElement(getProfilById(allBlockedProfiles.elementAt(i).getProfilId_gesperrter()));
+		}	
 		
-		for(int k = 0; k < profiles.size(); k++) {
-			if(pro != profiles.elementAt(k) && profiles.elementAt(k).equals(allBlockedProfiles.elementAt(k).getProfilId_gesperrter())) {
-				profiles.add(profiles.elementAt(k));
-			}
-		}
-
-		return profiles;
+		return vectorprofil;
 
 	}
 	
 	public Vector<Profil> showAllBlockerOf(Profil pro) throws IllegalArgumentException {
-		Vector<Profil> profiles = this.getAllProfils();
-		Vector<Kontaktsperre> allBlockers = this.getAllKontaktsperre();
+		Vector<Kontaktsperre> allBlockedProfiles = this.getBlockedBy(pro);
+		Vector<Profil> vectorprofil = new Vector<Profil>();
+		System.out.println(allBlockedProfiles);
+		for (int i = 0; i<allBlockedProfiles.size(); i++) {
+			vectorprofil.addElement(getProfilById(allBlockedProfiles.elementAt(i).getProfilId_sperrender()));
+		}	
 		
-		for(int k = 0; k < profiles.size(); k++) {
-			if(pro != profiles.elementAt(k) && profiles.elementAt(k).equals(allBlockers.elementAt(k).getProfilId_sperrender())) {
-				profiles.add(profiles.elementAt(k));
-			}
-		}
-		return profiles;
+		return vectorprofil;
 	}
 
 	@Override
@@ -639,10 +618,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	@Override
 	public void delete(Kontaktsperre sperre) throws IllegalArgumentException {
-		Kontaktsperre k = new Kontaktsperre();
-		k.setProfilId_gesperrter(0);
-		k.setProfilId_sperrender(0);
-		this.kontaktsperreMapper.updateKontaktsperre(k);
+		
 		this.kontaktsperreMapper.deleteKontaktsperre(sperre);
 	}
 
@@ -698,59 +674,53 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * @throws IllegalArgumentException
 	 */
 	public Vector<Profil> showMerklisteOf(Profil pro) throws IllegalArgumentException {
-		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Merkzettel> allGemerkteProfile = this.getAllMerkzettelOf(pro);
 		
-		for(int k = 0; k < profiles.size(); k++) {
-			if(pro != profiles.elementAt(k) && profiles.elementAt(k).equals(allGemerkteProfile.elementAt(k).getProfilId_gemerkter())) {
-				profiles.add(profiles.elementAt(k));
-			}
-			
+		for (int i = 0; i<allGemerkteProfile.size(); i++){
+			profiles.addElement(getProfilById(allGemerkteProfile.elementAt(i).getProfilId_gemerkter()));
 		}
-			
+					
 		return profiles;
 		
 	}
 	
 	public Vector<Profil> showMerkendeOf(Profil pro) throws IllegalArgumentException {
-		Vector<Profil> profiles = this.getAllProfils();
-		Vector<Merkzettel> merkendeProfiles = this.getAllMerkzettelOf(pro);
+		Vector<Profil> profiles = new Vector<Profil>();
+		Vector<Merkzettel> merkendeProfiles = merkzettelMapper.merkzettel_showGemerkteProfile(pro.getId());
 		
-		for(int k = 0; k < profiles.size(); k++) {
-			if(pro != profiles.elementAt(k) && profiles.elementAt(k).equals(merkendeProfiles.elementAt(k).getProfilId_merkender())) {
-				profiles.add(profiles.elementAt(k));
-			}
+		for (int i = 0; i<merkendeProfiles.size(); i++){
+			profiles.addElement(getProfilById(merkendeProfiles.elementAt(i).getProfilId_merkender()));
 		}
-		
+			
 		return profiles;
-
 	}
 
 	@Override
 	public Vector<Profil> showBesuchteOf(Profil pro) throws IllegalArgumentException {
-		Vector<Profil> profiles = this.getAllProfils();
-		Vector<Besuch> besuchteProfiles = this.getAllBesucheOf(pro);
+		Vector<Profil> profiles = new Vector<Profil>();
+		Vector<Besuch> besucher = besuchMapper.getAllBesucherOfProfil(pro);
 		
-		for(int b = 0; b < profiles.size(); b++) {
-			if(pro != profiles.elementAt(b) && profiles.elementAt(b).equals(besuchteProfiles.elementAt(b).getBesuchterNutzerID())) {
-				profiles.add(profiles.elementAt(b));
-			}
+		
+		for (int i = 0; i<besucher.size(); i++){
+			profiles.addElement(getProfilById(besucher.elementAt(i).getBesuchenderNutzerID()));
 		}
-		
+
+	
 		return profiles;
 	}
 	
 	@Override
 	public Vector<Profil> showBesucherOf(Profil pro) throws IllegalArgumentException {
-		Vector<Profil> profiles = this.getAllProfils();
+		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Besuch> besucher = this.getAllBesucheOf(pro);
 		
-		for(int b = 0; b < profiles.size(); b++) {
-			if(pro != profiles.elementAt(b) && profiles.elementAt(b).equals(besucher.elementAt(b).getBesuchenderNutzerID())) {
-				profiles.add(profiles.elementAt(b));
-			}
-		}
 		
+		for (int i = 0; i<besucher.size(); i++){
+			profiles.addElement(getProfilById(besucher.elementAt(i).getBesuchterNutzerID()));
+		}
+
+	
 		return profiles;
 	}
 	
@@ -777,10 +747,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	@Override
 	public void delete(Merkzettel merk) throws IllegalArgumentException {
 		Merkzettel m = new Merkzettel();
-		merk.setProfilId_gemerkter(0);
-		merk.setProfilId_merkender(0);
-		this.merkzettelMapper.updateMerkzettel(m);
-		this.merkzettelMapper.deleteMerkzettel(merk);
+		m.setProfilId_gemerkter(merk.getProfilId_gemerkter());
+		m.setProfilId_merkender(merk.getProfilId_merkender());
+		this.merkzettelMapper.deleteMerkzettel(m);
 	}
 
 	/////////////////////////////////////////// Suchprofil//////////////////////////////////////////////////////////////////////////////
@@ -863,83 +832,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 	
 	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException {
-		Vector<Profil> profiles = this.getAllProfils();
-		boolean treffer = false;
 		
-		for(int k = 0; k < profiles.size(); k++) {
-			profiles.elementAt(k);
-			if(suchpro.getHaarfarbe() != null) {
-				if(suchpro.getHaarfarbe() == profiles.elementAt(k).getHaarfarbe()) {
-					if(treffer != false){
-						treffer = true;
-					} else {
-						treffer = false;
-					}
-					
-				}
-			}
-			
-			if(suchpro.getGeschlecht() != null) {
-				if(suchpro.getGeschlecht() == profiles.elementAt(k).getGeschlecht()) {
-					treffer = true;
-				}
-			}
-			
-			if(suchpro.getKoerpergroesse() != 0) {
-				if(suchpro.getKoerpergroesse() == profiles.elementAt(k).getKoerpergroesse()) {
-					treffer = true;
-				}
-			}
-			
-			if(suchpro.getRaucher() != null) {
-				if(suchpro.getRaucher() == profiles.elementAt(k).getRaucher()){
-					treffer = true;
-				}
-			}
-			
-			if(suchpro.getReligion() != null) {
-				if(suchpro.getReligion() == profiles.elementAt(k).getReligion()) {
-					treffer = true;
-				}
-			}
-			
-			if(suchpro.getMinAlter() != 0 && suchpro.getMaxAlter() != 0) {
-				if(suchpro.getMinAlter() < getAlterOf(profiles.elementAt(k)) && suchpro.getMaxAlter() > getAlterOf(profiles.elementAt(k))) {
-					treffer = true;
-				}
-			}
-			
-			if(treffer == true){
-				profiles.add(profiles.elementAt(k));
-			}
-			
-		}
-		return profiles;
-		
-//		for(int k = 0; k < profiles.size(); k++) {
-//		profiles.elementAt(k);
-//		if(suchpro.getHaarfarbe() != null) {
-//		} else if(suchpro.getHaarfarbe() == profiles.elementAt(k).getHaarfarbe()) {
-//			if(suchpro.getGeschlecht() != null) {
-//			} else if(suchpro.getGeschlecht() == profiles.elementAt(k).getGeschlecht()) {
-//				if(suchpro.getKoerpergroesse() != 0) {
-//				} else if(suchpro.getKoerpergroesse() == profiles.elementAt(k).getKoerpergroesse()) {
-//					if(suchpro.getRaucher() != null) {
-//					} else if(suchpro.getRaucher() == profiles.elementAt(k).getRaucher()){
-//						if(suchpro.getReligion() != null) {
-//						} else if(suchpro.getReligion() == profiles.elementAt(k).getReligion()) {
-//							if(suchpro.getMinAlter() != 0 && suchpro.getMaxAlter() != 0) {
-//							} else if(suchpro.getMinAlter() < getAlterOf(profiles.elementAt(k)) && suchpro.getMaxAlter() > getAlterOf(profiles.elementAt(k))){
-//									profiles.add(profiles.elementAt(k));
-//								
-//							} profiles.add(profiles.elementAt(k));
-//						} profiles.add(profiles.elementAt(k));
-//					} profiles.add(profiles.elementAt(k));
-//				} profiles.add(profiles.elementAt(k));
-//			} profiles.add(profiles.elementAt(k));
-//		} profiles.add(profiles.elementAt(k));
-//		
-//	}
+		return this.profilMapper.getAllProfilBySuchprofil(suchpro);
 		
 	}
 	
@@ -1187,36 +1081,44 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 		// Merkzettel
 
-		Vector<Merkzettel> merk = this.getAllMerkzettelOf(pro);
+		Vector<Merkzettel> merk = merkzettelMapper.getAllMerkezettel();
 
 		for (int i = 0; i < merk.size(); i++) {
-			merkzettelMapper.deleteMerkzettel(merk.elementAt(i));
+			if(pro.getId() == merk.elementAt(i).getProfilId_gemerkter() || pro.getId() == merk.elementAt(i).getProfilId_merkender()){
+				merkzettelMapper.deleteMerkzettelbyprofil(merk.elementAt(i));
+			}
+			
 
 		}
 
 		// Besuch
 
-		Vector<Besuch> besuche = getAllBesucheOf(pro);
+		Vector<Besuch> besuche = besuchMapper.getAllBesuche();
+		
+		
 
 		for (int i = 0; i < besuche.size(); i++) {
-			besuchMapper.delete(besuche.elementAt(i));
-
-		}
-
-		// SuchprofilInfo
-
-		Vector<Suchprofil> suchprofil = this.getSuchprofilbyProfilId(pro);
-		Vector<Info> info = getInfoIdByProfilId(pro);
-		Suchprofil_Info suchinfo = new Suchprofil_Info();
-
-		for (int s = 0; s < suchprofil.size(); s++) {
-			for (int i = 0; i < info.size(); i++) {
-				suchinfo = getAllSuchprofilInfos(info.elementAt(i), suchprofil.elementAt(i));
-
+			if(pro.getId() == besuche.elementAt(i).getBesuchenderNutzerID() || pro.getId() == besuche.elementAt(i).getBesuchterNutzerID()){
+				besuchMapper.deleteeinzeln(besuche.elementAt(i));
 			}
+		
 
-			suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
 		}
+
+//		// SuchprofilInfo
+//
+//		Vector<Suchprofil> suchprofil = this.getSuchprofilbyProfilId(pro);
+//		Vector<Info> info = getInfoIdByProfilId(pro);
+//		Suchprofil_Info suchinfo = new Suchprofil_Info();
+//
+//		for (int s = 0; s < suchprofil.size(); s++) {
+//			for (int i = 0; i < info.size(); i++) {
+//				suchinfo = getAllSuchprofilInfos(info.elementAt(i), suchprofil.elementAt(i));
+//
+//			}
+//
+//			suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
+//		}
 
 		// Suchprofil
 
@@ -1229,13 +1131,18 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 		// Info
 
-		Vector<Info> infos = this.getAllInfoOf(pro);
-		
+		Vector<Info> infos = this.getAllInfo();
+		Vector<Freitexteigenschaft> frei = this.getAllFreitexteigenschaft();
 		for (int i = 0; i < infos.size(); i++) {
-			Vector<Freitexteigenschaft> frei = this.getAllFreitexteigenschaftOf(infos.elementAt(i));
-			for (int j = 0; j < frei.size(); j++) {
-				freitexteigenschaftMapper.deleteFreitexteigenschaft(frei.elementAt(j));
+			if(pro.getId() == infos.elementAt(i).getProfilId()){
+
 				infoMapper.deleteInfo(infos.elementAt(i));
+			}
+		}
+
+		for (int i = 0; i < frei.size(); i++) {
+			if(pro.getId() == frei.elementAt(i).getId()){
+				freitexteigenschaftMapper.deleteFreitexteigenschaft(frei.elementAt(i));
 			}
 		}
 
@@ -1319,14 +1226,18 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Methode zum Löschen von Besuchen.
 	 */
 	public void deleteBesuche(Profil pro, int besuchterNutzerID) throws IllegalArgumentException {
-		Vector<Besuch> allBesuche = new Vector<Besuch>();
-		allBesuche = this.getAllBesucheOf(pro);
-
-		if (allBesuche != null) {
-			for (Besuch besuche : allBesuche) {
-				this.besuchMapper.deleteByProfilId(pro, besuche.getBesuchterNutzerID());
-			}
-		}
+//		Vector<Besuch> allBesuche = new Vector<Besuch>();
+//		allBesuche = this.getAllBesucheOf(pro);
+//
+//		if (allBesuche != null) {
+//			for (Besuch besuche : allBesuche) {
+//				this.besuchMapper.deleteByProfilId(pro, besuche.getBesuchterNutzerID());
+//			}
+//		}
+		Besuch b1 = new Besuch();
+		b1.setBesuchenderNutzerID(pro.getId());
+		b1.setBesuchterNutzerID(besuchterNutzerID);
+		this.besuchMapper.delete(b1);
 	}
 
 	/**
@@ -1583,8 +1494,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	@Override
 	public Vector<Kontaktsperre> getBlockedBy(Profil pro) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		return kontaktsperreMapper.getAllKontaktsperrenDesGesperrten(pro);
 	}
 
 

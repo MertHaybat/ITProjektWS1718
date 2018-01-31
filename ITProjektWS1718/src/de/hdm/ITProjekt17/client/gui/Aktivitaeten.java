@@ -98,11 +98,13 @@ public class Aktivitaeten extends VerticalPanel {
 		public void onSelectionChange(SelectionChangeEvent event) {
 			final DialogBox b1 = new DialogBox();
 			Profil_Dialogbox profildialogbox = new Profil_Dialogbox(profil, pt2.getSsm_profil_anzeige().getSelectedObject());
+			Profil_Info_Dialogbox profilinfo = new Profil_Info_Dialogbox(profil, pt2.getSsm_profil_anzeige().getSelectedObject());
 			profildialogbox.setWidget(8, 0, kontaktmerken);
 			profildialogbox.setWidget(8, 1, kontaktsperren);
 			profildialogbox.setWidget(8, 2, besuchloeschen);
 			profildialogbox.setWidget(8, 3, besuchzurueck);
 			b1.add(profildialogbox);
+//			b1.add(profilinfo);
 			b1.setText("Profil");
 			b1.center();
 			kontaktmerken.addClickHandler(new ClickHandler() {
@@ -182,10 +184,12 @@ public class Aktivitaeten extends VerticalPanel {
 			public void onSelectionChange(SelectionChangeEvent event) {
 				final DialogBox b2 = new DialogBox();
 				Profil_Dialogbox profildialogbox2 = new Profil_Dialogbox(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
+				Profil_Info_Dialogbox profilinfo2 = new Profil_Info_Dialogbox(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
 				profildialogbox2.setWidget(8, 0, kontaktmerken);
 				profildialogbox2.setWidget(8, 1, kontaktsperren);
 				profildialogbox2.setWidget(8, 3, besuchzurueck);
 				b2.add(profildialogbox2);
+//				b2.add(profilinfo2);
 				b2.setText("Profil");
 				b2.center();
 				kontaktmerken.addClickHandler(new ClickHandler() {

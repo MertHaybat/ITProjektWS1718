@@ -83,8 +83,9 @@ public class ITProjektWS1718 implements EntryPoint{
 							 * Falls User noch nicht registriert ist wird der User zur Profilseite weitergeleitet, 
 							 * indem er aufgefordert wird, seine Daten einzutragen.
 							 */
+							signOutLink.setHref(loginInfo.getLogoutUrl());
 							RootPanel.get("Navigator").add(new Menubar());
-							RootPanel.get("Details").add(new Profilseite(loginInfo.getEmailAddress()));
+							RootPanel.get("Details").add(new Profilseite(loginInfo.getEmailAddress(), signOutLink));
 						}
 						
 					}

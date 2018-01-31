@@ -685,7 +685,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onSuccess(Void result) {
-									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
+								
 								}
 							});
 							break;
@@ -700,7 +700,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onSuccess(Void result) {
-									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
+									
 								}
 							});
 							break;
@@ -715,7 +715,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onSuccess(Void result) {
-									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
+									
 								}
 							});
 							break;
@@ -730,7 +730,7 @@ public class Profilseite extends VerticalPanel{
 
 								@Override
 								public void onSuccess(Void result) {
-									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
+									
 								}
 							});
 								break;

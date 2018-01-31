@@ -42,7 +42,7 @@ public class ITProjektWS1718 implements EntryPoint{
 	
 	private Button zumreportgenerator = new Button("Zum Report Generator");
 	private Anchor reportLink = new Anchor();
-	private Button zumprojektmarktplatz = new Button("Zum Projektmarktplatz");
+	private Button zurpartnerborse = new Button("Zur Partnerbörse");
 	
 	@Override
 	public void onModuleLoad() {
@@ -109,7 +109,7 @@ public class ITProjektWS1718 implements EntryPoint{
 	
 	//Zusammenstellung des Anmeldeabschnitts
 	private void loadLogin(){
-		zumprojektmarktplatz.addClickHandler(new ClickHandler() {		
+		zurpartnerborse.addClickHandler(new ClickHandler() {		
 			@Override
 			public void onClick(ClickEvent event) {
 
@@ -126,7 +126,7 @@ public class ITProjektWS1718 implements EntryPoint{
 			}
 		});
 		loginPanel.add(loginLabel);
-		loginPanel.add(zumprojektmarktplatz);
+		loginPanel.add(zurpartnerborse);
 		loginPanel.add(zumreportgenerator);
 		RootPanel.get("Details").add(loginPanel);
 

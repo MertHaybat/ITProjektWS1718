@@ -41,6 +41,7 @@ public class Merkzettelseite extends VerticalPanel{
 
 	private Button zumerkzettel = new Button("Zu Merkzettel");
 	private Button merkzettelloeschen = new Button("Merkzettel Löschen");
+	private Button merkzettelhinzufugen = new Button("Merkzettel Erstellen");
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 	public Merkzettelseite (final Profil profil){
 		
@@ -88,11 +89,19 @@ public class Merkzettelseite extends VerticalPanel{
 		
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
+			HorizontalPanel hpanel = new HorizontalPanel();
+			HorizontalPanel hpanel2 = new HorizontalPanel();
+			VerticalPanel vpanel = new VerticalPanel();
 			final DialogBox b1 = new DialogBox();
 			Profil_Dialogbox profildialogbox = new Profil_Dialogbox(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
-			profildialogbox.setWidget(8, 0, merkzettelloeschen);
-			profildialogbox.setWidget(8, 2, zumerkzettel);
-			b1.add(profildialogbox);
+			Profil_Info_Dialogbox profilinfo = new Profil_Info_Dialogbox(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
+			hpanel.add(profildialogbox);
+			hpanel.add(profilinfo);
+			hpanel2.add(merkzettelloeschen);
+			hpanel2.add(zumerkzettel);
+			vpanel.add(hpanel);
+			vpanel.add(hpanel2);
+			b1.add(vpanel);
 			b1.setText("Profil");
 			b1.center();
 			merkzettelloeschen.addClickHandler(new ClickHandler() {
@@ -133,12 +142,41 @@ public class Merkzettelseite extends VerticalPanel{
 				
 				@Override
 				public void onSelectionChange(SelectionChangeEvent event) {
+					HorizontalPanel hpanel = new HorizontalPanel();
+					HorizontalPanel hpanel2 = new HorizontalPanel();
+					VerticalPanel vpanel = new VerticalPanel();
 					final DialogBox b1 = new DialogBox();
 					Profil_Dialogbox profildialogbox = new Profil_Dialogbox(profil, pt2.getSsm_profil_anzeige().getSelectedObject());
-					profildialogbox.setWidget(8, 2, zumerkzettel);
-					b1.add(profildialogbox);
+					Profil_Info_Dialogbox profilinfo = new Profil_Info_Dialogbox(profil, pt2.getSsm_profil_anzeige().getSelectedObject());
+					hpanel.add(profildialogbox);
+					hpanel.add(profilinfo);
+					hpanel2.add(merkzettelhinzufugen);
+					hpanel2.add(zumerkzettel);
+					vpanel.add(hpanel);
+					vpanel.add(hpanel2);
+					b1.add(vpanel);
 					b1.setText("Profil");
 					b1.center();
+					merkzettelhinzufugen.addClickHandler(new ClickHandler() {
+						
+						@Override
+						public void onClick(ClickEvent event) {
+							pbverwaltung.createMerkzettel(profil, pt2.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Merkzettel>() {
+
+								@Override
+								public void onFailure(Throwable caught) {
+									// TODO Auto-generated method stub
+									
+								}
+
+								@Override
+								public void onSuccess(Merkzettel result) {
+									Window.alert("Profil zu Merkzettel hinzugefügt.");
+									b1.hide();
+								}
+							});
+						}
+					});
 					zumerkzettel.addClickHandler(new ClickHandler() {
 						
 						@Override

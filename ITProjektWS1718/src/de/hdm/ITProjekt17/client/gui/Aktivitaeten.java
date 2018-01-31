@@ -43,10 +43,10 @@ public class Aktivitaeten extends VerticalPanel {
 	private HTML htmlbesucher = new HTML("<h2>Besucher</<h2>");
 	private HTML htmlbesuchte = new HTML("<h2>Besuchte</<h2>");
 	
-	private Button kontaktsperren = new Button("Kontakt Sperren");
-	private Button kontaktmerken = new Button("Kontakt Merken");
+	private Button kontaktsperren = new Button("Sperren");
+	private Button kontaktmerken = new Button("Merken");
 	private Button besuchloeschen = new Button("Besuch Löschen");
-	private Button besuchzurueck = new Button("Zurück zur Aktivitätenseite");
+	private Button besuchzurueck = new Button("Zurück");
 	
 	
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
@@ -96,15 +96,21 @@ public class Aktivitaeten extends VerticalPanel {
 		
 		@Override
 		public void onSelectionChange(SelectionChangeEvent event) {
+			HorizontalPanel hpanel = new HorizontalPanel();
+			HorizontalPanel hpanel2 = new HorizontalPanel();
+			VerticalPanel vpanel = new VerticalPanel();
 			final DialogBox b1 = new DialogBox();
 			Profil_Dialogbox profildialogbox = new Profil_Dialogbox(profil, pt2.getSsm_profil_anzeige().getSelectedObject());
 			Profil_Info_Dialogbox profilinfo = new Profil_Info_Dialogbox(profil, pt2.getSsm_profil_anzeige().getSelectedObject());
-			profildialogbox.setWidget(8, 0, kontaktmerken);
-			profildialogbox.setWidget(8, 1, kontaktsperren);
-			profildialogbox.setWidget(8, 2, besuchloeschen);
-			profildialogbox.setWidget(8, 3, besuchzurueck);
-			b1.add(profildialogbox);
-//			b1.add(profilinfo);
+			hpanel.add(profildialogbox);
+			hpanel.add(profilinfo);
+			hpanel2.add(kontaktmerken);
+			hpanel2.add(kontaktsperren);
+			hpanel2.add(besuchloeschen);
+			hpanel2.add(besuchzurueck);
+			vpanel.add(hpanel);
+			vpanel.add(hpanel2);
+			b1.add(vpanel);
 			b1.setText("Profil");
 			b1.center();
 			kontaktmerken.addClickHandler(new ClickHandler() {
@@ -182,16 +188,24 @@ public class Aktivitaeten extends VerticalPanel {
 			
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
+				HorizontalPanel hpanel = new HorizontalPanel();
+				HorizontalPanel hpanel2 = new HorizontalPanel();
+				VerticalPanel vpanel = new VerticalPanel();
 				final DialogBox b2 = new DialogBox();
 				Profil_Dialogbox profildialogbox2 = new Profil_Dialogbox(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
 				Profil_Info_Dialogbox profilinfo2 = new Profil_Info_Dialogbox(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
-				profildialogbox2.setWidget(8, 0, kontaktmerken);
-				profildialogbox2.setWidget(8, 1, kontaktsperren);
-				profildialogbox2.setWidget(8, 3, besuchzurueck);
-				b2.add(profildialogbox2);
-//				b2.add(profilinfo2);
+				hpanel.add(profildialogbox2);
+				hpanel.add(profilinfo2);
+				hpanel2.add(kontaktmerken);
+				hpanel2.add(kontaktsperren);
+				hpanel2.add(besuchloeschen);
+				hpanel2.add(besuchzurueck);
+				vpanel.add(hpanel);
+				vpanel.add(hpanel2);
+				b2.add(vpanel);
 				b2.setText("Profil");
 				b2.center();
+						
 				kontaktmerken.addClickHandler(new ClickHandler() {
 					
 					@Override

@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -83,12 +84,21 @@ public class Suchergebnis extends VerticalPanel{
 						
 					}
 				});
+				HorizontalPanel hpanel = new HorizontalPanel();
+				HorizontalPanel hpanel2 = new HorizontalPanel();
+				VerticalPanel vpanel = new VerticalPanel();	
 				final DialogBox b1 = new DialogBox();
 				Profil_Dialogbox profildialogbox = new Profil_Dialogbox(profil, p1.getSsm_profil_anzeige().getSelectedObject());
-				profildialogbox.setWidget(8, 0, kontaktmerken);
-				profildialogbox.setWidget(8, 1, kontaktsperren);
-				profildialogbox.setWidget(8, 2, zursuche);
-				b1.add(profildialogbox);
+				Profil_Info_Dialogbox profilinfo = new Profil_Info_Dialogbox(profil, p1.getSsm_profil_anzeige().getSelectedObject());
+				hpanel.add(profildialogbox);
+				hpanel.add(profilinfo);
+				hpanel2.add(kontaktmerken);
+				hpanel2.add(kontaktsperren);
+				hpanel2.add(zursuche);
+				vpanel.add(hpanel);
+				vpanel.add(hpanel2);
+				b1.add(vpanel);
+				b1.setText("Profil");
 				b1.center();
 				zursuche.addClickHandler(new ClickHandler() {
 					

@@ -9,6 +9,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -74,11 +75,19 @@ public class Kontaktsperreseite extends VerticalPanel{
 			
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
+				HorizontalPanel hpanel = new HorizontalPanel();
+				HorizontalPanel hpanel2 = new HorizontalPanel();
+				VerticalPanel vpanel = new VerticalPanel();
 				final DialogBox b1 = new DialogBox();
 				Profil_Dialogbox profildialogbox = new Profil_Dialogbox(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
-				profildialogbox.setWidget(8, 0, sperreloeschen);
-				profildialogbox.setWidget(8, 1, zusperre);
-				b1.add(profildialogbox);
+				Profil_Info_Dialogbox profilinfo = new Profil_Info_Dialogbox(profil, pt1.getSsm_profil_anzeige().getSelectedObject());
+				hpanel.add(profildialogbox);
+				hpanel.add(profilinfo);
+				hpanel2.add(sperreloeschen);
+				hpanel2.add(zusperre);
+				vpanel.add(hpanel);
+				vpanel.add(hpanel2);
+				b1.add(vpanel);
 				b1.setText("Profil");
 				b1.center();
 				zusperre.addClickHandler(new ClickHandler() {

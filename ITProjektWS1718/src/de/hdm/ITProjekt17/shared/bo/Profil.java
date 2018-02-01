@@ -23,27 +23,11 @@ public class Profil extends BusinessObject {
 	public enum Geschlecht {
 	    m, w, s
 	  }
-	  /**
-	   * Zuweisung von String-Werten für das Enum Geschlecht.
-	   * @param c
-	   * @return str
-	   */
-	  public static String word(Geschlecht c) {
-	    String str ="";
-	    switch (c) {
-	      case m: str = "Männlich";
-	              break;
-	      case w: str = "Weiblich";
-	              break;
-	      case s: str = "Sonstiges";
-	              break;
-	     
-	    }
-	    return str;
-	  }
-	
-	  private String geschlecht ="";
-	
+	/**
+	 * Variable Geschlecht im Profil; Gibt das Geschlecht der Person an.
+	 */
+	 private String geschlecht ="";
+	 
 	/**
 	 * Variable Email im Profil; Gibt die Email der Person an.
 	 */
@@ -77,37 +61,15 @@ public class Profil extends BusinessObject {
 	public enum Haarfarbe {
 	    A, B, C, D, E, F
 	  }
-	  /**
-	   * Zuweisung von String-Werten für das Enum Haarfarbe.
-	   * @param h
-	   * @return str
-	   */
-	  public static String word(Haarfarbe h) {
-	    String str ="";
-	    switch (h) {
-	      case A: str = "schwarz";
-	            break;
-	      case B: str = "braun";
-	            break;
-	      case C: str = "blond";
-	            break;
-	      case D: str = "rot";
-	      		break;
-	      case E: str = "hell";
-    			break;	  
-	      case F: str = "dunkel";
-    			break;	   		
-
-	    }
-	    return str;
-	  }
 	
 	private String haarfarbe ="";
 	/**
 	 * Variable Nachname im Profil; Gibt den Nachnamen der Person an.
 	 */
 	private String nachname = "";
-
+	/**
+	 * Variable Raucher im Profil; Gibt den Status ob jemand Raucht oder nicht.
+	 */
 	private String raucher ="";
 	/**
 	 * Variable Raucher im Profil; Gibt an, ob die Person raucht oder nicht.
@@ -115,44 +77,11 @@ public class Profil extends BusinessObject {
 	public enum Raucher {
 	    A, B, C, D, E
 	  }
-	  /**
-	   * Zuweisung von String-Werten für das Enum Raucher.
-	   * @param b
-	   * @return str
-	   */
-	  public static String word(Raucher b) {
-	    String str ="";
-	    switch (b) {
-	      case A: str = "Ja";
-	            break;
-	      case B: str = "Nein";
-	            break;
-	      case C: str = "Gelegentlich";
-	            break;
-	      case D: str = "Partyraucher";
-	      		break;
-	      case E: str = "Nur nach dem Sex";
-    			break;	      		
-
-	    }
-	    return str;
-	  }
 
 	/**
 	 * Auslesen der Variable nachname
 	 * @return
 	 */
-
-	
-//	public Profil(String vorname, String nachname, Date geburtsdatum, int koerpergroesse, String haarfarbe, String religion, String raucher){
-//		this.vorname = vorname;
-//		this.nachname = nachname;
-//		this.geburtsdatum = geburtsdatum;
-//		this.koerpergroesse = koerpergroesse;
-//		this.haarfarbe = haarfarbe;
-//		this.religion = religion;
-//		this.raucher = raucher;
-//	}
 
 	
 	//--------------Get-Methoden--------------------
@@ -259,26 +188,76 @@ public class Profil extends BusinessObject {
 	public void setReligion(String religion){
 		this.religion = religion;
 	}
+	
+	// Weitere Methoden 
 
+	/**
+	   * Zuweisung von String-Werten für das Enum Raucher.
+	   * @param b
+	   * @return str
+	   */
+	  public static String word(Raucher b) {
+	    String str ="";
+	    switch (b) {
+	      case A: str = "Ja";
+	            break;
+	      case B: str = "Nein";
+	            break;
+	      case C: str = "Gelegentlich";
+	            break;
+	      case D: str = "Partyraucher";
+	      		break;
+	      case E: str = "Nur nach dem Sex";
+  			break;	      		
+
+	    }
+	    return str;
+	  }
 	
+	  /**
+	   * Zuweisung von String-Werten für das Enum Haarfarbe.
+	   * @param h
+	   * @return str
+	   */
+	  public static String word(Haarfarbe h) {
+	    String str ="";
+	    switch (h) {
+	      case A: str = "schwarz";
+	            break;
+	      case B: str = "braun";
+	            break;
+	      case C: str = "blond";
+	            break;
+	      case D: str = "rot";
+	      		break;
+	      case E: str = "hell";
+    			break;	  
+	      case F: str = "dunkel";
+    			break;	   		
+
+	    }
+	    return str;
+	  }
 	
+	  /**
+	   * Zuweisung von String-Werten für das Enum Geschlecht.
+	   * @param c
+	   * @return str
+	   */
+	  public static String word(Geschlecht c) {
+	    String str ="";
+	    switch (c) {
+	      case m: str = "Männlich";
+	              break;
+	      case w: str = "Weiblich";
+	              break;
+	      case s: str = "Sonstiges";
+	              break;
+	     
+	    }
+	    return str;
+	  }
 	
-	/*
-	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
-	 */
-	public String toString(){
-		return super.toString() + 
-					"Profil-ID: #" + this.getId() +
-					" Email: #" + this.getEmail() +
-					" Vorname: #" + this.getVorname() + 
-					" Nachname: #" + this.getNachname() + 
-					" Geburtsdatum: #" + this.getGeburtsdatum() + 
-					" Haarfarbe: #" + Profil.Haarfarbe.values() + 
-					" Körpergröße: #" + this.getKoerpergroesse() + 
-					" Religion: #" + this.getReligion() + 
-//					" Raucher: #" + Profil.getRaucher().values() +
-					" Geschlecht: #" + Profil.Geschlecht.values();
-	}
 	/**
 	 * Auslesen der Variable Geschlecht
 	 * @return geschlecht
@@ -321,4 +300,21 @@ public class Profil extends BusinessObject {
 	public void setHaarfarbe(String haarfarbe) {
 		this.haarfarbe = haarfarbe;
 	}
+	
+	/**
+	 * Erzeugen einer Textuellen Darstellung.
+	 */
+	public String toString(){
+		return super.toString() + 
+					"Profil-ID: #" + this.getId() +
+					" Email: #" + this.getEmail() +
+					" Vorname: #" + this.getVorname() + 
+					" Nachname: #" + this.getNachname() + 
+					" Geburtsdatum: #" + this.getGeburtsdatum() + 
+					" Haarfarbe: #" + Profil.Haarfarbe.values() + 
+					" Körpergröße: #" + this.getKoerpergroesse() + 
+					" Religion: #" + this.getReligion() + 
+//					" Raucher: #" + Profil.getRaucher().values() +
+					" Geschlecht: #" + Profil.Geschlecht.values();
+	}	
 }

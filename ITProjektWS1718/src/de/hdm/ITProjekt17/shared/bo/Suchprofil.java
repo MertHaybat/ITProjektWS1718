@@ -43,8 +43,6 @@ public class Suchprofil extends BusinessObject {
 	 */
 	private int maxAlter = 0;
 	
-
-	
 	/**
 	 * Variable koerpergroesse gibt die Körpergrösse des zusuchenden Teilneherms an.
 	 */
@@ -61,31 +59,6 @@ public class Suchprofil extends BusinessObject {
 	public enum HaarfarbeSuchprofil {
 	    A, B, C, D, E, F
 	  }
-	  /**
-	   * Zuweisung von String-Werten für das Enum HaarfarbeSuchprofil.
-	   * @param h
-	   * @return str
-	   */
-	  public static String wordSuchprofil(HaarfarbeSuchprofil h) {
-	    String str ="";
-	    switch (h) {
-	      case A: str = "schwarz";
-	            break;
-	      case B: str = "braun";
-	            break;
-	      case C: str = "blond";
-	            break;
-	      case D: str = "rot";
-	      		break;
-	      case E: str = "hell";
-    			break;	  
-	      case F: str = "dunkel";
-    			break;	   		
-
-	    }
-	    return str;
-	  }
-	
 	private String haarfarbe ="";
 	
 	/**
@@ -94,29 +67,7 @@ public class Suchprofil extends BusinessObject {
 	public enum RaucherSuchprofil {
 	    A, B, C, D, E
 	  }
-	  /**
-	   * Zuweisung von String-Werten für das Enum RaucherSuchprofil.
-	   * @param b
-	   * @return str
-	   */
-	  public static String wordSuchprofil(RaucherSuchprofil b) {
-	    String str ="";
-	    switch (b) {
-	      case A: str = "Ja";
-	            break;
-	      case B: str = "Nein";
-	            break;
-	      case C: str = "Gelegentlich";
-	            break;
-	      case D: str = "Partyraucher";
-	      		break;
-	      case E: str = "Nur nach dem Sex";
-    			break;	      		
-
-	    }
-	    return str;
-	  }
-
+	 
 	private String raucher ="";
 	
 	/**
@@ -124,24 +75,6 @@ public class Suchprofil extends BusinessObject {
 	 */
 	public enum GeschlechtSuchprofil {
 	    m, w, s
-	  }
-	  /**
-	   * Zuweisung von String-Werten für das Enum GeschlechtSuchprofil.
-	   * @param c
-	   * @return str
-	   */
-	  public static String wordSuchprofil(GeschlechtSuchprofil c) {
-	    String str ="";
-	    switch (c) {
-	      case m: str = "Männlich";
-	              break;
-	      case w: str = "Weiblich";
-	              break;
-	      case s: str = "Sonstiges";
-	              break;
-	     
-	    }
-	    return str;
 	  }
 	
 	  private String geschlecht ="";
@@ -163,7 +96,6 @@ public class Suchprofil extends BusinessObject {
 		this.profilId = profilId;
 	}
 	
-	
 	/**
 	 * Setzen des mindest Alters eines zusuchenden Teilnehmers.
 	 * @param minA
@@ -179,7 +111,6 @@ public class Suchprofil extends BusinessObject {
 	public void setMaxAlter(int maxA){
 		maxAlter = maxA;
 	}
-	
 	
 	/**
 	 * Setzen der Körpergrösse eines zusuchenden Teilenhmers.
@@ -291,6 +222,73 @@ public class Suchprofil extends BusinessObject {
 		return geschlecht;
 	}
 	
+	// Weitere Methoden
+	  /**
+	   * Zuweisung von String-Werten für das Enum HaarfarbeSuchprofil.
+	   * @param h
+	   * @return str
+	   */
+	  public static String wordSuchprofil(HaarfarbeSuchprofil h) {
+	    String str ="";
+	    switch (h) {
+	      case A: str = "schwarz";
+	            break;
+	      case B: str = "braun";
+	            break;
+	      case C: str = "blond";
+	            break;
+	      case D: str = "rot";
+	      		break;
+	      case E: str = "hell";
+  			break;	  
+	      case F: str = "dunkel";
+  			break;	   		
+
+	    }
+	    return str;
+	  }
+
+	  /**
+	   * Zuweisung von String-Werten für das Enum GeschlechtSuchprofil.
+	   * @param c
+	   * @return str
+	   */
+	  public static String wordSuchprofil(GeschlechtSuchprofil c) {
+	    String str ="";
+	    switch (c) {
+	      case m: str = "Männlich";
+	              break;
+	      case w: str = "Weiblich";
+	              break;
+	      case s: str = "Sonstiges";
+	              break;
+	     
+	    }
+	    return str;
+	  }
+	  
+	  /**
+	   * Zuweisung von String-Werten für das Enum RaucherSuchprofil.
+	   * @param b
+	   * @return str
+	   */
+	  public static String wordSuchprofil(RaucherSuchprofil b) {
+	    String str ="";
+	    switch (b) {
+	      case A: str = "Ja";
+	            break;
+	      case B: str = "Nein";
+	            break;
+	      case C: str = "Gelegentlich";
+	            break;
+	      case D: str = "Partyraucher";
+	      		break;
+	      case E: str = "Nur nach dem Sex";
+    			break;	      		
+
+	    }
+	    return str;
+	  }  
 	/*
 	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
 	 */

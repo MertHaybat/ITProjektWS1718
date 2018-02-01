@@ -183,6 +183,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
 	@Override
 	public Profil checkProfil(String email) throws IllegalArgumentException {
+		System.out.println("------------------------------- " + email);
 		return partnerboerseadministration.checkProfil(email);
 	}
 

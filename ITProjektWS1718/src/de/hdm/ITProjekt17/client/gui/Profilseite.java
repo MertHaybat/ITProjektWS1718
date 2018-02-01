@@ -68,9 +68,9 @@ public class Profilseite extends VerticalPanel{
 	private Label lb14 = new Label("Körperbau: ");
 	
 
-	private Button abbrechen = new Button ("Abbrechen");
+	
 	private Button ok = new Button("Bestätigen");
-	private Button rueckgaenig = new Button("Eingaben Rückgängig machen");
+	private Button abbrechen = new Button("Eingaben Rückgängig machen");
 	private Button löschen = new Button ("Profil löschen");
 	
 	private FlexTable ft1 = new FlexTable();
@@ -257,7 +257,7 @@ public class Profilseite extends VerticalPanel{
 			geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
 			geburtsdatum.getDatePicker().setYearArrowsVisible(true);
 			geburtsdatum.getDatePicker().setYearAndMonthDropdownVisible(true);
-			geburtsdatum.getDatePicker().setVisibleYearCount(10);
+			geburtsdatum.getDatePicker().setVisibleYearCount(100);
 
 
 		   
@@ -403,7 +403,7 @@ public class Profilseite extends VerticalPanel{
 		ft1.setWidget(8, 0, lb7);
 		ft1.setWidget(8, 1, lbraucher);
 		ft1.setWidget(9, 0, ok);
-		ft1.setWidget(9, 1, rueckgaenig);
+		ft1.setWidget(9, 1, abbrechen);
 		ft1.setWidget(12, 0, löschen);
 
 		ft2.setWidget(0, 0, lb10);
@@ -626,7 +626,7 @@ public class Profilseite extends VerticalPanel{
 			}
 			
 		});
-		rueckgaenig.addClickHandler(new ClickHandler(){
+		abbrechen.addClickHandler(new ClickHandler(){
 
 			@Override
 			public void onClick(ClickEvent event) {

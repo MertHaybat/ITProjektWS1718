@@ -40,8 +40,10 @@ public class Merkzettelseite extends VerticalPanel{
 	private HTML htmlandere_merkzettel = new HTML("<h2>Sie sind beliebt bei:</<h2>");
 
 	private Button zumerkzettel = new Button("Zu Merkzettel");
+	private Button zurück = new Button("Zurück");
 	private Button merkzettelloeschen = new Button("Merkzettel Löschen");
 	private Button merkzettelhinzufugen = new Button("Merkzettel Erstellen");
+	
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 	public Merkzettelseite (final Profil profil){
 		
@@ -99,6 +101,7 @@ public class Merkzettelseite extends VerticalPanel{
 			hpanel.add(profilinfo);
 			hpanel2.add(merkzettelloeschen);
 			hpanel2.add(zumerkzettel);
+			hpanel2.add(zurück);
 			vpanel.add(hpanel);
 			vpanel.add(hpanel2);
 			b1.add(vpanel);
@@ -129,6 +132,16 @@ public class Merkzettelseite extends VerticalPanel{
 					});
 				}
 			});
+			zurück.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+				b1.hide(); 
+			
+		}
+
+	});
+			
 			zumerkzettel.addClickHandler(new ClickHandler() {
 				
 				@Override
@@ -152,6 +165,7 @@ public class Merkzettelseite extends VerticalPanel{
 					hpanel.add(profilinfo);
 					hpanel2.add(merkzettelhinzufugen);
 					hpanel2.add(zumerkzettel);
+					hpanel2.add(zurück);
 					vpanel.add(hpanel);
 					vpanel.add(hpanel2);
 					b1.add(vpanel);
@@ -177,6 +191,16 @@ public class Merkzettelseite extends VerticalPanel{
 							});
 						}
 					});
+					zurück.addClickHandler(new ClickHandler() {
+						
+						@Override
+						public void onClick(ClickEvent event) {
+						b1.hide(); 
+					
+				}
+
+					});
+					
 					zumerkzettel.addClickHandler(new ClickHandler() {
 						
 						@Override
@@ -186,6 +210,7 @@ public class Merkzettelseite extends VerticalPanel{
 					});
 				}
 			});
+				
 		
 	}
 	

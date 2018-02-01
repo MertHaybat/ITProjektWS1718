@@ -40,11 +40,11 @@ public class Aktivitaeten extends VerticalPanel {
 	private VerticalPanel vpanelbesucher = new VerticalPanel();
 	private VerticalPanel vpanelbesuchte = new VerticalPanel();
 	
-	private HTML htmlbesucher = new HTML("<h2>Besucher</<h2>");
-	private HTML htmlbesuchte = new HTML("<h2>Besuchte</<h2>");
+	private HTML htmlbesucher = new HTML("<h2>Diese Profile haben dich besucht</<h2>");
+	private HTML htmlbesuchte = new HTML("<h2>Diese Profile hast du besucht</<h2>");
 	
-	private Button kontaktsperren = new Button("Sperren");
-	private Button kontaktmerken = new Button("Merken");
+	private Button kontaktsperren = new Button("Profil Sperren");
+	private Button kontaktmerken = new Button("Profil Merken");
 	private Button besuchloeschen = new Button("Besuch Löschen");
 	private Button besuchzurueck = new Button("Zurück");
 	

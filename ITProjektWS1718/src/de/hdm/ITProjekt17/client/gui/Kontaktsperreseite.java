@@ -29,6 +29,7 @@ public class Kontaktsperreseite extends VerticalPanel{
 	
 	private Button zusperre = new Button("Zu Kontaktsperren");
 	private Button sperreloeschen = new Button("Sperre Löschen");
+	private Button zurück = new Button("Zurück");
 	
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 	
@@ -85,6 +86,7 @@ public class Kontaktsperreseite extends VerticalPanel{
 				hpanel.add(profilinfo);
 				hpanel2.add(sperreloeschen);
 				hpanel2.add(zusperre);
+				hpanel2.add(zurück);
 				vpanel.add(hpanel);
 				vpanel.add(hpanel2);
 				b1.add(vpanel);
@@ -97,6 +99,15 @@ public class Kontaktsperreseite extends VerticalPanel{
 						b1.hide();
 					}
 				});
+				zurück.addClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+					b1.hide(); 
+				
+			}
+
+		});		
 				sperreloeschen.addClickHandler(new ClickHandler() {
 					
 					@Override

@@ -37,6 +37,7 @@ public class Suchprofil_Dialogbox extends DialogBox{
 		
 		Button profileAnzeigen = new Button("Profile anzeigen");
 		Button suchprofilLöschen = new Button("Suchprofil löschen");
+		Button zurück = new Button("Zurück");
 
 //		profileAnzeigen.addClickHandler(new ClickHandler(){
 //			
@@ -92,22 +93,41 @@ public class Suchprofil_Dialogbox extends DialogBox{
 					hide();					
 					RootPanel.get("Details").clear();
 					RootPanel.get("Details").add(new Suchen(profil));
+					 hide();   
 				}
 			});
 			}
 			
 		});
 		
+		
+			zurück.addClickHandler(new ClickHandler() {
+			
+				@Override
+				public void onClick(ClickEvent event) {
+					 hide(); 
+					
+				}
+
+			});
+			
+			
+	
+	
+
+	
+		
 		Label label = new Label("Möchten Sie die Suche starten oder das Suchprofil löschen?");
 
         VerticalPanel panel = new VerticalPanel();
-        panel.setHeight("100");
+        panel.setHeight("150");
         panel.setWidth("300");
         panel.setSpacing(10);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         panel.add(label);
         panel.add(profileAnzeigen);
         panel.add(suchprofilLöschen);
+        panel.add(zurück);
         setWidget(panel);
         
         

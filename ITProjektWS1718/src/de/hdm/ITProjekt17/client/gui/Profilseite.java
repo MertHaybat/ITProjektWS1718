@@ -70,8 +70,8 @@ public class Profilseite extends VerticalPanel{
 
 	
 	private Button ok = new Button("Bestätigen");
-	private Button abbrechen = new Button("Abbrechen");
-	private Button löschen = new Button ("löschen");
+	private Button abbrechen = new Button("Eingaben Rückgängig machen");
+	private Button löschen = new Button ("Profil löschen");
 	
 	private FlexTable ft1 = new FlexTable();
 	private FlexTable ft2 = new FlexTable();
@@ -108,7 +108,7 @@ public class Profilseite extends VerticalPanel{
 		ft1.setWidget(8, 0, lb7);
 		ft1.setWidget(8, 1, lbraucher);
 		ft1.setWidget(9, 0, ok);
-		ft1.setWidget(9, 1, abbrechen);
+		ft1.setWidget(11, 0, abbrechen); // Eingaben Rückgängig machen
 		
 		ft2.setWidget(0, 0, lb10);
 		ft2.setWidget(0, 1, lbinteresse);
@@ -404,7 +404,7 @@ public class Profilseite extends VerticalPanel{
 		ft1.setWidget(8, 1, lbraucher);
 		ft1.setWidget(9, 0, ok);
 		ft1.setWidget(9, 1, abbrechen);
-		ft1.setWidget(9, 2, löschen);
+		ft1.setWidget(12, 0, löschen);
 
 		ft2.setWidget(0, 0, lb10);
 		ft2.setWidget(0, 1, lbinteresse);

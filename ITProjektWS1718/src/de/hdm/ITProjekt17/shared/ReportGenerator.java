@@ -35,7 +35,7 @@ public interface ReportGenerator extends RemoteService {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	 public abstract  AllInfosOfProfilReport createAllInfosOfProfilReport(Profil pro, int score) throws IllegalArgumentException;
+//	 public abstract  AllInfosOfProfilReport createAllInfosOfProfilReport(Profil pro, int score) throws IllegalArgumentException;
 	 
 	 /**
 	  * Diese Methode sucht alle vom Profil/Teilnehmer nicht angesehenen Profile und zeigt diese an.
@@ -52,7 +52,7 @@ public interface ReportGenerator extends RemoteService {
 	  * @return
 	  * @throws IllegalArgumentException
 	  */
-	 public abstract PartnervorschlaegeAnhandSuchprofilReport createPartnervorschlaegeAnhandSuchprofilReport(Profil pro, Suchprofil such) throws IllegalArgumentException;
+	 public abstract PartnervorschlaegeAnhandSuchprofilReport createPartnervorschlaegeAnhandSuchprofilReport(Profil pro) throws IllegalArgumentException;
 	
 	 /**
 	 * Diese Methode sucht nach dem Profil auf der Partnerbörse

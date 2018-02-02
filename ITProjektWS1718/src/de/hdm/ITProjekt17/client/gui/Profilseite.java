@@ -606,23 +606,9 @@ public class Profilseite extends VerticalPanel{
 
 			@Override
 			public void onClick(ClickEvent event) {
-				pbverwaltung.delete(profil, new AsyncCallback<Void>(){
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void onSuccess(Void result) {
-						Window.alert("Profil wurde erfolgreich gelöscht. Starten Sie die Seite neu.");
-						RootPanel.get("Navigator").clear();
-						RootPanel.get("Details").clear();
-					}
-					
-				});
-				
+				Profil_loeschen_Dialogbox b1 = new Profil_loeschen_Dialogbox(profil);
+				b1.center();				
 			}
 			
 		});

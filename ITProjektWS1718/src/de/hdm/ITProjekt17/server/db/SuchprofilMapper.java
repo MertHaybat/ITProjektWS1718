@@ -276,10 +276,10 @@ public class SuchprofilMapper {
 					 	/**
 					 	 * Aufbau der DB Connection
 					 	 */
+						
 					    Connection con = DBConnection.connection();
 					  
 					    Vector<Suchprofil> result = new Vector<Suchprofil>();
-					    
 					    try {
 					    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM suchprofil WHERE profilid=? ");
 					    	stmt.setInt(1, pro.getId());
@@ -289,6 +289,8 @@ public class SuchprofilMapper {
 					        /**
 					         * Für jeden Eintrag im Suchergebnis wird nun ein Merkzettel-Objekt erstellt.
 					         */
+					    	
+					    	
 					       while (rs.next()) {
 					        	Suchprofil such = new Suchprofil();
 						          such.setId(rs.getInt("id"));
@@ -299,14 +301,14 @@ public class SuchprofilMapper {
 						          such.setHaarfarbe(rs.getString("haarfarbe"));
 						          such.setRaucher(rs.getString("raucher"));
 						          such.setGeschlecht(rs.getString("geschlecht"));
-						          
+						         
 					          /**
 					           *  Hinzufügen des neuen Objekts zum Ergebnisvektor
 					           */
-					          
-					         
-					          result.addElement(such);
-					        }
+
+						       result.addElement(such);
+					       		
+					       }
 					      }
 					      catch (SQLException e) {
 					        e.printStackTrace();

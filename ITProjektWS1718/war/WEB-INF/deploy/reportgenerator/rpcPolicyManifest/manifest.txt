@@ -1,0 +1,5 @@
+# Module reportgenerator
+# RPC service class, partial path of RPC policy file
+de.hdm.ITProjekt17.shared.PartnerboerseAdministration, 2B41D504CD042254445CE13336F6E5B2.gwt.rpc
+de.hdm.ITProjekt17.shared.ReportGenerator, 14DC3C5E7D092DFAC94E33CB51317D5A.gwt.rpc
+de.hdm.ITProjekt17.shared.LoginService, 47C64C4D2429D6ECCAEA0209444FF413.gwt.rpc

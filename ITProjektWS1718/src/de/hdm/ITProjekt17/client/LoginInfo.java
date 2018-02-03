@@ -1,15 +1,16 @@
 package de.hdm.ITProjekt17.client;
 
-import java.io.Serializable;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Login RPC Dienst - Ergebnis des Login-Dienstes soll ein Objekt der Klasse "LoginInfo" sein, in der alle
- * benötigten Elemente eines angemeldeten Nutzers verfügbar sind
+ * benï¿½tigten Elemente eines angemeldeten Nutzers verfï¿½gbar sind
  * @author Mert in Anlehnung an die Folien "GWT Benutzungsschnittstellen"
  *
  */
 
-public class LoginInfo implements Serializable{
+public class LoginInfo implements IsSerializable{
 
 	private static final long serialVersionUID = 1L;
 	private boolean loggedIn = false;

@@ -187,6 +187,8 @@ public class Merkzettelseite extends VerticalPanel{
 								public void onSuccess(Merkzettel result) {
 									Window.alert("Profil zu Merkzettel hinzugefügt.");
 									b1.hide();
+									RootPanel.get("Details").clear();
+									RootPanel.get("Details").add(new Merkzettelseite(profil));
 								}
 							});
 						}

@@ -13,6 +13,8 @@ public class ClientsideSettings extends CommonSettings{
 	
 	private static ReportGeneratorAsync reportGenerator = null;
 	
+	private static LoginServiceAsync loginService = null;
+	
 	/**
 	 * Name des Client-seitigen Loggers.
 	 */
@@ -26,11 +28,32 @@ public class ClientsideSettings extends CommonSettings{
 		return log;
 	}
 	
+	public static LoginServiceAsync getLoginService(){
+		if(loginService == null){
+			loginService = GWT.create(LoginService.class);
+		}
+		return loginService;
+	}
+	
 	public static PartnerboerseAdministrationAsync getBoerseVerwaltung(){
 		
 		if (boerseVerwaltung == null){
 			
 			boerseVerwaltung = GWT.create(PartnerboerseAdministration.class);
+			boerseVerwaltung.init(new AsyncCallback<Void>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onSuccess(Void result) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}
 		return boerseVerwaltung;
 	}

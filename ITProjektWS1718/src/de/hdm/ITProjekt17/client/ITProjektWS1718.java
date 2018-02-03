@@ -51,7 +51,7 @@ public class ITProjektWS1718 implements EntryPoint{
 		// Check login status using login service.
 		LoginServiceAsync loginService = GWT.create(LoginService.class);
 		//Start-URL der Anwendung GWT.getHostPageBaseURL() !!!
-		loginService.login(GWT.getHostPageBaseURL(), new AsyncCallback<LoginInfo>() {
+		loginService.login(GWT.getHostPageBaseURL()+"ITProjektWS1718.html", new AsyncCallback<LoginInfo>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -68,7 +68,7 @@ public class ITProjektWS1718 implements EntryPoint{
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+						Window.alert("Fehler beim Laden: " + caught.getLocalizedMessage()); 
 					}
 
 					@Override

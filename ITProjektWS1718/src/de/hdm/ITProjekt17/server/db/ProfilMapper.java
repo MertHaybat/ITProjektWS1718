@@ -86,7 +86,7 @@ public class ProfilMapper {
 		    	  	 * Durchführen der Einfüge Operation via Prepared Statement
 		    	  	 */
 		    	  		PreparedStatement stmt1 = con.prepareStatement(
-		    	  				"INSERT INTO profil(id, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, geschlecht, email) "
+		    	  				"INSERT INTO profil(id, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, raucher, email, geschlecht) "
 		    	  				+ "VALUES (?,?,?,?,?,?,?,?,?,?) ",			
 		    	  				
 		    	  				Statement.RETURN_GENERATED_KEYS);
@@ -98,8 +98,9 @@ public class ProfilMapper {
 		    	  				stmt1.setString(6, pro.getReligion());
 		    	  				stmt1.setString(7, pro.getHaarfarbe());
 		    	  				stmt1.setString(8, pro.getRaucher());
-		    	  				stmt1.setString(9, pro.getGeschlecht());
-		    	  				stmt1.setString(10, pro.getEmail());
+		    	  				stmt1.setString(9, pro.getEmail());
+		    	  				stmt1.setString(10, pro.getGeschlecht());
+		    	  				
 		    	  				
 		    	  				System.out.println(stmt);
 		    	  				stmt1.executeUpdate();

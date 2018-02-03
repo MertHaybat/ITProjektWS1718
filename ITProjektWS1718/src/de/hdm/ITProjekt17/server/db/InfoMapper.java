@@ -174,22 +174,20 @@ return null;
 				 * inkrementiert um 1
 				 */
 				in.setId(rs.getInt("maxid") + 1);
-				System.out.println("--------------------------" + in.getAuswahleigenschaftWert());
 				/**
 				 * Durchführen der Einfügeoperation via Prepared Statement
 				 */
 				PreparedStatement stmt1 = con.prepareStatement(
 
-						"INSERT INTO info (id, profilid, auswahleigenschaftwert, freitexteigenschaftwert, auswahleigenschaftid, freitexteigenschaftid) " + "VALUES (?,?,?,?,?,?) ",
+						"INSERT INTO info (id, profilid, freitexteigenschaftid, auswahleigenschaftid, freitexteigenschaftwert, auswahleigenschaftwert) " + "VALUES (?,?,?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);
 						stmt1.setInt(1, in.getId());
 						stmt1.setInt(2, in.getProfilId());
-						stmt1.setString(3, in.getAuswahleigenschaftWert());
-						stmt1.setString(4, in.getFreitexteigenschaftWert());
-						stmt1.setInt(5, in.getAuswahleigenschaftid());
-						stmt1.setInt(6, in.getFreitexteigenschaftid());
+						stmt1.setInt(3, in.getFreitexteigenschaftid());
+						stmt1.setInt(4, in.getAuswahleigenschaftid());
+						stmt1.setString(5, in.getFreitexteigenschaftWert());
+						stmt1.setString(6, in.getAuswahleigenschaftWert());
 					
-						
 						stmt1.executeUpdate();
 			}
 		} catch (SQLException e2) {

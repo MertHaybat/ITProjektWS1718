@@ -28,8 +28,12 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  *
  */
 
-@SuppressWarnings("serial")
 public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implements PartnerboerseAdministration {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Referenz auf den AuswahleigenschaftMapper, der Auswahleigenschaftsobjekte
@@ -96,7 +100,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 */
 	private AehnlichkeitsmassMapper aehnlichkeitsmassMapper = null;
 
-	public PartnerboerseAdministrationImpl() throws IllegalArgumentException {
+	public PartnerboerseAdministrationImpl() {
 
 	}
 
@@ -106,7 +110,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * <code>PartnerboerseAdministrationImpl</code> aufgerufen werden kann.
 	 */
 
-	public void init() throws IllegalArgumentException {
+	public void init() {
 		/*
 		 * Die PartnerboerseAdministrationImpl ben�tigt diese Mapper, um mit
 		 * deren Hilfe die Datenbank ansprechen zu k�nnen.
@@ -133,7 +137,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * </p>
 	 */
 	@Override
-	public Auswahleigenschaft createAuswahleigenschaft(String wert) throws IllegalArgumentException {
+	public Auswahleigenschaft createAuswahleigenschaft(String wert) {
 
 		Auswahleigenschaft aus = new Auswahleigenschaft();
 		aus.setWert(wert);
@@ -150,7 +154,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Speichern der Auswahleigenschaft.
 	 */
 	@Override
-	public void save(Auswahleigenschaft aus) throws IllegalArgumentException {
+	public void save(Auswahleigenschaft aus) {
 
 		try {
 			auswahleigenschaftMapper.updateAuswahleigenschaft(aus);
@@ -159,13 +163,12 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 	}
 
-	
 	/**
 	 * L�schen der Auswahleigenschaft. Dabei wird die Referenz zu Info auch
 	 * gel�scht.
 	 */
 	@Override
-	public void delete(Auswahleigenschaft aus) throws IllegalArgumentException {
+	public void delete(Auswahleigenschaft aus) {
 
 		try {
 			Vector<Info> auswahlinfo = this.getAllInfosAsAuswahleigenschaft(aus);
@@ -196,7 +199,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auslesen der Auswahleigenschaft, in dem die ID aufgerufen wird.
 	 */
 	@Override
-	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) throws IllegalArgumentException {
+	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) {
 
 		return this.auswahleigenschaftMapper.findByKey(id);
 	}
@@ -205,7 +208,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auslesen aller Auswahleigenschaften.
 	 */
 	@Override
-	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() throws IllegalArgumentException {
+	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() {
 		try {
 			return this.auswahleigenschaftMapper.getAll();
 		} catch (Exception e) {
@@ -217,7 +220,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Auswahleigenschaften eines bestimmten Info-Objekts.
 	 */
-	public Vector<Auswahleigenschaft> getAllAuswahleigenschaftOf(Info in) throws IllegalArgumentException {
+	public Vector<Auswahleigenschaft> getAllAuswahleigenschaftOf(Info in) {
 		return this.auswahleigenschaftMapper.getAllAuswahleigenschaftOf(in);
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,7 +236,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	// }
 
 	@Override
-	public void save(Eigenschaft eig) throws IllegalArgumentException {
+	public void save(Eigenschaft eig) {
 
 		try {
 			eigenschaftMapper.updateEigenschaft(eig);
@@ -243,7 +246,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public void delete(Eigenschaft eig) throws IllegalArgumentException {
+	public void delete(Eigenschaft eig) {
 
 		try {
 			eigenschaftMapper.deleteEigenschaft(eig);
@@ -279,12 +282,17 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * </p>
 	 */
 	@Override
-	public Freitexteigenschaft createFreitexteigenschaft(String wert) throws IllegalArgumentException {
-
-		Freitexteigenschaft frei = new Freitexteigenschaft();
+	public Freitexteigenschaft createFreitexteigenschaft(String wert) {
+		try {
+			Freitexteigenschaft frei = new Freitexteigenschaft();
 		frei.setWert(wert);
 		frei.setId(1);
 		return this.freitexteigenschaftMapper.insertFreitexteigenschaft(frei);
+		} catch (Exception e) {
+			e.getLocalizedMessage();
+		}
+		return null;
+		
 	}
 
 	/**
@@ -292,7 +300,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 */
 
 	@Override
-	public void save(Freitexteigenschaft frei) throws IllegalArgumentException {
+	public void save(Freitexteigenschaft frei) {
 
 		try {
 			freitexteigenschaftMapper.updateFreitexteigenschaft(frei);
@@ -306,7 +314,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * gel�scht.
 	 */
 	@Override
-	public void delete(Freitexteigenschaft frei) throws IllegalArgumentException {
+	public void delete(Freitexteigenschaft frei) {
 
 		try {
 			Vector<Info> freitextinfo = this.getAllInfosAsFreitexteigenschaft(frei);
@@ -336,7 +344,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Freitexteigenschaften eines bestimmten Info-Objekts.
 	 */
-	public Vector<Freitexteigenschaft> getAllFreitexteigenschaftOf(Info in) throws IllegalArgumentException {
+	public Vector<Freitexteigenschaft> getAllFreitexteigenschaftOf(Info in) {
 		return this.freitexteigenschaftMapper.getAllFreitexteigenschaftOf(in);
 	}
 
@@ -344,7 +352,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auslesen der Freitexteigenschaft, in dem die ID aufgerufen wird.
 	 */
 	@Override
-	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) throws IllegalArgumentException {
+	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) {
 
 		return this.freitexteigenschaftMapper.findByKey(id);
 	}
@@ -353,7 +361,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auslesen aller Freitexteigenschaften.
 	 */
 	@Override
-	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() throws IllegalArgumentException {
+	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() {
 
 		return this.freitexteigenschaftMapper.getAll();
 	}
@@ -363,7 +371,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Infos des Profils Profils.
 	 */
-	public Vector<Info> getAllInfobyProfil(Profil pro) throws IllegalArgumentException {
+	public Vector<Info> getAllInfobyProfil(Profil pro) {
 
 		return infoMapper.getInfoIdByProfilId(pro);
 	}
@@ -376,7 +384,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 */
 	@Override
 	public Info createInfo(String email, Integer auswahleigenschaftid, String freitexteigenschaftwert,
-			String auswahleigenschaftwert) throws IllegalArgumentException {
+			String auswahleigenschaftwert) {
+		try {
 		Profil p = profilMapper.findByEmail(email);
 
 		Info in = new Info();
@@ -387,29 +396,31 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		in.setAuswahleigenschaftWert(auswahleigenschaftwert);
 		in.setFreitexteigenschaftWert(freitexteigenschaftwert);
 		in.setId(1);
-		if (auswahleigenschaftid == 5) {
-			Freitexteigenschaft f = findByKeyFreitexteigenschaft(p.getId());
-			f.setWert(freitexteigenschaftwert);
-			save(f);
-
-		}
+			if (auswahleigenschaftid == 5) {
+				Freitexteigenschaft f = findByKeyFreitexteigenschaft(p.getId());
+				f.setWert(freitexteigenschaftwert);
+				save(f);
+				}
 		return this.infoMapper.insertInfo(in);
+		} catch (Exception e) {
+			e.getLocalizedMessage();
+		}
+		return null;
 	}
 
 	/**
 	 * Speichern der Info.
 	 */
 	@Override
-	public void save(Info in) throws IllegalArgumentException {
+	public void save(Info in) {
 		infoMapper.updateInfo(in);
-			if (in.getAuswahleigenschaftid() == 5) {
+		if (in.getAuswahleigenschaftid() == 5) {
 			Freitexteigenschaft f = findByKeyFreitexteigenschaft(in.getProfilId());
 			f.setWert(in.getFreitexteigenschaftWert());
 			save(f);
-		
+
 		}
-			
-		
+
 	}
 
 	/**
@@ -417,7 +428,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Freitexteigenschaft und Suchprofil_Info auch gel�scht.
 	 */
 	@Override
-	public void delete(Info in) throws IllegalArgumentException {
+	public void delete(Info in) {
 
 		try {
 			Vector<Freitexteigenschaft> freitextinfo = new Vector<Freitexteigenschaft>();
@@ -429,7 +440,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 				}
 			}
 
-		infoMapper.deleteInfo(in);
+			infoMapper.deleteInfo(in);
 
 		} catch (Exception e) {
 
@@ -439,7 +450,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * L�schen der Info eines Profils.
 	 */
-	public void deleteInfoOf(Profil pro) throws IllegalArgumentException {
+	public void deleteInfoOf(Profil pro) {
 		try {
 			this.infoMapper.deleteInfoOf(pro);
 		} catch (Exception e) {
@@ -450,7 +461,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * L�schen der Info des Suchprofil_Info.
 	 */
-	public void deleteInfoOf(Suchprofil_Info suchinfo) throws IllegalArgumentException {
+	public void deleteInfoOf(Suchprofil_Info suchinfo) {
 		try {
 			this.infoMapper.deleteInfoOf(suchinfo);
 		} catch (Exception e) {
@@ -461,7 +472,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * L�schen der Info, welche eine Auswahleigenschaft ist.
 	 */
-	public void deleteInfoAs(Auswahleigenschaft aus) throws IllegalArgumentException {
+	public void deleteInfoAs(Auswahleigenschaft aus) {
 		try {
 			this.infoMapper.deleteInfoOf(aus);
 		} catch (Exception e) {
@@ -472,7 +483,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * L�schen der Info, welche eine Freitexteigenschaft ist.
 	 */
-	public void deleteInfoAs(Freitexteigenschaft frei) throws IllegalArgumentException {
+	public void deleteInfoAs(Freitexteigenschaft frei) {
 		try {
 			this.infoMapper.deleteInfoOf(frei);
 		} catch (Exception e) {
@@ -483,7 +494,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Infos eines Profils.
 	 */
-	public Vector<Profil> getAllInfosOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Profil> getAllInfosOf(Profil pro) {
 		try {
 			this.infoMapper.getInfoIdByProfilId(pro);
 		} catch (Exception e) {
@@ -496,7 +507,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auslesen der Info, in dem die ID aufgerufen wird.
 	 */
 	@Override
-	public Info findByKeyInfo(int id) throws IllegalArgumentException {
+	public Info findByKeyInfo(int id) {
 		try {
 			return this.infoMapper.findByKey(id);
 		} catch (Exception e) {
@@ -509,7 +520,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auslesen aller Infos.
 	 */
 	@Override
-	public Vector<Info> getAllInfo() throws IllegalArgumentException {
+	public Vector<Info> getAllInfo() {
 		try {
 			return this.infoMapper.getAll();
 		} catch (Exception e) {
@@ -525,7 +536,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * steht fuer den Sperrenden User der andere Teilnehmer auf die Sperrliste
 	 * setzt.
 	 */
-	public Kontaktsperre createKontaktsperre(Profil pro, int profilId_gesperrter) throws IllegalArgumentException {
+	public Kontaktsperre createKontaktsperre(Profil pro, int profilId_gesperrter) {
 		Kontaktsperre sperre = new Kontaktsperre();
 		sperre.setProfilId_sperrender(pro.getId());
 		sperre.setProfilId_gesperrter(profilId_gesperrter);
@@ -536,7 +547,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Hier wird eine Kontaktsperre aufgehoben.
 	 */
-	public void deleteKontaktsperreOf(Profil pro, int profilId_gesperrter) throws IllegalArgumentException {
+	public void deleteKontaktsperreOf(Profil pro, int profilId_gesperrter) {
 		Vector<Kontaktsperre> result = new Vector<Kontaktsperre>();
 		result = this.getAllKontaktsperreOf(pro);
 
@@ -553,40 +564,39 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Kontaktsperre gesetzt wurden.
 	 * 
 	 * @param merk
-	 * @return
-	 * @throws IllegalArgumentException
+	 * @return @
 	 */
-	public Vector<Profil> showBlockedProfilsOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Profil> showBlockedProfilsOf(Profil pro) {
 		Vector<Kontaktsperre> allBlockedProfiles = this.getAllKontaktsperreOf(pro);
 		Vector<Profil> vectorprofil = new Vector<Profil>();
 		System.out.println(allBlockedProfiles);
-		for (int i = 0; i<allBlockedProfiles.size(); i++) {
+		for (int i = 0; i < allBlockedProfiles.size(); i++) {
 			vectorprofil.addElement(getProfilById(allBlockedProfiles.elementAt(i).getProfilId_gesperrter()));
-		}	
-		
+		}
+
 		return vectorprofil;
 
 	}
-	
-	public Vector<Profil> showAllBlockerOf(Profil pro) throws IllegalArgumentException {
+
+	public Vector<Profil> showAllBlockerOf(Profil pro) {
 		Vector<Kontaktsperre> allBlockedProfiles = this.getBlockedBy(pro);
 		Vector<Profil> vectorprofil = new Vector<Profil>();
 		System.out.println(allBlockedProfiles);
-		for (int i = 0; i<allBlockedProfiles.size(); i++) {
+		for (int i = 0; i < allBlockedProfiles.size(); i++) {
 			vectorprofil.addElement(getProfilById(allBlockedProfiles.elementAt(i).getProfilId_sperrender()));
-		}	
-		
+		}
+
 		return vectorprofil;
 	}
 
 	@Override
-	public Vector<Kontaktsperre> getAllKontaktsperreOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Kontaktsperre> getAllKontaktsperreOf(Profil pro) {
 
 		return kontaktsperreMapper.getAllKontaktsperrenDesSperrenden(pro);
 	}
 
 	@Override
-	public Kontaktsperre save(Kontaktsperre sperre) throws IllegalArgumentException {
+	public Kontaktsperre save(Kontaktsperre sperre) {
 
 		try {
 			kontaktsperreMapper.updateKontaktsperre(sperre);
@@ -597,7 +607,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public Kontaktsperre findById(int id) throws IllegalArgumentException {
+	public Kontaktsperre findById(int id) {
 		try {
 			this.kontaktsperreMapper.findByKey(id);
 		} catch (Exception e) {
@@ -607,7 +617,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public Vector<Kontaktsperre> getAllKontaktsperre() throws IllegalArgumentException {
+	public Vector<Kontaktsperre> getAllKontaktsperre() {
 		try {
 			this.kontaktsperreMapper.getAllKontaktsperre();
 		} catch (Exception e) {
@@ -617,8 +627,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public void delete(Kontaktsperre sperre) throws IllegalArgumentException {
-		
+	public void delete(Kontaktsperre sperre) {
+
 		this.kontaktsperreMapper.deleteKontaktsperre(sperre);
 	}
 
@@ -628,7 +638,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Merkenden angezeigt. DIes ist eine Hilfsmethode fÃ¼r andere Operationen
 	 * in dieser Klasse.
 	 */
-	public Vector<Merkzettel> getAllMerkzettelOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Merkzettel> getAllMerkzettelOf(Profil pro) {
 
 		return merkzettelMapper.getAllMerkezettelDesMerkers(pro);
 	}
@@ -640,7 +650,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 */
 
 	@Override
-	public Merkzettel createMerkzettel(Profil pro, int profilId_gemerkter) throws IllegalArgumentException {
+	public Merkzettel createMerkzettel(Profil pro, int profilId_gemerkter) {
 		Merkzettel merk = new Merkzettel();
 		merk.setProfilId_merkender(pro.getId());
 		merk.setProfilId_gemerkter(profilId_gemerkter);
@@ -653,7 +663,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Methode zum Loeschen eines Profils von der Merkliste.
 	 */
-	public void deleteProfilVonMerkliste(Profil pro, int profilId_gemerkter) throws IllegalArgumentException {
+	public void deleteProfilVonMerkliste(Profil pro, int profilId_gemerkter) {
 		Vector<Merkzettel> result = new Vector<Merkzettel>();
 
 		result = this.getAllMerkzettelOf(pro);
@@ -670,62 +680,57 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * gesetzt wurden.
 	 * 
 	 * @param merk
-	 * @return
-	 * @throws IllegalArgumentException
+	 * @return @
 	 */
-	public Vector<Profil> showMerklisteOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Profil> showMerklisteOf(Profil pro) {
 		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Merkzettel> allGemerkteProfile = this.getAllMerkzettelOf(pro);
-		
-		for (int i = 0; i<allGemerkteProfile.size(); i++){
+
+		for (int i = 0; i < allGemerkteProfile.size(); i++) {
 			profiles.addElement(getProfilById(allGemerkteProfile.elementAt(i).getProfilId_gemerkter()));
 		}
-					
+
 		return profiles;
-		
+
 	}
-	
-	public Vector<Profil> showMerkendeOf(Profil pro) throws IllegalArgumentException {
+
+	public Vector<Profil> showMerkendeOf(Profil pro) {
 		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Merkzettel> merkendeProfiles = merkzettelMapper.merkzettel_showGemerkteProfile(pro.getId());
-		
-		for (int i = 0; i<merkendeProfiles.size(); i++){
+
+		for (int i = 0; i < merkendeProfiles.size(); i++) {
 			profiles.addElement(getProfilById(merkendeProfiles.elementAt(i).getProfilId_merkender()));
 		}
-			
+
 		return profiles;
 	}
 
 	@Override
-	public Vector<Profil> showBesuchteOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Profil> showBesuchteOf(Profil pro) {
 		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Besuch> besucher = besuchMapper.getAllBesucherOfProfil(pro);
-		
-		
-		for (int i = 0; i<besucher.size(); i++){
+
+		for (int i = 0; i < besucher.size(); i++) {
 			profiles.addElement(getProfilById(besucher.elementAt(i).getBesuchenderNutzerID()));
 		}
 
-	
 		return profiles;
 	}
-	
+
 	@Override
-	public Vector<Profil> showBesucherOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Profil> showBesucherOf(Profil pro) {
 		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Besuch> besucher = this.getAllBesucheOf(pro);
-		
-		
-		for (int i = 0; i<besucher.size(); i++){
+
+		for (int i = 0; i < besucher.size(); i++) {
 			profiles.addElement(getProfilById(besucher.elementAt(i).getBesuchterNutzerID()));
 		}
 
-	
 		return profiles;
 	}
-	
+
 	@Override
-	public void save(Merkzettel merk) throws IllegalArgumentException {
+	public void save(Merkzettel merk) {
 
 		try {
 			merkzettelMapper.updateMerkzettel(merk);
@@ -735,7 +740,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public Merkzettel findByKey(int id) throws IllegalArgumentException {
+	public Merkzettel findByKey(int id) {
 		try {
 			this.merkzettelMapper.findByKey(id);
 		} catch (Exception e) {
@@ -745,7 +750,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public void delete(Merkzettel merk) throws IllegalArgumentException {
+	public void delete(Merkzettel merk) {
 		Merkzettel m = new Merkzettel();
 		m.setProfilId_gemerkter(merk.getProfilId_gemerkter());
 		m.setProfilId_merkender(merk.getProfilId_merkender());
@@ -758,111 +763,111 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Diese Methode erzeugt ein neues Suchprofil.
 	 */
 	@Override
-	public Suchprofil createSuchprofil(String haarfarbe, String religion, int körpergröße,
-			String raucher, String geschlecht, int minalter, int maxalter, int profilId)
-			throws IllegalArgumentException {
+	public Suchprofil createSuchprofil(String haarfarbe, String religion, int körpergröße, String raucher,
+			String geschlecht, int minalter, int maxalter, int profilId) {
 
 		Suchprofil suchpro = new Suchprofil();
-		if(haarfarbe != null) {
+		if (haarfarbe != null) {
 			suchpro.setHaarfarbe(haarfarbe);
 		} else {
 			suchpro.setHaarfarbe(null);
 		}
-		
-		if(körpergröße != 0){
+
+		if (körpergröße != 0) {
 			suchpro.setKoerpergroesse(körpergröße);
 		} else {
 			suchpro.setKoerpergroesse(0);
 		}
-		
-		if(maxalter != 0){
+
+		if (maxalter != 0) {
 			suchpro.setMaxAlter(maxalter);
 		} else {
 			suchpro.setMaxAlter(0);
 		}
-		
-		if(minalter != 0){
+
+		if (minalter != 0) {
 			suchpro.setMinAlter(minalter);
 		} else {
 			suchpro.setMinAlter(0);
 		}
-		
-		if(raucher != null){
+
+		if (raucher != null) {
 			suchpro.setRaucher(raucher);
 		} else {
 			suchpro.setRaucher(null);
 		}
-		
-		if(religion != null){
+
+		if (religion != null) {
 			suchpro.setReligion(religion);
 		} else {
 			suchpro.setReligion(null);
 		}
-		
-		if(geschlecht != null){
+
+		if (geschlecht != null) {
 			suchpro.setGeschlecht(geschlecht);
 		} else {
 			suchpro.setGeschlecht(null);
 		}
-		
+
 		suchpro.setProfilId(profilId);
 
 		return suchprofilMapper.insertSuchprofil(suchpro);
 	}
 
 	// Vergleiche deleteProfil(AP-Schicht)!!!!!!!!!!!!!!!!!
-	
+
 	/**
 	 * Hier wird das Suchprofil gelÃ¶scht Um das Suchprofil zu lÃ¶schen, mÃ¼ssen
 	 * erst die Daten aus der Tabelle Suchprofil_Info gelÃ¶scht werden um das
 	 * Suchprofil lÃ¶schen zu kÃ¶nnen
 	 */
 	@Override
-	public void deleteSuchprofil(Suchprofil pro) throws IllegalArgumentException {
-			suchprofilMapper.deleteProfil(pro);
+	public void deleteSuchprofil(Suchprofil pro) {
+		suchprofilMapper.deleteProfil(pro);
 
 	}
-	
-	public void delete(Suchprofil suchpro) throws IllegalArgumentException {
+
+	public void delete(Suchprofil suchpro) {
 		Vector<Info> suchprofilInfo = getAllInfoOf(suchpro);
-		for(int i = 0; i < suchprofilInfo.size(); i++){
+		for (int i = 0; i < suchprofilInfo.size(); i++) {
 			infoMapper.deleteInfo(suchprofilInfo.elementAt(i));
 		}
 		suchprofilMapper.deleteProfil(suchpro);
 	}
-	
-	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) throws IllegalArgumentException {
-		
+
+	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) {
+
 		return this.profilMapper.getAllProfilBySuchprofil(suchpro);
-		
+
 	}
-	
-	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) throws IllegalArgumentException {
+
+	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) {
 		Vector<Profil> profiles = this.getAllProfils();
 		Vector<Info> suchprofilInfos = this.getAllInfoOf(suchpro);
-	
-		for(int k = 0; k < profiles.size(); k++) {
+
+		for (int k = 0; k < profiles.size(); k++) {
 			profiles.elementAt(k);
 			Vector<Info> infosOfProfiles = this.getAllInfobyProfil(profiles.elementAt(k));
-			for(int j = 0; j < infosOfProfiles.size(); j++) {
-				for(int i = 0; i < suchprofilInfos.size(); i++) {
-					if(suchprofilInfos.elementAt(i) == infosOfProfiles.elementAt(j)) {
-						profiles.add(profiles.elementAt(k)) ;
+			for (int j = 0; j < infosOfProfiles.size(); j++) {
+				for (int i = 0; i < suchprofilInfos.size(); i++) {
+					if (suchprofilInfos.elementAt(i) == infosOfProfiles.elementAt(j)) {
+						profiles.add(profiles.elementAt(k));
 					}
 				}
 			}
 		}
 		return profiles;
 	}
-	public Vector<Info> getAllInfoOf(Suchprofil suchpro) throws IllegalArgumentException {
-//		return this.infoMapper.getAllForSuchprofil();
+
+	public Vector<Info> getAllInfoOf(Suchprofil suchpro) {
+		// return this.infoMapper.getAllForSuchprofil();
 		return null;
 	}
-	
-	public Vector<Info> getAllInfoOf(Profil pro) throws IllegalArgumentException {
+
+	public Vector<Info> getAllInfoOf(Profil pro) {
 		return this.infoMapper.getAll();
 	}
-	
+
 	/**
 	 * Mit dieser Hilfsmethode kÃ¶nnen alle Suchprofile des einzelenen
 	 * Teilnehmers herausgesucht und angezeigt werden. Dies geschieht Ã¼ber die
@@ -884,7 +889,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Mit dieser Methode werden alle Suchprofile Ã¼ber die Suchprofil Id aus
 	 * der Db heraus herausgefiltert.
 	 */
-	public Suchprofil findByKey1(int id) throws IllegalArgumentException {
+	public Suchprofil findByKey1(int id) {
 		try {
 			return this.suchprofilMapper.findByKey(id);
 		} catch (Exception e) {
@@ -896,7 +901,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Diese Methode zeigt alle Suchprofile der PartnerbÃ¶rse an.
 	 */
-	public Vector<Suchprofil> getAllSuchprofil() throws IllegalArgumentException {
+	public Vector<Suchprofil> getAllSuchprofil() {
 
 		return this.suchprofilMapper.getAllSuchprofil();
 	}
@@ -905,7 +910,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Es ist mÃ¶glich ein Suchprofil des einzelnen Users anhand der Profil ID
 	 * heauszusuchen.
 	 */
-	public Vector<Suchprofil> getSuchprofilbyProfilId(Profil pro) throws IllegalArgumentException {
+	public Vector<Suchprofil> getSuchprofilbyProfilId(Profil pro) {
 		try {
 			return suchprofilMapper.getSuchprofilIdByProfil(pro);
 		} catch (Exception e) {
@@ -916,7 +921,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	// Doppelt, eines muss entfernt werden!
 
 	@Override
-	public Suchprofil save(Suchprofil such) throws IllegalArgumentException {
+	public Suchprofil save(Suchprofil such) {
 
 		try {
 			suchprofilMapper.updateProfil(such);
@@ -928,7 +933,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public Suchprofil_Info getAllSuchprofilInfos(Info in, Suchprofil such) throws IllegalArgumentException {
+	public Suchprofil_Info getAllSuchprofilInfos(Info in, Suchprofil such) {
 
 		Vector<Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(in, such);
 		Suchprofil_Info si = new Suchprofil_Info();
@@ -954,7 +959,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	// }
 
-	public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info in) throws IllegalArgumentException {
+	public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info in) {
 		try {
 			return this.suchprofil_infoMapper.getAllSuchprofilInfoOf(in);
 		} catch (Exception e) {
@@ -967,10 +972,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Profil-Objekte der PartnerbÃ¶rse in der Datenbank.
 	 * 
-	 * @return
-	 * @throws IllegalArgumentException
+	 * @return @
 	 */
-	public Vector<Profil> getAllProfils() throws IllegalArgumentException {
+	public Vector<Profil> getAllProfils() {
 		try {
 			return this.profilMapper.getAllProfil();
 		} catch (Exception e) {
@@ -984,10 +988,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * gesucht.
 	 * 
 	 * @param email
-	 * @return
-	 * @throws IllegalArgumentException
+	 * @return @
 	 */
-	public Profil getByEmail(String email) throws IllegalArgumentException {
+	public Profil getByEmail(String email) {
 		try {
 			return profilMapper.findByEmail(email);
 		} catch (Exception e) {
@@ -1000,23 +1003,30 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Hier wird ein Profil angelegt.
 	 */
 	public Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse,
-			String religion, String haarfarbe, String raucher, String geschlecht) throws IllegalArgumentException {
+			String religion, String haarfarbe, String raucher, String geschlecht) {
 
-		Profil pro = new Profil();
-		pro.setEmail(email);
-		pro.setVorname(vorname);
-		pro.setNachname(nachname);
-		pro.setGeburtsdatum(geburtsdatum);
-		pro.setKoerpergroesse(koerpergroesse);
-		pro.setReligion(religion);
-		pro.setHaarfarbe(haarfarbe);
-		pro.setGeschlecht(geschlecht);
-		pro.setRaucher(raucher);
-		pro.setId(1);
+		try {
+			Profil pro = new Profil();
+			pro.setEmail(email);
+			pro.setVorname(vorname);
+			pro.setNachname(nachname);
+			pro.setGeburtsdatum(geburtsdatum);
+			pro.setKoerpergroesse(koerpergroesse);
+			pro.setReligion(religion);
+			pro.setHaarfarbe(haarfarbe);
+			pro.setGeschlecht(geschlecht);
+			pro.setRaucher(raucher);
+			pro.setId(1);
 
-		createFreitexteigenschaft("Freitexteigenschaft");
+			createFreitexteigenschaft("Freitexteigenschaft");
 
-		return this.profilMapper.insertProfil(pro);
+			return this.profilMapper.insertProfil(pro);
+			
+		} catch (Exception e) {
+			e.getLocalizedMessage();
+		}
+
+		return null;
 
 	}
 
@@ -1052,7 +1062,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public void save(Profil pro) throws IllegalArgumentException {
+	public void save(Profil pro) {
 		try {
 			this.profilMapper.updateProfil(pro);
 		} catch (Exception e) {
@@ -1064,7 +1074,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Hier wird ein erstelltes Profil gÃ¤nzlich aus der PartnerbÃ¶rse entfernt
 	 * mit all seinen Daten und Informationen.
 	 */
-	public void delete(Profil pro) throws IllegalArgumentException {
+	public void delete(Profil pro) {
 
 		// Vector <Profil> profil = this.getAllProfils();
 		// Vector <Merkzettel> merk = this.getAllMerkzettel(profilid);
@@ -1074,8 +1084,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		Vector<Kontaktsperre> sperre = this.getAllKontaktsperreOf(pro);
 
 		for (int i = 0; i < sperre.size(); i++) {
-			if(pro.getId() == sperre.elementAt(i).getProfilId_gesperrter() || pro.getId() == sperre.elementAt(i).getProfilId_sperrender())
-			kontaktsperreMapper.deleteKontaktsperreByProfil(sperre.elementAt(i));
+			if (pro.getId() == sperre.elementAt(i).getProfilId_gesperrter()
+					|| pro.getId() == sperre.elementAt(i).getProfilId_sperrender())
+				kontaktsperreMapper.deleteKontaktsperreByProfil(sperre.elementAt(i));
 
 		}
 
@@ -1084,41 +1095,40 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		Vector<Merkzettel> merk = merkzettelMapper.getAllMerkezettel();
 
 		for (int i = 0; i < merk.size(); i++) {
-			if(pro.getId() == merk.elementAt(i).getProfilId_gemerkter() || pro.getId() == merk.elementAt(i).getProfilId_merkender()){
+			if (pro.getId() == merk.elementAt(i).getProfilId_gemerkter()
+					|| pro.getId() == merk.elementAt(i).getProfilId_merkender()) {
 				merkzettelMapper.deleteMerkzettelbyprofil(merk.elementAt(i));
 			}
-			
 
 		}
 
 		// Besuch
 
 		Vector<Besuch> besuche = besuchMapper.getAllBesuche();
-		
-		
 
 		for (int i = 0; i < besuche.size(); i++) {
-			if(pro.getId() == besuche.elementAt(i).getBesuchenderNutzerID() || pro.getId() == besuche.elementAt(i).getBesuchterNutzerID()){
+			if (pro.getId() == besuche.elementAt(i).getBesuchenderNutzerID()
+					|| pro.getId() == besuche.elementAt(i).getBesuchterNutzerID()) {
 				besuchMapper.deleteeinzeln(besuche.elementAt(i));
 			}
-		
 
 		}
 
-//		// SuchprofilInfo
-//
-//		Vector<Suchprofil> suchprofil = this.getSuchprofilbyProfilId(pro);
-//		Vector<Info> info = getInfoIdByProfilId(pro);
-//		Suchprofil_Info suchinfo = new Suchprofil_Info();
-//
-//		for (int s = 0; s < suchprofil.size(); s++) {
-//			for (int i = 0; i < info.size(); i++) {
-//				suchinfo = getAllSuchprofilInfos(info.elementAt(i), suchprofil.elementAt(i));
-//
-//			}
-//
-//			suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
-//		}
+		// // SuchprofilInfo
+		//
+		// Vector<Suchprofil> suchprofil = this.getSuchprofilbyProfilId(pro);
+		// Vector<Info> info = getInfoIdByProfilId(pro);
+		// Suchprofil_Info suchinfo = new Suchprofil_Info();
+		//
+		// for (int s = 0; s < suchprofil.size(); s++) {
+		// for (int i = 0; i < info.size(); i++) {
+		// suchinfo = getAllSuchprofilInfos(info.elementAt(i),
+		// suchprofil.elementAt(i));
+		//
+		// }
+		//
+		// suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
+		// }
 
 		// Suchprofil
 
@@ -1134,14 +1144,14 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		Vector<Info> infos = this.getAllInfo();
 		Vector<Freitexteigenschaft> frei = this.getAllFreitexteigenschaft();
 		for (int i = 0; i < infos.size(); i++) {
-			if(pro.getId() == infos.elementAt(i).getProfilId()){
+			if (pro.getId() == infos.elementAt(i).getProfilId()) {
 
 				infoMapper.deleteInfo(infos.elementAt(i));
 			}
 		}
 
 		for (int i = 0; i < frei.size(); i++) {
-			if(pro.getId() == frei.elementAt(i).getId()){
+			if (pro.getId() == frei.elementAt(i).getId()) {
 				freitexteigenschaftMapper.deleteFreitexteigenschaft(frei.elementAt(i));
 			}
 		}
@@ -1155,7 +1165,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Es werden Profile der PartnerbÃ¶rse anhand der Profil Id aus der
 	 * Datenbnak gefiltert.
 	 */
-	public Profil getProfilById(int id) throws IllegalArgumentException {
+	public Profil getProfilById(int id) {
 		try {
 			return this.profilMapper.findByKey(id);
 		} catch (Exception e) {
@@ -1168,7 +1178,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Hier werden alle Profile der PartnerbÃ¶rse herausgefiltert die sich in
 	 * der Datenbank befinden.
 	 */
-	public Vector<Profil> getAllProfil() throws IllegalArgumentException {
+	public Vector<Profil> getAllProfil() {
 		try {
 			return profilMapper.getAllProfil();
 		} catch (Exception e) {
@@ -1184,10 +1194,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * wie eine ID, denn diese gibt es nur einmal.
 	 * 
 	 * @param email
-	 * @return
-	 * @throws IllegalArgumentException
+	 * @return @
 	 */
-	public Profil pruefenAufExistenz(String email) throws IllegalArgumentException {
+	public Profil pruefenAufExistenz(String email) {
 
 		Profil profil = new Profil();
 		Profil existingProfil = getByEmail(email);
@@ -1207,7 +1216,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public Vector<Besuch> showVisitedProfiles(Profil pro) throws IllegalArgumentException {
+	public Vector<Besuch> showVisitedProfiles(Profil pro) {
 
 		Vector<Besuch> allBesuche = new Vector<Besuch>();
 		allBesuche = this.getAllBesucheOf(pro);
@@ -1225,15 +1234,16 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Methode zum Löschen von Besuchen.
 	 */
-	public void deleteBesuche(Profil pro, int besuchterNutzerID) throws IllegalArgumentException {
-//		Vector<Besuch> allBesuche = new Vector<Besuch>();
-//		allBesuche = this.getAllBesucheOf(pro);
-//
-//		if (allBesuche != null) {
-//			for (Besuch besuche : allBesuche) {
-//				this.besuchMapper.deleteByProfilId(pro, besuche.getBesuchterNutzerID());
-//			}
-//		}
+	public void deleteBesuche(Profil pro, int besuchterNutzerID) {
+		// Vector<Besuch> allBesuche = new Vector<Besuch>();
+		// allBesuche = this.getAllBesucheOf(pro);
+		//
+		// if (allBesuche != null) {
+		// for (Besuch besuche : allBesuche) {
+		// this.besuchMapper.deleteByProfilId(pro,
+		// besuche.getBesuchterNutzerID());
+		// }
+		// }
 		Besuch b1 = new Besuch();
 		b1.setBesuchenderNutzerID(pro.getId());
 		b1.setBesuchterNutzerID(besuchterNutzerID);
@@ -1245,10 +1255,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * wurden.
 	 * 
 	 * @param besuchenderNutzerID
-	 * @return
-	 * @throws IllegalArgumentException
+	 * @return @
 	 */
-	public Vector<Besuch> getAllBesucheOf(Profil pro) throws IllegalArgumentException {
+	public Vector<Besuch> getAllBesucheOf(Profil pro) {
 		try {
 			return besuchMapper.getAllBesucheDesBesuchenden(pro);
 		} catch (Exception e) {
@@ -1263,10 +1272,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * wurden und welche gesperrt sind.
 	 * 
 	 * @param profilid
-	 * @return
-	 * @throws IllegalArgumentException
+	 * @return @
 	 */
-	public Vector<Profil> getUnvisitedProfiles(Profil pro) throws IllegalArgumentException {
+	public Vector<Profil> getUnvisitedProfiles(Profil pro) {
 		/**
 		 * Besuche des Besuchenden werden hier abgerufen und in
 		 */
@@ -1296,7 +1304,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * @param profilId_gesperrter
 	 * @return
 	 */
-	public boolean sperrPruefung(Profil pro) throws IllegalArgumentException {
+	public boolean sperrPruefung(Profil pro) {
 		Vector<Kontaktsperre> sperrL = getAllKontaktsperreOf(pro);
 		boolean sperrListe = false;
 
@@ -1313,7 +1321,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public Vector<Info> getInfoIdByProfilId(Profil pro) throws IllegalArgumentException {
+	public Vector<Info> getInfoIdByProfilId(Profil pro) {
 		try {
 			return infoMapper.getInfoIdByProfilId(pro);
 		} catch (Exception e) {
@@ -1327,22 +1335,38 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * 
 	 * @param pro.getId()
 	 * @param besuch.getBesuchterNutzerID
-	 * @throws IllegalArgumentException
+	 * @
 	 */
-	public Besuch visit(int eigene_id, int fremde_id) throws IllegalArgumentException {
+	public Besuch visit(int eigene_id, int fremde_id) {
 		Besuch besuch = new Besuch();
 		besuch.setBesuchenderNutzerID(eigene_id);
 		besuch.setBesuchterNutzerID(fremde_id);
 		return besuchMapper.insert(besuch);
 	}
 
-	public Profil checkProfil(String email) throws IllegalArgumentException {
+	public Profil checkProfil(String email) {
 
-		if (profilMapper.findByEmail(email) == null) {
-			return null;
-		} else {
-			return profilMapper.findByEmail(email);
+		// Profil p = new Profil();
+		// p.setEmail("hallo");
+		// p.setGeburtsdatum(new Date());
+		// p.setGeschlecht("hallo");
+		// p.setHaarfarbe("Hallo");
+		// p.setKoerpergroesse(123);
+		// p.setNachname("halo");
+		// p.setRaucher("hallo");
+		// p.setReligion("hallo");
+		// p.setVorname("hallo");
+		// return p;
+		try {
+			if (profilMapper.findByEmail(email) == null) {
+				return null;
+			} else {
+				return profilMapper.findByEmail(email);
+			}
+		} catch (Exception e) {
+			e.getMessage();
 		}
+		return null;
 
 	}
 
@@ -1351,10 +1375,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * 
 	 * @param p1,
 	 *            p2
-	 * @return prozent
-	 * @throws IllegalArgumentException
+	 * @return prozent @
 	 */
-	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) throws IllegalArgumentException {
+	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) {
 		double aehnlichkeitstreffer = 0;
 		double prozent = 0;
 		Profil profil1 = profilMapper.findByKey(p1.getId());
@@ -1384,8 +1407,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil)
-			throws IllegalArgumentException {
+	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil) {
 
 		Aehnlichkeitsmass a1 = new Aehnlichkeitsmass();
 		a1.setEigenes_profilid(eigenes_profil);
@@ -1419,19 +1441,19 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	@Override
-	public void deleteAehnlichkeit(Aehnlichkeitsmass a) throws IllegalArgumentException {
+	public void deleteAehnlichkeit(Aehnlichkeitsmass a) {
 		// TODO Auto-generated method stub
 		aehnlichkeitsmassMapper.deleteAehnlichkeitsmass(a);
 	}
 
 	@Override
-	public Aehnlichkeitsmass findAehnlichkeitByProfilid(int id) throws IllegalArgumentException {
+	public Aehnlichkeitsmass findAehnlichkeitByProfilid(int id) {
 		// TODO Auto-generated method stub
 		return this.aehnlichkeitsmassMapper.findByKey(id);
 	}
 
 	@Override
-	public Vector<Aehnlichkeitsmass> showAllAehnlichkeitByProfil() throws IllegalArgumentException {
+	public Vector<Aehnlichkeitsmass> showAllAehnlichkeitByProfil() {
 		// TODO Auto-generated method stub
 
 		return this.aehnlichkeitsmassMapper.getAll();
@@ -1466,36 +1488,33 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 		return allAehnlichkeitsmassVonProfilenAnhandSuchprofilen;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
-	public int getAlterOf(Profil pro) throws IllegalArgumentException {
-//		GregorianCalendar now = new GregorianCalendar();
+	public int getAlterOf(Profil pro) {
+		// GregorianCalendar now = new GregorianCalendar();
 		int alter = 0;
 		Date today = new Date();
-//		int now = today.getDate();
+		// int now = today.getDate();
 		Date geburtsdatum = pro.getGeburtsdatum();
-		if(geburtsdatum.getYear() < today.getYear()) {
+		if (geburtsdatum.getYear() < today.getYear()) {
 			alter = today.getYear() - geburtsdatum.getYear();
-			if(geburtsdatum.getMonth() > today.getMonth()){
-				if(geburtsdatum.getDay() > today.getDay()){
+			if (geburtsdatum.getMonth() > today.getMonth()) {
+				if (geburtsdatum.getDay() > today.getDay()) {
 					alter = alter - 1;
 				} else {
 					alter = alter + 0;
 				}
-				
+
 			}
 		}
-		
-		
-		
+
 		return alter;
 	}
 
 	@Override
-	public Vector<Kontaktsperre> getBlockedBy(Profil pro) throws IllegalArgumentException {
+	public Vector<Kontaktsperre> getBlockedBy(Profil pro) {
 		return kontaktsperreMapper.getAllKontaktsperrenDesGesperrten(pro);
 	}
-
 
 }

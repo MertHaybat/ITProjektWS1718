@@ -1,7 +1,5 @@
 package de.hdm.ITProjekt17.client.gui;
 
-
-
 import java.util.Vector;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -31,10 +29,10 @@ import de.hdm.ITProjekt17.shared.bo.Profil.Geschlecht;
 import de.hdm.ITProjekt17.shared.bo.Profil.Haarfarbe;
 import de.hdm.ITProjekt17.shared.bo.Profil.Raucher;
 
-public class Profilseite extends VerticalPanel{
+public class Profilseite extends VerticalPanel {
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
-	
+
 	private TextBox tbemail = new TextBox();
 	private TextBox tbvorname = new TextBox();
 	private TextBox tbnachname = new TextBox();
@@ -44,15 +42,14 @@ public class Profilseite extends VerticalPanel{
 	private TextBox tbkörpergröße = new TextBox();
 	private ListBox lbraucher = new ListBox();
 	private ListBox lbgeschlecht = new ListBox();
-//	private TextBox tbfreitext = new TextBox();
+	// private TextBox tbfreitext = new TextBox();
 	private TextArea tbfreitext = new TextArea();
 
-	
 	private ListBox lbinteresse = new ListBox();
-	private ListBox lbwohnsituation = new ListBox();	
+	private ListBox lbwohnsituation = new ListBox();
 	private ListBox lbausbildung = new ListBox();
 	private ListBox lbkörperbau = new ListBox();
-	
+
 	private Label lb1 = new Label("Vorname: ");
 	private Label lb2 = new Label("Nachname: ");
 	private Label lb3 = new Label("Geburtsdatum: ");
@@ -66,28 +63,25 @@ public class Profilseite extends VerticalPanel{
 	private Label lb11 = new Label("Wohnsituation: ");
 	private Label lb12 = new Label("Ausbildung: ");
 	private Label lb14 = new Label("Körperbau: ");
-	
 
-	
 	private Button ok = new Button("Bestätigen");
 	private Button abbrechen = new Button("Eingaben Rückgängig machen");
-	private Button löschen = new Button ("Profil löschen");
-	
+	private Button löschen = new Button("Profil löschen");
+
 	private FlexTable ft1 = new FlexTable();
 	private FlexTable ft2 = new FlexTable();
 
 	private Profil p1 = new Profil();
-	
+
 	private VerticalPanel vpanel = new VerticalPanel();
 	private VerticalPanel vpanel2 = new VerticalPanel();
 	private HorizontalPanel hpanel = new HorizontalPanel();
-	
+
 	private Auswahleigenschaft a = new Auswahleigenschaft();
 	private Auswahleigenschaft b = new Auswahleigenschaft();
 	private Auswahleigenschaft c = new Auswahleigenschaft();
 	private Auswahleigenschaft d = new Auswahleigenschaft();
 
-	
 	public Profilseite(final String email, final Anchor logout){
 		Window.alert("Willkommen auf MOFOS. Tragen Sie bitte nachfolgend die Daten zu Ihrer Person ein.");
 
@@ -279,22 +273,24 @@ public class Profilseite extends VerticalPanel{
 								@Override
 								public void onFailure(Throwable caught) {
 									// TODO Auto-generated method stub
-							Window.alert("Fehlerhafte Eingabe");		
+									
+							Window.alert("Fehlerhafte Eingabe " + caught.getLocalizedMessage());		
 								}
 
 								@Override
 								public void onSuccess(Profil result) {
-									p1 = result;
+								
 									pbverwaltung.checkProfil(email, new AsyncCallback<Profil>() {
 
 										@Override
 										public void onFailure(Throwable caught) {
 											// TODO Auto-generated method stub
-											
+											Window.alert(caught.getLocalizedMessage());
 										}
 
 										@Override
 										public void onSuccess(Profil result) {
+											p1 = result;
 											RootPanel.get("Topbar").add(logout);
 											RootPanel.get("Navigator").clear();
 											RootPanel.get("Navigator").add(new Menubar(result));
@@ -305,87 +301,93 @@ public class Profilseite extends VerticalPanel{
 					});
 					
 					Window.alert("Sie haben sich erfolgreich mit folgender E-Mail angemeldet: " + email);
-					pbverwaltung.createInfo(email, 1, "", lbinteresse.getSelectedValue(), new AsyncCallback<Info>(){
-
-						@Override
-						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void onSuccess(Info result) {
-							pbverwaltung.createInfo(email, 2, "", lbwohnsituation.getSelectedValue(), new AsyncCallback<Info>(){
-
-								@Override
-								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
-								}
-
-								@Override
-								public void onSuccess(Info result) {
-									pbverwaltung.createInfo(email, 3, "", lbausbildung.getSelectedValue(), new AsyncCallback<Info>(){
-
-										@Override
-										public void onFailure(Throwable caught) {
-											// TODO Auto-generated method stub
-											
-										}
-
-										@Override
-										public void onSuccess(Info result) {
-											pbverwaltung.createInfo(email, 4, "", lbkörperbau.getSelectedValue(), new AsyncCallback<Info>(){
-
-												@Override
-												public void onFailure(Throwable caught) {
-													// TODO Auto-generated method stub
-													
-												}
-
-												@Override
-												public void onSuccess(Info result) {
-													pbverwaltung.createInfo(email, 5, tbfreitext.getValue(), "", new AsyncCallback<Info>(){
-
-														@Override
-														public void onFailure(Throwable caught) {
-															// TODO Auto-generated method stub
-															
-														}
-
-														@Override
-														public void onSuccess(Info result) {
-															RootPanel.get("Details").clear();
-															RootPanel.get("Details").add(new Profilseite(p1));
-															RootPanel.get("Navigator").clear();
-															RootPanel.get("Navigator").add(new Menubar(p1));
-														}
-														
-													});
-													
-												}
-												
-											});
-										}
-										
-									});
-								}
-								
-							});
-							
-						}
-						
-					});
-				}
+					
+				  pbverwaltung.createInfo(email, 1, "",
+				  lbinteresse.getSelectedValue(), new AsyncCallback<Info>(){
+				  
+				  @Override 
+				  public void onFailure(Throwable caught) {
+				            Window.alert("Fehler bei Info 1 " +
+				            caught.getLocalizedMessage());
+				  
+				            }
+				  
+				  @Override 
+				  public void onSuccess(Info result) {
+				            pbverwaltung.createInfo(email, 2, "",
+				            lbwohnsituation.getSelectedValue(), new
+				            AsyncCallback<Info>(){
+				  
+				  @Override 
+				  public void onFailure(Throwable caught) { 
+					 
+				  
+				            }
+				  
+				  @Override 
+				  public void onSuccess(Info result) {
+				            pbverwaltung.createInfo(email, 3, "",
+				            lbausbildung.getSelectedValue(), new
+				            AsyncCallback<Info>(){
+				  
+				  @Override 
+				  public void onFailure(Throwable caught) { 
+				  
+				            }
+				  
+				  @Override 
+				  public void onSuccess(Info result) {
+				            pbverwaltung.createInfo(email, 4, "",
+				            lbkörperbau.getSelectedValue(), new
+				            AsyncCallback<Info>(){
+				  
+				  @Override 
+				  public void onFailure(Throwable caught) { 
+				  
+				            }
+				  
+				  @Override 
+				  public void onSuccess(Info result) {
+				            pbverwaltung.createInfo(email, 5,
+				            tbfreitext.getValue(), "", new
+				            AsyncCallback<Info>(){
+				  
+				  @Override 
+				  public void onFailure(Throwable caught) { 
+				  
+				            }
+				  
+				  @Override 
+				  public void onSuccess(Info result) {
+				            RootPanel.get("Details").clear();
+				            RootPanel.get("Details").add(new Profilseite(p1));
+				            RootPanel.get("Navigator").clear();
+				            RootPanel.get("Navigator").add(new Menubar(p1)); }
+				  
+				            });
+				  
+				            }
+				  
+				            }); }
+				  
+				            }); }
+				  
+				            });
+				  
+				            }
+				  
+				            });
+				 
+				} 
 				
-		    });
+		    }
+				);
 				
 		RootPanel.get("Details").clear();
 		RootPanel.get("Details").add(this);
 	}
-	
-	
-	public Profilseite(final Profil profil){
+
+	public Profilseite(final Profil profil) {
 		ft1.setWidget(1, 0, lb1);
 		ft1.setWidget(1, 1, tbvorname);
 		ft1.setWidget(2, 0, lb2);
@@ -418,200 +420,174 @@ public class Profilseite extends VerticalPanel{
 		ft2.setWidget(6, 0, tbfreitext);
 
 		tbfreitext.setPixelSize(250, 150);
-		
+
 		geburtsdatum.setFormat(new DateBox.DefaultFormat(DateTimeFormat.getFormat("dd-MM-yyyy")));
-        geburtsdatum.getDatePicker().setYearArrowsVisible(true);
+		geburtsdatum.getDatePicker().setYearArrowsVisible(true);
 		geburtsdatum.getDatePicker().setYearAndMonthDropdownVisible(true);
 		geburtsdatum.getDatePicker().setVisibleYearCount(100);
-		
-		
-		//ListBox Raucher befüllen.
-		
+
+		// ListBox Raucher befüllen.
+
 		Raucher b1 = Raucher.A;
 		Raucher b2 = Raucher.B;
 		Raucher b3 = Raucher.C;
 		Raucher b4 = Raucher.D;
 		Raucher b5 = Raucher.E;
-	      lbraucher.addItem(Profil.word(b1));
-	      lbraucher.addItem(Profil.word(b2));
-	      lbraucher.addItem(Profil.word(b3));
-	      lbraucher.addItem(Profil.word(b4));
-	      lbraucher.addItem(Profil.word(b5));
-		  
-		//ListBox Geschlecht befüllen.
+		lbraucher.addItem(Profil.word(b1));
+		lbraucher.addItem(Profil.word(b2));
+		lbraucher.addItem(Profil.word(b3));
+		lbraucher.addItem(Profil.word(b4));
+		lbraucher.addItem(Profil.word(b5));
 
-			Geschlecht c1 = Geschlecht.m;
-			Geschlecht c2 = Geschlecht.w;
-			Geschlecht c3 = Geschlecht.s;
-		      lbgeschlecht.addItem(Profil.word(c1));
-		      lbgeschlecht.addItem(Profil.word(c2));
-		      lbgeschlecht.addItem(Profil.word(c3));
-		      
-		//ListBox Haarfarbe befüllen.
+		// ListBox Geschlecht befüllen.
 
-			Haarfarbe h1 = Haarfarbe.A;
-			Haarfarbe h2 = Haarfarbe.B;
-			Haarfarbe h3 = Haarfarbe.C;
-			Haarfarbe h4 = Haarfarbe.D;
-			Haarfarbe h5 = Haarfarbe.E;
-			  lbhaarfarbe.addItem(Profil.word(h1));
-			  lbhaarfarbe.addItem(Profil.word(h2));
-			  lbhaarfarbe.addItem(Profil.word(h3));
-			  lbhaarfarbe.addItem(Profil.word(h4));
-			  lbhaarfarbe.addItem(Profil.word(h5));
+		Geschlecht c1 = Geschlecht.m;
+		Geschlecht c2 = Geschlecht.w;
+		Geschlecht c3 = Geschlecht.s;
+		lbgeschlecht.addItem(Profil.word(c1));
+		lbgeschlecht.addItem(Profil.word(c2));
+		lbgeschlecht.addItem(Profil.word(c3));
 
-	      
-			//ListBox Interesse befüllen.
-			
-	      lbinteresse.addItem("Frauen");
-	      lbinteresse.addItem("Männer");
-	      lbinteresse.addItem("Beides");	  
-	      
-			//ListBox Wohnsituation befüllen.
-			
-	      lbwohnsituation.addItem("Bei den Eltern");
-	      lbwohnsituation.addItem("Alleine");
-	      lbwohnsituation.addItem("In einer WG");
-	      lbwohnsituation.addItem("Im Wohnheim");
+		// ListBox Haarfarbe befüllen.
 
-			//ListBox Ausbildung befüllen.
-			
-	      lbausbildung.addItem("Kein Abschluss");
-	      lbausbildung.addItem("Schüler");
-	      lbausbildung.addItem("Student");
-	      lbausbildung.addItem("Absolvent");
-				      
-	      //ListBox Körperbau befüllen.
-	      
-	      lbkörperbau.addItem("dünn");     
-	      lbkörperbau.addItem("durchschnittlich");
-	      lbkörperbau.addItem("sportlich");
-	      lbkörperbau.addItem("muskulös");
-	      lbkörperbau.addItem("mollig");
-	      lbkörperbau.addItem("dick");
-		
+		Haarfarbe h1 = Haarfarbe.A;
+		Haarfarbe h2 = Haarfarbe.B;
+		Haarfarbe h3 = Haarfarbe.C;
+		Haarfarbe h4 = Haarfarbe.D;
+		Haarfarbe h5 = Haarfarbe.E;
+		lbhaarfarbe.addItem(Profil.word(h1));
+		lbhaarfarbe.addItem(Profil.word(h2));
+		lbhaarfarbe.addItem(Profil.word(h3));
+		lbhaarfarbe.addItem(Profil.word(h4));
+		lbhaarfarbe.addItem(Profil.word(h5));
+
+		// ListBox Interesse befüllen.
+
+		lbinteresse.addItem("Frauen");
+		lbinteresse.addItem("Männer");
+		lbinteresse.addItem("Beides");
+
+		// ListBox Wohnsituation befüllen.
+
+		lbwohnsituation.addItem("Bei den Eltern");
+		lbwohnsituation.addItem("Alleine");
+		lbwohnsituation.addItem("In einer WG");
+		lbwohnsituation.addItem("Im Wohnheim");
+
+		// ListBox Ausbildung befüllen.
+
+		lbausbildung.addItem("Kein Abschluss");
+		lbausbildung.addItem("Schüler");
+		lbausbildung.addItem("Student");
+		lbausbildung.addItem("Absolvent");
+
+		// ListBox Körperbau befüllen.
+
+		lbkörperbau.addItem("dünn");
+		lbkörperbau.addItem("durchschnittlich");
+		lbkörperbau.addItem("sportlich");
+		lbkörperbau.addItem("muskulös");
+		lbkörperbau.addItem("mollig");
+		lbkörperbau.addItem("dick");
+
 		tbemail.setValue(profil.getEmail());
 		tbvorname.setValue(profil.getVorname());
 		tbnachname.setValue(profil.getNachname());
 		geburtsdatum.setValue(profil.getGeburtsdatum());
 		tbreligion.setValue(profil.getReligion());
 		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
-		
 
-		
-		//Raucher
-		if(profil.getRaucher()==Profil.word(b1)){
+		// Raucher
+		if (profil.getRaucher() == Profil.word(b1)) {
 			lbraucher.setSelectedIndex(0);
-		}
-		else if(profil.getRaucher()==Profil.word(b2)){
+		} else if (profil.getRaucher() == Profil.word(b2)) {
 			lbraucher.setSelectedIndex(1);
-		}
-		else if(profil.getRaucher()==Profil.word(b3)){
+		} else if (profil.getRaucher() == Profil.word(b3)) {
 			lbraucher.setSelectedIndex(2);
-		}else if(profil.getRaucher()==Profil.word(b4)){
+		} else if (profil.getRaucher() == Profil.word(b4)) {
 			lbraucher.setSelectedIndex(3);
-		}else if(profil.getRaucher()==Profil.word(b5)){
+		} else if (profil.getRaucher() == Profil.word(b5)) {
 			lbraucher.setSelectedIndex(4);
 		}
-		
-		
-		//Geschlecht
-		if(profil.getGeschlecht()==Profil.word(c1)){
+
+		// Geschlecht
+		if (profil.getGeschlecht() == Profil.word(c1)) {
 			lbgeschlecht.setSelectedIndex(0);
-		}
-		else if(profil.getGeschlecht()==Profil.word(c2)){
+		} else if (profil.getGeschlecht() == Profil.word(c2)) {
 			lbgeschlecht.setSelectedIndex(1);
-		}
-		else if(profil.getGeschlecht()==Profil.word(c3)){
+		} else if (profil.getGeschlecht() == Profil.word(c3)) {
 			lbgeschlecht.setSelectedIndex(2);
 		}
-		
-		//Haarfarbe
-		if(profil.getHaarfarbe()==Profil.word(h1)){
+
+		// Haarfarbe
+		if (profil.getHaarfarbe() == Profil.word(h1)) {
 			lbhaarfarbe.setSelectedIndex(0);
-		}
-		else if(profil.getHaarfarbe()==Profil.word(h2)){
+		} else if (profil.getHaarfarbe() == Profil.word(h2)) {
 			lbhaarfarbe.setSelectedIndex(1);
-		}
-		else if(profil.getHaarfarbe()==Profil.word(h3)){
+		} else if (profil.getHaarfarbe() == Profil.word(h3)) {
 			lbhaarfarbe.setSelectedIndex(2);
-		}
-		else if(profil.getHaarfarbe()==Profil.word(h4)){
+		} else if (profil.getHaarfarbe() == Profil.word(h4)) {
 			lbhaarfarbe.setSelectedIndex(3);
-		}
-		else if(profil.getHaarfarbe()==Profil.word(h5)){
+		} else if (profil.getHaarfarbe() == Profil.word(h5)) {
 			lbhaarfarbe.setSelectedIndex(4);
 		}
-		
-		//Interesse
-		if(lbinteresse.getSelectedIndex()==0){
+
+		// Interesse
+		if (lbinteresse.getSelectedIndex() == 0) {
 			a.setWert("Frauen");
-		}
-		else if(lbinteresse.getSelectedIndex()==1){
+		} else if (lbinteresse.getSelectedIndex() == 1) {
 			a.setWert("Männer");
-		}
-		else if(lbinteresse.getSelectedIndex()==2){
+		} else if (lbinteresse.getSelectedIndex() == 2) {
 			a.setWert("Beides");
 		}
-		
-		//Wohnsituation
-		if(lbwohnsituation.getSelectedIndex()==0){
+
+		// Wohnsituation
+		if (lbwohnsituation.getSelectedIndex() == 0) {
 			b.setWert("Bei den Eltern");
-		}
-		else if(lbwohnsituation.getSelectedIndex()==1){
+		} else if (lbwohnsituation.getSelectedIndex() == 1) {
 			b.setWert("Alleine");
-		}
-		else if(lbwohnsituation.getSelectedIndex()==2){
+		} else if (lbwohnsituation.getSelectedIndex() == 2) {
 			b.setWert("In einer WG");
-		}
-		else if(lbwohnsituation.getSelectedIndex()==3){
+		} else if (lbwohnsituation.getSelectedIndex() == 3) {
 			b.setWert("Im Wohnheim");
 		}
-		
-		//Ausbildung
-		if(lbausbildung.getSelectedIndex()==0){
+
+		// Ausbildung
+		if (lbausbildung.getSelectedIndex() == 0) {
 			c.setWert("Kein Abschluss");
-		}
-		else if(lbausbildung.getSelectedIndex()==1){
+		} else if (lbausbildung.getSelectedIndex() == 1) {
 			c.setWert("Schüler");
-		}
-		else if(lbausbildung.getSelectedIndex()==2){
+		} else if (lbausbildung.getSelectedIndex() == 2) {
 			c.setWert("Student");
-		}
-		else if(lbausbildung.getSelectedIndex()==3){
+		} else if (lbausbildung.getSelectedIndex() == 3) {
 			c.setWert("Absolvent");
 		}
-				
-		//Körperbau
-		if(lbkörperbau.getSelectedIndex()==0){
+
+		// Körperbau
+		if (lbkörperbau.getSelectedIndex() == 0) {
 			d.setWert("dünn");
-		}
-		else if(lbkörperbau.getSelectedIndex()==1){
+		} else if (lbkörperbau.getSelectedIndex() == 1) {
 			d.setWert("durchschnittlich");
-		}
-		else if(lbkörperbau.getSelectedIndex()==2){
+		} else if (lbkörperbau.getSelectedIndex() == 2) {
 			d.setWert("sportlich");
-		}
-		else if(lbkörperbau.getSelectedIndex()==3){
+		} else if (lbkörperbau.getSelectedIndex() == 3) {
 			d.setWert("muskulös");
-		}
-		else if(lbkörperbau.getSelectedIndex()==4){
+		} else if (lbkörperbau.getSelectedIndex() == 4) {
 			d.setWert("mollig");
-		}
-		else if(lbkörperbau.getSelectedIndex()==5){
+		} else if (lbkörperbau.getSelectedIndex() == 5) {
 			d.setWert("dick");
 		}
-		
-		löschen.addClickHandler(new ClickHandler(){
+
+		löschen.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				pbverwaltung.delete(profil, new AsyncCallback<Void>(){
+				pbverwaltung.delete(profil, new AsyncCallback<Void>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
@@ -620,23 +596,23 @@ public class Profilseite extends VerticalPanel{
 						RootPanel.get("Navigator").clear();
 						RootPanel.get("Details").clear();
 					}
-					
+
 				});
-				
+
 			}
-			
+
 		});
-		abbrechen.addClickHandler(new ClickHandler(){
+		abbrechen.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-			RootPanel.get("Details").clear();
-			RootPanel.get("Details").add(new Profilseite(profil));
-				
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(new Profilseite(profil));
+
 			}
-			
+
 		});
-		ok.addClickHandler(new ClickHandler(){
+		ok.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
@@ -648,219 +624,235 @@ public class Profilseite extends VerticalPanel{
 				profil.setRaucher(lbraucher.getSelectedValue());
 				profil.setReligion(tbreligion.getValue());
 				profil.setVorname(tbvorname.getValue());
-				pbverwaltung.save(profil, new AsyncCallback<Void>(){
+				pbverwaltung.save(profil, new AsyncCallback<Void>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
 					public void onSuccess(Void result) {
 						Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
-						}
-					
-				});	
+					}
+
+				});
 				pbverwaltung.getAllInfobyProfil(profil, new AsyncCallback<Vector<Info>>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
 					public void onSuccess(Vector<Info> result) {
 						for (Info info : result) {
 							switch (info.getAuswahleigenschaftid()) {
-							case 1: info.setAuswahleigenschaftWert(lbinteresse.getSelectedValue());
-							pbverwaltung.save(info, new AsyncCallback<Void>() {
+							case 1:
+								info.setAuswahleigenschaftWert(lbinteresse.getSelectedValue());
+								pbverwaltung.save(info, new AsyncCallback<Void>() {
 
-								@Override
-								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
-								}
+									@Override
+									public void onFailure(Throwable caught) {
+										// TODO Auto-generated method stub
 
-								@Override
-								public void onSuccess(Void result) {
-								
-								}
-							});
-							break;
-							case 2: info.setAuswahleigenschaftWert(lbwohnsituation.getSelectedValue());
-							pbverwaltung.save(info, new AsyncCallback<Void>() {
+									}
 
-								@Override
-								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
-								}
+									@Override
+									public void onSuccess(Void result) {
 
-								@Override
-								public void onSuccess(Void result) {
-									
-								}
-							});
-							break;
-							case 3: info.setAuswahleigenschaftWert(lbausbildung.getSelectedValue());
-							pbverwaltung.save(info, new AsyncCallback<Void>() {
-
-								@Override
-								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
-								}
-
-								@Override
-								public void onSuccess(Void result) {
-									
-								}
-							});
-							break;
-							case 4: info.setAuswahleigenschaftWert(lbkörperbau.getSelectedValue());
-							pbverwaltung.save(info, new AsyncCallback<Void>() {
-
-								@Override
-								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
-								}
-
-								@Override
-								public void onSuccess(Void result) {
-									
-								}
-							});
+									}
+								});
 								break;
-							case 5: info.setFreitexteigenschaftWert(tbfreitext.getValue());
-							pbverwaltung.save(info, new AsyncCallback<Void>() {
+							case 2:
+								info.setAuswahleigenschaftWert(lbwohnsituation.getSelectedValue());
+								pbverwaltung.save(info, new AsyncCallback<Void>() {
 
-								@Override
-								public void onFailure(Throwable caught) {
-									Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
-								}
+									@Override
+									public void onFailure(Throwable caught) {
+										// TODO Auto-generated method stub
 
-								@Override
-								public void onSuccess(Void result) {
-									RootPanel.get("Details").clear();
-									RootPanel.get("Details").add(new Profilseite(profil));
-								}
-							});
-							break;
+									}
+
+									@Override
+									public void onSuccess(Void result) {
+
+									}
+								});
+								break;
+							case 3:
+								info.setAuswahleigenschaftWert(lbausbildung.getSelectedValue());
+								pbverwaltung.save(info, new AsyncCallback<Void>() {
+
+									@Override
+									public void onFailure(Throwable caught) {
+										// TODO Auto-generated method stub
+
+									}
+
+									@Override
+									public void onSuccess(Void result) {
+
+									}
+								});
+								break;
+							case 4:
+								info.setAuswahleigenschaftWert(lbkörperbau.getSelectedValue());
+								pbverwaltung.save(info, new AsyncCallback<Void>() {
+
+									@Override
+									public void onFailure(Throwable caught) {
+										// TODO Auto-generated method stub
+
+									}
+
+									@Override
+									public void onSuccess(Void result) {
+
+									}
+								});
+								break;
+							case 5:
+								info.setFreitexteigenschaftWert(tbfreitext.getValue());
+								pbverwaltung.save(info, new AsyncCallback<Void>() {
+
+									@Override
+									public void onFailure(Throwable caught) {
+										Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
+									}
+
+									@Override
+									public void onSuccess(Void result) {
+										RootPanel.get("Details").clear();
+										RootPanel.get("Details").add(new Profilseite(profil));
+									}
+								});
+								break;
 							default:
 								break;
 							}
-							
+
 						}
-						
+
 					}
-					
+
 				});
-				
+
 			}
-			
+
 		});
-		
-	    pbverwaltung.getInfoIdByProfilId(profil, new AsyncCallback<Vector<Info>>() {
-			
+
+		pbverwaltung.getInfoIdByProfilId(profil, new AsyncCallback<Vector<Info>>() {
+
 			@Override
 			public void onSuccess(Vector<Info> result) {
-				
+
 				for (Info info : result) {
-					
+
 					int o = info.getAuswahleigenschaftid();
-					
-					
+
 					switch (o) {
-					case 1: 
+					case 1:
 						String wert = info.getAuswahleigenschaftWert();
 						switch (wert) {
 						case "Frauen":
 							lbinteresse.setSelectedIndex(0);
 							break;
-						case "Männer": lbinteresse.setSelectedIndex(1);
-							
+						case "Männer":
+							lbinteresse.setSelectedIndex(1);
+
 							break;
 
-						case "Beides": lbinteresse.setSelectedIndex(2);
-						break;
+						case "Beides":
+							lbinteresse.setSelectedIndex(2);
+							break;
 						default:
 							break;
 						}
 						break;
 
-					case 2: 
+					case 2:
 						String wert2 = info.getAuswahleigenschaftWert();
 						switch (wert2) {
-						
-						case "Bei den Eltern": lbwohnsituation.setSelectedIndex(0);
-							
+
+						case "Bei den Eltern":
+							lbwohnsituation.setSelectedIndex(0);
+
 							break;
-							
-						case "Alleine": lbwohnsituation.setSelectedIndex(1);
+
+						case "Alleine":
+							lbwohnsituation.setSelectedIndex(1);
 							break;
-						case "In einer WG": lbwohnsituation.setSelectedIndex(2);
+						case "In einer WG":
+							lbwohnsituation.setSelectedIndex(2);
 							break;
-						case "Im Wohnheim": lbwohnsituation.setSelectedIndex(3);
+						case "Im Wohnheim":
+							lbwohnsituation.setSelectedIndex(3);
 						default:
 							break;
 						}
-						
-					case 3: 
+
+					case 3:
 						String wert3 = info.getAuswahleigenschaftWert();
 						switch (wert3) {
-						case "Kein Abschluss": lbausbildung.setSelectedIndex(0);
-						break;
-						case "Schüler": lbausbildung.setSelectedIndex(1); break;
-						case "Student": lbausbildung.setSelectedIndex(2);
-						break;
-						case "Absolvent": lbausbildung.setSelectedIndex(3);
-							
+						case "Kein Abschluss":
+							lbausbildung.setSelectedIndex(0);
+							break;
+						case "Schüler":
+							lbausbildung.setSelectedIndex(1);
+							break;
+						case "Student":
+							lbausbildung.setSelectedIndex(2);
+							break;
+						case "Absolvent":
+							lbausbildung.setSelectedIndex(3);
+
 							break;
 
 						default:
 							break;
 						}
-						
-					case 4: 
+
+					case 4:
 						String wert4 = info.getAuswahleigenschaftWert();
 						switch (wert4) {
 						case "dünn":
 							lbkörperbau.setSelectedIndex(0);
 							break;
-						case "durchschnittlich": 
+						case "durchschnittlich":
 							lbkörperbau.setSelectedIndex(1);
 							break;
-						case "sportlich": lbkörperbau.setSelectedIndex(2);
-						break;
-						case "muskulös": lbkörperbau.setSelectedIndex(3);
-						break;
-						case "mollig": lbkörperbau.setSelectedIndex(4);
-						break;
-						case "dick": lbkörperbau.setSelectedIndex(5);
+						case "sportlich":
+							lbkörperbau.setSelectedIndex(2);
+							break;
+						case "muskulös":
+							lbkörperbau.setSelectedIndex(3);
+							break;
+						case "mollig":
+							lbkörperbau.setSelectedIndex(4);
+							break;
+						case "dick":
+							lbkörperbau.setSelectedIndex(5);
 						default:
 							break;
 						}
 					case 5:
 						tbfreitext.setValue(info.getFreitexteigenschaftWert());
-						
+
 					default:
 						break;
 					}
-					
-					
-					
-					
+
 				}
-				
+
 			}
-			
+
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		vpanel.add(ft1);

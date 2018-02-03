@@ -56,7 +56,6 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	protected PartnerboerseAdministration getPartnerboerse(){
 		return this.partnerboerseadministration;
 	}
-	
 
 	@Override
 	public PartnervorschlaegeOfProfilNichtAngesehenReport createPartnervorschlaegeOfProfilNichtAngesehenReport(Profil pro) throws IllegalArgumentException {
@@ -156,6 +155,11 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 	@Override
 	public Profil checkProfil(String email) throws IllegalArgumentException {
 		return partnerboerseadministration.checkProfil(email);
+	}
+
+	@Override
+	public void deleteAehnlichkeitsmass(Aehnlichkeitsmass a) throws IllegalArgumentException {
+		partnerboerseadministration.deleteAehnlichkeit(a);
 	}
 
 }

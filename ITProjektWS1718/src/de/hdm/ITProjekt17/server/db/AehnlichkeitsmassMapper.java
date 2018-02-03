@@ -201,8 +201,8 @@ public class AehnlichkeitsmassMapper {
 			/**
 			 * DurchfÃ¼hrung der LÃ¶schoperation
 			 */
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM aehnlichkeitsmass " + "WHERE id= ? ");
-			stmt.setInt(1, a.getId());
+			PreparedStatement stmt = con.prepareStatement("DELETE FROM aehnlichkeitsmass " + "WHERE eigenes_profilid= ? ");
+			stmt.setInt(1, a.getEigenes_profilid());
 			stmt.executeUpdate();
 
 		} catch (SQLException e2) {

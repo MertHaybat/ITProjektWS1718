@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.ReportGeneratorAsync;
+import de.hdm.ITProjekt17.shared.bo.Aehnlichkeitsmass;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.report.HTMLReportWriter;
@@ -30,8 +31,19 @@ public class ReportOfAllAehnlicheProfilesBySuchprofilesSeite extends HTMLResultP
 	
 	ReportGeneratorAsync reportverwaltung = ClientsideSettings.getReportGenerator();
 	
-	public ReportOfAllAehnlicheProfilesBySuchprofilesSeite(Profil pro){
-		reportverwaltung.createPartnervorschlaegeAnhandSuchprofilReport(pro, new AsyncCallback<PartnervorschlaegeAnhandSuchprofilReport>() {
+	public ReportOfAllAehnlicheProfilesBySuchprofilesSeite(final Profil pro){
+		Aehnlichkeitsmass a = new Aehnlichkeitsmass();
+		a.setEigenes_profilid(pro.getId());
+		reportverwaltung.deleteAehnlichkeitsmass(a, new AsyncCallback<Void>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Fehler beim Löschen des Ähnlichkeitsmaß" + caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				reportverwaltung.createPartnervorschlaegeAnhandSuchprofilReport(pro, new AsyncCallback<PartnervorschlaegeAnhandSuchprofilReport>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -50,6 +62,9 @@ public class ReportOfAllAehnlicheProfilesBySuchprofilesSeite extends HTMLResultP
 				}
 			}
 		});
+			}
+		});
+		
 	}
 		
 }

@@ -836,9 +836,24 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) {
-
+//		Profil a = new Profil();
+//		a.setId(suchpro.getProfilId());
+//		Vector<Profil> foundProfiles = this.profilMapper.getAllProfilBySuchprofil(suchpro);
+//		Vector<Profil> blockedProfiles = this.showBlockedProfilsOf(a);
+//		Vector<Profil> blockers = this.showAllBlockerOf(a);
+//		for(int i = 0; i<foundProfiles.size(); i++){
+//			foundProfiles.remove(blockedProfiles.elementAt(i));
+//			foundProfiles.remove(blockers.elementAt(i));
+//		}
+//		int alter = 0;
+//		
+//		
+//		for(int i = suchpro.getMinAlter(); i<suchpro.getMaxAlter(); i++ ){
+//			alter = Integer.parseInt(new Date().toString())-Integer.parseInt(foundProfiles.elementAt(i).getGeburtsdatum().toString());
+//		
+//		}
+	
 		return this.profilMapper.getAllProfilBySuchprofil(suchpro);
-
 	}
 
 	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) {
@@ -1309,8 +1324,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		boolean sperrListe = false;
 
 		for (int i = 0; i < sperrL.size(); i++) {
-			if (sperrL.get(i).getId() == pro.getId())
-				;
+			if (sperrL.elementAt(i).getId() == pro.getId());
 			{
 				sperrListe = true;
 			}
@@ -1442,7 +1456,6 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	@Override
 	public void deleteAehnlichkeit(Aehnlichkeitsmass a) {
-		// TODO Auto-generated method stub
 		aehnlichkeitsmassMapper.deleteAehnlichkeitsmass(a);
 	}
 

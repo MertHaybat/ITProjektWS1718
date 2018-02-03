@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.ReportGeneratorAsync;
+import de.hdm.ITProjekt17.shared.bo.Aehnlichkeitsmass;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.report.HTMLReportWriter;
 import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeOfProfilNichtAngesehenReport;
@@ -23,8 +24,19 @@ public class ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite extends HTMLResult
 	
 	ReportGeneratorAsync reportverwaltung = ClientsideSettings.getReportGenerator();
 	
-	public ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite(Profil pro){
-		reportverwaltung.createPartnervorschlaegeOfProfilNichtAngesehenReport(pro, new AsyncCallback<PartnervorschlaegeOfProfilNichtAngesehenReport>() {
+	public ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite(final Profil pro){
+		Aehnlichkeitsmass a = new Aehnlichkeitsmass();
+		a.setEigenes_profilid(pro.getId());
+		reportverwaltung.deleteAehnlichkeitsmass(a, new AsyncCallback<Void>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Fehler beim Löschen des Ähnlichkeitsmaß'" + caught.getLocalizedMessage());
+			}
+
+			@Override
+			public void onSuccess(Void result) {
+				reportverwaltung.createPartnervorschlaegeOfProfilNichtAngesehenReport(pro, new AsyncCallback<PartnervorschlaegeOfProfilNichtAngesehenReport>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -39,7 +51,9 @@ public class ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite extends HTMLResult
 					hrw.process(result);
 					append(hrw.getReportText());
 					
-				}
+						}
+					}
+				});	
 			}
 		});
 	}

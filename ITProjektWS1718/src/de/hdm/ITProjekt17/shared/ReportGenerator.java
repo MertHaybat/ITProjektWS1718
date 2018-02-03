@@ -3,6 +3,7 @@ package de.hdm.ITProjekt17.shared;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+import de.hdm.ITProjekt17.shared.bo.Aehnlichkeitsmass;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.report.AllInfosOfProfilReport;
@@ -61,4 +62,6 @@ public interface ReportGenerator extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	 public Profil checkProfil(String email) throws IllegalArgumentException;
+	 
+	 public void deleteAehnlichkeitsmass(Aehnlichkeitsmass a) throws IllegalArgumentException;
 }

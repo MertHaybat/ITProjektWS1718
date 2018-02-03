@@ -2,6 +2,7 @@ package de.hdm.ITProjekt17.shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+import de.hdm.ITProjekt17.shared.bo.Aehnlichkeitsmass;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.report.AllInfosOfProfilReport;
@@ -28,5 +29,7 @@ public interface ReportGeneratorAsync {
 			AsyncCallback<PartnervorschlaegeAnhandSuchprofilReport> callback);
 
 	void checkProfil(String email, AsyncCallback<Profil> callback);
+
+	void deleteAehnlichkeitsmass(Aehnlichkeitsmass a, AsyncCallback<Void> callback);
 
 }

@@ -2,6 +2,8 @@ package de.hdm.ITProjekt17.shared.report;
 
 import java.io.Serializable;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * Spalte eines <code>Row</code>-Objekts. <code>Column</code>-Objekte
  * implementieren das <code>Serializable</code>-Interface und können daher als
@@ -10,7 +12,7 @@ import java.io.Serializable;
  * @see Row
  * @author Thies
  */
-public class Column implements Serializable {
+public class Column implements IsSerializable, Serializable {
 
   /**
    * 

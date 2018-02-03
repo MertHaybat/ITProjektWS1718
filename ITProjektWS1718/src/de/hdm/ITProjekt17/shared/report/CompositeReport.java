@@ -3,13 +3,15 @@ package de.hdm.ITProjekt17.shared.report;
 import java.io.Serializable;
 import java.util.*;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * Ein zusammengesetzter Report. Dieser Report kann aus einer Menge von 
  * Teil-Reports (vgl. Attribut <code>subReports</code>) bestehen.
  */
-public abstract class CompositeReport 
+public class CompositeReport 
 	extends Report 
-	implements Serializable {
+	implements IsSerializable, Serializable {
 
 	/**
    * 

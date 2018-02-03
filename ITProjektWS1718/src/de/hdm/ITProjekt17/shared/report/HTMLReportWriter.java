@@ -2,6 +2,8 @@ package de.hdm.ITProjekt17.shared.report;
 
 import java.util.Vector;
 
+import de.hdm.ITProjekt17.client.gui.report.ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite;
+
 /**
  * Ein <code>ReportWriter</code>, der Reports mittels HTML formatiert. Das im
  * Zielformat vorliegende Ergebnis wird in der Variable <code>reportText</code>
@@ -128,5 +130,29 @@ public class HTMLReportWriter extends ReportWriter {
 	  this.reportText = result.toString();
 	  System.out.println("Hallo7--------------------------------------");
   }
+  
+  public void process(PartnervorschlaegeOfProfilNichtAngesehenReport r) {
+	  System.out.println("HalloBeiUnbesucht--------------------------------------");
+	  this.resetReportText();
+	  
+	  StringBuffer result = new StringBuffer();
+	  
+	  result.append("<H1>" + r.getTitle() + "</H1>");
+	  result.append("div id=\"MetaData\">");
+	  result.append("div id=\"RequestDetailsSP\">");
+	  result.append("<H3>Report Details</H3>");
+	  result.append(paragraph2HTML(r.getImprint()));
+	  result.append("<p>Report erstellt am " + r.getCreated().toString());
+	  result.append("</div>");
+	  
+	  result.append("<div id=\"Rahmen\">");
+	  result.append("<H2>Unbesuchte Profile</H2>\n");
+	  result.append("</div>");
+	  
+	  for(int i = 0; i < r.getRows().size(); i++) {
+		  
+	  }
+  }
+
   }
 

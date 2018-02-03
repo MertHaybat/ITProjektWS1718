@@ -18,4 +18,5 @@ package de.hdm.ITProjekt17.shared.report;
 public abstract class ReportWriter {
 
 			public abstract void process(PartnervorschlaegeAnhandSuchprofilReport r);
+			public abstract void process(PartnervorschlaegeOfProfilNichtAngesehenReport r);
 }

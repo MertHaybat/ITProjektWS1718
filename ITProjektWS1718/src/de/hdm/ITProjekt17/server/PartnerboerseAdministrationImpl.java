@@ -1270,22 +1270,22 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		/**
 		 * Besuche des Besuchenden werden hier abgerufen und in
 		 */
-		Vector<Besuch> unvisitedProfiles = this.getAllBesucheOf(pro);
-		Vector<Besuch> visitedProfiles = this.besuchMapper.findByKey(pro.getId());
-		System.out.println("Size visited Profiles: " + visitedProfiles.size());
-
-		for (int visited = 0; visited < visitedProfiles.size(); visited++) {
-			unvisitedProfiles.remove(visitedProfiles.get(visited));
-		}
-		for (int unVisited = 0; unVisited < unvisitedProfiles.size(); unVisited++) {
-			if (sperrPruefung(pro) == true) {
-				unvisitedProfiles.remove(unVisited);
+		
+		Vector<Profil> allProfiles = this.getAllProfils();
+		for(int i = 0; i<allProfiles.size(); i++){
+			if(pro.getId() == allProfiles.elementAt(i).getId()){
+				allProfiles.remove(allProfiles.elementAt(i));
 			}
 		}
-		for (int i = 0; i < unvisitedProfiles.size(); i++) {
-			return profilMapper.getAllProfilbyKey(unvisitedProfiles.elementAt(i).getBesuchterNutzerID());
+		System.out.println(allProfiles.size());
+		Vector<Besuch> visitedProfiles = this.besuchMapper.findByKey(pro.getId());
+		for (int o = 0; o< visitedProfiles.size(); o++) {
+			allProfiles.remove(visitedProfiles.elementAt(o));
 		}
-		return null;
+		System.out.println(allProfiles.size());
+	
+		return allProfiles;
+		
 	}
 
 	/**
@@ -1396,19 +1396,19 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		Profil profil2 = profilMapper.findByKey(fremdes_profil);
 
 		if (profil1 != null && profil2 != null) {
-			if (profil1.getHaarfarbe() == profil2.getHaarfarbe()) {
+			if (profil1.getHaarfarbe().equals(profil2.getHaarfarbe())) {
 				aehnlichkeitstreffer++;
 			}
 			if (profil1.getKoerpergroesse() == profil2.getKoerpergroesse()) {
 				aehnlichkeitstreffer++;
 			}
-			if (profil1.getRaucher() == profil2.getRaucher()) {
+			if (profil1.getRaucher().equals(profil2.getRaucher())) {
 				aehnlichkeitstreffer++;
 			}
-			if (profil1.getReligion() == profil2.getReligion()) {
+			if (profil1.getReligion().equals(profil2.getReligion())) {
 				aehnlichkeitstreffer++;
 			}
-			if (profil1.getGeschlecht() == profil2.getGeschlecht()) {
+			if (profil1.getGeschlecht().equals(profil2.getGeschlecht())) {
 				aehnlichkeitstreffer++;
 			}
 			a1.setAehnlichkeitsindex(aehnlichkeitstreffer * 20);

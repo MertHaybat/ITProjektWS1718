@@ -91,41 +91,7 @@ public class PartnerboerseReport implements EntryPoint{
 			}
 		});
 		
-		reportverwaltung.createPartnervorschlaegeAnhandSuchprofilReport(p1, new AsyncCallback<PartnervorschlaegeAnhandSuchprofilReport>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(PartnervorschlaegeAnhandSuchprofilReport result) {
-				ReportOfAllAehnlicheProfilesBySuchprofilesSeite reportSuchprofiles = new ReportOfAllAehnlicheProfilesBySuchprofilesSeite(p1);
-				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(reportSuchprofiles);
-					
-				}
-				
-		});
 		
-		reportverwaltung.createPartnervorschlaegeOfProfilNichtAngesehenReport(p1, new AsyncCallback<PartnervorschlaegeOfProfilNichtAngesehenReport>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(PartnervorschlaegeOfProfilNichtAngesehenReport result) {
-				ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite reportUnbesucht = new ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite(p1);
-				RootPanel.get("Details").clear();
-				RootPanel.get("Details").add(reportUnbesucht);
-				
-			}
-			
-		});
 		
 	}
 	
@@ -133,8 +99,8 @@ public class PartnerboerseReport implements EntryPoint{
 	private void loadreport(final Profil profil){
 		signOutLink.setHref(loginInfo.getLogoutUrl());
 		RootPanel.get("Topbar").add(signOutLink);
-		RootPanel.get("Details").add(new StartseiteReport(p1));
-		RootPanel.get("Navigator").add(new MenubarReport(p1));
+		RootPanel.get("Details").add(new StartseiteReport(profil));
+		RootPanel.get("Navigator").add(new MenubarReport(profil));
 	}
 	private void loadlogin(){
 		zumreportgenerator.addClickHandler(new ClickHandler() {		

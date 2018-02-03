@@ -57,96 +57,48 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		return this.partnerboerseadministration;
 	}
 	
-	
-	
-//	//---------Nicht-implementierte-Mehtoden-des-ReportGenerator-Interfaces-auf-der-Client-Seite----------
-//
-//	@Override
-//	public AllInfosOfProfilReport createAllInfosOfProfilReport(Profil pro, int score) throws IllegalArgumentException {
-//		if (this.getPartnerboerse() == null){
-//			return null;
-//		}
-//		
-//		
-//		AllInfosOfProfilReport result = new AllInfosOfProfilReport();
-//		
-//		String scoreString = Double.toString(score);
-//		
-//		Row topRow = new Row();
-//		topRow.addColumn(new Column(pro.getVorname() + " " + pro.getNachname()));
-//		topRow.addColumn(new Column(scoreString));
-//		
-////		Auslesen sämtlicher Pflichattribute
-//		Row emailRow = new Row();
-//		emailRow.addColumn(new Column("Email"));
-//		emailRow.addColumn(new Column(pro.getEmail()));
-//		Row geburtsdatumRow = new Row();
-//		geburtsdatumRow.addColumn(new Column("Geburtsdatum"));
-//		geburtsdatumRow.addColumn(new Column(String.valueOf(pro.getGeburtsdatum())));
-//		Row koerpergroesseRow = new Row();
-//		koerpergroesseRow.addColumn(new Column("Körpergröße"));
-//		koerpergroesseRow.addColumn(new Column(String.valueOf(pro.getKoerpergroesse())));
-//		Row geschlechtRow = new Row();
-//		geschlechtRow.addColumn(new Column("Geschlecht"));
-//		geschlechtRow.addColumn(new Column(String.valueOf(pro.getGeschlecht())));
-//		Row haarfarbeRow = new Row();
-//		haarfarbeRow.addColumn(new Column("Haarfarbe"));
-//		haarfarbeRow.addColumn(new Column(pro.getHaarfarbe()));
-//		Row religionRow = new Row();
-//		religionRow.addColumn(new Column("Religion"));
-//		religionRow.addColumn(new Column(pro.getReligion()));
-//		Row raucherRow = new Row();
-//		raucherRow.addColumn(new Column("Raucher"));
-//		raucherRow.addColumn(new Column(pro.getRaucher()));
-//		
-//		result.addRow(emailRow);
-//		result.addRow(geburtsdatumRow);
-//		result.addRow(koerpergroesseRow);
-//		result.addRow(geschlechtRow);
-//		result.addRow(haarfarbeRow);
-//		result.addRow(religionRow);
-//		result.addRow(raucherRow);
-//		return null;
-//		
-//		/** Auslesen aller Infos des Profils
-//		 * 
-//		 */
-//		
-////		Vector <Info> allInfos = partnerboerseadministration.getAllInfobyProfilid(pro);
-////		Vector <Info> allInfos = partnerboerseadministration.getAllInfobyProfil(pro);
-//		
-////		Vector<Info> infos = partnerboerseadministration.;
-//	}
 
 	@Override
 	public PartnervorschlaegeOfProfilNichtAngesehenReport createPartnervorschlaegeOfProfilNichtAngesehenReport(Profil pro) throws IllegalArgumentException {
-//		if(this.getPartnerboerse() == null){
-//			return null;
-//		}
-//		
-//		PartnervorschlaegeOfProfilNichtAngesehenReport result = new PartnervorschlaegeOfProfilNichtAngesehenReport();
-//		
-//		result.setTitle("Alle unbesuchten Profile geordnet nach Aehnlichkeitsmass");
-//		
-//		result.setCreated(new Date());
-//		
-//		Vector<Profil> allSimilarNotVisitedProfiles = this.partnerboerseadministration.getAehnlicheUnbesuchteProfileVon(pro);
-//		
-//		for(Profil asnvp : allSimilarNotVisitedProfiles) {
-//			Aehnlichkeitsmass score = partnerboerseadministration.createAehnlichkeit(pro.getId(), pro.getId());
-//			
-//			result.addSubReport(this.createAllInfosOfProfilReport(asnvp, score.getAehnlichkeitsindex()));
-//		}
-//		
-//		CompositeParagraph requestDetails = new CompositeParagraph();
-//		
-//		requestDetails.addSubParagraph(new SimpleParagraph("Anzahl aller Profile: " + (partnerboerseadministration.getAllProfil().size()-1)));
-//		requestDetails.addSubParagraph(new SimpleParagraph("Anzahl unbesuchter Profile: " + allSimilarNotVisitedProfiles.size()));
-//		requestDetails.addSubParagraph(new SimpleParagraph("Report angefordert von: " + pro.getVorname() + " " + pro.getNachname()));
-//		
-//		result.setImprint(requestDetails);
-//		
-		return null;
+		if(this.getPartnerboerse() == null){
+			return null;
+		}
+		Aehnlichkeitsmass score = new Aehnlichkeitsmass();
+		PartnervorschlaegeOfProfilNichtAngesehenReport result = new PartnervorschlaegeOfProfilNichtAngesehenReport();
+		
+		result.setTitle("Alle unbesuchten Profile mit Aehnlichkeitsmass");
+		
+		result.setCreated(new Date());
+		
+		Row headline = new Row();
+		headline.addColumn(new Column("Vorname"));
+		headline.addColumn(new Column("Nachname"));
+		headline.addColumn(new Column("Haarfarbe"));
+		headline.addColumn(new Column("Religion"));
+		headline.addColumn(new Column("Geschlecht"));
+		headline.addColumn(new Column("Körpergröße"));
+		headline.addColumn(new Column("Raucher"));
+		headline.addColumn(new Column("Ähnlichkeitsmaß"));
+		
+		result.addRow(headline);
+		Vector<Profil> unVisitedProfiles = this.partnerboerseadministration.getUnvisitedProfiles(pro);
+		System.out.println(unVisitedProfiles.size());
+		for(int i = 0; i<unVisitedProfiles.size(); i++){
+			System.out.println(unVisitedProfiles.size() + "hadshidijasdk");
+			score = this.partnerboerseadministration.createAehnlichkeit(pro.getId(), unVisitedProfiles.elementAt(i).getId());
+			Row profile = new Row();
+			  profile.addColumn(new Column(unVisitedProfiles.elementAt(i).getVorname()));
+			  profile.addColumn(new Column(unVisitedProfiles.elementAt(i).getNachname()));
+			  profile.addColumn(new Column(unVisitedProfiles.elementAt(i).getHaarfarbe()));
+			  profile.addColumn(new Column(unVisitedProfiles.elementAt(i).getReligion()));
+			  profile.addColumn(new Column(unVisitedProfiles.elementAt(i).getGeschlecht()));
+			  profile.addColumn(new Column(String.valueOf(unVisitedProfiles.elementAt(i).getKoerpergroesse())));
+			  profile.addColumn(new Column(unVisitedProfiles.elementAt(i).getRaucher()));
+			  profile.addColumn(new Column(String.valueOf(score.getAehnlichkeitsindex())));
+			  result.addRow(profile);
+		}
+		return result;
+
 	}
 
 	@Override
@@ -157,7 +109,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		
 		PartnervorschlaegeAnhandSuchprofilReport result = new PartnervorschlaegeAnhandSuchprofilReport();
 		
-		result.setTitle("Alle unbesuchten Profile geordnet nach Aehnlichkeitsmass");
+		result.setTitle("Alle Profile ähnlich dem Suchprofil mit Ähnlichkeitsmaß");
 		
 		result.setCreated(new Date());
 		Row headline = new Row();
@@ -174,12 +126,18 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 		
 		Vector<Suchprofil> allSuchProfilByProfil = this.partnerboerseadministration.findSuchprofilByProfilId(pro);
 		Vector<Profil> allSimilarProfilesFromSuchprofiles = new Vector<Profil>();
+		
+		
 		for(int i = 0; i< allSuchProfilByProfil.size(); i++){
+
+			
 			allSimilarProfilesFromSuchprofiles = 
 					this.partnerboerseadministration.getAllProfilsOf(allSuchProfilByProfil.elementAt(i));
+				
 			for(int o = 0; o<allSimilarProfilesFromSuchprofiles.size(); o++){
 				Aehnlichkeitsmass score = this.partnerboerseadministration.createAehnlichkeit(pro.getId(), allSimilarProfilesFromSuchprofiles.elementAt(o).getId());
-				  Row profile = new Row();
+				
+				Row profile = new Row();
 				  profile.addColumn(new Column(allSimilarProfilesFromSuchprofiles.elementAt(o).getVorname()));
 				  profile.addColumn(new Column(allSimilarProfilesFromSuchprofiles.elementAt(o).getNachname()));
 				  profile.addColumn(new Column(allSimilarProfilesFromSuchprofiles.elementAt(o).getHaarfarbe()));

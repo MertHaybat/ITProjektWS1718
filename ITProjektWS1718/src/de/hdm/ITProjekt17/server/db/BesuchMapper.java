@@ -212,7 +212,7 @@ public class BesuchMapper {
 		    Vector<Besuch> result = new Vector<Besuch>();
 		    
 		    try {
-		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE  besuchendernutzerid=? ");
+		    	PreparedStatement stmt = con.prepareStatement("SELECT * FROM besuch WHERE besuchendernutzerid=? ");
 		    	stmt.setInt(1, pro.getId());
 		      
 		    	ResultSet rs = stmt.executeQuery();
@@ -368,5 +368,4 @@ public class BesuchMapper {
 		       */
 		      return result;
 	 }
-	  
 }

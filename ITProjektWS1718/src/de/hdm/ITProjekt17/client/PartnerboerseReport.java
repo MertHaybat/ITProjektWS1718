@@ -72,7 +72,7 @@ public class PartnerboerseReport implements EntryPoint{
 							
 						}else{
 							RootPanel.get("Details").clear();
-							Window.alert("Bitte registrieren Sie sich über den Projektmarktplatz");	
+							Window.alert("Bitte registrieren Sie sich über die Partnerbörse");	
 							partnerlink.setHref(GWT.getHostPageBaseURL()+"ITProjektWS1718.html");
 							Window.open(partnerlink.getHref(), "_self", "");
 						}

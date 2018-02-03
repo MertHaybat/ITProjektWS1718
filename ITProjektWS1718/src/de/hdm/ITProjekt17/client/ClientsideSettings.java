@@ -1,6 +1,12 @@
 package de.hdm.ITProjekt17.client;
 
 import java.util.logging.Logger;
+import de.hdm.ITProjekt17.shared.LoginService;
+import de.hdm.ITProjekt17.shared.LoginServiceAsync;
+import de.hdm.ITProjekt17.shared.PartnerboerseAdministration;
+import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
+import de.hdm.ITProjekt17.shared.ReportGenerator;
+import de.hdm.ITProjekt17.shared.ReportGeneratorAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -14,6 +20,7 @@ public class ClientsideSettings extends CommonSettings{
 	private static ReportGeneratorAsync reportGenerator = null;
 	
 	private static LoginServiceAsync loginService = null;
+	
 	
 	/**
 	 * Name des Client-seitigen Loggers.
@@ -65,19 +72,21 @@ public class ClientsideSettings extends CommonSettings{
 				reportGenerator = GWT.create(ReportGenerator.class);
 				
 				
-				reportGenerator.init(new AsyncCallback<Void>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-					
-					}
-
-					@Override
-					public void onSuccess(Void result) {				
-					}
-				});
+//				reportGenerator.init(new AsyncCallback<Void>() {
+//
+//					@Override
+//					public void onFailure(Throwable caught) {
+//					
+//					}
+//
+//					@Override
+//					public void onSuccess(Void result) {				
+//					}
+//				});
 			}
 			return reportGenerator;
 	  }
+	 
+	 
 	
 }

@@ -19,12 +19,12 @@ public interface ReportGeneratorAsync {
 
 	void init(AsyncCallback<Void> callback);
 
-	void createAllInfosOfProfilReport(Profil pro, int score, AsyncCallback<AllInfosOfProfilReport> callback);
+//	void createAllInfosOfProfilReport(Profil pro, int score, AsyncCallback<AllInfosOfProfilReport> callback);
 
 	void createPartnervorschlaegeOfProfilNichtAngesehenReport(Profil pro,
 			AsyncCallback<PartnervorschlaegeOfProfilNichtAngesehenReport> callback);
 
-	void createPartnervorschlaegeAnhandSuchprofilReport(Profil pro, Suchprofil such,
+	void createPartnervorschlaegeAnhandSuchprofilReport(Profil pro,
 			AsyncCallback<PartnervorschlaegeAnhandSuchprofilReport> callback);
 
 	void checkProfil(String email, AsyncCallback<Profil> callback);

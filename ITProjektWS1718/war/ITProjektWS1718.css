@@ -11,7 +11,22 @@
 	margin-top: 10px;
     margin-bottom: 10px;
 }
+.gwt-TextBox{
+	padding: 1px;
+    border: 1px solid #ccc;
+    width: 150px;
+}
 
+.gwt-DateBox {
+    padding: 1px;
+    border: 1px solid #ccc;
+    width: 150px;
+}
+.gwt-ListBox {
+    padding: 1px;
+    border: 1px solid #ccc;
+    width: 150px;
+}
 
 #Topbar {
 	height: 40px;

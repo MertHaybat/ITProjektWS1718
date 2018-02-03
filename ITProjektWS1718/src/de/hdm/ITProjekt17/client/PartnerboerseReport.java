@@ -14,15 +14,21 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.client.gui.Startseite;
 import de.hdm.ITProjekt17.client.gui.report.MenubarReport;
+import de.hdm.ITProjekt17.client.gui.report.ReportOfAllAehnlicheProfilesBySuchprofilesSeite;
+import de.hdm.ITProjekt17.client.gui.report.ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite;
 import de.hdm.ITProjekt17.client.gui.report.StartseiteReport;
 import de.hdm.ITProjekt17.shared.LoginService;
 import de.hdm.ITProjekt17.shared.LoginServiceAsync;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.ReportGeneratorAsync;
 import de.hdm.ITProjekt17.shared.bo.Profil;
+import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeAnhandSuchprofilReport;
+import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeOfProfilNichtAngesehenReport;
 
 public class PartnerboerseReport implements EntryPoint{
 	
+	ReportGeneratorAsync reportGenerator = null;
+//	private LoginServiceAsync loginService = ClientsideSettings.getLoginService();
 	private LoginInfo loginInfo = null;
 	private VerticalPanel loginPanel = new VerticalPanel();
 	private Label loginLabel = new Label("Please sign in to your Google Account to access the Partnerbörse application.");
@@ -84,7 +90,46 @@ public class PartnerboerseReport implements EntryPoint{
 				Window.alert("Fehler Login: " + caught.toString());
 			}
 		});
+		
+		reportverwaltung.createPartnervorschlaegeAnhandSuchprofilReport(p1, new AsyncCallback<PartnervorschlaegeAnhandSuchprofilReport>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(PartnervorschlaegeAnhandSuchprofilReport result) {
+				ReportOfAllAehnlicheProfilesBySuchprofilesSeite reportSuchprofiles = new ReportOfAllAehnlicheProfilesBySuchprofilesSeite(p1);
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(reportSuchprofiles);
+					
+				}
+				
+		});
+		
+		reportverwaltung.createPartnervorschlaegeOfProfilNichtAngesehenReport(p1, new AsyncCallback<PartnervorschlaegeOfProfilNichtAngesehenReport>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(PartnervorschlaegeOfProfilNichtAngesehenReport result) {
+				ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite reportUnbesucht = new ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite(p1);
+				RootPanel.get("Details").clear();
+				RootPanel.get("Details").add(reportUnbesucht);
+				
+			}
+			
+		});
+		
 	}
+	
+	
 	private void loadreport(final Profil profil){
 		signOutLink.setHref(loginInfo.getLogoutUrl());
 		RootPanel.get("Topbar").add(signOutLink);

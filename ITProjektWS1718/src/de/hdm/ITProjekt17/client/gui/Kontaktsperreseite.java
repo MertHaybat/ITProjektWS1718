@@ -18,7 +18,11 @@ import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 import de.hdm.ITProjekt17.shared.bo.Profil;
-
+/**
+ * 
+ * Erstellung der Kontaktsperreseite
+ *
+ */
 public class Kontaktsperreseite extends VerticalPanel{
 	private VerticalPanel vpaneleigene_kontaktsperren = new VerticalPanel();
 	private VerticalPanel vpanelandere_kontaktsperren = new VerticalPanel();
@@ -46,13 +50,17 @@ public class Kontaktsperreseite extends VerticalPanel{
 		this.add(hpanel);
 		pbverwaltung.showBlockedProfilsOf(profil, new AsyncCallback<Vector<Profil>>() {
 			
-			@Override
+			/**
+			 * siehe Client gui report
+			 */
 			public void onSuccess(Vector<Profil> result) {
 				pt1.setRowData(0, result);
 				pt1.setRowCount(result.size(), true);
 			}
 			
-			@Override
+			/**
+			 * siehe Client gui report
+			 */
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
@@ -60,13 +68,11 @@ public class Kontaktsperreseite extends VerticalPanel{
 		});
 		pbverwaltung.showAllBlockerOf(profil, new AsyncCallback<Vector<Profil>>() {
 
-			@Override
+			
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
 			}
-
-			@Override
 			public void onSuccess(Vector<Profil> result) {
 				pt2.setRowData(0, result);
 				pt2.setRowCount(result.size(), true);
@@ -74,7 +80,9 @@ public class Kontaktsperreseite extends VerticalPanel{
 		});
 		pt1.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			
-			@Override
+			/**
+			 * Wenn man auf Profil klickt, wird ein DialogFenster von der Klasse Profil_Dialogbox und Profil_info_Dialogbox erstellt und angezeigt.
+			 */
 			public void onSelectionChange(SelectionChangeEvent event) {
 				HorizontalPanel hpanel = new HorizontalPanel();
 				HorizontalPanel hpanel2 = new HorizontalPanel();
@@ -94,14 +102,14 @@ public class Kontaktsperreseite extends VerticalPanel{
 				b1.center();
 				zusperre.addClickHandler(new ClickHandler() {
 					
-					@Override
+					
 					public void onClick(ClickEvent event) {
 						b1.hide();
 					}
 				});
 				zurück.addClickHandler(new ClickHandler() {
 					
-					@Override
+					
 					public void onClick(ClickEvent event) {
 					b1.hide(); 
 				
@@ -110,20 +118,22 @@ public class Kontaktsperreseite extends VerticalPanel{
 		});		
 				sperreloeschen.addClickHandler(new ClickHandler() {
 					
-					@Override
+					/**
+					 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+					 */
 					public void onClick(ClickEvent event) {
 						Kontaktsperre k = new Kontaktsperre();
 						k.setProfilId_gesperrter(pt1.getSsm_profil_anzeige().getSelectedObject().getId());
 						k.setProfilId_sperrender(profil.getId());
 						pbverwaltung.delete(k, new AsyncCallback<Void>() {
 
-							@Override
+							
 							public void onFailure(Throwable caught) {
 								// TODO Auto-generated method stub
 								
 							}
 
-							@Override
+							
 							public void onSuccess(Void result) {
 								Window.alert("Profilsperre wurde erfolgreich aufgehoben");
 								b1.hide();
@@ -137,10 +147,12 @@ public class Kontaktsperreseite extends VerticalPanel{
 				
 			}
 		});
-		
+		/**
+		 * wird angezeigt, wenn das Profil nicht angezeigt werden kann bspw. durch blockierung oder löschung des profils
+		 */
 		pt2.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 					
-					@Override
+					
 					public void onSelectionChange(SelectionChangeEvent event) {
 						Window.alert("Sie können dieses Profil nicht anschauen");
 					}

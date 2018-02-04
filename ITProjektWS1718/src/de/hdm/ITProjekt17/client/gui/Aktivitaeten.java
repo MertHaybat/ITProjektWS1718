@@ -65,13 +65,13 @@ public class Aktivitaeten extends VerticalPanel {
 		this.add(hpanel);
 		pbverwaltung.showBesucherOf(profil, new AsyncCallback<Vector<Profil>>() {
 
-			@Override
+			
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
 			}
 
-			@Override
+			
 			public void onSuccess(Vector<Profil> result) {
 				pt2.setRowData(0, result);
 				pt2.setRowCount(result.size(), true);
@@ -79,13 +79,13 @@ public class Aktivitaeten extends VerticalPanel {
 		});
 		pbverwaltung.showBesuchteOf(profil, new AsyncCallback<Vector<Profil>>() {
 
-			@Override
+			
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
 			}
 
-			@Override
+			
 			public void onSuccess(Vector<Profil> result) {
 				pt1.setRowData(0, result);
 				pt1.setRowCount(result.size(), true);
@@ -94,7 +94,9 @@ public class Aktivitaeten extends VerticalPanel {
 		
 		pt2.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 		
-		@Override
+		/**
+		 * Wenn man auf Profil klickt, wird ein DialogFenster von der Klasse Profil_Dialogbox und Profil_info_Dialogbox erstellt und angezeigt.
+		 */
 		public void onSelectionChange(SelectionChangeEvent event) {
 			HorizontalPanel hpanel = new HorizontalPanel();
 			HorizontalPanel hpanel2 = new HorizontalPanel();
@@ -115,17 +117,17 @@ public class Aktivitaeten extends VerticalPanel {
 			b1.center();
 			kontaktmerken.addClickHandler(new ClickHandler() {
 				
-				@Override
+				
 				public void onClick(ClickEvent event) {
 					pbverwaltung.createMerkzettel(profil, pt2.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Merkzettel>() {
 
-						@Override
+						
 						public void onFailure(Throwable caught) {
 							// TODO Auto-generated method stub
 							
 						}
 
-						@Override
+						
 						public void onSuccess(Merkzettel result) {
 							Window.alert("Profil wurde erfolgreich gemerkt");
 							b1.hide();
@@ -135,17 +137,17 @@ public class Aktivitaeten extends VerticalPanel {
 			});
 			kontaktsperren.addClickHandler(new ClickHandler() {
 				
-				@Override
+				
 				public void onClick(ClickEvent event) {
 					pbverwaltung.createKontaktsperre(profil, pt2.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Kontaktsperre>() {
 
-						@Override
+						
 						public void onFailure(Throwable caught) {
 							// TODO Auto-generated method stub
 							
 						}
 
-						@Override
+					
 						public void onSuccess(Kontaktsperre result) {
 							Window.alert("Profil wurde erfolgreich gesperrt");
 							b1.hide();
@@ -155,17 +157,17 @@ public class Aktivitaeten extends VerticalPanel {
 			});
 			besuchloeschen.addClickHandler(new ClickHandler() {
 				
-				@Override
+				
 				public void onClick(ClickEvent event) {
 					pbverwaltung.deleteBesuche(profil, pt2.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Void>() {
 
-						@Override
+						
 						public void onFailure(Throwable caught) {
 							// TODO Auto-generated method stub
 							
 						}
 
-						@Override
+						
 						public void onSuccess(Void result) {
 							Window.alert("Besuch wurde erfolgreich gelöscht");
 							b1.hide();
@@ -177,7 +179,7 @@ public class Aktivitaeten extends VerticalPanel {
 			});
 			besuchzurueck.addClickHandler(new ClickHandler() {
 				
-				@Override
+				
 				public void onClick(ClickEvent event) {
 					b1.hide();
 				}
@@ -186,7 +188,9 @@ public class Aktivitaeten extends VerticalPanel {
 	});
 		pt1.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			
-			@Override
+			/**
+			 * Wenn man auf Profil klickt, wird ein DialogFenster von der Klasse Profil_Dialogbox und Profil_info_Dialogbox erstellt und angezeigt.
+			 */
 			public void onSelectionChange(SelectionChangeEvent event) {
 				HorizontalPanel hpanel = new HorizontalPanel();
 				HorizontalPanel hpanel2 = new HorizontalPanel();
@@ -208,7 +212,7 @@ public class Aktivitaeten extends VerticalPanel {
 						
 				kontaktmerken.addClickHandler(new ClickHandler() {
 					
-					@Override
+					
 					public void onClick(ClickEvent event) {
 						Window.alert("Profil wurde gemerkt");
 						b2.hide();
@@ -216,17 +220,17 @@ public class Aktivitaeten extends VerticalPanel {
 				});
 				kontaktsperren.addClickHandler(new ClickHandler() {
 					
-					@Override
+					
 					public void onClick(ClickEvent event) {
 						pbverwaltung.createKontaktsperre(profil,  pt1.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Kontaktsperre>() {
 
-							@Override
+							
 							public void onFailure(Throwable caught) {
 								// TODO Auto-generated method stub
 								
 							}
 
-							@Override
+							
 							public void onSuccess(Kontaktsperre result) {
 								Window.alert("Profil wurde gesperrt");
 								b2.hide();
@@ -236,7 +240,7 @@ public class Aktivitaeten extends VerticalPanel {
 				});
 				besuchzurueck.addClickHandler(new ClickHandler() {
 					
-					@Override
+					
 					public void onClick(ClickEvent event) {
 						b2.hide();
 					}

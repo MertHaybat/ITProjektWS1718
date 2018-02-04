@@ -10,7 +10,12 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
-
+/**
+ * 
+ * hier wird eine Menübar erstellt.
+ * Hier werden die Buttons Startseite, Profil, Aktivitäten, Merkzettel, Kontaktsperren und Suchen realisiert
+ *
+ */
 public class Menubar extends VerticalPanel { 
 	
 	private VerticalPanel vpanel = new VerticalPanel();
@@ -61,7 +66,9 @@ public class Menubar extends VerticalPanel {
 		
 		btn1.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 */
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();
 			RootPanel.get("Details").add(new Startseite(profil));
@@ -82,7 +89,9 @@ public class Menubar extends VerticalPanel {
 		});
 		
 		btn2.addClickHandler(new ClickHandler(){
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 */
 			public void onClick(ClickEvent event) {
 
 				Profilseite p = new Profilseite(profil);
@@ -102,7 +111,9 @@ public class Menubar extends VerticalPanel {
 
 		btn3.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 */
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(new Aktivitaeten(profil));
@@ -120,7 +131,9 @@ public class Menubar extends VerticalPanel {
 		
 		btn4.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 */
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(new Merkzettelseite(profil));
@@ -139,7 +152,9 @@ public class Menubar extends VerticalPanel {
 		
 		btn5.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 */
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(new Kontaktsperreseite(profil));
@@ -159,7 +174,9 @@ public class Menubar extends VerticalPanel {
 		
 		btn6.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 */
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();
 			RootPanel.get("Details").add(new Suchen(profil));

@@ -10,6 +10,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+/**
+ * 
+ * Anzeigen der Buttons um von Menü zu Menü springen zu können
+ *
+ */
 public class MenubarReport extends VerticalPanel { 
 	
 	private VerticalPanel vpanel = new VerticalPanel();
@@ -33,7 +38,9 @@ public class MenubarReport extends VerticalPanel {
 		
 		btn1.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Clickhandeler ist eine anonyme Klasse die die Methode on click realissiert und wird aktiviert wenn ein Usser auf den Button klickt
+			 */
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();
 			RootPanel.get("Details").add(new StartseiteReport(profil));

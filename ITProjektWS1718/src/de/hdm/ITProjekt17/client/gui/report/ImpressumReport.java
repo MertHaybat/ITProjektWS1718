@@ -7,6 +7,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+/**
+ * 
+ * Anzeigen des Impressums der Partner börse
+ *
+ */
 public class ImpressumReport extends VerticalPanel{
 
 	private VerticalPanel vpanel = new VerticalPanel();

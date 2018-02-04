@@ -19,7 +19,11 @@ import de.hdm.ITProjekt17.shared.bo.Aehnlichkeitsmass;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.report.HTMLReportWriter;
 import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeOfProfilNichtAngesehenReport;
-
+/**
+ *  Ergebispanel zum ausgeben aller unbesuchten Profile mit Ähnlickeit im ReportGenerator
+ * 
+ *
+ */
 public class ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite extends HTMLResultPanel{
 	
 	ReportGeneratorAsync reportverwaltung = ClientsideSettings.getReportGenerator();
@@ -29,22 +33,26 @@ public class ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite extends HTMLResult
 		a.setEigenes_profilid(pro.getId());
 		reportverwaltung.deleteAehnlichkeitsmass(a, new AsyncCallback<Void>() {
 
-			@Override
+			/**
+			 * wenn der asynccallback fehlerhaft ist, dann springt das Programm in diese Methode. GWT Konvention verlangt die Implementierung dieser Methode
+			 */
 			public void onFailure(Throwable caught) {
 				Window.alert("Fehler beim Löschen des Ähnlichkeitsmaß'" + caught.getLocalizedMessage());
 			}
 
-			@Override
+			/**
+			 * wenn der asyncallback erfolgreich durchgeführt wurden ist, dann springt das Programm in diese Methode rein. GWT Konvention verlangt die Implementierung dieser Methode
+			 */
 			public void onSuccess(Void result) {
 				reportverwaltung.createPartnervorschlaegeOfProfilNichtAngesehenReport(pro, new AsyncCallback<PartnervorschlaegeOfProfilNichtAngesehenReport>() {
 
-			@Override
+			
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
 			}
 
-			@Override
+			
 			public void onSuccess(PartnervorschlaegeOfProfilNichtAngesehenReport result) {
 				if (result != null){
 					HTMLReportWriter hrw = new HTMLReportWriter();

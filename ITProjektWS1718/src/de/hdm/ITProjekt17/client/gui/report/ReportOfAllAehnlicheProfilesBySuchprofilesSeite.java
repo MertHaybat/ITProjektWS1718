@@ -26,32 +26,44 @@ import de.hdm.ITProjekt17.shared.report.HTMLReportWriter;
 import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeAnhandSuchprofilReport;
 
 
-
+/**
+ * 
+ *Ausgeben aller Ähnlichen Profile anhand des Suchprofiles
+ *
+ */
 public class ReportOfAllAehnlicheProfilesBySuchprofilesSeite extends HTMLResultPanel{
 	
 	ReportGeneratorAsync reportverwaltung = ClientsideSettings.getReportGenerator();
 	
+	/**
+	 * 
+	 * @param pro
+	 */
 	public ReportOfAllAehnlicheProfilesBySuchprofilesSeite(final Profil pro){
 		Aehnlichkeitsmass a = new Aehnlichkeitsmass();
 		a.setEigenes_profilid(pro.getId());
 		reportverwaltung.deleteAehnlichkeitsmass(a, new AsyncCallback<Void>() {
 
-			@Override
+			/**
+			 * wenn der asynccallback fehlerhaft ist, dann springt das Programm in diese Methode. GWT Konvention verlangt die Implementierung dieser Methode
+			 */
 			public void onFailure(Throwable caught) {
 				Window.alert("Fehler beim Löschen des Ähnlichkeitsmaß" + caught.getLocalizedMessage());
 			}
 
-			@Override
+			/**
+			 * wenn der asyncallback erfolgreich durchgeführt wurden ist, dann springt das Programm in diese Methode rein. GWT Konvention verlangt die Implementierung dieser Methode
+			 */
 			public void onSuccess(Void result) {
 				reportverwaltung.createPartnervorschlaegeAnhandSuchprofilReport(pro, new AsyncCallback<PartnervorschlaegeAnhandSuchprofilReport>() {
 
-			@Override
+			
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
 			}
 
-			@Override
+
 			public void onSuccess(PartnervorschlaegeAnhandSuchprofilReport result) {
 				
 				if (result != null){

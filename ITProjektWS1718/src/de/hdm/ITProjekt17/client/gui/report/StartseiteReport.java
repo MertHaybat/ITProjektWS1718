@@ -6,6 +6,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+/**
+ * 
+ * Dies ist die Startseite vom ReportGenerator der Partnerbörse
+ *
+ */
 public class StartseiteReport extends VerticalPanel{
 	
 	private VerticalPanel vpanel = new VerticalPanel();

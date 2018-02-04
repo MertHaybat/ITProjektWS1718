@@ -6,6 +6,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+
+/**
+ * 
+ * HTML Seite vom AGB Report wird angezeigt
+ *
+ */
 public class AGBReport extends VerticalPanel{
 
 	private VerticalPanel vpanel = new VerticalPanel();

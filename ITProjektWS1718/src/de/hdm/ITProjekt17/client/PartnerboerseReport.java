@@ -24,7 +24,13 @@ import de.hdm.ITProjekt17.shared.ReportGeneratorAsync;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeAnhandSuchprofilReport;
 import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeOfProfilNichtAngesehenReport;
-
+/**
+ *  Die Klasse PartnerboerseReport implementiert das Entry-Pojnt Interface, welches
+ *  die Main() Methode von GWT darstellt. Hier steigt das Programm beim START des RG ein.
+ *  
+ * @author Samina
+ *
+ */
 public class PartnerboerseReport implements EntryPoint{
 	
 	ReportGeneratorAsync reportGenerator = null;
@@ -46,25 +52,32 @@ public class PartnerboerseReport implements EntryPoint{
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 	private static ReportGeneratorAsync reportverwaltung = ClientsideSettings.getReportGenerator();
 	
-	@Override
+	/**
+	 * Wird mit der Entry-Point Implementierung realisiert.
+	 */
 	public void onModuleLoad() {
 
 		LoginServiceAsync loginService = GWT.create(LoginService.class);
 		loginService.login(GWT.getHostPageBaseURL()+"ITProjektWS1718Report.html", new AsyncCallback<LoginInfo>() {
 			
-			@Override
+			
 			public void onSuccess(LoginInfo result) {
 				loginInfo = result;
 				if (loginInfo.isLoggedIn()){
 					reportverwaltung.checkProfil(loginInfo.getEmailAddress(), new AsyncCallback<Profil>() {
 
-						@Override
+						/**
+						 * siehe Client gui report
+						 */
 						public void onFailure(Throwable caught) {
 							// TODO Auto-generated method stub
 							
 						}
 
-						@Override
+
+						/**
+						 * siehe Client gui report
+						 */
 						public void onSuccess(Profil result) {
 							if (result != null){
 								RootPanel.get("Details").clear();
@@ -85,7 +98,7 @@ public class PartnerboerseReport implements EntryPoint{
 				
 			}
 			
-			@Override
+			
 			public void onFailure(Throwable caught) {
 				Window.alert("Fehler Login: " + caught.toString());
 			}
@@ -95,13 +108,20 @@ public class PartnerboerseReport implements EntryPoint{
 		
 	}
 	
-	
+	/**
+	 * Laden des Reports
+	 * @param profil
+	 */
 	private void loadreport(final Profil profil){
 		signOutLink.setHref(loginInfo.getLogoutUrl());
 		RootPanel.get("Topbar").add(signOutLink);
 		RootPanel.get("Details").add(new StartseiteReport(profil));
 		RootPanel.get("Navigator").add(new MenubarReport(profil));
 	}
+	
+	/**
+	 * Laden des Logins in den RG
+	 */
 	private void loadlogin(){
 		zumreportgenerator.addClickHandler(new ClickHandler() {		
 			@Override
@@ -112,6 +132,8 @@ public class PartnerboerseReport implements EntryPoint{
 
 			}
 		});
+		
+		
 		zurpartnerboerse.addClickHandler(new ClickHandler() {		
 			@Override
 			public void onClick(ClickEvent event) {

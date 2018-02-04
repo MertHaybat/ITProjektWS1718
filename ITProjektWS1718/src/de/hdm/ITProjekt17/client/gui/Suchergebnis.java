@@ -26,8 +26,17 @@ import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 
+/**
+ * Deese Seite wird erstellt wenn man auf der Suchenseite eine Suche anhand des erstellten Suchrprofils startet.
+ * Hier werden die Ergebnisse der suche sichtbar.
+ * @author Mert
+ *
+ */
 public class Suchergebnis extends VerticalPanel{
 	
+	/**
+	 * Erstellen aller Buttons und anderen wichtigen Objekte für die Realisierung der Seite.
+	 */
 	private Button kontaktsperren = new Button("Kontakt sperren");
 	private Button kontaktmerken = new Button("Kontakt merken");
 	private Button zursuche = new Button("Zurück");
@@ -48,14 +57,18 @@ public class Suchergebnis extends VerticalPanel{
 		});
 		pbverwaltung.getAllProfilsOf(suchprofil, new AsyncCallback<Vector<Profil>>() {
 					
-					@Override
+					/**
+					 * Siehe Client.gui.report
+					 */
 					public void onSuccess(Vector<Profil> result) {
 						p1.setRowData(0, result);
 						p1.setRowCount(result.size(), true);
 					
 					}
 					
-					@Override
+					/**
+					 * Siehe Client.gui.report
+					 */
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 						
@@ -68,17 +81,19 @@ public class Suchergebnis extends VerticalPanel{
 		
 		p1.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			
-			@Override
+			/**
+			 * Wird ausgeführt wenn ein Profil besucht wird und erstellt eine Dialogbox des Profils das Besucht wird.
+			 */
 			public void onSelectionChange(SelectionChangeEvent event) {
 				pbverwaltung.visit(profil.getId(), p1.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Besuch>() {
 
-					@Override
+					
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 						
 					}
 
-					@Override
+					
 					public void onSuccess(Besuch result) {
 						// TODO Auto-generated method stub
 						
@@ -102,24 +117,27 @@ public class Suchergebnis extends VerticalPanel{
 				b1.center();
 				zursuche.addClickHandler(new ClickHandler() {
 					
-					@Override
+					
 					public void onClick(ClickEvent event) {
 					b1.hide();
 					}
 				});
 				kontaktmerken.addClickHandler(new ClickHandler() {
 					
-					@Override
+					/**
+					 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+					 * die on click methode, die auf einen klick wartet und dann ausgeführt
+					 * wird wenn der Button geklickt wird.
+					 */
 					public void onClick(ClickEvent event) {
 						pbverwaltung.createMerkzettel(profil, p1.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Merkzettel>() {
 
-							@Override
 							public void onFailure(Throwable caught) {
 								// TODO Auto-generated method stub
 								
 							}
 
-							@Override
+							
 							public void onSuccess(Merkzettel result) {
 								Window.alert("Profil wurde in die Merkliste gesetzt");
 								b1.hide();
@@ -130,17 +148,21 @@ public class Suchergebnis extends VerticalPanel{
 				});
 				kontaktsperren.addClickHandler(new ClickHandler() {
 					
-					@Override
+					/**
+					 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+					 * die on click methode, die auf einen klick wartet und dann ausgeführt
+					 * wird wenn der Button geklickt wird.
+					 */
 					public void onClick(ClickEvent event) {
 						pbverwaltung.createKontaktsperre(profil, p1.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Kontaktsperre>() {
 
-							@Override
+							
 							public void onFailure(Throwable caught) {
 								// TODO Auto-generated method stub
 								
 							}
 
-							@Override
+							
 							public void onSuccess(Kontaktsperre result) {
 								Window.alert("Profil wurde gesperrt");
 								b1.hide();

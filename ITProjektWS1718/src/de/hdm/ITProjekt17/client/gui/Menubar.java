@@ -48,7 +48,7 @@ public class Menubar extends VerticalPanel {
 		this.add(vpanel);
 		
 	}
-	
+
 	public Menubar(final Profil profil){
 		btn1.setStylePrimaryName("menubarbutton");
 		btn2.setStylePrimaryName("menubarbutton");
@@ -67,7 +67,9 @@ public class Menubar extends VerticalPanel {
 		btn1.addClickHandler(new ClickHandler(){
 
 			/**
-			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
 			 */
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();
@@ -90,7 +92,9 @@ public class Menubar extends VerticalPanel {
 		
 		btn2.addClickHandler(new ClickHandler(){
 			/**
-			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
 			 */
 			public void onClick(ClickEvent event) {
 
@@ -112,7 +116,9 @@ public class Menubar extends VerticalPanel {
 		btn3.addClickHandler(new ClickHandler(){
 
 			/**
-			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
 			 */
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
@@ -132,7 +138,9 @@ public class Menubar extends VerticalPanel {
 		btn4.addClickHandler(new ClickHandler(){
 
 			/**
-			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
 			 */
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
@@ -153,7 +161,9 @@ public class Menubar extends VerticalPanel {
 		btn5.addClickHandler(new ClickHandler(){
 
 			/**
-			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
 			 */
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
@@ -175,7 +185,9 @@ public class Menubar extends VerticalPanel {
 		btn6.addClickHandler(new ClickHandler(){
 
 			/**
-			 * Interface clickhandler wird als anonyme klasse erstellt und realisert die on click methode, die auf einen klick (button) wartet und dann ausgeführt wird
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
 			 */
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();

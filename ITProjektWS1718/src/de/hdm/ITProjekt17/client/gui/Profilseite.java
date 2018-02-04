@@ -29,10 +29,19 @@ import de.hdm.ITProjekt17.shared.bo.Profil.Geschlecht;
 import de.hdm.ITProjekt17.shared.bo.Profil.Haarfarbe;
 import de.hdm.ITProjekt17.shared.bo.Profil.Raucher;
 
+/**
+ * Erstellen einer Profilseite wenn sich der User auf der Partnerbörse Regsitrieren will.
+ * @author Mert
+ *
+ */
 public class Profilseite extends VerticalPanel {
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 
+	
+	/**
+	 * Erstellen aller Objekte (Buttons, TextBoxen, ListBoxen, TextAreas, Labels, FlexTables und VerticalPanels)
+	 */
 	private TextBox tbemail = new TextBox();
 	private TextBox tbvorname = new TextBox();
 	private TextBox tbnachname = new TextBox();
@@ -124,7 +133,9 @@ public class Profilseite extends VerticalPanel {
 
 		this.add(hpanel);
 		
-		//Interesse
+				/**
+				 * Interesse
+				 */
 				if(lbinteresse.getSelectedIndex()==0){
 					a.setWert("Frauen");
 				}
@@ -135,7 +146,9 @@ public class Profilseite extends VerticalPanel {
 					a.setWert("Beides");
 				}
 				
-				//Wohnsituation
+				/**
+				 * Wohnsituation
+				 */
 				if(lbwohnsituation.getSelectedIndex()==0){
 					b.setWert("Bei den Eltern");
 				}
@@ -149,7 +162,9 @@ public class Profilseite extends VerticalPanel {
 					b.setWert("Im Wohnheim");
 				}
 				
-				//Ausbildung
+				/**
+				 * Ausbildung
+				 */
 				if(lbausbildung.getSelectedIndex()==0){
 					c.setWert("Kein Abschluss");
 				}
@@ -163,7 +178,9 @@ public class Profilseite extends VerticalPanel {
 					c.setWert("Absolvent");
 				}
 						
-				//Körperbau
+				/**
+				 * Körperbau
+				 */
 				if(lbkörperbau.getSelectedIndex()==0){
 					d.setWert("dünn");
 				}
@@ -183,7 +200,9 @@ public class Profilseite extends VerticalPanel {
 					d.setWert("dick");
 				}
 			
-		//ListBox Raucher befüllen.
+		/**
+		 * ListBox Raucher befüllen.
+		 */
 		
 		Raucher b1 = Raucher.A;
 		Raucher b2 = Raucher.B;
@@ -196,7 +215,9 @@ public class Profilseite extends VerticalPanel {
 	      lbraucher.addItem(Profil.word(b4));
 	      lbraucher.addItem(Profil.word(b5));
 		  
-		//ListBox Geschlecht befüllen.
+		/**
+		 * ListBox Geschlecht befüllen.
+		 */
 		Geschlecht c1 = Geschlecht.m;
 		Geschlecht c2 = Geschlecht.w;
 		Geschlecht c3 = Geschlecht.s;
@@ -204,7 +225,9 @@ public class Profilseite extends VerticalPanel {
 	      lbgeschlecht.addItem(Profil.word(c2));
 	      lbgeschlecht.addItem(Profil.word(c3));
 	      
-			//ListBox Haarfarbe befüllen.
+			/**
+			 * ListBox Haarfarbe befüllen.
+			 */
 
 			Haarfarbe h1 = Haarfarbe.A;
 			Haarfarbe h2 = Haarfarbe.B;
@@ -218,27 +241,35 @@ public class Profilseite extends VerticalPanel {
 			  lbhaarfarbe.addItem(Profil.word(h5));
 
 		  
-		//ListBox Interesse befüllen.
+		/**
+		 * ListBox Interesse befüllen.
+		 */
 			
 	      lbinteresse.addItem("Frauen");
 	      lbinteresse.addItem("Männer");
 	      lbinteresse.addItem("Beides");	  
 	      
-			//ListBox Wohnsituation befüllen.
+			/**
+			 * ListBox Wohnsituation befüllen.
+			 */
 			
 	      lbwohnsituation.addItem("Bei den Eltern");
 	      lbwohnsituation.addItem("Alleine");
 	      lbwohnsituation.addItem("In einer WG");
 	      lbwohnsituation.addItem("Im Wohnheim");
 
-			//ListBox Ausbildung befüllen.
+			/**
+			 * ListBox Ausbildung befüllen.
+			 */
 			
 	      lbausbildung.addItem("Kein Abschluss");
 	      lbausbildung.addItem("Schüler");
 	      lbausbildung.addItem("Student");
 	      lbausbildung.addItem("Absolvent");
 	      
-	      //ListBox Körperbau befüllen.
+	      /**
+	       * ListBox Körperbau befüllen.
+	       */
 	      
 	      lbkörperbau.addItem("dünn");     
 	      lbkörperbau.addItem("durchschnittlich");
@@ -257,38 +288,52 @@ public class Profilseite extends VerticalPanel {
 		   
 		    abbrechen.addClickHandler(new ClickHandler() {
 				
-				@Override
+		    	/**
+				 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+				 * die on click methode, die auf einen klick wartet und dann ausgeführt
+				 * wird wenn der Button geklickt wird.
+				 */
 				public void onClick(ClickEvent event) {
 					Window.open(logout.getHref(), "_self", "");
 				}
 			});
 		    ok.addClickHandler(new ClickHandler(){
 
-				@Override
+		    	/**
+				 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+				 * die on click methode, die auf einen klick wartet und dann ausgeführt
+				 * wird wenn der Button geklickt wird.
+				 */
 				public void onClick(ClickEvent event) {
 					pbverwaltung.createProfil(email, tbvorname.getValue(), tbnachname.getValue(), geburtsdatum.getValue(), 
 							Integer.parseInt(tbkörpergröße.getValue()),
 							tbreligion.getValue(), lbhaarfarbe.getSelectedValue(), lbraucher.getSelectedValue(), lbgeschlecht.getSelectedValue(), new AsyncCallback<Profil>(){
 					
-								@Override
+								/**
+								 * Siehe Client.gui.report
+								 */
 								public void onFailure(Throwable caught) {
 									// TODO Auto-generated method stub
 									
 							Window.alert("Fehlerhafte Eingabe " + caught.getLocalizedMessage());		
 								}
 
-								@Override
+								/**
+								 * Siehe Client.gui.report
+								 */
 								public void onSuccess(Profil result) {
 								
 									pbverwaltung.checkProfil(email, new AsyncCallback<Profil>() {
 
-										@Override
+										
 										public void onFailure(Throwable caught) {
 											// TODO Auto-generated method stub
 											Window.alert(caught.getLocalizedMessage());
 										}
 
-										@Override
+										/**
+										 * Siehe Client.gui.report
+										 */
 										public void onSuccess(Profil result) {
 											p1 = result;
 											RootPanel.get("Topbar").add(logout);
@@ -305,59 +350,69 @@ public class Profilseite extends VerticalPanel {
 				  pbverwaltung.createInfo(email, 1, "",
 				  lbinteresse.getSelectedValue(), new AsyncCallback<Info>(){
 				  
-				  @Override 
+					  	/**
+						 * Siehe Client.gui.report
+						 */
 				  public void onFailure(Throwable caught) {
 				            Window.alert("Fehler bei Info 1 " +
 				            caught.getLocalizedMessage());
 				  
 				            }
 				  
-				  @Override 
+				  	/**
+					 * Siehe Client.gui.report
+					 */ 
 				  public void onSuccess(Info result) {
 				            pbverwaltung.createInfo(email, 2, "",
 				            lbwohnsituation.getSelectedValue(), new
 				            AsyncCallback<Info>(){
 				  
-				  @Override 
+				    /**
+					 * Siehe Client.gui.report
+					 */ 
 				  public void onFailure(Throwable caught) { 
 					 
 				  
 				            }
 				  
-				  @Override 
+				  	/**
+					 * Siehe Client.gui.report
+					 */ 
 				  public void onSuccess(Info result) {
 				            pbverwaltung.createInfo(email, 3, "",
 				            lbausbildung.getSelectedValue(), new
 				            AsyncCallback<Info>(){
 				  
-				  @Override 
+				   	/**
+					 * Siehe Client.gui.report
+					 */ 
 				  public void onFailure(Throwable caught) { 
 				  
 				            }
 				  
-				  @Override 
+				   
 				  public void onSuccess(Info result) {
 				            pbverwaltung.createInfo(email, 4, "",
 				            lbkörperbau.getSelectedValue(), new
 				            AsyncCallback<Info>(){
 				  
-				  @Override 
+				   
 				  public void onFailure(Throwable caught) { 
 				  
 				            }
 				  
-				  @Override 
+				   
 				  public void onSuccess(Info result) {
 				            pbverwaltung.createInfo(email, 5,
 				            tbfreitext.getValue(), "", new
 				            AsyncCallback<Info>(){
 				  
-				  @Override 
+				   
 				  public void onFailure(Throwable caught) { 
 				  
 				            }
 				  
-				  @Override 
+				   
 				  public void onSuccess(Info result) {
 				            RootPanel.get("Details").clear();
 				            RootPanel.get("Details").add(new Profilseite(p1));
@@ -426,7 +481,9 @@ public class Profilseite extends VerticalPanel {
 		geburtsdatum.getDatePicker().setYearAndMonthDropdownVisible(true);
 		geburtsdatum.getDatePicker().setVisibleYearCount(100);
 
-		// ListBox Raucher befüllen.
+		/**
+		 * ListBox Raucher befüllen.
+		 */
 
 		Raucher b1 = Raucher.A;
 		Raucher b2 = Raucher.B;
@@ -439,7 +496,9 @@ public class Profilseite extends VerticalPanel {
 		lbraucher.addItem(Profil.word(b4));
 		lbraucher.addItem(Profil.word(b5));
 
-		// ListBox Geschlecht befüllen.
+		/**
+		 *  ListBox Geschlecht befüllen.
+		 */
 
 		Geschlecht c1 = Geschlecht.m;
 		Geschlecht c2 = Geschlecht.w;
@@ -448,7 +507,9 @@ public class Profilseite extends VerticalPanel {
 		lbgeschlecht.addItem(Profil.word(c2));
 		lbgeschlecht.addItem(Profil.word(c3));
 
-		// ListBox Haarfarbe befüllen.
+		/**
+		 *  ListBox Haarfarbe befüllen.
+		 */
 
 		Haarfarbe h1 = Haarfarbe.A;
 		Haarfarbe h2 = Haarfarbe.B;
@@ -461,27 +522,35 @@ public class Profilseite extends VerticalPanel {
 		lbhaarfarbe.addItem(Profil.word(h4));
 		lbhaarfarbe.addItem(Profil.word(h5));
 
-		// ListBox Interesse befüllen.
+		/**
+		 *  ListBox Interesse befüllen.
+		 */
 
 		lbinteresse.addItem("Frauen");
 		lbinteresse.addItem("Männer");
 		lbinteresse.addItem("Beides");
 
-		// ListBox Wohnsituation befüllen.
+		/**
+		 *  ListBox Wohnsituation befüllen.
+		 */
 
 		lbwohnsituation.addItem("Bei den Eltern");
 		lbwohnsituation.addItem("Alleine");
 		lbwohnsituation.addItem("In einer WG");
 		lbwohnsituation.addItem("Im Wohnheim");
 
-		// ListBox Ausbildung befüllen.
+		/**
+		 *  ListBox Ausbildung befüllen.
+		 */
 
 		lbausbildung.addItem("Kein Abschluss");
 		lbausbildung.addItem("Schüler");
 		lbausbildung.addItem("Student");
 		lbausbildung.addItem("Absolvent");
 
-		// ListBox Körperbau befüllen.
+		/**
+		 *  ListBox Körperbau befüllen.
+		 */
 
 		lbkörperbau.addItem("dünn");
 		lbkörperbau.addItem("durchschnittlich");
@@ -497,7 +566,9 @@ public class Profilseite extends VerticalPanel {
 		tbreligion.setValue(profil.getReligion());
 		tbkörpergröße.setValue(String.valueOf(profil.getKoerpergroesse()));
 
-		// Raucher
+		/**
+		 *  Raucher
+		 */
 		if (profil.getRaucher() == Profil.word(b1)) {
 			lbraucher.setSelectedIndex(0);
 		} else if (profil.getRaucher() == Profil.word(b2)) {
@@ -510,7 +581,9 @@ public class Profilseite extends VerticalPanel {
 			lbraucher.setSelectedIndex(4);
 		}
 
-		// Geschlecht
+		/**
+		 * Geschlecht
+		 */
 		if (profil.getGeschlecht() == Profil.word(c1)) {
 			lbgeschlecht.setSelectedIndex(0);
 		} else if (profil.getGeschlecht() == Profil.word(c2)) {
@@ -519,7 +592,9 @@ public class Profilseite extends VerticalPanel {
 			lbgeschlecht.setSelectedIndex(2);
 		}
 
-		// Haarfarbe
+		/**
+		 *  Haarfarbe
+		 */
 		if (profil.getHaarfarbe() == Profil.word(h1)) {
 			lbhaarfarbe.setSelectedIndex(0);
 		} else if (profil.getHaarfarbe() == Profil.word(h2)) {
@@ -532,7 +607,9 @@ public class Profilseite extends VerticalPanel {
 			lbhaarfarbe.setSelectedIndex(4);
 		}
 
-		// Interesse
+		/**
+		 * Interesse
+		 */
 		if (lbinteresse.getSelectedIndex() == 0) {
 			a.setWert("Frauen");
 		} else if (lbinteresse.getSelectedIndex() == 1) {
@@ -541,7 +618,9 @@ public class Profilseite extends VerticalPanel {
 			a.setWert("Beides");
 		}
 
-		// Wohnsituation
+		/**
+		 *  Wohnsituation
+		 */
 		if (lbwohnsituation.getSelectedIndex() == 0) {
 			b.setWert("Bei den Eltern");
 		} else if (lbwohnsituation.getSelectedIndex() == 1) {
@@ -552,7 +631,9 @@ public class Profilseite extends VerticalPanel {
 			b.setWert("Im Wohnheim");
 		}
 
-		// Ausbildung
+		/**
+		 *  Ausbildung
+		 */
 		if (lbausbildung.getSelectedIndex() == 0) {
 			c.setWert("Kein Abschluss");
 		} else if (lbausbildung.getSelectedIndex() == 1) {
@@ -563,7 +644,9 @@ public class Profilseite extends VerticalPanel {
 			c.setWert("Absolvent");
 		}
 
-		// Körperbau
+		/**
+		 *  Körperbau
+		 */
 		if (lbkörperbau.getSelectedIndex() == 0) {
 			d.setWert("dünn");
 		} else if (lbkörperbau.getSelectedIndex() == 1) {
@@ -580,7 +663,11 @@ public class Profilseite extends VerticalPanel {
 
 		löschen.addClickHandler(new ClickHandler() {
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
+			 */
 			public void onClick(ClickEvent event) {
 				Profil_loeschen_Dialogbox b1 = new Profil_loeschen_Dialogbox(profil);
 				b1.center();
@@ -590,7 +677,11 @@ public class Profilseite extends VerticalPanel {
 		});
 		abbrechen.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
+			 */
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(new Profilseite(profil));
@@ -600,7 +691,11 @@ public class Profilseite extends VerticalPanel {
 		});
 		ok.addClickHandler(new ClickHandler() {
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
+			 */
 			public void onClick(ClickEvent event) {
 				profil.setGeburtsdatum(geburtsdatum.getValue());
 				profil.setGeschlecht(lbgeschlecht.getSelectedValue());
@@ -612,13 +707,15 @@ public class Profilseite extends VerticalPanel {
 				profil.setVorname(tbvorname.getValue());
 				pbverwaltung.save(profil, new AsyncCallback<Void>() {
 
-					@Override
+					/**
+					 * Siehe Client.gui.report
+					 */
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 
 					}
 
-					@Override
+					
 					public void onSuccess(Void result) {
 						Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
 					}
@@ -626,13 +723,13 @@ public class Profilseite extends VerticalPanel {
 				});
 				pbverwaltung.getAllInfobyProfil(profil, new AsyncCallback<Vector<Info>>() {
 
-					@Override
+					
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 
 					}
 
-					@Override
+					
 					public void onSuccess(Vector<Info> result) {
 						for (Info info : result) {
 							switch (info.getAuswahleigenschaftid()) {
@@ -656,13 +753,13 @@ public class Profilseite extends VerticalPanel {
 								info.setAuswahleigenschaftWert(lbwohnsituation.getSelectedValue());
 								pbverwaltung.save(info, new AsyncCallback<Void>() {
 
-									@Override
+									
 									public void onFailure(Throwable caught) {
 										// TODO Auto-generated method stub
 
 									}
 
-									@Override
+									
 									public void onSuccess(Void result) {
 
 									}
@@ -672,13 +769,13 @@ public class Profilseite extends VerticalPanel {
 								info.setAuswahleigenschaftWert(lbausbildung.getSelectedValue());
 								pbverwaltung.save(info, new AsyncCallback<Void>() {
 
-									@Override
+									
 									public void onFailure(Throwable caught) {
 										// TODO Auto-generated method stub
 
 									}
 
-									@Override
+									
 									public void onSuccess(Void result) {
 
 									}
@@ -688,13 +785,13 @@ public class Profilseite extends VerticalPanel {
 								info.setAuswahleigenschaftWert(lbkörperbau.getSelectedValue());
 								pbverwaltung.save(info, new AsyncCallback<Void>() {
 
-									@Override
+									
 									public void onFailure(Throwable caught) {
 										// TODO Auto-generated method stub
 
 									}
 
-									@Override
+									
 									public void onSuccess(Void result) {
 
 									}
@@ -704,12 +801,12 @@ public class Profilseite extends VerticalPanel {
 								info.setFreitexteigenschaftWert(tbfreitext.getValue());
 								pbverwaltung.save(info, new AsyncCallback<Void>() {
 
-									@Override
+									
 									public void onFailure(Throwable caught) {
 										Window.alert("Ihre Veränderungen wurden erfolgreich abgespeichert");
 									}
 
-									@Override
+									
 									public void onSuccess(Void result) {
 										RootPanel.get("Details").clear();
 										RootPanel.get("Details").add(new Profilseite(profil));
@@ -732,7 +829,7 @@ public class Profilseite extends VerticalPanel {
 
 		pbverwaltung.getInfoIdByProfilId(profil, new AsyncCallback<Vector<Info>>() {
 
-			@Override
+			
 			public void onSuccess(Vector<Info> result) {
 
 				for (Info info : result) {
@@ -835,7 +932,7 @@ public class Profilseite extends VerticalPanel {
 
 			}
 
-			@Override
+			
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 

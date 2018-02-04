@@ -12,35 +12,51 @@ import de.hdm.ITProjekt17.client.ClientsideSettings;
 import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+/**
+ * Dialogbox die angezeigt wird wenn ein Teilnehmer der Partnerbörse sein Profil löschen will.
+ * Dient als Sicherheitsabfrage alls ein Teilnehmer ausversehen auf den Button zum löschen des Profils klickt.
+ * @author Giuseppe
+ *
+ */
+
 public class Profil_loeschen_Dialogbox extends DialogBox{
 	
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 
 	public Profil_loeschen_Dialogbox(final Profil profil){
 		
-		//Dialogbox Überschrift
+		/**
+		 * Dialogbox Überschrift
+		 */
 		setText("Wollen Sie das Profil wirklich löschen?");
 		setAnimationEnabled(true);	
-		
 		
 		Button ja = new Button("Ja");
 		Button nein = new Button("Nein");
 		
 		ja.addClickHandler(new ClickHandler() {
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
+			 */
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				
 				pbverwaltung.delete(profil, new AsyncCallback<Void>(){
 
-					@Override
+					/**
+					 * Siehe Client.gui.report
+					 */
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
 						
 					}
 
-					@Override
+					/**
+					 * Siehe Client.gui.report
+					 */
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
 						Window.alert("Profil wurde erfolgreich gelöscht. Starten Sie die Seite neu.");
@@ -56,7 +72,11 @@ public class Profil_loeschen_Dialogbox extends DialogBox{
 		
 		nein.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
+			 */
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				hide();

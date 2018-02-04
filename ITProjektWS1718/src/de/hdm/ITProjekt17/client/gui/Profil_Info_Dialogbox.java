@@ -13,6 +13,12 @@ import de.hdm.ITProjekt17.shared.PartnerboerseAdministrationAsync;
 import de.hdm.ITProjekt17.shared.bo.Info;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+
+/**
+ * DialogBox um die Informationen des anderen Profils anzuzeugen.
+ * @author Mert
+ *
+ */
 public class Profil_Info_Dialogbox extends FlexTable{
 	private TextBox tbinteresse = new TextBox();
 	private TextBox tbwohnsituation = new TextBox();
@@ -44,7 +50,9 @@ public class Profil_Info_Dialogbox extends FlexTable{
 		
 		pbverwaltung.getInfoIdByProfilId(profil_fremd, new AsyncCallback<Vector<Info>>() {
 			
-			@Override
+			/**
+			 * Siehe Client.gui.report
+			 */
 			public void onSuccess(Vector<Info> result) {
 				for (Info info : result) {
 					int o = info.getAuswahleigenschaftid();
@@ -72,7 +80,9 @@ public class Profil_Info_Dialogbox extends FlexTable{
 				}
 			}
 			
-			@Override
+			/**
+			 * Siehe Client.gui.report
+			 */
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				

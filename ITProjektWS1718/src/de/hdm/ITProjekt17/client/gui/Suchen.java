@@ -29,12 +29,16 @@ import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil.GeschlechtSuchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil.HaarfarbeSuchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil.RaucherSuchprofil;
-
+/**
+ * Hier wird eine Suchen seite erstellt, diese dient zur Suche von anderen Teilnehmern anhand eines definierten Suchprofils.
+ * @author Mert
+ *
+ */
 public class Suchen extends VerticalPanel {
 
 	private static PartnerboerseAdministrationAsync pbverwaltung = ClientsideSettings.getBoerseVerwaltung();
 
-	/*
+	/**
 	 * Deklarieren und Instanziieren der Widgets
 	 */
 
@@ -133,7 +137,11 @@ public class Suchen extends VerticalPanel {
 
 		suchprofilErstellen.addClickHandler(new ClickHandler() {
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
+			 */
 			public void onClick(ClickEvent event) {
 
 				pbverwaltung.createSuchprofil(lbhaarfarbe.getSelectedValue(),
@@ -141,13 +149,17 @@ public class Suchen extends VerticalPanel {
 						lbgeschlecht.getSelectedValue(), Integer.parseInt(tbminalter.getValue()),
 						Integer.parseInt(tbmaxalter.getValue()), profil.getId(), new AsyncCallback<Suchprofil>() {
 
-							@Override
+							/**
+							 * Siehe Client.gui.report
+							 */
 							public void onFailure(Throwable caught) {
 								// TODO Auto-generated method stub
 								Window.alert("Da ist etwas schief gelaufen" + caught.getMessage());
 							}
 
-							@Override
+							/**
+							 * Siehe Client.gui.report
+							 */
 							public void onSuccess(Suchprofil result) {
 								RootPanel.get("Details").clear();
 								RootPanel.get("Details").add(new Suchen(profil));
@@ -183,7 +195,10 @@ public class Suchen extends VerticalPanel {
 		ct.setWidth("100%");
 		ssm.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			
-			@Override
+			/**
+			 * Es wird eine Suchprofil_Dialogbox erzeugt wenn man auf das erstellte Suchprofil klickt um eine 
+			 * suche starten zu können oder um wieder zurück zur Suchenseite zu gelangen.
+			 */
 			public void onSelectionChange(SelectionChangeEvent event) {
 				Suchprofil_Dialogbox b1 = new Suchprofil_Dialogbox(profil, ssm.getSelectedObject());
 				b1.center();
@@ -268,13 +283,13 @@ public class Suchen extends VerticalPanel {
 		ct.addColumn(suchprofileKörpergröße, "Körpergröße");
 		pbverwaltung.findSuchprofilByProfilId(profil, new AsyncCallback<Vector<Suchprofil>>() {
 
-			@Override
+			
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 
 			}
 
-			@Override
+			
 			public void onSuccess(Vector<Suchprofil> result) {
 				ct.setRowData(0, result);
 				ct.setRowCount(result.size(), true);

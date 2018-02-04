@@ -9,6 +9,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+/**
+ * Anlegen einer Topbar
+ * @author Giuseppe
+ *
+ */
 public class Topbar extends VerticalPanel{
 //	
 //	private VerticalPanel vpanel = new VerticalPanel();

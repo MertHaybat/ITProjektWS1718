@@ -6,6 +6,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+/**
+ * Erstellen einer Startseite wenn der Teilnehmer die Partnerbörse besucht.
+ * @author Mert
+ *
+ */
 public class Startseite extends VerticalPanel{
 	
 	private VerticalPanel vpanel = new VerticalPanel();

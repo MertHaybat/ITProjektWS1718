@@ -30,7 +30,9 @@ public class Suchprofil_Dialogbox extends DialogBox{
 
 	public Suchprofil_Dialogbox(final Profil profil, final Suchprofil suchprofil){
 		
-		//Dialogbox Überschrift
+		/**
+		 * Dialogbox Überschrift
+		 */
 		setText("Was wollen Sie tun?");
 		setAnimationEnabled(true);
 		
@@ -76,18 +78,26 @@ public class Suchprofil_Dialogbox extends DialogBox{
 		
 		suchprofilLöschen.addClickHandler(new ClickHandler(){
 
-			@Override
+			/**
+			 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+			 * die on click methode, die auf einen klick wartet und dann ausgeführt
+			 * wird wenn der Button geklickt wird.
+			 */
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 			pbverwaltung.deleteSuchprofil(suchprofil, new AsyncCallback<Void>() {
 
-				@Override
+				/**
+				 * Siehe Client.gui.report
+				 */
 				public void onFailure(Throwable caught) {
 					// TODO Auto-generated method stub
 					
 				}
 
-				@Override
+				/**
+				 * Siehe Client.gui.report
+				 */
 				public void onSuccess(Void result) {
 					Window.alert("Das Suchprofil wurde erfolgreich gelöscht");	
 					hide();					
@@ -110,12 +120,9 @@ public class Suchprofil_Dialogbox extends DialogBox{
 				}
 
 			});
-			
-			
-	
-	
-
-	
+			/**
+			 * Erstellen eines Labels welches fragt ob eine suche durchgeführt werden soll oder nicht.
+			 */
 		
 		Label label = new Label("Möchten Sie die Suche starten oder das Suchprofil löschen?");
 

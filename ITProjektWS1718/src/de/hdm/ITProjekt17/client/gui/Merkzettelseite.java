@@ -30,8 +30,16 @@ import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
 
+/**
+ * Hier wird eine Merkzettelseite erstellt, diese zeigt alle Merkenden und gemerkten Profile eines Profils an.
+ * 
+ * @author Mert
+ *
+ */
 public class Merkzettelseite extends VerticalPanel{
-	
+	/**
+	 * Objekte die vom Typ VerticalPanel, HTML und Button sind werden hier angelegt.
+	 */
 	private VerticalPanel vpaneleigener_merkzettel = new VerticalPanel();
 	private VerticalPanel vpanelandere_merkzettel = new VerticalPanel();
 	private VerticalPanel hpanel = new VerticalPanel();
@@ -59,13 +67,17 @@ public class Merkzettelseite extends VerticalPanel{
 		this.add(hpanel);
 		pbverwaltung.showMerkendeOf(profil, new AsyncCallback<Vector<Profil>>(){
 
-			@Override
+			/**
+			 * Siehe client.gui.report
+			 */
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
 			}
 
-			@Override
+			/**
+			 * Siehe Client.Gui.Report
+			 */
 			public void onSuccess(Vector<Profil> result) {
 				pt2.setRowData(0, result);
 				pt2.setRowCount(result.size(), true);
@@ -74,13 +86,17 @@ public class Merkzettelseite extends VerticalPanel{
 		});
 		pbverwaltung.showMerklisteOf(profil, new AsyncCallback<Vector<Profil>>() {
 
-			@Override
+			/**
+			 * Siehe Client.gui.report
+			 */
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
 			}
 
-			@Override
+			/**
+			 * Siehe Client.gui.report
+			 */
 			public void onSuccess(Vector<Profil> result) {
 				pt1.setRowData(0, result);
 				pt1.setRowCount(result.size(), true);
@@ -89,7 +105,10 @@ public class Merkzettelseite extends VerticalPanel{
 		
 		pt1.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 		
-		@Override
+		/**
+		 * Wird aufgerufen wenn man ein Profil anklickt und dieses somit einsehen kann.
+		 * Hier werden die Klassen Profil_Dialogbox und Profil_Info_Dialogbox als Objekte realsiert.
+		 */
 		public void onSelectionChange(SelectionChangeEvent event) {
 			HorizontalPanel hpanel = new HorizontalPanel();
 			HorizontalPanel hpanel2 = new HorizontalPanel();
@@ -109,20 +128,28 @@ public class Merkzettelseite extends VerticalPanel{
 			b1.center();
 			merkzettelloeschen.addClickHandler(new ClickHandler() {
 				
-				@Override
+				/**
+				 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+				 * die on click methode, die auf einen klick wartet und dann ausgeführt
+				 * wird wenn der Button geklickt wird.
+				 */
 				public void onClick(ClickEvent event) {
 					Merkzettel m1 = new Merkzettel();
 					m1.setProfilId_gemerkter(pt1.getSsm_profil_anzeige().getSelectedObject().getId());
 					m1.setProfilId_merkender(profil.getId());
 					pbverwaltung.delete(m1, new AsyncCallback<Void>() {
 
-						@Override
+						/**
+						 * Siehe @Client.gui.Report
+						 */
 						public void onFailure(Throwable caught) {
 							// TODO Auto-generated method stub
 							
 						}
 
-						@Override
+						/**
+						 * Siehe Client.gui.report
+						 */
 						public void onSuccess(Void result) {
 							Window.alert("Profil aus Merkzettel gelöscht");
 							b1.hide();
@@ -134,7 +161,11 @@ public class Merkzettelseite extends VerticalPanel{
 			});
 			zurück.addClickHandler(new ClickHandler() {
 				
-				@Override
+				/**
+				 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+				 * die on click methode, die auf einen klick wartet und dann ausgeführt
+				 * wird wenn der Button geklickt wird.
+				 */
 				public void onClick(ClickEvent event) {
 				b1.hide(); 
 			
@@ -144,7 +175,11 @@ public class Merkzettelseite extends VerticalPanel{
 			
 			zumerkzettel.addClickHandler(new ClickHandler() {
 				
-				@Override
+				/**
+				 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+				 * die on click methode, die auf einen klick wartet und dann ausgeführt
+				 * wird wenn der Button geklickt wird.
+				 */
 				public void onClick(ClickEvent event) {
 				b1.hide();
 				}
@@ -153,7 +188,10 @@ public class Merkzettelseite extends VerticalPanel{
 	});
 		pt2.getSsm_profil_anzeige().addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 				
-				@Override
+			/**
+			 * Wird aufgerufen wenn man ein Profil anklickt und dieses somit einsehen kann.
+			 * Hier werden die Klassen Profil_Dialogbox und Profil_Info_Dialogbox als Objekte realsiert.
+			 */
 				public void onSelectionChange(SelectionChangeEvent event) {
 					HorizontalPanel hpanel = new HorizontalPanel();
 					HorizontalPanel hpanel2 = new HorizontalPanel();
@@ -173,17 +211,25 @@ public class Merkzettelseite extends VerticalPanel{
 					b1.center();
 					merkzettelhinzufugen.addClickHandler(new ClickHandler() {
 						
-						@Override
+						/**
+						 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+						 * die on click methode, die auf einen klick wartet und dann ausgeführt
+						 * wird wenn der Button geklickt wird.
+						 */
 						public void onClick(ClickEvent event) {
 							pbverwaltung.createMerkzettel(profil, pt2.getSsm_profil_anzeige().getSelectedObject().getId(), new AsyncCallback<Merkzettel>() {
 
-								@Override
+								/**
+								 * Siehe Client.gui.report
+								 */
 								public void onFailure(Throwable caught) {
 									// TODO Auto-generated method stub
 									
 								}
 
-								@Override
+								/**
+								 * Siehe Client.gui.report
+								 */
 								public void onSuccess(Merkzettel result) {
 									Window.alert("Profil zu Merkzettel hinzugefügt.");
 									b1.hide();
@@ -195,7 +241,11 @@ public class Merkzettelseite extends VerticalPanel{
 					});
 					zurück.addClickHandler(new ClickHandler() {
 						
-						@Override
+						/**
+						 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+						 * die on click methode, die auf einen klick wartet und dann ausgeführt
+						 * wird wenn der Button geklickt wird.
+						 */
 						public void onClick(ClickEvent event) {
 						b1.hide(); 
 					
@@ -205,17 +255,16 @@ public class Merkzettelseite extends VerticalPanel{
 					
 					zumerkzettel.addClickHandler(new ClickHandler() {
 						
-						@Override
+						/**
+						 * Interface clickhandler wird als anonyme klasse erstellt und realisert 
+						 * die on click methode, die auf einen klick wartet und dann ausgeführt
+						 * wird wenn der Button geklickt wird.
+						 */
 						public void onClick(ClickEvent event) {
 						b1.hide();
 						}
 					});
 				}
-			});
-				
-		
+			});		
 	}
-	
-	
-
 }

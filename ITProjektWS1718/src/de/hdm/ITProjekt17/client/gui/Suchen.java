@@ -57,9 +57,9 @@ public class Suchen extends VerticalPanel {
 	private Label lb8 = new Label("Geschlecht: ");
 	private Label lb9 = new Label("Alter von bis:");
 
-	private Button suchen = new Button("Suchen");
 	private Button suchprofilErstellen = new Button("Suchprofil speichern");
 //	private Button suchprofilLoeschen = new Button("Suchprofil löschen");
+	private Label lb10 = new Label("Klicken Sie unten auf Ihr Suchprofil, um eine Suche starten zu können.");
 
 	private FlexTable ft1 = new FlexTable();
 	private CellTable<Suchprofil> ct = new CellTable<Suchprofil>();
@@ -75,7 +75,6 @@ public class Suchen extends VerticalPanel {
 		ft1.setWidget(4, 0, lb9);
 		ft1.setWidget(4, 1, tbminalter);
 		ft1.setWidget(4, 2, tbmaxalter);
-		;
 		ft1.setWidget(5, 0, lb4);
 		ft1.setWidget(5, 1, lbhaarfarbe);
 		ft1.setWidget(6, 0, lb5);
@@ -84,7 +83,7 @@ public class Suchen extends VerticalPanel {
 		ft1.setWidget(7, 1, tbkörpergröße);
 		ft1.setWidget(8, 0, lb7);
 		ft1.setWidget(8, 1, lbraucher);
-		ft1.setWidget(11, 1, suchen);
+		ft1.setWidget(11, 1, lb10);
 		ft1.setWidget(10, 1, suchprofilErstellen);
 //		ft1.setWidget(9, 3, suchprofilLoeschen);
 
@@ -126,15 +125,6 @@ public class Suchen extends VerticalPanel {
 		lbhaarfarbe.addItem(Suchprofil.wordSuchprofil(h5));
 
 		
-
-		suchen.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-			}
-
-		});
-
 		suchprofilErstellen.addClickHandler(new ClickHandler() {
 
 			/**

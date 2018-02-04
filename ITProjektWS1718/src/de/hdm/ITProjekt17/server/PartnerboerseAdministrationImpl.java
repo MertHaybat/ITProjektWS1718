@@ -100,6 +100,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 */
 	private AehnlichkeitsmassMapper aehnlichkeitsmassMapper = null;
 
+	/**
+	 * Konstruktor
+	 */
 	public PartnerboerseAdministrationImpl() {
 
 	}
@@ -111,10 +114,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 */
 
 	public void init() {
-		/*
+		/**
 		 * Die PartnerboerseAdministrationImpl ben�tigt diese Mapper, um mit
 		 * deren Hilfe die Datenbank ansprechen zu k�nnen.
 		 */
+
 		this.auswahleigenschaftMapper = AuswahleigenschaftMapper.auswahleigenschaftMapper();
 		this.eigenschaftMapper = EigenschaftMapper.eigenschaftMapper();
 		this.freitexteigenschaftMapper = FreitexteigenschaftMapper.freitexteigenschaftMapper();
@@ -136,12 +140,12 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auswahleigenschaft-Mapper aufgerufen wird.
 	 * </p>
 	 */
-	@Override
+
 	public Auswahleigenschaft createAuswahleigenschaft(String wert) {
 
 		Auswahleigenschaft aus = new Auswahleigenschaft();
 		aus.setWert(wert);
-		/*
+		/**
 		 * Setzen einer vorl�ufigen ID.
 		 */
 		aus.setId(1);
@@ -153,7 +157,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Speichern der Auswahleigenschaft.
 	 */
-	@Override
+
 	public void save(Auswahleigenschaft aus) {
 
 		try {
@@ -167,7 +171,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * L�schen der Auswahleigenschaft. Dabei wird die Referenz zu Info auch
 	 * gel�scht.
 	 */
-	@Override
+
 	public void delete(Auswahleigenschaft aus) {
 
 		try {
@@ -198,7 +202,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen der Auswahleigenschaft, in dem die ID aufgerufen wird.
 	 */
-	@Override
+
 	public Auswahleigenschaft findByKeyAuswahleigenschaft(int id) {
 
 		return this.auswahleigenschaftMapper.findByKey(id);
@@ -207,7 +211,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Auswahleigenschaften.
 	 */
-	@Override
+	
 	public Vector<Auswahleigenschaft> getAllAuswahleigenschaft() {
 		try {
 			return this.auswahleigenschaftMapper.getAll();
@@ -235,7 +239,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	// return this.eigenschaftMapper.insertEigenschaft(eig);
 	// }
 
-	@Override
+	/**
+	 * speichern der Eignschaft
+	 */
 	public void save(Eigenschaft eig) {
 
 		try {
@@ -245,7 +251,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 	}
 
-	@Override
+	/**
+	 * Löschen der Eigenschaft
+	 */
 	public void delete(Eigenschaft eig) {
 
 		try {
@@ -281,25 +289,25 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Freitexteigenschaft-Mapper aufgerufen wird.
 	 * </p>
 	 */
-	@Override
+
 	public Freitexteigenschaft createFreitexteigenschaft(String wert) {
 		try {
 			Freitexteigenschaft frei = new Freitexteigenschaft();
-		frei.setWert(wert);
-		frei.setId(1);
-		return this.freitexteigenschaftMapper.insertFreitexteigenschaft(frei);
+			frei.setWert(wert);
+			frei.setId(1);
+			return this.freitexteigenschaftMapper.insertFreitexteigenschaft(frei);
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
 		return null;
-		
+
 	}
 
 	/**
 	 * Speichern der Freitexteigenschaft.
 	 */
 
-	@Override
+	
 	public void save(Freitexteigenschaft frei) {
 
 		try {
@@ -351,7 +359,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen der Freitexteigenschaft, in dem die ID aufgerufen wird.
 	 */
-	@Override
+	
 	public Freitexteigenschaft findByKeyFreitexteigenschaft(int id) {
 
 		return this.freitexteigenschaftMapper.findByKey(id);
@@ -360,7 +368,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Freitexteigenschaften.
 	 */
-	@Override
+	
 	public Vector<Freitexteigenschaft> getAllFreitexteigenschaft() {
 
 		return this.freitexteigenschaftMapper.getAll();
@@ -382,26 +390,26 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * die insertInfo des Info-Mapper aufgerufen wird.
 	 * </p>
 	 */
-	@Override
+	
 	public Info createInfo(String email, Integer auswahleigenschaftid, String freitexteigenschaftwert,
 			String auswahleigenschaftwert) {
 		try {
-		Profil p = profilMapper.findByEmail(email);
+			Profil p = profilMapper.findByEmail(email);
 
-		Info in = new Info();
+			Info in = new Info();
 
-		in.setProfilId(p.getId());
-		in.setFreitexteigenschaftid(p.getId());
-		in.setAuswahleigenschaftid(auswahleigenschaftid);
-		in.setAuswahleigenschaftWert(auswahleigenschaftwert);
-		in.setFreitexteigenschaftWert(freitexteigenschaftwert);
-		in.setId(1);
+			in.setProfilId(p.getId());
+			in.setFreitexteigenschaftid(p.getId());
+			in.setAuswahleigenschaftid(auswahleigenschaftid);
+			in.setAuswahleigenschaftWert(auswahleigenschaftwert);
+			in.setFreitexteigenschaftWert(freitexteigenschaftwert);
+			in.setId(1);
 			if (auswahleigenschaftid == 5) {
 				Freitexteigenschaft f = findByKeyFreitexteigenschaft(p.getId());
 				f.setWert(freitexteigenschaftwert);
 				save(f);
-				}
-		return this.infoMapper.insertInfo(in);
+			}
+			return this.infoMapper.insertInfo(in);
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
@@ -411,7 +419,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Speichern der Info.
 	 */
-	@Override
+	
 	public void save(Info in) {
 		infoMapper.updateInfo(in);
 		if (in.getAuswahleigenschaftid() == 5) {
@@ -427,7 +435,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * L�schen der Info. Dabei wird die Referenz zu Auswahleigenschaft,
 	 * Freitexteigenschaft und Suchprofil_Info auch gel�scht.
 	 */
-	@Override
+	
 	public void delete(Info in) {
 
 		try {
@@ -506,7 +514,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen der Info, in dem die ID aufgerufen wird.
 	 */
-	@Override
+	
 	public Info findByKeyInfo(int id) {
 		try {
 			return this.infoMapper.findByKey(id);
@@ -519,7 +527,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Infos.
 	 */
-	@Override
+	
 	public Vector<Info> getAllInfo() {
 		try {
 			return this.infoMapper.getAll();
@@ -563,8 +571,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auslesen aller User eines Profils die vom Teilnehmer auf die
 	 * Kontaktsperre gesetzt wurden.
 	 * 
-	 * @param merk
-	 * @return @
+	 * @param pro
+	 * @return vectorprofil
 	 */
 	public Vector<Profil> showBlockedProfilsOf(Profil pro) {
 		Vector<Kontaktsperre> allBlockedProfiles = this.getAllKontaktsperreOf(pro);
@@ -577,7 +585,12 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return vectorprofil;
 
 	}
-
+	
+	/**
+	 * Auslesen aller User eines Profils die den Teilnehmer auf die Kontaktsperre gesetzt wurden
+	 * @param pro
+	 * @return vectorprofil
+	 */
 	public Vector<Profil> showAllBlockerOf(Profil pro) {
 		Vector<Kontaktsperre> allBlockedProfiles = this.getBlockedBy(pro);
 		Vector<Profil> vectorprofil = new Vector<Profil>();
@@ -589,13 +602,21 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return vectorprofil;
 	}
 
-	@Override
+	/**
+	 * Auslesen aller Kontaktsperren eines Profils
+	 * @param pro
+	 * @return kontaktsperreMapper
+	 */
 	public Vector<Kontaktsperre> getAllKontaktsperreOf(Profil pro) {
 
 		return kontaktsperreMapper.getAllKontaktsperrenDesSperrenden(pro);
 	}
 
-	@Override
+	/**
+	 * Speichern einer Kontaktsperre
+	 * @param sperre
+	 * @return null
+	 */
 	public Kontaktsperre save(Kontaktsperre sperre) {
 
 		try {
@@ -606,7 +627,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return null;
 	}
 
-	@Override
+	/**
+	 * Auslesen einer Kontaktsperre anhand der Kontaktsperren-id
+	 * @param id
+	 * @return null
+	 */
 	public Kontaktsperre findById(int id) {
 		try {
 			this.kontaktsperreMapper.findByKey(id);
@@ -616,7 +641,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return null;
 	}
 
-	@Override
+	/**
+	 * Alle Kontaktsperren aus der Partnerbörse auslesen
+	 */
 	public Vector<Kontaktsperre> getAllKontaktsperre() {
 		try {
 			this.kontaktsperreMapper.getAllKontaktsperre();
@@ -626,7 +653,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return null;
 	}
 
-	@Override
+	/**
+	 * Löschen einer Kontaktsperre
+	 */
 	public void delete(Kontaktsperre sperre) {
 
 		this.kontaktsperreMapper.deleteKontaktsperre(sperre);
@@ -637,6 +666,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Mit diesere Methode werden alle Merkzettel anhand der Profil Id des
 	 * Merkenden angezeigt. DIes ist eine Hilfsmethode fÃ¼r andere Operationen
 	 * in dieser Klasse.
+	 *@param pro
+	 *@return merkzettelMapper
+	 * 
 	 */
 	public Vector<Merkzettel> getAllMerkzettelOf(Profil pro) {
 
@@ -647,9 +679,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Methode um ein einzelnes Profil auf den Merkzettel zu setzen. LoggedIn
 	 * steht fÃ¼r den Merkenden User der andere Teilnehmer auf seine
 	 * Merkliste(Merkzettel) setzt.
+	 * @param pro, profilId_gemerkter
+	 * @return merkzettelMapper
+	 * 
 	 */
 
-	@Override
 	public Merkzettel createMerkzettel(Profil pro, int profilId_gemerkter) {
 		Merkzettel merk = new Merkzettel();
 		merk.setProfilId_merkender(pro.getId());
@@ -679,8 +713,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Auslesen aller User eines Profils die vom Teilnehmer auf den Merkzettel
 	 * gesetzt wurden.
 	 * 
-	 * @param merk
-	 * @return @
+	 * @param pro
+	 * @return profiles
 	 */
 	public Vector<Profil> showMerklisteOf(Profil pro) {
 		Vector<Profil> profiles = new Vector<Profil>();
@@ -693,7 +727,13 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return profiles;
 
 	}
-
+	/**
+	 * Auslesen aller User eines Profils die den Teilnehmer auf den Merkzettel
+	 * gesetzt haben
+	 * 
+	 * @param pro
+	 * @return profiles
+	 */
 	public Vector<Profil> showMerkendeOf(Profil pro) {
 		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Merkzettel> merkendeProfiles = merkzettelMapper.merkzettel_showGemerkteProfile(pro.getId());
@@ -705,7 +745,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return profiles;
 	}
 
-	@Override
+	/**
+	 * Auslesen aller User eines Profils die vom Teilnehmer besucht wurden
+	 * @param pro
+	 * @return profiles  
+	 */
 	public Vector<Profil> showBesuchteOf(Profil pro) {
 		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Besuch> besucher = besuchMapper.getAllBesucherOfProfil(pro);
@@ -717,7 +761,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return profiles;
 	}
 
-	@Override
+	/**
+	 * Auslesen aller User eines Profils die den Teilnehmer besucht haben
+	 * @param pro
+	 * @return profiles  
+	 */
 	public Vector<Profil> showBesucherOf(Profil pro) {
 		Vector<Profil> profiles = new Vector<Profil>();
 		Vector<Besuch> besucher = this.getAllBesucheOf(pro);
@@ -729,7 +777,10 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return profiles;
 	}
 
-	@Override
+	/**
+	 * Speichern eines Merkzettels
+	 * @param merk
+	 */
 	public void save(Merkzettel merk) {
 
 		try {
@@ -739,7 +790,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 	}
 
-	@Override
+	/**
+	 * Auslesen eines Merkzettel anhand der MerkzettelId
+	 * @param id
+	 * @return null
+	 */
 	public Merkzettel findByKey(int id) {
 		try {
 			this.merkzettelMapper.findByKey(id);
@@ -749,7 +804,10 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return null;
 	}
 
-	@Override
+	/**
+	 * Löschen eines Merkzettels
+	 * @param merk
+	 */
 	public void delete(Merkzettel merk) {
 		Merkzettel m = new Merkzettel();
 		m.setProfilId_gemerkter(merk.getProfilId_gemerkter());
@@ -761,8 +819,10 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	/**
 	 * Diese Methode erzeugt ein neues Suchprofil.
+	 * @param haarfarbe, religion, körpergröße, raucher, geschlecht, minalter, maxalter, profilId
+	 * @return suchprofilMapper
 	 */
-	@Override
+	
 	public Suchprofil createSuchprofil(String haarfarbe, String religion, int körpergröße, String raucher,
 			String geschlecht, int minalter, int maxalter, int profilId) {
 
@@ -821,12 +881,15 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * erst die Daten aus der Tabelle Suchprofil_Info gelÃ¶scht werden um das
 	 * Suchprofil lÃ¶schen zu kÃ¶nnen
 	 */
-	@Override
+	
 	public void deleteSuchprofil(Suchprofil pro) {
 		suchprofilMapper.deleteProfil(pro);
 
 	}
-
+	/**
+	 * Die Suchprofilinformationen werden gelöscht
+	 * @param suchpro
+	 */
 	public void delete(Suchprofil suchpro) {
 		Vector<Info> suchprofilInfo = getAllInfoOf(suchpro);
 		for (int i = 0; i < suchprofilInfo.size(); i++) {
@@ -834,28 +897,38 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 		suchprofilMapper.deleteProfil(suchpro);
 	}
-
+	/**
+	 * Auslesen aller Profile aus Suchprofil
+	 * @param suchpro
+	 * @return profilMapper
+	 */
 	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) {
-//		Profil a = new Profil();
-//		a.setId(suchpro.getProfilId());
-//		Vector<Profil> foundProfiles = this.profilMapper.getAllProfilBySuchprofil(suchpro);
-//		Vector<Profil> blockedProfiles = this.showBlockedProfilsOf(a);
-//		Vector<Profil> blockers = this.showAllBlockerOf(a);
-//		for(int i = 0; i<foundProfiles.size(); i++){
-//			foundProfiles.remove(blockedProfiles.elementAt(i));
-//			foundProfiles.remove(blockers.elementAt(i));
-//		}
-//		int alter = 0;
-//		
-//		
-//		for(int i = suchpro.getMinAlter(); i<suchpro.getMaxAlter(); i++ ){
-//			alter = Integer.parseInt(new Date().toString())-Integer.parseInt(foundProfiles.elementAt(i).getGeburtsdatum().toString());
-//		
-//		}
-	
+		// Profil a = new Profil();
+		// a.setId(suchpro.getProfilId());
+		// Vector<Profil> foundProfiles =
+		// this.profilMapper.getAllProfilBySuchprofil(suchpro);
+		// Vector<Profil> blockedProfiles = this.showBlockedProfilsOf(a);
+		// Vector<Profil> blockers = this.showAllBlockerOf(a);
+		// for(int i = 0; i<foundProfiles.size(); i++){
+		// foundProfiles.remove(blockedProfiles.elementAt(i));
+		// foundProfiles.remove(blockers.elementAt(i));
+		// }
+		// int alter = 0;
+		//
+		//
+		// for(int i = suchpro.getMinAlter(); i<suchpro.getMaxAlter(); i++ ){
+		// alter = Integer.parseInt(new
+		// Date().toString())-Integer.parseInt(foundProfiles.elementAt(i).getGeburtsdatum().toString());
+		//
+		// }
+
 		return this.profilMapper.getAllProfilBySuchprofil(suchpro);
 	}
-
+	/**
+	 * Auslesen aller Profile anhand der Info aus Suchprofil
+	 * @param suchpro
+	 * @reutn profiles
+	 */
 	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) {
 		Vector<Profil> profiles = this.getAllProfils();
 		Vector<Info> suchprofilInfos = this.getAllInfoOf(suchpro);
@@ -873,12 +946,22 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 		return profiles;
 	}
-
+	
+	/**
+	 * Alle Infos aus Suchprofil auslesen
+	 * @param suchpro
+	 * @return null
+	 */
 	public Vector<Info> getAllInfoOf(Suchprofil suchpro) {
 		// return this.infoMapper.getAllForSuchprofil();
 		return null;
 	}
-
+	
+	/**
+	 * Alle Informationen aus Profil auslesen
+	 * @param pro
+	 * @return infoMapper
+	 */
 	public Vector<Info> getAllInfoOf(Profil pro) {
 		return this.infoMapper.getAll();
 	}
@@ -888,8 +971,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Teilnehmers herausgesucht und angezeigt werden. Dies geschieht Ã¼ber die
 	 * Profil Id des Users.
 	 * 
-	 * @param profilId
-	 * @return
+	 * @param pro
+	 * @return 
 	 */
 	public Vector<Suchprofil> findSuchprofilByProfilId(Profil pro) {
 		try {
@@ -902,7 +985,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	/**
 	 * Mit dieser Methode werden alle Suchprofile Ã¼ber die Suchprofil Id aus
-	 * der Db heraus herausgefiltert.
+	 * der Db  herausgefiltert.
+	 * @param id
+	 * @return 
 	 */
 	public Suchprofil findByKey1(int id) {
 		try {
@@ -915,6 +1000,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	/**
 	 * Diese Methode zeigt alle Suchprofile der PartnerbÃ¶rse an.
+	 * @return
 	 */
 	public Vector<Suchprofil> getAllSuchprofil() {
 
@@ -924,6 +1010,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Es ist mÃ¶glich ein Suchprofil des einzelnen Users anhand der Profil ID
 	 * heauszusuchen.
+	 * @param pro
+	 * @return
 	 */
 	public Vector<Suchprofil> getSuchprofilbyProfilId(Profil pro) {
 		try {
@@ -933,9 +1021,13 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 		return null;
 	}
-	// Doppelt, eines muss entfernt werden!
+	
 
-	@Override
+	/**
+	 * speichern eines Suchprofiles
+	 * @param such
+	 * @return 
+	 */
 	public Suchprofil save(Suchprofil such) {
 
 		try {
@@ -948,6 +1040,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Auslesen aller Suchprofilinfos aus Info und Suchprofil
+	 * @param in, such
+	 * @return si
+	 */
 	public Suchprofil_Info getAllSuchprofilInfos(Info in, Suchprofil such) {
 
 		Vector<Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(in, such);
@@ -958,22 +1055,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return si;
 	}
 
-	// public void deleteSuchprofilInfo (Profil pro){
-	// Vector <Suchprofil> suchp =
-	// suchprofilMapper.getSuchprofilIdByProfil(pro);
-	// Vector <Info> info = infoMapper.getInfoIdByProfilId(pro);
-	// Vector <Suchprofil_Info> suchinfo =
-	// suchprofil_infoMapper.getAllSuchprofilInfos(info, such);
-	//
-	//
-	// for(int i=0; i < suchp.size(); i ++){
-	//
-	// if(suchp)
-	// }
-	//
-
-	// }
-
+	/**
+	 * Auslesen aller SuchprofilInfos 
+	 * @param in
+	 * @return null
+	 */
 	public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info in) {
 		try {
 			return this.suchprofil_infoMapper.getAllSuchprofilInfoOf(in);
@@ -987,7 +1073,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Auslesen aller Profil-Objekte der PartnerbÃ¶rse in der Datenbank.
 	 * 
-	 * @return @
+	 * @return 
 	 */
 	public Vector<Profil> getAllProfils() {
 		try {
@@ -999,11 +1085,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	/**
-	 * Mit diesere Methode wird ein Profil anhand der Gmail in der Datenbank
+	 * Mit dieser Methode wird ein Profil anhand der Gmail in der Datenbank
 	 * gesucht.
 	 * 
 	 * @param email
-	 * @return @
+	 * @return 
 	 */
 	public Profil getByEmail(String email) {
 		try {
@@ -1015,7 +1101,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 
 	/**
-	 * Hier wird ein Profil angelegt.
+	 *Anlegen eines Profils in der Partnerbörse
+	 *@param email, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, geschlecht, raucher
+	 *@return
 	 */
 	public Profil createProfil(String email, String vorname, String nachname, Date geburtsdatum, int koerpergroesse,
 			String religion, String haarfarbe, String raucher, String geschlecht) {
@@ -1036,7 +1124,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 			createFreitexteigenschaft("Freitexteigenschaft");
 
 			return this.profilMapper.insertProfil(pro);
-			
+
 		} catch (Exception e) {
 			e.getLocalizedMessage();
 		}
@@ -1047,6 +1135,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	/**
 	 * Mit dieser Methode wird ein Profil aktualisiert.
+	 * @param email, vorname, nachname, geburtsdatum, koerpergroesse, religion, haarfarbe, geschlecht, raucher
+	 * @return pro
 	 */
 	public Profil saveProfil(String email, String geschlecht, String vorname, String nachname, Date geburtsdatum,
 			int koerpergroesse, String religion, String haarfarbe, String raucher) {
@@ -1076,7 +1166,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	}
 
-	@Override
+	/**
+	 * speichern eines Profils
+	 * @param pro
+	 * 
+	 */
 	public void save(Profil pro) {
 		try {
 			this.profilMapper.updateProfil(pro);
@@ -1088,14 +1182,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Hier wird ein erstelltes Profil gÃ¤nzlich aus der PartnerbÃ¶rse entfernt
 	 * mit all seinen Daten und Informationen.
+	 * @param pro
 	 */
 	public void delete(Profil pro) {
 
-		// Vector <Profil> profil = this.getAllProfils();
-		// Vector <Merkzettel> merk = this.getAllMerkzettel(profilid);
-
-		// Kontaktsperre
-
+		//Kontaktsperre
 		Vector<Kontaktsperre> sperre = this.getAllKontaktsperreOf(pro);
 
 		for (int i = 0; i < sperre.size(); i++) {
@@ -1130,20 +1221,6 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 
 		// // SuchprofilInfo
-		//
-		// Vector<Suchprofil> suchprofil = this.getSuchprofilbyProfilId(pro);
-		// Vector<Info> info = getInfoIdByProfilId(pro);
-		// Suchprofil_Info suchinfo = new Suchprofil_Info();
-		//
-		// for (int s = 0; s < suchprofil.size(); s++) {
-		// for (int i = 0; i < info.size(); i++) {
-		// suchinfo = getAllSuchprofilInfos(info.elementAt(i),
-		// suchprofil.elementAt(i));
-		//
-		// }
-		//
-		// suchprofil_infoMapper.deleteSuchprofil_Info(suchinfo);
-		// }
 
 		// Suchprofil
 
@@ -1179,6 +1256,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Es werden Profile der PartnerbÃ¶rse anhand der Profil Id aus der
 	 * Datenbnak gefiltert.
+	 * @param id
+	 * @return
 	 */
 	public Profil getProfilById(int id) {
 		try {
@@ -1192,6 +1271,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Hier werden alle Profile der PartnerbÃ¶rse herausgefiltert die sich in
 	 * der Datenbank befinden.
+	 * @return
 	 */
 	public Vector<Profil> getAllProfil() {
 		try {
@@ -1201,7 +1281,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		}
 		return null;
 	}
-	// Doppelt, eines muss entfernt werden
+
 
 	/**
 	 * Diese Methode ist fÃ¼r den Login wichtig, da sie prÃ¼ft ob eine Gmal
@@ -1209,7 +1289,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * wie eine ID, denn diese gibt es nur einmal.
 	 * 
 	 * @param email
-	 * @return @
+	 * @return profil
 	 */
 	public Profil pruefenAufExistenz(String email) {
 
@@ -1231,6 +1311,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Anzeigen aller besuchten Profile
+	 * @param pro
+	 * @return allBesuche
+	 */
 	public Vector<Besuch> showVisitedProfiles(Profil pro) {
 
 		Vector<Besuch> allBesuche = new Vector<Besuch>();
@@ -1248,6 +1333,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	/**
 	 * Methode zum Löschen von Besuchen.
+	 * @param pro, besuchterNutzerID
 	 */
 	public void deleteBesuche(Profil pro, int besuchterNutzerID) {
 		// Vector<Besuch> allBesuche = new Vector<Besuch>();
@@ -1269,8 +1355,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * Hilfsmethode zu anzeige aller Profile die vom besuchten aus besucht
 	 * wurden.
 	 * 
-	 * @param besuchenderNutzerID
-	 * @return @
+	 * @param pro
+	 * @return 
 	 */
 	public Vector<Besuch> getAllBesucheOf(Profil pro) {
 		try {
@@ -1286,45 +1372,43 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * PrÃ¼fung, welche Profile schon besucht wurden, welche nicht besucht
 	 * wurden und welche gesperrt sind.
 	 * 
-	 * @param profilid
-	 * @return @
+	 * @param pro
+	 * @return allProfiles
 	 */
 	public Vector<Profil> getUnvisitedProfiles(Profil pro) {
-		/**
-		 * Besuche des Besuchenden werden hier abgerufen und in
-		 */
 		
+
 		Vector<Profil> allProfiles = this.getAllProfils();
-		for(int i = 0; i<allProfiles.size(); i++){
-			if(pro.getId() == allProfiles.elementAt(i).getId()){
+		for (int i = 0; i < allProfiles.size(); i++) {
+			if (pro.getId() == allProfiles.elementAt(i).getId()) {
 				allProfiles.remove(allProfiles.elementAt(i));
 			}
 		}
 		System.out.println(allProfiles.size());
 		Vector<Besuch> visitedProfiles = this.besuchMapper.findByKey(pro.getId());
-		for (int o = 0; o< visitedProfiles.size(); o++) {
+		for (int o = 0; o < visitedProfiles.size(); o++) {
 			allProfiles.remove(visitedProfiles.elementAt(o));
 		}
 		System.out.println(allProfiles.size());
-	
+
 		return allProfiles;
-		
+
 	}
 
 	/**
 	 * Diese Methode wird fÃ¼r die Methode getUnvisitedProfils benÃ¶tigt um zu
 	 * prÃ¼fen welche Profile gesperrt sind.
 	 * 
-	 * @param profilId_sperrender
-	 * @param profilId_gesperrter
-	 * @return
+	 * @param pro
+	 * @return sperrListe
 	 */
 	public boolean sperrPruefung(Profil pro) {
 		Vector<Kontaktsperre> sperrL = getAllKontaktsperreOf(pro);
 		boolean sperrListe = false;
 
 		for (int i = 0; i < sperrL.size(); i++) {
-			if (sperrL.elementAt(i).getId() == pro.getId());
+			if (sperrL.elementAt(i).getId() == pro.getId())
+				;
 			{
 				sperrListe = true;
 			}
@@ -1334,7 +1418,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@Override
+	/**
+	 * Auslesen einer Info anhand der ProfilId
+	 * @param pro
+	 * @return 
+	 */
 	public Vector<Info> getInfoIdByProfilId(Profil pro) {
 		try {
 			return infoMapper.getInfoIdByProfilId(pro);
@@ -1347,9 +1435,9 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Setzt besuch wenn ein Profil das andere Besucht
 	 * 
-	 * @param pro.getId()
-	 * @param besuch.getBesuchterNutzerID
-	 * @
+	 * @param eigene_id
+	 * @param fremde_id
+	 * @return
 	 */
 	public Besuch visit(int eigene_id, int fremde_id) {
 		Besuch besuch = new Besuch();
@@ -1357,7 +1445,12 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		besuch.setBesuchterNutzerID(fremde_id);
 		return besuchMapper.insert(besuch);
 	}
-
+	
+	/**
+	 * Überprüfen eines Profiles anhand der Email adresse
+	 * @param email
+	 * @return
+	 */
 	public Profil checkProfil(String email) {
 
 		// Profil p = new Profil();
@@ -1387,9 +1480,8 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	/**
 	 * Ähnlichkeitsmaß von Profil zu Profil
 	 * 
-	 * @param p1,
-	 *            p2
-	 * @return prozent @
+	 * @param p1, p2
+	 * @return prozent 
 	 */
 	public double berechneAhnlichkeitProfilProfil(Profil p1, Profil p2) {
 		double aehnlichkeitstreffer = 0;
@@ -1420,7 +1512,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 
 	}
 
-	@Override
+	/**
+	 * Anlegen eines Ähnlichkeitsmaßes von Profil zu Profil
+	 * @param eigenes_profil, fremdes_profil
+	 * @return
+	 */
 	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil) {
 
 		Aehnlichkeitsmass a1 = new Aehnlichkeitsmass();
@@ -1454,25 +1550,40 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return this.aehnlichkeitsmassMapper.insertAehnlichkeitsmass(a1);
 	}
 
-	@Override
+	/**
+	 * Löschen eines Ähnlichkeitsmaßes
+	 * @param a
+	 * @return
+	 */
 	public void deleteAehnlichkeit(Aehnlichkeitsmass a) {
 		aehnlichkeitsmassMapper.deleteAehnlichkeitsmass(a);
 	}
 
-	@Override
+	/**
+	 * Finden eines Ähnlichkeitsmaßes anhand der ProfilId
+	 * @param id
+	 * @return 
+	 */
 	public Aehnlichkeitsmass findAehnlichkeitByProfilid(int id) {
 		// TODO Auto-generated method stub
 		return this.aehnlichkeitsmassMapper.findByKey(id);
 	}
 
-	@Override
+	/**
+	 * Anzeigen aller Profile anhand der Ähnlichkeitsmaßes
+	 * @return
+	 */
 	public Vector<Aehnlichkeitsmass> showAllAehnlichkeitByProfil() {
 		// TODO Auto-generated method stub
 
 		return this.aehnlichkeitsmassMapper.getAll();
 	}
 
-	@Override
+	/**Anzeigen aller ähnlichen Profile, die der Teilnehmer nicht besucht hat
+	 * @param pro
+	 * @return allAehnlichkeitsmassVonProfilen
+	 * 
+	 */
 	public Vector<Aehnlichkeitsmass> getAehnlicheUnbesuchteProfileVon(Profil pro) {
 		Vector<Aehnlichkeitsmass> allAehnlichkeitsmassVonProfilen = new Vector<Aehnlichkeitsmass>();
 		Vector<Profil> allUnvisitedProfils = this.getUnvisitedProfiles(pro);
@@ -1484,7 +1595,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return allAehnlichkeitsmassVonProfilen;
 	}
 
-	@Override
+	/**
+	 * Anzeigen aller ähnlichen Profile anhand der Sucprofile eines Users
+	 * @param pro
+	 * @return allAehnlichkeitsmassVonProfilenAnhandSuchprofilen
+	 */
 	public Vector<Aehnlichkeitsmass> getAehnlicheProfileVonSuchprofilen(Profil pro) {
 		Vector<Aehnlichkeitsmass> allAehnlichkeitsmassVonProfilenAnhandSuchprofilen = new Vector<Aehnlichkeitsmass>();
 		Vector<Suchprofil> allSuchprofileVonProfil = this.getSuchprofilbyProfilId(pro);
@@ -1502,8 +1617,13 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return allAehnlichkeitsmassVonProfilenAnhandSuchprofilen;
 	}
 
+	/**
+	 * Berechnen des Alters anhand des Geburtdatum
+	 * @param pro
+	 * @return alter
+	 */
 	@SuppressWarnings("deprecation")
-	@Override
+	
 	public int getAlterOf(Profil pro) {
 		// GregorianCalendar now = new GregorianCalendar();
 		int alter = 0;
@@ -1525,7 +1645,11 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return alter;
 	}
 
-	@Override
+	/**
+	 * Anzeigen aller Profile, die den Teilnehmer gesperrt haben
+	 * @param pro
+	 * @return 
+	 */
 	public Vector<Kontaktsperre> getBlockedBy(Profil pro) {
 		return kontaktsperreMapper.getAllKontaktsperrenDesGesperrten(pro);
 	}

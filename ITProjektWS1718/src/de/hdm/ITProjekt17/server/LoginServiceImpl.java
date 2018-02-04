@@ -9,15 +9,19 @@ import de.hdm.ITProjekt17.client.LoginInfo;
 import de.hdm.ITProjekt17.shared.LoginService;
 
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService{
-
+	
+	/**
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
+	 */
+	
 	private static final long serialVersionUID = 1L;
 
-	@Override
+	
 	public LoginInfo login(String requestUri){
 			UserService userService = UserServiceFactory.getUserService();
 				User user = userService.getCurrentUser();
 				LoginInfo logInInfo = new LoginInfo();
-			
+				
 				if (user != null){
 					logInInfo.setLoggedIn(true);
 					logInInfo.setEmailAddress(user.getEmail());

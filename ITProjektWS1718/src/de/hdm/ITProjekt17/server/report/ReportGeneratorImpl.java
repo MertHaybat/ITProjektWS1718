@@ -131,7 +131,7 @@ public class ReportGeneratorImpl extends RemoteServiceServlet implements ReportG
 
 			
 			allSimilarProfilesFromSuchprofiles = 
-					this.partnerboerseadministration.getAllProfilsOf(allSuchProfilByProfil.elementAt(i));
+					this.partnerboerseadministration.getAllProfilsOf(pro, allSuchProfilByProfil.elementAt(i));
 				
 			for(int o = 0; o<allSimilarProfilesFromSuchprofiles.size(); o++){
 				Aehnlichkeitsmass score = this.partnerboerseadministration.createAehnlichkeit(pro.getId(), allSimilarProfilesFromSuchprofiles.elementAt(o).getId());

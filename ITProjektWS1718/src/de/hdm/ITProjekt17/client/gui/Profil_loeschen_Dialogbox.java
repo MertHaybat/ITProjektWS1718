@@ -6,6 +6,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import de.hdm.ITProjekt17.client.ClientsideSettings;
@@ -30,9 +31,13 @@ public class Profil_loeschen_Dialogbox extends DialogBox{
 		 */
 		setText("Wollen Sie das Profil wirklich löschen?");
 		setAnimationEnabled(true);	
+		HorizontalPanel hpanel = new HorizontalPanel();
 		
 		Button ja = new Button("Ja");
 		Button nein = new Button("Nein");
+		hpanel.add(ja);
+		hpanel.add(nein);
+		this.add(hpanel);
 		
 		ja.addClickHandler(new ClickHandler() {
 
@@ -62,6 +67,7 @@ public class Profil_loeschen_Dialogbox extends DialogBox{
 						Window.alert("Profil wurde erfolgreich gelöscht. Starten Sie die Seite neu.");
 						RootPanel.get("Navigator").clear();
 						RootPanel.get("Details").clear();
+						hide();
 					}
 					
 					

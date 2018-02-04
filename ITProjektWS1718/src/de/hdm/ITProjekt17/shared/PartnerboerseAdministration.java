@@ -1,5 +1,6 @@
 package de.hdm.ITProjekt17.shared;
 
+
 import java.util.Date;
 import java.util.Vector;
 
@@ -98,8 +99,6 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector <Suchprofil> getAllSuchprofil () ;
 	public Vector <Suchprofil> findSuchprofilByProfilId(Profil pro);
 
-	public Suchprofil_Info getAllSuchprofilInfos (Info in, Suchprofil such) ;
-	public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info in) ;
 
 
 	public Vector<Besuch> showVisitedProfiles(Profil pro) ;
@@ -114,12 +113,11 @@ public interface PartnerboerseAdministration extends RemoteService {
 	
 	public Vector<Info> getInfoIdByProfilId(Profil pro) ;
 	
-	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) ;
+	public Vector<Profil> getAllProfilsOf(Profil pro, Suchprofil suchpro) ;
 	public void delete(Suchprofil suchpro) ;
 
 	public void deleteSuchprofil(Suchprofil pro) ;
 	
-	public int getAlterOf(Profil pro) ;
 	public Vector<Profil> getAllProfilesByInfoOf(Suchprofil suchpro) ;
 	public Vector<Profil> showMerkendeOf(Profil pro) ;
 	

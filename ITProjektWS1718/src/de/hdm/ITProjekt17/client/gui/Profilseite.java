@@ -51,7 +51,6 @@ public class Profilseite extends VerticalPanel {
 	private TextBox tbkörpergröße = new TextBox();
 	private ListBox lbraucher = new ListBox();
 	private ListBox lbgeschlecht = new ListBox();
-	// private TextBox tbfreitext = new TextBox();
 	private TextArea tbfreitext = new TextArea();
 
 	private ListBox lbinteresse = new ListBox();

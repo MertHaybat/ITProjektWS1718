@@ -41,31 +41,6 @@ public class Suchprofil_Dialogbox extends DialogBox{
 		Button suchprofilLöschen = new Button("Suchprofil löschen");
 		Button zurück = new Button("Zurück");
 
-//		profileAnzeigen.addClickHandler(new ClickHandler(){
-//			
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				hide();
-//				final Profil_Tabelle p1 = new Profil_Tabelle();
-//				
-//				pbverwaltung.getAllProfilsOf(suchprofil, new AsyncCallback<Vector<Profil>>() {
-//					
-//					@Override
-//					public void onSuccess(Vector<Profil> result) {
-//						p1.setRowData(0, result);
-//						p1.setRowCount(result.size(), true);
-//						
-//					}
-//					
-//					@Override
-//					public void onFailure(Throwable caught) {
-//						// TODO Auto-generated method stub
-//						
-//					}
-//				});
-//			}
-//			
-//		});
 		profileAnzeigen.addClickHandler(new ClickHandler() {
 			
 			@Override
@@ -140,10 +115,3 @@ public class Suchprofil_Dialogbox extends DialogBox{
         
 	}	
 }
-	//Das muss noch in die DoubleClick Methode
-//Window.alert("That's it!");
-//Suchprofil_Dialogbox suchprofil_Dialogbox = new Suchprofil_Dialogbox();
-//int left = Window.getClientWidth()/ 2;
-//int top = Window.getClientHeight()/ 2;
-//suchprofil_Dialogbox.setPopupPosition(left, top);
-//suchprofil_Dialogbox.show();

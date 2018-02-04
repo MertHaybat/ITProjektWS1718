@@ -14,9 +14,12 @@ import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
 import de.hdm.ITProjekt17.shared.bo.Besuch;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
@@ -83,12 +86,6 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	private SuchprofilMapper suchprofilMapper = null;
 
 	/**
-	 * Referenz auf den Suchprofil_InfoMapper, der Suchprofil_Infoobjekte mit
-	 * der Datenbank abgleicht.
-	 */
-	private Suchprofil_InfoMapper suchprofil_infoMapper = null;
-
-	/**
 	 * Referenz auf den BesuchMapper, der Besuchobjekte mit der Datenbank
 	 * abgleicht.
 	 */
@@ -127,7 +124,6 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		this.kontaktsperreMapper = KontaktsperreMapper.kontaktsperreMapper();
 		this.merkzettelMapper = MerkzettelMapper.merkzettelMapper();
 		this.suchprofilMapper = SuchprofilMapper.suchprofilMapper();
-		this.suchprofil_infoMapper = Suchprofil_InfoMapper.suchprofil_InfoMapper();
 		this.besuchMapper = BesuchMapper.besuchMapper();
 		this.aehnlichkeitsmassMapper = AehnlichkeitsmassMapper.aehnlichkeitsmassMapper();
 	}
@@ -902,27 +898,59 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 	 * @param suchpro
 	 * @return profilMapper
 	 */
-	public Vector<Profil> getAllProfilsOf(Suchprofil suchpro) {
-		// Profil a = new Profil();
-		// a.setId(suchpro.getProfilId());
-		// Vector<Profil> foundProfiles =
-		// this.profilMapper.getAllProfilBySuchprofil(suchpro);
-		// Vector<Profil> blockedProfiles = this.showBlockedProfilsOf(a);
-		// Vector<Profil> blockers = this.showAllBlockerOf(a);
-		// for(int i = 0; i<foundProfiles.size(); i++){
-		// foundProfiles.remove(blockedProfiles.elementAt(i));
-		// foundProfiles.remove(blockers.elementAt(i));
-		// }
-		// int alter = 0;
-		//
-		//
-		// for(int i = suchpro.getMinAlter(); i<suchpro.getMaxAlter(); i++ ){
-		// alter = Integer.parseInt(new
-		// Date().toString())-Integer.parseInt(foundProfiles.elementAt(i).getGeburtsdatum().toString());
-		//
-		// }
+	public Vector<Profil> getAllProfilsOf(Profil pro, Suchprofil suchpro) {
+		 Vector<Profil> foundProfiles = this.profilMapper.getAllProfilBySuchprofil(suchpro);
+		 Vector<Profil> blockedProfiles = this.showBlockedProfilsOf(pro);
+		 Vector<Profil> blockers = this.showAllBlockerOf(pro);
+		 
+		 for(int yz = 0; yz<foundProfiles.size(); yz++){
+			 if(pro.getId() == foundProfiles.elementAt(yz).getId()){
+				 foundProfiles.removeElementAt(yz);
+			 }
+		 }
+		 
+		 if(blockedProfiles.size() != 0){
+		 for(int z = 0; z<foundProfiles.size(); z++){	 
+			 for(int y= 0; y<blockedProfiles.size(); y++){
+				 if (blockedProfiles.elementAt(y).getId() == foundProfiles.elementAt(z).getId()){
+					 foundProfiles.removeElementAt(z);
+				 }
+				 
+			 }
+		 }
+		 }
+		 
+		 if(blockers.size() != 0){
+			 for(int qw = 0; qw<foundProfiles.size(); qw++){	 
+				 for(int cv= 0; cv<blockers.size(); cv++){
+					 if (blockers.elementAt(cv).getId() == foundProfiles.elementAt(qw).getId()){
+						 foundProfiles.removeElementAt(qw);
+					 }
+					 
+				 }
+			 }
+		 }
+		 
+		 for(int i = 0; i<foundProfiles.size(); i++){
+			System.out.println(foundProfiles.elementAt(i).getId());
+			
+		 GregorianCalendar cal = new GregorianCalendar();
+		 int y, d, b;
+		 y = cal.get(cal.YEAR);
+		 d = cal.get(cal.DAY_OF_YEAR);
+		 cal.setTime(foundProfiles.elementAt(i).getGeburtsdatum());
+		 b = y - cal.get(cal.YEAR);
+		 if (d < cal.get(cal.DAY_OF_YEAR)) {
+				--b;
+			}
+		 if (!(suchpro.getMinAlter()<b && b<suchpro.getMaxAlter())){
+			 foundProfiles.remove(foundProfiles.elementAt(i));
+		 }
+		 
+		 }
+		 return foundProfiles;
 
-		return this.profilMapper.getAllProfilBySuchprofil(suchpro);
+//		return this.profilMapper.getAllProfilBySuchprofil(suchpro);
 	}
 	/**
 	 * Auslesen aller Profile anhand der Info aus Suchprofil
@@ -1038,36 +1066,7 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 		return null;
 	}
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * Auslesen aller Suchprofilinfos aus Info und Suchprofil
-	 * @param in, such
-	 * @return si
-	 */
-	public Suchprofil_Info getAllSuchprofilInfos(Info in, Suchprofil such) {
-
-		Vector<Suchprofil_Info> suchinfo = suchprofil_infoMapper.getAllSuchprofilInfos(in, such);
-		Suchprofil_Info si = new Suchprofil_Info();
-		for (int i = 0; i < suchinfo.size(); i++) {
-			si.setId(suchinfo.get(i).getId());
-		}
-		return si;
-	}
-
-	/**
-	 * Auslesen aller SuchprofilInfos 
-	 * @param in
-	 * @return null
-	 */
-	public Vector<Suchprofil_Info> getAllSuchprofilInfoOf(Info in) {
-		try {
-			return this.suchprofil_infoMapper.getAllSuchprofilInfoOf(in);
-		} catch (Exception e) {
-
-		}
-		return null;
-	}
+	
 
 	//////////////////////////////////////////// Profil/////////////////////////////////////////////////////////////////////////////
 	/**
@@ -1248,6 +1247,12 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 			}
 		}
 
+		//Ähnlichkeitsmaß löschen
+		Aehnlichkeitsmass a = new Aehnlichkeitsmass();
+		a.setEigenes_profilid(pro.getId());
+		
+		deleteAehnlichkeit(a);
+		
 		// AnschlieÃŸend das Profil entfernen
 
 		profilMapper.deleteProfil(getProfilById(pro.getId()));
@@ -1384,12 +1389,22 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 				allProfiles.remove(allProfiles.elementAt(i));
 			}
 		}
-		System.out.println(allProfiles.size());
+		
+		
+		
 		Vector<Besuch> visitedProfiles = this.besuchMapper.findByKey(pro.getId());
-		for (int o = 0; o < visitedProfiles.size(); o++) {
-			allProfiles.remove(visitedProfiles.elementAt(o));
+		if(visitedProfiles.size() != 0){
+			
+			for (int o = 0; o < allProfiles.size(); o++) {
+				for (int y = 0; y < visitedProfiles.size(); y++){
+					if(allProfiles.elementAt(o).getId() == visitedProfiles.elementAt(y).getBesuchterNutzerID()){
+						
+						allProfiles.removeElementAt(o);
+					}
+				}
+				
+			}
 		}
-		System.out.println(allProfiles.size());
 
 		return allProfiles;
 
@@ -1615,34 +1630,6 @@ public class PartnerboerseAdministrationImpl extends RemoteServiceServlet implem
 			}
 		}
 		return allAehnlichkeitsmassVonProfilenAnhandSuchprofilen;
-	}
-
-	/**
-	 * Berechnen des Alters anhand des Geburtdatum
-	 * @param pro
-	 * @return alter
-	 */
-	@SuppressWarnings("deprecation")
-	
-	public int getAlterOf(Profil pro) {
-		// GregorianCalendar now = new GregorianCalendar();
-		int alter = 0;
-		Date today = new Date();
-		// int now = today.getDate();
-		Date geburtsdatum = pro.getGeburtsdatum();
-		if (geburtsdatum.getYear() < today.getYear()) {
-			alter = today.getYear() - geburtsdatum.getYear();
-			if (geburtsdatum.getMonth() > today.getMonth()) {
-				if (geburtsdatum.getDay() > today.getDay()) {
-					alter = alter - 1;
-				} else {
-					alter = alter + 0;
-				}
-
-			}
-		}
-
-		return alter;
 	}
 
 	/**

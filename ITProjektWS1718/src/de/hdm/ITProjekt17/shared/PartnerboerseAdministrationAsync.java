@@ -164,11 +164,6 @@ public interface PartnerboerseAdministrationAsync {
 	
 	void findSuchprofilByProfilId(Profil pro, AsyncCallback<Vector<Suchprofil>> callback);
 
-	//_________________________________________________________________________________________________________________________
-	
-	void getAllSuchprofilInfos(Info in, Suchprofil such, AsyncCallback<Suchprofil_Info> callback);
-	
-	void getAllSuchprofilInfoOf(Info in, AsyncCallback<Vector<Suchprofil_Info>> callback);
 
 	//_________________________________________________________________________________________________________________________
 	
@@ -198,11 +193,9 @@ public interface PartnerboerseAdministrationAsync {
 
 	void getAehnlicheProfileVonSuchprofilen(Profil pro, AsyncCallback<Vector<Aehnlichkeitsmass>> callback);
 
-	void getAllProfilsOf(Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
+	void getAllProfilsOf(Profil pro, Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
 
 	void delete(Suchprofil suchpro, AsyncCallback<Void> callback);
-
-	void getAlterOf(Profil pro, AsyncCallback<Integer> callback);
 
 	void getAllProfilesByInfoOf(Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
 

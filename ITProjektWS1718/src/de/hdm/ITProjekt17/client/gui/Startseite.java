@@ -24,7 +24,7 @@ public class Startseite extends VerticalPanel{
 				+ "Es warten viele spannende und neue Bekanntschaften auf dich.</br>"
 				+ "Viel Spaß und viel Glück.</br> "
 				+ "<p>"
-				+ "Falls du Fragen zur Funktion hast oder Support benötigst, kannst du unsere Kontaktdaten im Impressum finden. </p>"
+				+ " </p>"
 				+ "	</section>"
 				+ "</article>");
 

@@ -55,7 +55,7 @@ public class Suchergebnis extends VerticalPanel{
 				RootPanel.get("Details").add(new Suchen(profil));
 			}
 		});
-		pbverwaltung.getAllProfilsOf(suchprofil, new AsyncCallback<Vector<Profil>>() {
+		pbverwaltung.getAllProfilsOf(profil, suchprofil, new AsyncCallback<Vector<Profil>>() {
 					
 					/**
 					 * Siehe Client.gui.report

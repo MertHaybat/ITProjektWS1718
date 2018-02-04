@@ -18,6 +18,10 @@ import de.hdm.ITProjekt17.shared.bo.Profil.Raucher;
 
 public class Suchprofil extends BusinessObject {
 
+	
+	/**
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
+	 */
 	private static final long serialVersionUID = 1L; 
 	
 	/**

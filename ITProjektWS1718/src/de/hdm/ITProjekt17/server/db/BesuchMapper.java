@@ -25,7 +25,7 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
  * eine einzige Instanz der Klasse exisitert.
  * 
  * 
- * @author Samina
+ * @author Thies
  *
  */
 

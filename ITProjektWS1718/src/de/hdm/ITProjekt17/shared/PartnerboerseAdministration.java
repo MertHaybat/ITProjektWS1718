@@ -8,19 +8,17 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import de.hdm.ITProjekt17.shared.bo.*;
 
+/**
+ * Das Interface PartnerboerseAdministration wird in der Impl(Server-Seitige) Klasse realisiert.
+ * Da es ein Interface ist werden lediglich Methoden Köpfe angelegt.
+ * @author Dennis Lehle
+ *
+ */
 @RemoteServiceRelativePath("partnerboerseadministration")
 public interface PartnerboerseAdministration extends RemoteService {
+	
+	
 	public void init() ;
-	
-	/**
-	 * Suchen eines Profil-Objekts, dessen ID aus der Datenbank bekannt.
-	 * Wird nicht implementiert in die GUI!
-	 * 
-	 * @param id in der Datenbank.
-	 * @return Das erste Profil-Objekt, dass den Suchkriterien entspricht.
-	 * @
-	 */
-	
 	public Aehnlichkeitsmass createAehnlichkeit(int eigenes_profil, int fremdes_profil) ;
 	public void deleteAehnlichkeit(Aehnlichkeitsmass a) ;
 	public Aehnlichkeitsmass findAehnlichkeitByProfilid(int id) ;

@@ -10,11 +10,22 @@ import java.util.Vector;
 import de.hdm.ITProjekt17.shared.bo.Kontaktsperre;
 import de.hdm.ITProjekt17.shared.bo.Merkzettel;
 import de.hdm.ITProjekt17.shared.bo.Profil;
-	/**
-	 * 
-	 * @author dennis
-	 *
-	 */
+	
+/**
+ * * Die Mapper-Klasse stellt Methoden zur Verfügung die
+ * <code>Kontaktsperre</code>-Objekte auf eine relationale Datenbank abbildet. Die
+ * Methoden bieten die Möglichkeit Objekte aus der Datenbank zu suchen, sie zu
+ * erzeugen und zu löschen. Das Mapping ist bidirektional. D.h., Objekte können
+ * in DB-Strukturen und DB-Strukturen in Objekte umgewandelt werden.
+ * 
+ * Diese Mapper-Klasse besitzt Singleton-Eigenschaften und wird nur einmal
+ * mithilfe der Methode <code>kontaktsperreMapper()</code> initialisiert. Der
+ * Konstruktor ist bewusst durch <code>protected</code> geschützt, damit nur
+ * eine einzige Instanz der Klasse exisitert.
+ * 
+ * @author Thies
+ *
+ */
 	public class KontaktsperreMapper {
 			/**
 			 * Die Klasse KontaktsperreMapper wird nur einmal instantiiert. Man spricht 

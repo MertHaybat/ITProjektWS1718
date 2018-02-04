@@ -1,17 +1,27 @@
 package de.hdm.ITProjekt17.shared.bo;
 
+/**
+ * Die Klasse Aehnlichkeitsmass dient zum vergleich ähnlicher Profile im ReportGenerator.
+ * @author Dennis Lehle
+ *
+ */
 public class Aehnlichkeitsmass extends BusinessObject{
 
 	/**
-	 * 
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 
+	 * Variable eigenes_Profilid ist speichert die Eigene Profil Id die jedes Profil besitzt.
 	 */
-
 	private int eigenes_profilid = 0;
+	/**
+	 * Variable fremdes_Profilid ist speichert die Eigene Profil Id die jedes Profil besitzt.
+	 */
 	private int fremdes_profilid = 0;
+	/**
+	 * Der Index zeigt die Ähnlichkeit zweier Profile.
+	 */
 	private int aehnlichkeitsindex = 0;
 	/**
 	 * Auslesen der eigenen Profil id

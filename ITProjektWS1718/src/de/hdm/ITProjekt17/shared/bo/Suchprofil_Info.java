@@ -3,7 +3,7 @@ package de.hdm.ITProjekt17.shared.bo;
 public class Suchprofil_Info extends BusinessObject {
 
 	/**
-	 * 
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
 	 */
 	private static final long serialVersionUID = 1L;
 	/**

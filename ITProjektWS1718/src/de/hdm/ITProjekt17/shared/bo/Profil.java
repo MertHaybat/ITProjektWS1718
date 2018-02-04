@@ -10,9 +10,12 @@ import java.util.Date;
  */
 public class Profil extends BusinessObject {
 
+	
+	/**
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
+	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	//-----------Variablen-der-Klasse-Profil-----------------------
 	
 	/**
@@ -31,7 +34,6 @@ public class Profil extends BusinessObject {
 	/**
 	 * Variable Email im Profil; Gibt die Email der Person an.
 	 */
-	
 	private String email = "";
 
 	
@@ -77,12 +79,6 @@ public class Profil extends BusinessObject {
 	public enum Raucher {
 	    A, B, C, D, E
 	  }
-
-	/**
-	 * Auslesen der Variable nachname
-	 * @return
-	 */
-
 	
 	//--------------Get-Methoden--------------------
 	
@@ -126,7 +122,6 @@ public class Profil extends BusinessObject {
 		return this.koerpergroesse;
 	}
 	
-	
 	/**
 	 * Auslesen der Variable Religion.
 	 * @return religion
@@ -136,8 +131,6 @@ public class Profil extends BusinessObject {
 	}
 
 
-	
-	
 	//-------------Set-Methoden--------------------
 	
 	/**

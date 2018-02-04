@@ -1,6 +1,13 @@
 package de.hdm.ITProjekt17.shared;
 
-
+/**
+ * Das Async Interface der PartnerboerseAdministration deklariert die selben Methodenköpfe wie 
+ * das Synchrone Interface. 
+ * Es wird semiautomatisch vom Google Plugin erstellt und verwaltet.
+ * Plus ein Callback-Objekt damit RPC Antworten auf der Client-Seite verarbeitet werden können.
+ * 
+ * @Author Fatjona Mustafi
+ */
 import java.util.Date;
 import java.util.Vector;
 

@@ -17,8 +17,18 @@ import de.hdm.ITProjekt17.shared.bo.Profil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil;
 import de.hdm.ITProjekt17.shared.bo.Suchprofil_Info;
 /**
+ * Die Mapper-Klasse stellt Methoden zur Verfügung die
+ * <code>Info</code>-Objekte auf eine relationale Datenbank abbildet. Die
+ * Methoden bieten die Möglichkeit Objekte aus der Datenbank zu suchen, sie zu
+ * erzeugen und zu löschen. Das Mapping ist bidirektional. D.h., Objekte können
+ * in DB-Strukturen und DB-Strukturen in Objekte umgewandelt werden.
  * 
- * @author samina
+ * Diese Mapper-Klasse besitzt Singleton-Eigenschaften und wird nur einmal
+ * mithilfe der Methode <code>infoMapper()</code> initialisiert. Der
+ * Konstruktor ist bewusst durch <code>protected</code> geschützt, damit nur
+ * eine einzige Instanz der Klasse exisitert.
+ * 
+ * @author Thies
  *
  */
 public class InfoMapper {

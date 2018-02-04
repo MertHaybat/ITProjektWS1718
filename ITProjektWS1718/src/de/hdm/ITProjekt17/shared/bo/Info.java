@@ -3,7 +3,7 @@ package de.hdm.ITProjekt17.shared.bo;
 
 
 /**
- * Realisierung eines exemplarischen Info-Objektes für das Profil
+ * Realisierung eines exemplarischen Info-Objektes für das Profil.
  * 
  * @author dezzyanthony
  *
@@ -11,9 +11,11 @@ package de.hdm.ITProjekt17.shared.bo;
 
 public class Info extends BusinessObject{
 
+	
+	/**
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
+	 */
 	private static final long serialVersionUID = 1L;
-	
-	
 	
 	//-------------------Variablen-der-Info-Klasse--------------------
 	
@@ -81,8 +83,6 @@ public class Info extends BusinessObject{
 		return profilId;
 	}
 	
-	
-	
 	/**
 	 * Auslesen des Textes
 	 * @return text
@@ -138,7 +138,6 @@ public class Info extends BusinessObject{
 		this.profilId = profilId;
 	}
 	
-	
 	/**
 	 * Setzen eines Texte's
 	 * @param text
@@ -185,8 +184,8 @@ public class Info extends BusinessObject{
 		this.suchprofilid = suchprofilid;
 	}
 	
-	/*
-	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
+	/**
+	 * ID des Profils, welches gesperrt und von wem es gesperrt werden soll.
 	 */
 	public String toString(){
 		return super.toString() + 

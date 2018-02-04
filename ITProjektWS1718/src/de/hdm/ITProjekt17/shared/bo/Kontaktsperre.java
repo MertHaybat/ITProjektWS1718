@@ -11,6 +11,9 @@ package de.hdm.ITProjekt17.shared.bo;
 
 public class Kontaktsperre extends BusinessObject {
 	
+	/**
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
+	 */
 	private static final long serialVersionUID = 1L; 
 
 	
@@ -61,8 +64,8 @@ public class Kontaktsperre extends BusinessObject {
 		this.profilId_sperrender = profilId_sperrender;
 	}
 
-	/*
-	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
+	/**
+	 * ID des Profils, welches gesperrt und von wem es gesperrt werden soll.
 	 */
 	public String toString(){
 		return super.toString() + 

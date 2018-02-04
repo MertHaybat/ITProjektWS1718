@@ -6,12 +6,15 @@ package de.hdm.ITProjekt17.shared.bo;
  * Methoden der Attribute bereit. <code>Besuch</code> erbt von
  * <code>BusinessObject</code> und ist dadurch Serializable.
  * 
- * @author Samina
+ * @author Thies
  * 
  */
 
 public class Besuch extends BusinessObject {
 
+	/**
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
+	 */
 	private static final long serialVersionUID = 1L;
 
 	// -----------Variablen-der-Klasse-Besuch----------------------

@@ -2,9 +2,8 @@ package de.hdm.ITProjekt17.shared.bo;
 
 
 /**
- * Realisierung einer exemplarischen AUswahleigenschaft der Partnerbörse.
- * Sie erlaubt es Auswahlen treffen zu können.
- * @author dezzyanthony
+ * Realisierung einer exemplarischen Auswahleigenschaft der Partnerbörse.
+ * @author Dennis Lehle
  *
  */
 
@@ -12,18 +11,23 @@ public class Auswahleigenschaft extends Eigenschaft {
 	
 	
 	/**
-	 * 
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
 	 */
 	private static final long serialVersionUID = 1L;
 	//-------------Variablen-der-Klasse-Auswahleigenschaft------------------
 	
 	/**
-	 * Variable auswahlEigenschaft ist eine Auswahl, welche der Teilnehmer auswählt
+	 * Variable wert ist der Wert, welcher als Auswahl in der GUI gewählt wird und dort gespeichert wird.
 	 */
 	private String wert = "";
-	
+	/**
+	 * Variable Info Id ist ein Fremdschlüssel aus Tabelle Info 
+	 */
 	private int infoid = 0;
 	
+	/**
+	 * Konstruktor
+	 */
 	public Auswahleigenschaft(){
 		
 	}
@@ -64,7 +68,7 @@ public class Auswahleigenschaft extends Eigenschaft {
 		this.infoid = infoid;
 	}
 	
-	/*
+	/**
 	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
 	 */
 	public String toString(){

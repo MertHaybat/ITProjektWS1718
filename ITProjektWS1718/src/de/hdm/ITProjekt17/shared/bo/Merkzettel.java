@@ -12,12 +12,11 @@ package de.hdm.ITProjekt17.shared.bo;
 public class Merkzettel extends BusinessObject{
 	
 	/**
-	 * 
+	 * Dient zum Serialisieren von Objekten für eine RPC fähigen austausch zwischen Server und Client.
 	 */
 	private static final long serialVersionUID = 1L;
 	//---------------Variablen-der-Klasse-Merkzettel---------------
-	
-	
+
 	/**
 	 * Variable von Profil, welche vermerk verhängt
 	 */
@@ -63,7 +62,7 @@ public class Merkzettel extends BusinessObject{
 	}
 
 	
-	/*
+	/**
 	 * Erzeugung einer textuellen Darstellung des jeweiligen Objektes einer Klasse
 	 */
 	public String toString(){

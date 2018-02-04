@@ -37,6 +37,11 @@ public class MenubarReport extends VerticalPanel {
 			public void onClick(ClickEvent event) {
 			RootPanel.get("Details").clear();
 			RootPanel.get("Details").add(new StartseiteReport(profil));
+			btn1.removeStyleName("gwt-Button");
+			btn1.getElement().getStyle().setBackgroundColor("#C0C0C0");
+		
+			btn2.getElement().getStyle().setBackgroundColor("");
+			btn3.getElement().getStyle().setBackgroundColor("");
 			}
 			
 		});
@@ -48,6 +53,12 @@ public class MenubarReport extends VerticalPanel {
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(new ReportOfAllUnbesuchteProfilesByAehnlichkeitSeite(profil));
+				btn2.removeStyleName("gwt-Button");
+				btn2.getElement().getStyle().setBackgroundColor("#C0C0C0");
+			
+				btn1.getElement().getStyle().setBackgroundColor("");
+				btn3.getElement().getStyle().setBackgroundColor("");
+				
 			}
 			
 		});
@@ -58,6 +69,11 @@ public class MenubarReport extends VerticalPanel {
 			public void onClick(ClickEvent event) {
 				RootPanel.get("Details").clear();
 				RootPanel.get("Details").add(new ReportOfAllAehnlicheProfilesBySuchprofilesSeite(profil));
+				btn3.removeStyleName("gwt-Button");
+				btn3.getElement().getStyle().setBackgroundColor("#C0C0C0");
+			
+				btn1.getElement().getStyle().setBackgroundColor("");
+				btn2.getElement().getStyle().setBackgroundColor("");
 			}
 			
 		});

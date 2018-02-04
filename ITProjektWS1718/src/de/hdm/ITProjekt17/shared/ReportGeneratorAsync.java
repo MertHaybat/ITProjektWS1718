@@ -12,6 +12,7 @@ import de.hdm.ITProjekt17.shared.report.PartnervorschlaegeOfProfilNichtAngesehen
 /**
  * Das Gegenstück zu Synchronen Interface ReportGenerator.
  * Wird vom Google Plugin semiautomatisch erstellt und verwalter/gepflegt.
+ * Und ein Callback-Objekt damit RPC Antworten auf der Client-Seite verarbeitet werden können.
  * 
  * @author Dennis Lehle
  *

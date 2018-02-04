@@ -193,7 +193,6 @@ public interface PartnerboerseAdministrationAsync {
 
 	void getAehnlicheProfileVonSuchprofilen(Profil pro, AsyncCallback<Vector<Aehnlichkeitsmass>> callback);
 
-	void getAllProfilsOf(Profil pro, Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
 
 	void delete(Suchprofil suchpro, AsyncCallback<Void> callback);
 
@@ -208,6 +207,8 @@ public interface PartnerboerseAdministrationAsync {
 	void showMerkendeOf(Profil pro, AsyncCallback<Vector<Profil>> callback);
 
 	void getBlockedBy(Profil pro, AsyncCallback<Vector<Kontaktsperre>> callback);
+
+	void getAllProfilsOf(Profil pro, Suchprofil suchpro, AsyncCallback<Vector<Profil>> callback);
 
 
 

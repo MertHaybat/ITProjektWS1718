@@ -26,7 +26,7 @@ public interface PartnerboerseAdministration extends RemoteService {
 	public Vector<Aehnlichkeitsmass> showAllAehnlichkeitByProfil() ;
 	public Vector<Aehnlichkeitsmass> getAehnlicheUnbesuchteProfileVon(Profil pro) ;
 	public Vector<Aehnlichkeitsmass> getAehnlicheProfileVonSuchprofilen(Profil pro) ;
-	
+	public Vector<Profil> getAllProfilsOf(Profil pro, Suchprofil suchpro);
 	public Auswahleigenschaft createAuswahleigenschaft(String wert) ;
 	public void save(Auswahleigenschaft aus) ;
 	public void delete(Auswahleigenschaft aus) ;
@@ -113,7 +113,6 @@ public interface PartnerboerseAdministration extends RemoteService {
 	
 	public Vector<Info> getInfoIdByProfilId(Profil pro) ;
 	
-	public Vector<Profil> getAllProfilsOf(Profil pro, Suchprofil suchpro) ;
 	public void delete(Suchprofil suchpro) ;
 
 	public void deleteSuchprofil(Suchprofil pro) ;
